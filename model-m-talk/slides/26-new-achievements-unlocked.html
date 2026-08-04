@@ -1,0 +1,9 @@
+<section class="slide layout-gallery">
+  <header class="slide-head"><span class="eyebrow"><span lang="ja">実績解除</span> · Mistake gallery</span><h2>New achievements unlocked</h2></header>
+  <img class="meme-cutout meme-worked fragment step-punch" data-fragment-index="2" src="assets/manga/it-worked.png" alt="Black-and-white manga reaction panel reading: It worked?!">
+  <div class="content" data-stagger=".bug-card" style="grid-template-columns:1fr 1fr;margin-top:70px">
+    <div class="bug-card"><h3>U1 enable tied high</h3><p>74HC138 pin 5 is active-low—but the PCB connects it to +3.3 V.</p><p><strong>Impact:</strong> AM10–AM13 stay disabled.</p><p><strong>Hotfix:</strong> bridge pad 5 → pad 4 (GND).</p></div>
+    <div class="bug-card"><h3>Daisy pad 33 has no ADC</h3><p>The AM14/AM15 pot path landed on a non-ADC pin.</p><p><strong>Impact:</strong> twelve control pots cannot be read.</p><p><strong>Hotfix:</strong> wire pad 33 → pad 35 (A11).</p></div>
+  </div>
+  <aside class="notes">These are the two documented board errata. U1 pin 5 disables HE71–HE100 until bridged. The Daisy pad bodge restores the A11 path for AM14/AM15 and twelve pots. Reveal “IT WORKED?!” only after both hotfixes land. Transition: software engineers already know these patterns by different names.</aside>
+</section>

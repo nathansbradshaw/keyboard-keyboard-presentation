@@ -1,0 +1,9 @@
+<section class="slide layout-split manga-cameo-slide">
+  <div class="manga-cameo callout-success fragment step-pop" data-sfx="クリア!!"><div class="manga-bubble"><span class="jp-text" lang="ja">ノートオンは一回。関門は二つ。</span><span class="en-text">One NoteOn. Two checkpoints.</span></div></div>
+  <header class="slide-head"><span class="eyebrow">Implemented behavior</span><h2>Two thresholds, one NoteOn</h2></header>
+  <div class="content slide-body" data-stagger=".card">
+    <div class="card tint" data-tone="time"><span class="badge implemented">FIRST_DELTA = 150</span><div class="big-number">1</div><h3>Start the timer</h3><p>Enter <code>FirstActuated</code>. No MIDI event yet.</p></div>
+    <div class="card yellow" data-tone="success"><span class="badge implemented">SECOND_DELTA = 250</span><div class="big-number">2</div><h3>Emit NoteOn</h3><p>Elapsed time becomes MIDI velocity.</p></div>
+  </div>
+  <aside class="notes">Correct a likely misconception: this is not two actions. Crossing 150 starts the velocity timer; crossing 250 emits one NoteOn. NoteOff occurs after the delta falls below 100 for three confirmations. Transition: velocity uses time between the press regions.</aside>
+</section>

@@ -1,0 +1,10 @@
+<section class="slide layout-diagram" data-auto-animate>
+  <header class="slide-head"><span class="eyebrow">Protocol boundary</span><h2 data-id="phone-title">Why MIDI was the right boundary</h2></header>
+  <div class="content">
+    <div class="pipeline" data-id="phone-pipeline" data-stagger=".pipeline-step, .pipeline-arrow" data-stagger-group="2" data-stagger-effect="step-wipe">
+      <div class="pipeline-step">Keyboard<br><span class="small">owns intent</span></div><div class="pipeline-arrow">→</div><div class="pipeline-step" style="background:var(--yellow)">MIDI<br><span class="small">owns the contract</span></div><div class="pipeline-arrow">→</div><div class="pipeline-step">Phone<br><span class="small">owns sound</span></div>
+    </div>
+    <div class="grid-4" data-stagger=".card" data-stagger-group="2" data-stagger-start="3" style="width:1200px;margin-top:70px"><div class="card" data-tone="system">Separation of concerns</div><div class="card tint" data-tone="success">Interchangeable parts</div><div class="card yellow" data-tone="signal">Inspectable messages</div><div class="card magenta" data-tone="boundary">Clear responsibility</div></div>
+  </div>
+  <aside class="notes">MIDI is the API boundary. The keyboard repository proves what it sends; the phone must prove how it turns those messages into sound. That separation let both systems evolve independently and made debugging possible with standard tools. Transition: extract lessons from the whole system.</aside>
+</section>

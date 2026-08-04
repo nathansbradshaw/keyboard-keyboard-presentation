@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>That Time I Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober</title>
+
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" />
+
+  <style>
+    :root {
+      --w: 1600px;
+      --h: 900px;
+      --ink: #10121f;
+      --paper: #fff8ee;
+      --cream: #fff1d0;
+      --teal: #2fe6ff;
+      --pink: #ff3aa4;
+      --gold: #ffc247;
+      --green: #94aa85;
+      --mint: #dcead5;
+      --danger: #ff3344;
+      --purple: #8f50ff;
+      --shadow: rgba(0,0,0,.45);
+    }
+
+    html, body { margin: 0; background: #070711; }
+
+    /* Let Reveal do the scaling. This preserves the 16:9 coordinate system on any screen. */
+    .reveal { font-family: Inter, Avenir, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; }
+    .reveal .slides { text-align: left; }
+    .reveal section {
+      width: var(--w);
+      height: var(--h);
+      padding: 0 !important;
+      box-sizing: border-box;
+      overflow: hidden;
+      color: white;
+      background: #090914;
+    }
+
+    .frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .bg-grid::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(80, 235, 255, .18) 1.6px, transparent 0),
+        linear-gradient(135deg, rgba(255,58,164,.08), transparent 45%, rgba(47,230,255,.08));
+      background-size: 44px 44px, 100% 100%;
+      opacity: .75;
+      z-index: -3;
+    }
+
+    .speedlines::after {
+      content: "";
+      position: absolute;
+      inset: -160px;
+      background:
+        repeating-conic-gradient(from 12deg at 50% 50%, rgba(255,255,255,.3) 0deg 1.2deg, transparent 1.2deg 9deg);
+      opacity: .13;
+      animation: spin 22s linear infinite;
+      z-index: -2;
+    }
+
+    .burst::before {
+      content: "";
+      position: absolute;
+      inset: -90px;
+      background: radial-gradient(circle at 50% 50%, transparent 0 16%, rgba(255,255,255,.8) 16.2% 16.8%, transparent 17%),
+        repeating-conic-gradient(from -8deg, rgba(255,255,255,.28) 0deg 3deg, transparent 3deg 11deg);
+      opacity: .18;
+      z-index: -2;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes floaty { 0%,100%{ transform: translateY(0) rotate(-1deg);} 50%{ transform: translateY(-12px) rotate(1deg);} }
+    @keyframes pulse { 0%,100%{ transform: scale(1); filter: drop-shadow(0 0 0 var(--pink)); } 50%{ transform: scale(1.035); filter: drop-shadow(0 0 18px var(--pink)); } }
+    @keyframes scan { 0%{ transform: translateY(-100%);} 100%{ transform: translateY(100%);} }
+    @keyframes glitch { 0%,100%{ transform: translate(0); text-shadow: 5px 5px 0 var(--pink), -5px -5px 0 var(--teal);} 20%{ transform: translate(-4px,2px);} 40%{ transform: translate(4px,-2px);} 60%{ transform: translate(-2px,-1px);} 80%{ transform: translate(2px,1px);} }
+
+    .kicker {
+      display: inline-block;
+      font-size: 31px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: var(--pink);
+      color: white;
+      padding: 10px 18px;
+      border: 5px solid white;
+      box-shadow: 8px 8px 0 #000;
+      transform: rotate(-2deg);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-size: 84px;
+      line-height: .92;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+      text-shadow: 7px 7px 0 #000;
+    }
+    h2 {
+      font-size: 62px;
+      line-height: .95;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      text-shadow: 5px 5px 0 #000;
+    }
+    h3 { font-size: 34px; font-weight: 950; }
+    p { font-size: 30px; line-height: 1.23; }
+
+    .title-lockup {
+      position: absolute;
+      left: 80px;
+      top: 88px;
+      width: 1040px;
+      z-index: 3;
+    }
+    .title-lockup h1 { margin-top: 26px; }
+    .title-lockup .sub { margin-top: 24px; font-size: 32px; color: var(--cream); }
+
+    .hero-img {
+      position: absolute;
+      right: 58px;
+      bottom: 48px;
+      width: 610px;
+      height: 610px;
+      object-fit: cover;
+      border: 8px solid white;
+      box-shadow: 22px 22px 0 var(--pink), -18px -18px 0 var(--teal), 0 28px 55px var(--shadow);
+      transform: rotate(2deg);
+      border-radius: 20px;
+    }
+
+    .quest-box, .hud, .card, .bubble, .terminal, .status, .item-card {
+      border: 6px solid white;
+      box-shadow: 12px 12px 0 #000;
+      border-radius: 18px;
+      background: rgba(10,12,24,.9);
+    }
+    .quest-box {
+      padding: 38px 46px;
+      width: 760px;
+      position: absolute;
+      left: 100px;
+      top: 220px;
+    }
+    .quest-title {
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 1000;
+      font-size: 48px;
+      text-shadow: 4px 4px 0 #000;
+      margin-bottom: 24px;
+    }
+    .quest-list { font-size: 34px; line-height: 1.6; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .quest-list span { color: var(--teal); }
+
+    .big-center {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 90px;
+      text-align: center;
+    }
+    .big-center h2 { font-size: 92px; }
+    .big-center p { margin-top: 30px; max-width: 1060px; font-size: 38px; color: var(--cream); }
+
+    .split {
+      position: absolute;
+      inset: 70px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .split .text { z-index: 2; }
+    .photo {
+      width: 100%;
+      height: 620px;
+      object-fit: cover;
+      border: 8px solid white;
+      border-radius: 18px;
+      box-shadow: 18px 18px 0 var(--gold), 0 30px 60px var(--shadow);
+    }
+    .photo.contain { object-fit: contain; background: #15151f; }
+
+    .rule-grid {
+      position: absolute;
+      right: 80px;
+      top: 120px;
+      width: 650px;
+      display: grid;
+      gap: 24px;
+    }
+    .rule {
+      background: #fff;
+      color: var(--ink);
+      border: 6px solid #000;
+      box-shadow: 11px 11px 0 var(--teal);
+      padding: 24px 30px;
+      border-radius: 18px;
+      font-weight: 950;
+      font-size: 34px;
+    }
+    .rule b { color: var(--pink); }
+
+    .keyboard-diagram {
+      position: absolute;
+      left: 80px;
+      bottom: 70px;
+      width: 770px;
+      height: 450px;
+      border: 7px solid white;
+      border-radius: 18px;
+      box-shadow: 18px 18px 0 var(--pink);
+      object-fit: cover;
+      object-position: 50% 45%;
+    }
+
+    .note-pattern {
+      position: absolute;
+      left: 105px;
+      top: 160px;
+      background: rgba(255,255,255,.96);
+      color: #111;
+      border: 6px solid #000;
+      border-radius: 18px;
+      padding: 24px 30px;
+      box-shadow: 12px 12px 0 var(--green);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 32px;
+      white-space: pre;
+      line-height: 1.3;
+    }
+    .note-pattern .cde { color: #e32929; font-weight: 1000; }
+    .note-pattern .fgab { color: #d91515; font-weight: 1000; }
+
+    .manga-grid {
+      position: absolute;
+      inset: 52px 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 28px;
+    }
+    .panel {
+      position: relative;
+      background: #f8f0e6;
+      color: #151515;
+      border: 8px solid #111;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 11px 11px 0 rgba(0,0,0,.8);
+      padding: 28px;
+    }
+    .panel.dark { background: #11111c; color: #fff; }
+    .panel h3 { font-size: 42px; text-transform: uppercase; line-height: .96; }
+    .panel p { margin-top: 20px; font-size: 30px; }
+    .panel .sfx { position: absolute; right: 22px; bottom: 18px; font-size: 68px; font-weight: 1000; color: var(--pink); transform: rotate(-8deg); text-shadow: 4px 4px 0 #000; }
+
+    .bubble {
+      background: white;
+      color: #0d0d14;
+      border-color: #111;
+      padding: 26px 34px;
+      font-weight: 950;
+      font-size: 40px;
+      text-transform: uppercase;
+      display: inline-block;
+      box-shadow: 10px 10px 0 var(--pink);
+    }
+
+    .terminal {
+      position: absolute;
+      left: 90px;
+      bottom: 90px;
+      width: 860px;
+      padding: 34px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 32px;
+      color: #50ff8a;
+      background: #03050a;
+    }
+    .terminal .bad { color: #ff5869; }
+    .terminal .ok { color: #b8ff72; }
+
+    .boss-card {
+      position: absolute;
+      right: 90px;
+      top: 150px;
+      width: 480px;
+      padding: 34px;
+      background: linear-gradient(135deg, #1d0b16, #090914);
+      border: 7px solid white;
+      box-shadow: 16px 16px 0 var(--danger);
+      border-radius: 22px;
+    }
+    .boss-card .boss { color: var(--danger); font-size: 36px; font-weight: 1000; text-transform: uppercase; }
+    .meter { height: 28px; border: 4px solid white; border-radius: 999px; overflow: hidden; background: #141422; margin-top: 22px; }
+    .meter > i { display:block; height:100%; width: 78%; background: linear-gradient(90deg, var(--danger), var(--gold)); }
+
+    .device-pair {
+      position: absolute;
+      left: 100px;
+      bottom: 70px;
+      width: 900px;
+      height: 560px;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 8px solid white;
+      box-shadow: 22px 22px 0 var(--teal);
+    }
+
+    .cutin {
+      position: absolute;
+      right: 86px;
+      bottom: 90px;
+      width: 430px;
+      padding: 26px 30px;
+      border: 6px solid #111;
+      border-radius: 16px;
+      color: #111;
+      background: white;
+      box-shadow: 12px 12px 0 var(--gold);
+      transform: rotate(2deg);
+    }
+    .cutin h3 { font-size: 40px; color: var(--pink); text-transform: uppercase; }
+    .cutin p { color: #111; font-size: 26px; margin-top: 14px; }
+
+    .sticker-sheet {
+      position: absolute;
+      right: 45px;
+      bottom: 35px;
+      width: 620px;
+      opacity: .25;
+      filter: saturate(1.4) contrast(1.05);
+      transform: rotate(3deg);
+    }
+
+    .arc-list {
+      position: absolute;
+      left: 80px;
+      top: 190px;
+      display: grid;
+      gap: 17px;
+      width: 620px;
+    }
+    .arc {
+      background: #111827;
+      border-left: 14px solid var(--teal);
+      color: white;
+      padding: 18px 25px;
+      font-size: 36px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      box-shadow: 9px 9px 0 #000;
+    }
+    .arc:nth-child(2){ border-color: var(--gold); }
+    .arc:nth-child(3){ border-color: var(--pink); }
+    .arc:nth-child(4){ border-color: var(--purple); }
+    .arc:nth-child(5){ border-color: var(--danger); }
+    .arc:nth-child(6){ border-color: #77ff66; }
+
+    .final-grid {
+      position: absolute;
+      inset: 70px 70px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .final-grid img { width: 100%; height: 700px; object-fit: cover; border: 8px solid white; border-radius: 24px; box-shadow: 18px 18px 0 var(--pink); }
+    .final-grid .hud { padding: 34px 40px; }
+
+    .scanline::after {
+      content:"";
+      position:absolute;
+      left:0; right:0; top:0; height:35%;
+      background: linear-gradient(to bottom, transparent, rgba(47,230,255,.15), transparent);
+      animation: scan 3.8s linear infinite;
+      pointer-events:none;
+      z-index:4;
+    }
+
+    .fragment.pop-in.visible { animation: pulse .45s ease both; }
+
+    .footer-tag {
+      position:absolute;
+      left: 64px;
+      bottom: 38px;
+      font-size: 22px;
+      opacity:.75;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 01 TITLE -->
+    <section data-auto-animate>
+      <div class="frame bg-grid speedlines">
+        <img class="hero-img" src="a_vibrant_anime_style_illustration_poster_composit.png" alt="Anime poster of the project" data-id="hero" />
+        <div class="title-lockup" data-id="title-lockup">
+          <span class="kicker">Episode 01</span>
+          <h1 data-id="main-title">That Time I Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober</h1>
+          <p class="sub">N8 × electroNuck • keyboards • magnets • firmware • music</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 QUEST -->
+    <section data-auto-animate>
+      <div class="frame bg-grid burst scanline">
+        <div class="quest-box" data-id="quest">
+          <div class="quest-title">New Quest!</div>
+          <div class="quest-list">
+            <div><span>☑</span> Build something cool</div>
+            <div><span>☐</span> Make it musical</div>
+            <div><span>☐</span> Get it working</div>
+            <div><span>☐</span> Meet Mark Rober</div>
+          </div>
+        </div>
+        <div class="cutin fragment pop-in">
+          <h3>Side Quest?</h3>
+          <p>No. This immediately becomes the main quest.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 QUEST MORPH -->
+    <section data-auto-animate>
+      <div class="frame bg-grid speedlines">
+        <div class="quest-box" data-id="quest" style="left:420px;top:175px;width:760px;box-shadow:18px 18px 0 var(--danger);">
+          <div class="quest-title" style="color:var(--danger)">New Bug Unlocked</div>
+          <div class="quest-list">
+            <div><span>☑</span> Vintage keyboard</div>
+            <div><span>☑</span> Hall effect sensors</div>
+            <div><span>☑</span> MIDI firmware</div>
+            <div><span>☑</span> Velocity response</div>
+            <div><span>☐</span> Why did we do this?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 CHARACTER INTRO -->
+    <section>
+      <div class="frame bg-grid">
+        <div class="big-center" style="align-items:start;text-align:left;place-items:start;">
+          <span class="kicker">Character Select</span>
+        </div>
+        <div class="manga-grid" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;inset:180px 90px 95px;">
+          <div class="panel dark fragment pop-in">
+            <h3 style="color:var(--teal)">electroNuck</h3>
+            <p>The long-haired hardware wizard who can turn old electronics into new sounds.</p>
+            <div class="sfx">BZZT!!</div>
+          </div>
+          <div class="panel dark fragment pop-in">
+            <h3 style="color:var(--gold)">N8</h3>
+            <p>The guy who says, “What if we just...” and accidentally opens another engineering arc.</p>
+            <div class="sfx">DON!!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 HARDWARE REFERENCE -->
+    <section data-auto-animate>
+      <div class="frame bg-grid">
+        <div class="split">
+          <div class="text">
+            <span class="kicker">The Relic</span>
+            <h2 style="margin-top:28px">A Lexmark / IBM Model M becomes the instrument body.</h2>
+            <p style="margin-top:24px;color:var(--cream)">Keep the staggered keyboard. Add encoders, display, Hall effect velocity sensing, and just enough tape labels to prove it is real.</p>
+          </div>
+          <img class="photo" src="42cb9960-b112-4d59-9667-a7bcfcf5fa07.png" alt="Keyboard and synth phone reference" data-id="modelm" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 WICKI-HAYDEN RULES -->
+    <section data-auto-animate>
+      <div class="frame bg-grid speedlines">
+        <span class="kicker" style="position:absolute;left:80px;top:64px">Wicki-Hayden Arc</span>
+        <div class="note-pattern" data-id="pattern">Row 1   <span class="cde">C   D   E</span>
+Row 2 <span class="fgab">F   G   A   B</span>
+Row 3   <span class="cde">C   D   E</span>
+Row 4 <span class="fgab">F   G   A   B</span>
+Row 5   <span class="cde">C   D   E</span></div>
+        <img class="keyboard-diagram" src="1000024563.jpg" alt="Actual Wicki-Hayden note layout on prototype" data-id="modelm" />
+        <div class="rule-grid">
+          <div class="rule fragment pop-in">Horizontal movement = <b>whole step</b></div>
+          <div class="rule fragment pop-in">Diagonal movement = <b>semitone</b></div>
+          <div class="rule fragment pop-in">Shapes transpose anywhere</div>
+          <div class="rule fragment pop-in">Pianists: existential damage</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 PIANIST BOSS BATTLE -->
+    <section>
+      <div class="frame bg-grid burst">
+        <div class="manga-grid">
+          <div class="panel dark fragment"><h3>I have mastered Rachmaninoff.</h3><p>Fear me.</p><div class="sfx">✨</div></div>
+          <div class="panel fragment"><h3>...</h3><p>Where are the black keys?</p><div class="sfx">?!</div></div>
+          <div class="panel dark fragment"><h3>Why is everything diagonal?</h3><p>The hands reject the geometry.</p><div class="sfx">ゴゴゴ</div></div>
+          <div class="panel fragment"><h3>Wait.</h3><p>C major is the same shape as F♯ major?</p><div class="sfx">NANI?!</div></div>
+          <div class="panel dark fragment"><h3>This is sorcery.</h3><p>Or, technically, isomorphic layout design.</p><div class="sfx">神!!</div></div>
+          <div class="panel fragment"><h3>My years of piano training...</h3><p>Completely ineffective.</p><div class="sfx">RIP</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 GUITARIST GETS IT -->
+    <section>
+      <div class="frame bg-grid speedlines">
+        <div class="big-center">
+          <h2>Guitarists see the layout and go:</h2>
+          <p class="bubble fragment pop-in" style="margin-top:50px;font-size:64px;">“Oh. This makes perfect sense.”</p>
+          <p class="fragment" style="font-size:34px;color:var(--cream);">Same intervals. Same shapes. Move the pattern anywhere.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 HALL EFFECT ARC -->
+    <section data-auto-animate>
+      <div class="frame bg-grid">
+        <div class="split">
+          <div class="text">
+            <span class="kicker">Hall Effect Arc</span>
+            <h2 style="margin-top:28px">Velocity from magnets instead of piano hammers.</h2>
+            <p style="margin-top:24px;color:var(--cream)">Measure key travel, infer velocity, and send MIDI with expression instead of simple on/off switches.</p>
+          </div>
+          <div class="hud scanline" style="padding:48px;height:540px;position:relative;">
+            <h3 style="color:var(--teal);font-size:52px">Sensor Readout</h3>
+            <p style="margin-top:36px;font-family:ui-monospace;font-size:36px;color:#8dff9c">magnet → hall sensor → ADC</p>
+            <p style="margin-top:30px;font-family:ui-monospace;font-size:36px;color:#8dff9c">travel curve → velocity 127</p>
+            <div class="meter" style="margin-top:48px"><i style="width:92%;background:linear-gradient(90deg,var(--teal),var(--pink))"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 FIRMWARE ARC -->
+    <section>
+      <div class="frame bg-grid scanline">
+        <span class="kicker" style="position:absolute;left:90px;top:75px">Firmware Arc</span>
+        <h2 style="position:absolute;left:90px;top:150px;width:900px">Every successful compile unlocked a harder problem.</h2>
+        <div class="terminal fragment pop-in">
+          <div>&gt; read_sensors()</div>
+          <div>&gt; map_velocity()</div>
+          <div class="bad">&gt; why_is_latency_real()</div>
+          <div class="bad">panic: prototype smoke detected</div>
+          <div class="ok">&gt; midi.send(note_on, velocity)</div>
+          <div class="ok">build success // for now</div>
+        </div>
+        <div class="boss-card fragment pop-in">
+          <div class="boss">Boss: Latency</div>
+          <p style="margin-top:20px">HP</p>
+          <div class="meter"><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 PHONE RETURNS -->
+    <section data-auto-animate>
+      <div class="frame bg-grid burst">
+        <span class="kicker" style="position:absolute;left:90px;top:70px">Previously On...</span>
+        <img class="device-pair" src="42cb9960-b112-4d59-9667-a7bcfcf5fa07.png" alt="Keyboard and phone" data-id="pair" />
+        <div class="cutin" style="right:100px;top:220px;bottom:auto;width:460px;">
+          <h3>The Synth Phone Returns</h3>
+          <p>A phone turned vocal effects processor joins the keyboard for the crossover episode.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 FINAL FORM -->
+    <section data-auto-animate>
+      <div class="frame bg-grid speedlines">
+        <div class="final-grid">
+          <img src="42cb9960-b112-4d59-9667-a7bcfcf5fa07.png" alt="Final form hardware" data-id="pair" />
+          <div class="hud">
+            <h2 style="font-size:70px">Final Form</h2>
+            <p style="margin-top:24px;color:var(--cream)">Model M body. Wicki-Hayden notes. Hall effect velocity. MIDI output. Synth phone FX.</p>
+            <div class="quest-list" style="margin-top:36px;font-size:32px">
+              <div><span>☑</span> Keyboard</div>
+              <div><span>☑</span> Phone</div>
+              <div><span>☑</span> Music</div>
+              <div><span>☐</span> Mark Rober</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 QUEST COMPLETE? -->
+    <section>
+      <div class="frame bg-grid burst scanline">
+        <div class="big-center">
+          <span class="kicker">Season Finale</span>
+          <h2 style="margin-top:34px;animation:glitch 1.4s infinite">Quest Objective</h2>
+          <p class="bubble" style="margin-top:48px;font-size:70px;box-shadow:14px 14px 0 var(--teal);">Meet Mark Rober</p>
+          <p style="font-size:32px;color:var(--cream);margin-top:32px">Status: still loading...</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    progress: true,
+    center: false,
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    width: 1600,
+    height: 900,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    autoAnimate: true,
+    autoAnimateEasing: 'cubic-bezier(.22,1,.36,1)',
+    autoAnimateDuration: 0.85,
+    autoAnimateUnmatched: false,
+    plugins: []
+  });
+</script>
+</body>
+</html>

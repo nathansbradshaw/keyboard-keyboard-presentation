@@ -1,0 +1,8 @@
+<section class="slide layout-split wide-right" data-auto-animate>
+  <header class="slide-head"><span class="eyebrow">Measurement · conceptual</span><h2 data-id="hall-title">ADC delta over key travel</h2></header>
+  <div class="content slide-body">
+    <div class="stack"><span class="badge implemented">64 resting samples at boot</span><p>The implementation calibrates a baseline—not a full-press endpoint.</p><p class="muted">This curve explains the sensing idea; it is not captured project data.</p></div>
+    <div class="chart" data-id="hall-signal"><div class="curve"></div><div class="curve release"></div><span class="chart-label axis-x">key travel →</span><span class="chart-label axis-y">absolute ADC delta →</span><span class="chart-label" style="right:28px;top:42px;color:var(--magenta)">press</span><span class="chart-label" style="right:28px;top:82px;color:#087f7b">release</span></div>
+  </div>
+  <aside class="notes">This graph is schematic—not project data. The code takes 64 resting samples at startup, primes the filter from that baseline, and does not capture a full-press calibration endpoint. Transition: turn a messy signal into clean events.</aside>
+</section>

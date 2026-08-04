@@ -1,0 +1,14 @@
+<section class="slide layout-diagram">
+  <header class="slide-head"><span class="eyebrow">Board plan · verified</span><h2>The board is an analog routing problem</h2></header>
+  <div class="content">
+    <div class="arch-grid" data-stagger=".arch-node" data-stagger-effect="step-pop">
+      <div class="arch-node">100 × MT9105ET<br><span class="small">Hall sensors</span></div><div class="arch-arrow">→</div>
+      <div class="arch-node yellow">AM1–AM13<br><span class="small">13 × SN74LV4051A</span></div><div class="arch-arrow">→</div>
+      <div class="arch-node dark">Daisy Seed<br><span class="small">12-bit ADC → event queue → DIN-5</span></div>
+      <div class="arch-node magenta">12 analog pots<br><span class="small">MIDI CC controls</span></div><div class="arch-arrow">→</div>
+      <div class="arch-node">AM14–AM15<br><span class="small">shared A11 input</span></div><div class="arch-arrow">→</div>
+      <div class="arch-node yellow">128×32 OLED<br><span class="small">notes, CC, settings</span></div>
+    </div>
+  </div>
+  <aside class="notes">Verified topology: AM1–AM9 have dedicated ADC inputs; AM10–AM13 are selected through U1 and share A9/A10 in pairs. AM14–AM15 carry twelve pots through A11. The Daisy Seed sends UART MIDI over DIN-5; USB exists on the board but USB MIDI is not implemented. Transition: compare a layout tweak in web and hardware.</aside>
+</section>

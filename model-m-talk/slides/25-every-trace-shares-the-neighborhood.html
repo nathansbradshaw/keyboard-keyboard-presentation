@@ -1,0 +1,12 @@
+<section class="slide layout-content">
+  <header class="slide-head"><span class="eyebrow">Routing strategy</span><h2>Every trace shares the neighborhood</h2></header>
+  <div class="content grid-3" data-stagger=".card" data-stagger-group="2">
+    <div class="card tint" data-tone="system"><h3>3 shared select lines</h3><p>D7/D8/D9 select X0–X7 across every mux.</p></div>
+    <div class="card" data-tone="signal"><h3>9 direct ADC paths</h3><p>AM1–AM9 land on Daisy A0–A8.</p></div>
+    <div class="card yellow" data-tone="system"><h3>4 decoded muxes</h3><p>U1 selects AM10–AM13 over shared A9/A10.</p></div>
+    <div class="card" data-tone="signal"><h3>2 pot muxes</h3><p>AM14–AM15 share the A11 input.</p></div>
+    <div class="card magenta" data-tone="warning"><h3>Analog references</h3><p>Ground quality changes every threshold decision.</p></div>
+    <div class="card dark" data-tone="physical"><h3>Physical enclosure</h3><p>Ribs, screws, and connector access still win.</p></div>
+  </div>
+  <aside class="notes">This is the implemented signal topology, not a generic keyboard matrix. The scan addresses one mux channel across the board, reads nine direct ADCs, then selects four decoded muxes. Transition: the real errata make these constraints memorable.</aside>
+</section>
