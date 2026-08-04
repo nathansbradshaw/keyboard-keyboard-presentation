@@ -1,8 +1,12 @@
-<section class="slide layout-gallery">
+<section class="slide layout-content debug-tools-slide">
   <header class="slide-head"><span class="eyebrow">Debug kit</span><h2>There is no browser console</h2></header>
-  <div class="content" data-stagger=".card" data-stagger-group="2">
+  <div class="content debug-grid" data-stagger=".card" data-stagger-group="2">
     <div class="card tint" data-tone="signal"><h3>RTT logs</h3><p>Live key, ADC, and event diagnostics.</p></div><div class="card" data-tone="system"><h3>DIAG_LOGGING</h3><p>Compile-time detail when needed.</p></div><div class="card yellow" data-tone="system"><h3>Cargo Embed + GDB</h3><p>Flash, attach, and inspect.</p></div>
     <div class="card" data-tone="insight"><h3>Three LEDs</h3><p>Boot and runtime state at a glance.</p></div><div class="card magenta" data-tone="signal"><h3>128×32 OLED</h3><p>Mode, values, and calibration feedback.</p></div><div class="card dark" data-tone="boundary"><h3>MIDI monitor</h3><p>Inspect the DIN boundary.</p></div>
+    <figure class="lucky-debug-panel fragment step-punch" data-fragment-index="3">
+      <img src="assets/manga/lucky-star-keyboard.gif" alt="Animated Lucky Star scene of a character pressing computer-keyboard keys with a telephone handset">
+      <figcaption><strong>When the logs stop helping.</strong><small>Animation excerpt: <cite>Lucky Star</cite> · Kyoto Animation · source image via MyAnimeList</small></figcaption>
+    </figure>
   </div>
-  <aside class="notes">These are evidenced in the repository: RTT logging, a DIAG_LOGGING feature, Cargo Embed and GDB configuration, three status LEDs, OLED output, and standard MIDI inspection at the protocol boundary. Transition: MIDI takes us to the returning character.</aside>
+  <aside class="notes">These are evidenced in the repository: RTT logging, a DIAG_LOGGING feature, Cargo Embed and GDB configuration, three status LEDs, OLED output, and standard MIDI inspection at the protocol boundary. Reveal the Lucky Star excerpt only after the real debugging tools; it is the punch line, not the method. Third-party animation excerpt supplied from https://image.myanimelist.net/ui/5LYzTBVoS196gvYvw3zjwI6dbw19qysxdOlqR6dNT_w and credited on-slide. Transition: MIDI takes us to the returning character.</aside>
 </section>

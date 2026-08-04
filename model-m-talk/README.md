@@ -104,4 +104,6 @@ Press `D` to jump to **LIVE DEMO**. The preceding slide contains the six-step ru
 
 The standalone PNGs under `assets/manga/` were copied from the project root and renamed descriptively; their source artwork is otherwise unchanged.
 
+`assets/manga/lucky-star-keyboard.gif` is a third-party animation excerpt from *Lucky Star*, produced by Kyoto Animation, supplied from `https://image.myanimelist.net/ui/5LYzTBVoS196gvYvw3zjwI6dbw19qysxdOlqR6dNT_w`. It is visibly credited on slide 42. Attribution does not itself grant reuse permission; confirm the intended presentation context or replace it with original reaction art before distributing the deck commercially.
+
 `assets/keyboard/keyboard-keyboard.jpg` was copied from the sibling `keyboard-keyboard` project's `images/keyboard-keyboard.jpg`; `keyboard-keyboard.webp` is the optimized delivery copy used by the deck.

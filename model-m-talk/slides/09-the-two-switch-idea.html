@@ -1,16 +1,21 @@
-<section class="slide layout-split wide-right" data-auto-animate>
-  <header class="slide-head"><span class="eyebrow">Prototype 0</span><h2 data-id="switch-title">The two-switch idea</h2></header>
-  <div class="content slide-body" data-stagger=".card">
-    <div class="stack">
-      <span class="badge experimental">Early experiment</span>
-      <p class="big-copy">One press.<br>Two digital moments.</p>
-      <p>Easy to explain. Hard to package.</p>
+<section class="slide layout-content two-switch-measurement" data-auto-animate>
+  <header class="slide-head"><span class="eyebrow">Prototype 0 · velocity from timing</span><h2 data-id="switch-title">Two switches can estimate speed—but they throw away the motion</h2></header>
+  <div class="content switch-model-deep">
+    <div class="switch-stack-technical" data-id="switch-model" data-stagger=".trip-plane, .trip-gap" data-stagger-effect="step-wipe">
+      <div class="key-plunger">KEY TRAVEL <span>↓</span></div>
+      <div class="trip-plane first"><span>SWITCH 1</span><strong>t₁</strong><small>first edge</small></div>
+      <div class="trip-gap"><span>known spacing</span><strong>Δx</strong></div>
+      <div class="trip-plane second"><span>SWITCH 2</span><strong>t₂</strong><small>second edge</small></div>
     </div>
-    <div class="explode" data-id="switch-model" data-stagger=".layer, .layer-arrow" data-stagger-group="2">
-      <div class="layer" style="height:190px">Keycap</div><div class="layer-arrow">↓</div>
-      <div class="layer" style="height:260px">Switch 1<br><span class="small">note on</span></div><div class="layer-arrow">↓</div>
-      <div class="layer" style="height:330px">Switch 2<br><span class="small">second state</span></div>
+
+    <div class="switch-inference">
+      <div class="velocity-equation fragment step-punch" data-fragment-index="3"><small>INFERRED STRIKE SPEED</small><strong>v ≈ Δx / (t₂ − t₁)</strong><p>Two digital edges turn time into a velocity proxy.</p></div>
+      <div class="measurement-ledger" data-stagger=".measurement-row" data-stagger-start="4" data-stagger-effect="step-wipe">
+        <div class="measurement-row good"><span>WE OBSERVE</span><p>Two timestamps with a fixed mechanical separation</p></div>
+        <div class="measurement-row bad"><span>WE LOSE</span><p>Position before, between and after those trip points</p></div>
+        <div class="measurement-row bad"><span>ERROR COMES FROM</span><p>Alignment, switch tolerance, bounce and changing Δx</p></div>
+      </div>
     </div>
   </div>
-  <aside class="notes">This approach was inspired by layered-action instruments, not presented as their exact mechanism. It was mechanically tall, alignment-sensitive, and maintenance-heavy. Transition: put it through a tradeoff screen.</aside>
+  <aside class="notes">Explain the measurement, not just the mechanism. If the two switches are separated by a known travel distance delta-x, timestamp their edges at t1 and t2 and use delta-x divided by delta-t as a velocity proxy. It is simple and entirely digital. But it observes only two points on the key trajectory. Mechanical spacing, alignment, tolerance, and bounce become measurement error, while continuous position and aftertouch remain invisible. This was an early concept, not the final implementation. Transition: evaluate those costs explicitly.</aside>
 </section>

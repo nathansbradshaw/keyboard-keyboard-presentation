@@ -1,9 +1,13 @@
 <section class="slide layout-content manga-cameo-slide">
   <div class="manga-cameo callout-warning fragment step-pop" data-sfx="警告!!"><div class="manga-bubble"><span class="jp-text" lang="ja">仕様追加。後悔は後ほど。</span><span class="en-text">Scope accepted. Regret pending.</span></div></div>
-  <header class="slide-head"><span class="eyebrow">Requirements.md</span><h2>The acceptance criteria were… unusual</h2></header>
-  <div class="content grid-2" data-stagger=".terminal">
-    <div class="terminal"><span class="prompt">[must]</span> look like a Model M<br><span class="prompt">[must]</span> feel mechanically satisfying<br><span class="prompt">[must]</span> support expressive input<br><span class="prompt">[must]</span> send MIDI</div>
-    <div class="terminal"><span class="prompt">[must]</span> fit the original shell<br><span class="prompt">[must]</span> connect to the Synth Phone<br><span class="prompt">[must]</span> be repairable<br><span class="warn">[must]</span> justify this talk</div>
+  <header class="slide-head"><span class="eyebrow">Requirements → architecture</span><h2>Every requirement removed an easy solution</h2></header>
+  <div class="content constraint-ledger" data-stagger=".constraint-row" data-stagger-effect="step-wipe">
+    <div class="constraint-head"><span>WE INSISTED ON</span><span>SO THE SYSTEM NEEDED</span><span>THE REAL COST</span></div>
+    <div class="constraint-row" data-tone="physical"><strong>Keep the Model M shell</strong><span>Fixed geometry and shallow vertical clearance</span><b>One enormous custom PCB</b></div>
+    <div class="constraint-row" data-tone="signal"><strong>Make every key expressive</strong><span>Continuous sensing—not a binary matrix</span><b>100 Hall sensors · 13 muxes</b></div>
+    <div class="constraint-row" data-tone="time"><strong>Make velocity feel playable</strong><span>Per-key calibration plus deterministic timing</span><b>64-sample boot baseline · 1 kHz scan</b></div>
+    <div class="constraint-row" data-tone="boundary"><strong>Drive the Synth Phone</strong><span>Separate performance data from sound generation</span><b>DIN-5 MIDI · 31.25 kbaud</b></div>
+    <p class="constraint-conclusion fragment step-punch" data-fragment-index="4"><span lang="ja">制約が設計になった。</span> The constraints did not decorate the architecture. They created it.</p>
   </div>
-  <aside class="notes">Stress that constraints are creative fuel. The last criterion is comedic but true. Transition: before selecting a sensing technology, we explored the interface space.</aside>
+  <aside class="notes">This is the point of the slide: requirements are causal. Preserving the shell forced the board geometry. Expressive input forced analog sensing. Playable velocity forced calibration and a deterministic scan. Connecting to the external Synth Phone made MIDI the boundary. The numbers come from the real repository: 100 MT9105ET sensors across 13 SN74LV4051A muxes, 64 calibration samples per switch, a 1 kHz timer task, and USART1 MIDI at 31250 baud. Transition: before choosing Hall effect, test the simplest way to estimate key speed.</aside>
 </section>
