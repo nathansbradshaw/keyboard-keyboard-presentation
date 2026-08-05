@@ -15,6 +15,12 @@ rustc server.rs -o target/model-m-talk-server
 
 Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed, for example `./target/model-m-talk-server 8080`. Reveal.js is loaded from jsDelivr, so the first run needs internet access. A browser that has already cached those files can run the deck offline.
 
+Three entry points are available:
+
+- `/` — the original 58-slide cut
+- `/discovery.html` — the discovery-led cut, which preserves the original files and adds a research → false hope → acceptance → build arc
+- `/compare.html` — both cuts side by side, with links to open either one full-size
+
 ## Controls
 
 - `←` / `→` or Space: previous / next slide
@@ -27,7 +33,9 @@ Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed,
 ## Editing
 
 - Individual slide markup and notes: `slides/*.html`
+- Discovery-cut slide markup and notes: `slides-discovery/*.html`
 - Slide order: `slide-manifest.js`
+- Discovery-cut order: `slide-manifest-discovery.js`
 - Slide loading/bootstrap: `slide-loader.js`
 - Page shell and Reveal dependencies: `index.html`
 - Visual system and reusable layouts: `styles.css`
@@ -36,7 +44,7 @@ Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed,
 - Real keyboard photograph: `assets/keyboard/keyboard-keyboard.webp`
 - Standalone manga characters, reactions, quest prompts, and item cards: `assets/manga/*.png`
 
-Every file under `slides/` contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add or reorder slides, update `slide-manifest.js`; the loader fetches that ordered list before `presentation.js` initializes Reveal.
+Every file under `slides/` and `slides-discovery/` contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add or reorder original slides, update `slide-manifest.js`. To change the alternate story, update `slide-manifest-discovery.js`; it can reuse canonical slides alongside discovery-specific fragments. The loader fetches the selected ordered list before `presentation.js` initializes Reveal.
 
 Because the browser loads slide fragments with `fetch`, opening `index.html` directly from the filesystem is not supported. Use the included Rust server.
 
@@ -107,3 +115,5 @@ The standalone PNGs under `assets/manga/` were copied from the project root and 
 `assets/manga/lucky-star-keyboard.gif` is a third-party animation excerpt from *Lucky Star*, produced by Kyoto Animation, supplied from `https://image.myanimelist.net/ui/5LYzTBVoS196gvYvw3zjwI6dbw19qysxdOlqR6dNT_w`. It is visibly credited on slide 42. Attribution does not itself grant reuse permission; confirm the intended presentation context or replace it with original reaction art before distributing the deck commercially.
 
 `assets/keyboard/keyboard-keyboard.jpg` was copied from the sibling `keyboard-keyboard` project's `images/keyboard-keyboard.jpg`; `keyboard-keyboard.webp` is the optimized delivery copy used by the deck.
+
+`assets/research/*.webp` are optimized delivery copies of the project-owned photos and research captures in `docs/`. The Discord captures are used as documentary evidence in the discovery cut; confirm participant permission or replace them with redrawn quotations before public distribution. The Melodicade MX reference is credited in speaker notes to Koop Instruments.

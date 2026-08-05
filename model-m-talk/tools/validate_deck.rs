@@ -14,7 +14,10 @@ fn manifest_files(manifest: &str) -> Vec<&str> {
             let line = line.trim();
             line.strip_prefix('"')
                 .and_then(|value| value.strip_suffix("\","))
-                .filter(|value| value.starts_with("slides/"))
+                .filter(|value| {
+                    (value.starts_with("slides/") || value.starts_with("slides-discovery/"))
+                        && value.ends_with(".html")
+                })
         })
         .collect()
 }
@@ -46,27 +49,40 @@ fn fail(message: impl Into<String>) -> io::Error {
 }
 
 fn main() -> io::Result<()> {
-    let deck_dir = std::env::args_os()
-        .nth(1)
+    let mut arguments = std::env::args_os().skip(1);
+    let deck_dir = arguments
+        .next()
         .map(PathBuf::from)
         .unwrap_or_else(|| PathBuf::from("."));
-    let index = fs::read_to_string(deck_dir.join("index.html"))?;
-    let manifest = fs::read_to_string(deck_dir.join("slide-manifest.js"))?;
+    let index_name = arguments
+        .next()
+        .and_then(|value| value.into_string().ok())
+        .unwrap_or_else(|| "index.html".into());
+    let manifest_name = arguments
+        .next()
+        .and_then(|value| value.into_string().ok())
+        .unwrap_or_else(|| "slide-manifest.js".into());
+    let canonical_deck = manifest_name == "slide-manifest.js";
+    let index = fs::read_to_string(deck_dir.join(&index_name))?;
+    let manifest = fs::read_to_string(deck_dir.join(&manifest_name))?;
     let files = manifest_files(&manifest);
 
     if count(&index, "<section class=\"slide") != 0 {
-        return Err(fail("index.html still contains inline slides"));
+        return Err(fail(format!("{index_name} still contains inline slides")));
     }
-    for required in ["slide-manifest.js", "slide-loader.js"] {
+    for required in [manifest_name.as_str(), "slide-loader.js"] {
         if !index.contains(required) {
-            return Err(fail(format!("index.html does not load {required}")));
+            return Err(fail(format!("{index_name} does not load {required}")));
         }
     }
-    if files.len() != 58 {
+    if canonical_deck && files.len() != 58 {
         return Err(fail(format!(
             "manifest contains {} slides instead of 58",
             files.len()
         )));
+    }
+    if files.is_empty() {
+        return Err(fail("manifest contains no slides"));
     }
 
     let unique: HashSet<_> = files.iter().copied().collect();
@@ -74,14 +90,16 @@ fn main() -> io::Result<()> {
         return Err(fail("manifest contains duplicate slide files"));
     }
 
-    let disk_files: HashSet<String> = fs::read_dir(deck_dir.join("slides"))?
-        .filter_map(Result::ok)
-        .filter(|entry| entry.path().extension().and_then(|ext| ext.to_str()) == Some("html"))
-        .map(|entry| format!("slides/{}", entry.file_name().to_string_lossy()))
-        .collect();
-    let manifest_set: HashSet<String> = files.iter().map(|file| (*file).to_string()).collect();
-    if disk_files != manifest_set {
-        return Err(fail("slide files on disk do not exactly match the manifest"));
+    if canonical_deck {
+        let disk_files: HashSet<String> = fs::read_dir(deck_dir.join("slides"))?
+            .filter_map(Result::ok)
+            .filter(|entry| entry.path().extension().and_then(|ext| ext.to_str()) == Some("html"))
+            .map(|entry| format!("slides/{}", entry.file_name().to_string_lossy()))
+            .collect();
+        let manifest_set: HashSet<String> = files.iter().map(|file| (*file).to_string()).collect();
+        if disk_files != manifest_set {
+            return Err(fail("slide files on disk do not exactly match the canonical manifest"));
+        }
     }
 
     let mut notes = 0;
@@ -109,8 +127,8 @@ fn main() -> io::Result<()> {
     }
 
     println!(
-        "Validated {} slides, {} notes, {} auto-animate slides, and {} slides with staged reveals.",
-        files.len(), notes, auto_animate, staggered
+        "Validated {} slides from {}, {} notes, {} auto-animate slides, and {} slides with staged reveals.",
+        files.len(), manifest_name, notes, auto_animate, staggered
     );
     Ok(())
 }
