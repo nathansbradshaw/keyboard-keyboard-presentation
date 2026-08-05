@@ -789,6 +789,166 @@ body { overflow: hidden; }
   filter: drop-shadow(10px 10px 0 rgba(0,0,0,.5));
 }
 
+/* Discovery cut: documentary screenshots and build photos share the existing
+   manga grammar without changing the original slide set. */
+.research-question-grid {
+  display: grid;
+  grid-template-columns: 1fr 90px 1fr;
+  align-items: stretch;
+  gap: 24px;
+  max-width: 1320px !important;
+}
+.research-question-grid .card { min-height: 330px; padding: 38px; }
+.research-question-grid .card h3 { margin-top: 24px; font-size: 48px; }
+.research-question-grid .card p { max-width: 470px; font-size: 27px; }
+.research-question-mark { display: grid; place-items: center; color: var(--yellow); font-size: 82px; font-weight: 1000; }
+.research-value { display: block; margin-top: 24px; font: 1000 72px/1 ui-monospace, monospace; }
+.research-payoff { margin-top: 30px !important; color: var(--yellow); font-size: 38px !important; font-weight: 950; text-align: center; }
+
+.research-screenshot-stage { display: grid; gap: 24px; max-width: 1370px !important; }
+.research-screenshot {
+  margin: 0;
+  overflow: hidden;
+  border: 5px solid #08080d;
+  border-radius: 14px;
+  background: #19191f;
+  box-shadow: 10px 10px 0 var(--cyan), 15px 15px 0 #08080d;
+}
+.research-screenshot img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.research-screenshot figcaption,
+.research-photo-pair figcaption,
+.geometry-comparison figcaption {
+  padding: 12px 16px;
+  background: var(--charcoal);
+  color: var(--paper);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .025em;
+}
+.research-screenshot.wide { height: 210px; }
+.research-screenshot.wide img { height: 158px; }
+.research-screenshot.portrait { height: 540px; }
+.research-screenshot.portrait img { height: 488px; object-fit: cover; object-position: top; }
+.research-screenshot.poc { height: 535px; }
+.research-screenshot.poc img { height: 483px; object-fit: cover; }
+.research-answer {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 24px 32px;
+  border: 5px solid #08080d;
+  border-radius: 14px;
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 10px 10px 0 var(--magenta);
+}
+.research-answer > span { grid-row: 1 / 3; font: 1000 34px/1.05 "Hiragino Sans", "Yu Gothic", sans-serif; }
+.research-answer small { font-weight: 1000; letter-spacing: .12em; }
+.research-answer strong { color: var(--ink); font-size: 35px; }
+.research-answer p { grid-column: 2; font-size: 23px; }
+
+.false-hope-grid { display: grid; gap: 28px; max-width: 1360px !important; }
+.false-hope-grid .research-screenshot { height: 150px; }
+.false-hope-grid .research-screenshot img { height: 98px; }
+.false-hope-grid .card { min-height: 230px; }
+.false-hope-grid .card h3 { margin-top: 14px; font-size: 39px; }
+
+.switch-stack-visual {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 520px;
+  padding-right: 110px;
+}
+.keycap-block, .switch-block {
+  display: grid;
+  place-items: center;
+  width: 340px;
+  border: 6px solid #08080d;
+  color: var(--ink);
+  font-size: 26px;
+  font-weight: 1000;
+  box-shadow: 8px 8px 0 #000;
+}
+.keycap-block { height: 90px; border-radius: 24px 24px 8px 8px; background: var(--paper); }
+.switch-block { height: 145px; background: var(--cyan); }
+.switch-block.bottom { background: var(--magenta); }
+.height-bracket {
+  position: absolute;
+  right: 12px;
+  top: 93px;
+  display: grid;
+  place-items: center;
+  width: 94px;
+  height: 380px;
+  border-right: 8px solid var(--red);
+  color: var(--red);
+  font-size: 27px;
+  font-weight: 1000;
+  line-height: .92;
+  text-align: center;
+  writing-mode: vertical-rl;
+}
+.grief-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; height: 500px; }
+.grief-grid .manga-panel { padding: 35px; }
+.grief-grid .manga-panel h3 { margin-top: 28px; font-size: 45px; }
+.grief-grid .manga-panel p { margin-top: 30px; font-size: 29px; }
+
+.source-merge {
+  display: grid;
+  grid-template-columns: 1fr 70px 1fr 70px 1.08fr;
+  align-items: stretch;
+  gap: 18px;
+  max-width: 1420px !important;
+}
+.source-merge .card { min-width: 0; min-height: 390px; padding: 30px; }
+.source-merge .card h3 { margin-top: 22px; font-size: 43px; }
+.source-merge .card p { font-size: 25px; }
+.source-merge code { display: block; margin-top: 32px; overflow-wrap: anywhere; font-size: 15px; }
+.source-arrow { display: grid; place-items: center; color: var(--yellow); font-size: 68px; font-weight: 1000; }
+
+.research-photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1370px !important; }
+.research-photo-pair figure,
+.geometry-comparison figure {
+  margin: 0;
+  overflow: hidden;
+  border: 5px solid #08080d;
+  border-radius: 14px;
+  background: #061526;
+  box-shadow: 9px 9px 0 var(--cyan);
+}
+.research-photo-pair img { display: block; width: 100%; height: 420px; object-fit: cover; }
+.research-banner {
+  position: relative;
+  z-index: 5;
+  width: max-content;
+  max-width: 1250px;
+  margin: 24px auto 0;
+  padding: 14px 25px;
+  border: 4px solid #08080d;
+  border-radius: 10px;
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 7px 7px 0 var(--magenta);
+  font-size: 29px;
+  font-weight: 1000;
+  text-align: center;
+}
+
+.geometry-comparison {
+  display: grid;
+  grid-template-columns: 1fr 62px 1fr;
+  align-items: center;
+  gap: 18px;
+  max-width: 1420px !important;
+}
+.geometry-comparison figure { box-shadow: 9px 9px 0 var(--magenta); }
+.geometry-comparison img { display: block; width: 100%; height: 410px; object-fit: contain; }
+.geometry-arrow { color: var(--yellow); font-size: 62px; font-weight: 1000; text-align: center; }
+
 /* Manga grammar: reusable reaction panels, typographic cut-ins, speech bubbles,
    and slow background motion. */
 .manga-burst::before {

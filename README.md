@@ -21,6 +21,8 @@ Open <http://127.0.0.1:8000>. To use another port, pass it as the first argument
 ./target/model-m-talk-server 8080
 ```
 
+Open <http://127.0.0.1:8000/compare.html> to compare the original cut with the alternate discovery-led cut. The original remains at `/`; the alternate is at `/discovery.html`.
+
 Reveal.js is loaded from jsDelivr, so an uncached first run requires internet access. Opening `index.html` directly is not supported because the browser loads the individual slide files with `fetch`.
 
 ## Presenting

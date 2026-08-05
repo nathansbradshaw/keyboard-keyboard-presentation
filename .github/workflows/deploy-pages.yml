@@ -37,6 +37,7 @@ jobs:
         run: |
           rustc model-m-talk/tools/validate_deck.rs -o /tmp/validate-model-m-talk
           /tmp/validate-model-m-talk model-m-talk
+          /tmp/validate-model-m-talk model-m-talk discovery.html slide-manifest-discovery.js
 
       - name: Upload presentation
         uses: actions/upload-pages-artifact@v4
