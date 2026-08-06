@@ -397,6 +397,138 @@ body { overflow: hidden; }
   transform: rotate(-1deg);
 }
 
+/* Manga triptych for the embedded-as-medium thesis. Each panel uses the
+   visual behavior of its medium instead of only describing it. */
+.constraint-manga-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  height: 330px;
+  margin-top: 28px;
+  perspective: 1200px;
+}
+.constraint-medium {
+  min-width: 0;
+  height: 320px;
+  padding: 20px 24px 22px;
+  overflow: visible;
+  transform-origin: center;
+}
+.constraint-medium:nth-child(1) { transform: rotate(-1.8deg) translateY(5px); }
+.constraint-medium:nth-child(2) { z-index: 3; transform: rotate(1.3deg) translateY(-5px); }
+.constraint-medium:nth-child(3) { transform: rotate(-.8deg) translateY(4px); }
+.constraint-medium small {
+  display: block;
+  color: #536a61;
+  font: 950 13px/1 ui-monospace, monospace;
+  letter-spacing: .08em;
+}
+.constraint-medium.dark small { color: #b8cac3; }
+.manga-panel.constraint-medium h3 { max-width: 56%; margin-top: 10px; font-size: 35px; }
+.manga-panel.constraint-medium p { max-width: 58%; margin-top: 8px; font-size: 20px; line-height: 1.12; }
+.manga-panel.constraint-medium .jp-line { max-width: 58%; margin-bottom: 6px; font-size: 17px; }
+.manga-panel.constraint-medium .manga-sfx { right: -12px; bottom: -14px; font-size: 52px; }
+.manga-panel.constraint-medium .manga-sfx::after { margin-top: 7px; font-size: 10px; }
+
+.pixel-art-demo,
+.watercolor-demo,
+.embedded-art-demo {
+  position: absolute !important;
+  z-index: 0 !important;
+  right: 22px;
+  top: 42px;
+  width: 142px;
+  height: 112px;
+}
+.pixel-art-demo {
+  display: grid;
+  grid-template-columns: repeat(5, 20px);
+  grid-template-rows: repeat(4, 20px);
+  gap: 3px;
+  padding: 9px;
+  border: 4px solid #08080d;
+  background:
+    linear-gradient(rgba(21,155,152,.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21,155,152,.2) 1px, transparent 1px),
+    #fffdf4;
+  background-size: 12px 12px;
+  box-shadow: 6px 6px 0 var(--tone);
+  transform: rotate(3deg);
+}
+.pixel-art-demo i { display: block; width: 20px; height: 20px; background: var(--tone); }
+.pixel-art-demo i:nth-child(1) { grid-column: 2; }
+.pixel-art-demo i:nth-child(2) { grid-column: 4; }
+.pixel-art-demo i:nth-child(3) { grid-column: 1; grid-row: 2; }
+.pixel-art-demo i:nth-child(4) { grid-column: 2; grid-row: 2; background: var(--magenta); }
+.pixel-art-demo i:nth-child(5) { grid-column: 3; grid-row: 2; }
+.pixel-art-demo i:nth-child(6) { grid-column: 4; grid-row: 2; background: var(--magenta); }
+.pixel-art-demo i:nth-child(7) { grid-column: 5; grid-row: 2; }
+.pixel-art-demo i:nth-child(8) { grid-column: 2 / span 3; grid-row: 3; width: 66px; background: var(--yellow); }
+.pixel-art-demo i:nth-child(9) { grid-column: 3; grid-row: 4; }
+
+.watercolor-demo {
+  overflow: hidden;
+  border: 4px solid #08080d;
+  border-radius: 48% 52% 43% 57% / 55% 42% 58% 45%;
+  background: #fffdf4;
+  box-shadow: 6px 6px 0 var(--tone);
+  transform: rotate(-4deg);
+  filter: saturate(1.15);
+}
+.watercolor-demo::before,
+.watercolor-demo::after,
+.watercolor-demo i {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(5px);
+  opacity: .68;
+}
+.watercolor-demo::before { inset: 8px 38px 20px 5px; background: #35d6d0; transform: rotate(18deg); }
+.watercolor-demo::after { inset: 24px 4px 8px 40px; background: #f25aa2; transform: rotate(-17deg); }
+.watercolor-demo i:nth-child(1) { inset: 2px 25px 46px 52px; background: #ffd34f; }
+.watercolor-demo i:nth-child(2) { inset: 51px 54px 2px 9px; background: #7e63c8; }
+.watercolor-demo i:nth-child(3) { inset: 34px 20px 22px 34px; border: 4px solid #008b95; opacity: .42; }
+
+.embedded-art-demo {
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--cyan);
+  background:
+    linear-gradient(rgba(53,214,208,.16) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(53,214,208,.16) 2px, transparent 2px),
+    #0b0b17;
+  background-size: 18px 18px;
+  box-shadow: 6px 6px 0 var(--magenta);
+  transform: rotate(3deg);
+}
+.chip-core {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 54px;
+  border: 4px solid #08080d;
+  background: var(--yellow);
+  color: var(--ink);
+  font: 1000 17px/1 ui-monospace, monospace;
+  box-shadow: 4px 4px 0 var(--cyan);
+}
+.embedded-art-demo i { position: absolute; background: var(--magenta); box-shadow: 0 0 8px var(--magenta); }
+.embedded-art-demo i:nth-of-type(1) { left: 0; top: 28px; width: 43px; height: 5px; }
+.embedded-art-demo i:nth-of-type(2) { right: 0; bottom: 27px; width: 43px; height: 5px; }
+.embedded-art-demo i:nth-of-type(3) { left: 29px; bottom: 0; width: 5px; height: 34px; }
+.embedded-art-demo i:nth-of-type(4) { right: 25px; top: 0; width: 5px; height: 34px; }
+.constraint-payoff {
+  margin-top: 25px !important;
+  max-width: 1180px;
+  font-size: 25px !important;
+  text-transform: none;
+}
+.constraint-payoff span { margin-right: 12px; font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+
 /* Requirement ledger: each promise visibly causes an architectural commitment. */
 .constraint-ledger { max-width: 1360px !important; }
 .constraint-head,
@@ -1612,6 +1744,11 @@ body { overflow: hidden; }
   transition: clip-path .5s cubic-bezier(.22,1,.36,1);
 }
 .reveal .slides section .fragment.step-wipe.visible { clip-path: inset(0); }
+.reveal .slides section .fragment.step-panel {
+  opacity: 0;
+  transition: opacity .36s ease;
+}
+.reveal .slides section .fragment.step-panel.visible { opacity: 1; }
 .reveal .slides section .fragment.step-punch { opacity: 0; }
 .reveal .slides section .fragment.step-punch.visible {
   opacity: 1;

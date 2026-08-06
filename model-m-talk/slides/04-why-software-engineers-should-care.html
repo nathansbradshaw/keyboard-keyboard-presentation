@@ -1,16 +1,35 @@
 <section class="slide layout-content manga-cameo-slide">
-  <div class="manga-cameo callout-insight fragment step-pop" data-sfx="ピコーン!!"><div class="manga-bubble"><span class="jp-text" lang="ja">APIに磁石が生えた。</span><span class="en-text">Now the API has magnets.</span></div></div>
-  <header class="slide-head"><span class="eyebrow">The thesis</span><h2>Why software engineers should care</h2></header>
+  <div class="manga-cameo callout-insight fragment step-pop" data-sfx="ドン!!"><div class="manga-bubble"><span class="jp-text" lang="ja">制約こそ表現だ。</span><span class="en-text">The constraint is the expression.</span></div></div>
+  <header class="slide-head"><span class="eyebrow">The invitation</span><h2>Embedded systems are an art of constraints</h2></header>
   <div class="content thesis-argument">
-    <p class="thesis-line">The hard part was not sending MIDI. It was deciding when <span>noisy human motion</span> meant “play a note.”</p>
-    <div class="thesis-chain" data-stagger=".thesis-stage, .thesis-arrow" data-stagger-effect="step-wipe">
-      <div class="thesis-stage" data-tone="physical"><small>MESSY WORLD</small><h3>Motion</h3><p>Hands, magnets, tolerances, drift and mechanical travel</p></div>
-      <div class="thesis-arrow">→</div>
-      <div class="thesis-stage" data-tone="system"><small>SOFTWARE MODEL</small><h3>Intent</h3><p>Sampling, calibration, filtering, thresholds and state</p></div>
-      <div class="thesis-arrow">→</div>
-      <div class="thesis-stage" data-tone="boundary"><small>STABLE CONTRACT</small><h3>MIDI</h3><p>Notes, velocity, controls and pitch bend</p></div>
+    <p class="thesis-line">The medium pushes back—and that is what makes the work <span>fun, surprising, and challenging.</span></p>
+    <div class="constraint-manga-grid" data-stagger=".constraint-medium" data-stagger-effect="step-panel">
+      <article class="manga-panel constraint-medium tone-confident">
+        <span class="jp-line" lang="ja">小さな世界</span>
+        <small>01 · LIMITED RESOLUTION</small>
+        <div class="pixel-art-demo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <h3>Pixel art</h3>
+        <p>Every square becomes a deliberate choice.</p>
+        <span class="manga-sfx" data-meaning="place the pixel">カチッ</span>
+      </article>
+      <article class="manga-panel constraint-medium tone-magic">
+        <span class="jp-line" lang="ja">滲みも味方</span>
+        <small>02 · UNRULY MATERIAL</small>
+        <div class="watercolor-demo" aria-hidden="true"><i></i><i></i><i></i></div>
+        <h3>Watercolor</h3>
+        <p>Water, pigment, and paper join the process.</p>
+        <span class="manga-sfx" data-meaning="let it flow">にじみ</span>
+      </article>
+      <article class="manga-panel constraint-medium tone-dread dark">
+        <span class="jp-line" lang="ja">物理が参戦</span>
+        <small>03 · PHYSICAL COMPUTATION</small>
+        <div class="embedded-art-demo" aria-hidden="true"><span class="chip-core">MCU</span><i></i><i></i><i></i><i></i></div>
+        <h3>Embedded</h3>
+        <p>Time, memory, power, and imperfect signals shape the code.</p>
+        <span class="manga-sfx" data-meaning="the medium fights back">ピコーン</span>
+      </article>
     </div>
-    <p class="thesis-payoff fragment step-punch" data-fragment-index="5">That translation problem is software engineering—just with magnets.</p>
+    <p class="thesis-payoff constraint-payoff fragment step-punch" data-fragment-index="3"><span lang="ja">制約は邪魔じゃない。</span> The constraint gives the work its character.</p>
   </div>
-  <aside class="notes">This is the promise for the talk. Do not enumerate generic lessons. State the actual problem: turn uncertain physical motion into a stable software contract. The rest of the talk follows the middle box—sampling, calibration, filtering, thresholds, state, and scheduling—before arriving at MIDI. Transition: if MIDI keyboards are solved, why build this one?</aside>
+  <aside class="notes">Reveal the three manga panels one beat at a time: pixel art, watercolor, then embedded. Invite software engineers to see embedded development as a creative medium, not merely software with fewer resources. Pixel art gets its character from a finite grid and palette. Watercolor gets its character from working with water, pigment, paper, and imperfect control. Embedded systems ask us to work with clocks, memory, power, mechanical geometry, analog noise, and physical tolerances. Those limits force deliberate choices and make the result distinctive. In this project, the medium includes an old shell, one hundred analog sensors, a one-millisecond scan, and DIN MIDI. Transition: if MIDI keyboards are already solved, why deliberately choose these constraints?</aside>
 </section>
