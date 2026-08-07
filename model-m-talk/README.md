@@ -1,6 +1,6 @@
 # Model M MIDI Talk
 
-An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** It uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide.
+An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The primary 58-slide cut follows the lived discovery story before opening up the technical system. It uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide.
 
 ## Run locally
 
@@ -17,8 +17,9 @@ Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed,
 
 Three entry points are available:
 
-- `/` — the original 58-slide cut
-- `/discovery.html` — the discovery-led cut, which preserves the original files and adds a research → false hope → acceptance → build arc
+- `/` — the primary discovery-led cut: research → false hope → acceptance → build
+- `/technical.html` — the 60-slide technical-first cut
+- `/discovery.html` — a direct alias for the primary discovery-led sequence
 - `/compare.html` — both cuts side by side, with links to open either one full-size
 
 ## Controls
@@ -42,7 +43,8 @@ Three entry points are available:
 - Reveal configuration and custom keys: `presentation.js`
 - Title illustration: `assets/characters/title-hero.webp` (optimized) and `title-hero.png` (source)
 - Real keyboard photograph: `assets/keyboard/keyboard-keyboard.webp`
-- Standalone manga characters, reactions, quest prompts, and item cards: `assets/manga/*.png`
+- Original title cast and transparent reaction libraries: `assets/characters/`
+- Standalone manga characters, quest prompts, and item cards: `assets/manga/*.png`
 
 Every file under `slides/` and `slides-discovery/` contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add or reorder original slides, update `slide-manifest.js`. To change the alternate story, update `slide-manifest-discovery.js`; it can reuse canonical slides alongside discovery-specific fragments. The loader fetches the selected ordered list before `presentation.js` initializes Reveal.
 
@@ -59,7 +61,9 @@ Because the browser loads slide fragments with `fetch`, opening `index.html` dir
 
 ## Manga presentation system
 
-- The default slide canvas uses a high-contrast night background, subtle halftone dots, and radial speed lines; cream and colored cards always reset to dark text.
+- `/storyboard-library.html` is the combined visual catalog for camera shots, character blocking, emotion effects, story beats, expression cutouts, props, and reference assets. The reusable staging API is documented in `ANIME_STORYBOARD.md` and implemented in `anime-storyboard.css`.
+- `/bubble-library.html` is the visual inventory for eight reusable, text-editable chat-bubble families. Copy/paste recipes and modifiers are documented in `MANGA_BUBBLES.md`; the shared rules live in `manga-bubbles.css` and are available to every slide through `styles.css`.
+- Everyday story and technical slides use warm paper, subtle halftone dots, and low-contrast radial lines. Dark backgrounds are reserved for title cards, act breaks, the demo, and theatrical finale beats.
 - `manga-panel-grid`, `manga-quote-stage`, and `manga-objective` reproduce the reaction-panel, punch-line, and season-finale layouts from the earlier deck.
 - `manga-cameo` is a large, rotated, text-only corner callout with Japanese headline copy, an English translation, an offset cyan/ink shadow, and a typographic `ドン!!` impact mark.
 - Manga reactions and character bubbles use concise Japanese copy with adjacent English translations; `lang="ja"` and a Japanese-capable system font stack keep the typography intentional and accessible.
@@ -71,7 +75,7 @@ Because the browser loads slide fragments with `fetch`, opening `index.html` dir
 The generated title art is presentation-ready, and the hardware overview now uses the real project photograph. Replace the remaining conceptual cards with owned project photography where possible:
 
 1. Verified Wicki-Hayden key-label reference
-2. KiCad board overview and PCB revisions
+2. Additional PCB revision screenshots beyond the generated current-board renders
 3. Actual decoder-enable and pot-ADC bodge photos
 4. Synth Phone exterior and internal controls
 5. Backup demo video with captions
@@ -110,10 +114,24 @@ Press `D` to jump to **LIVE DEMO**. The preceding slide contains the six-step ru
 
 `assets/characters/title-hero.png` was generated with OpenAI's built-in image generation tool for this project; `title-hero.webp` is the optimized delivery copy. Prompt summary: original anime/manga key art of electroNuck and N8 with a modified beige Model M-style MIDI keyboard, negative space for title copy, cream/mint/cyan/magenta palette, no text, logos, celebrity likeness, piano keys, hex grids, or coffee imagery.
 
+`assets/characters/reactions/*.png` are six legacy, project-specific transparent cutouts generated with OpenAI's built-in image generation tool, using `title-hero.png` only as the cast and style reference. Prompt set summary: isolated waist-up reactions of the two original title characters—panic, skepticism, eureka, exhaustion, triumph, and “uh-oh”—in the deck's polished manga style, with no text, logos, props, or borrowed characters. Each was generated against a flat chroma-key field, then converted to alpha locally with edge cleanup. They remain available but are no longer referenced by the active decks; Mio and Ren now provide the recurring reaction cast.
+
+`assets/characters/faces/mio/*.png`, `assets/characters/faces/ren/*.png`, and `assets/characters/faces/kaori/*.png` are 64 original, text-free reaction cutouts generated with OpenAI's built-in image generation tool. Mio (美緒) is a dusty-rose-haired character with six expressions: confidence, confusion, dread, realization, amazement, and defeat. Ren (蓮) is a navy-haired character with a cyan strap and nine reusable reactions: immediate understanding, happiness, sadness, exhaustion, annoyance, frustration, fury, unhinged comedy, and harmless knocked-out defeat. Every Mio and Ren emotion has a restrained base image plus `-big` and `-max` exaggeration levels. Kaori (香織) is a coral-pink-haired fantasy heroine, theatrical skeptic, and gyaru-manga reaction specialist with 19 distinct poses spanning teasing, confidence, embarrassment, adoration, judgment, rage, confusion, exhaustion, defeat, and maximal crying. These names identify the characters without assigning an instrument or fixed story role. Prompt set summary: economical hand-drawn TV-anime cel language, simple production linework, flat colors, one hard-edged shadow, original recurring characters, expressive squash-and-stretch acting, no text, speech bubbles, logos, franchise characters, or watermarks. Each was generated against a flat chroma-key field, converted to alpha locally, edge-checked, and trimmed to its visible bounds. See `assets/characters/faces/README.md` for the catalog and naming convention.
+
 The standalone PNGs under `assets/manga/` were copied from the project root and renamed descriptively; their source artwork is otherwise unchanged.
 
-`assets/manga/lucky-star-keyboard.gif` is a third-party animation excerpt from *Lucky Star*, produced by Kyoto Animation, supplied from `https://image.myanimelist.net/ui/5LYzTBVoS196gvYvw3zjwI6dbw19qysxdOlqR6dNT_w`. It is visibly credited on slide 42. Attribution does not itself grant reuse permission; confirm the intended presentation context or replace it with original reaction art before distributing the deck commercially.
+`assets/manga/model-m-senpai.webp` is a lossless WebP delivery copy of the repository-root `141.png` reaction meme. Treat the supplied meme as third-party material unless ownership or reuse rights are confirmed.
+
+`assets/manga/its-fine.webp`, `project-despair.webp`, and `thats-illegal.webp` are lossless WebP delivery copies of the repository-root `024.png`, `040.png`, and `142.png` reaction assets. Their source artwork is otherwise unchanged. They remain as legacy assets but are no longer referenced by either active deck.
+
+`assets/manga/lucky-star-keyboard.gif` is a legacy third-party animation excerpt from *Lucky Star*, produced by Kyoto Animation, supplied from `https://image.myanimelist.net/ui/5LYzTBVoS196gvYvw3zjwI6dbw19qysxdOlqR6dNT_w`. It is no longer referenced by either active deck; the debugging slide now uses original reaction art.
 
 `assets/keyboard/keyboard-keyboard.jpg` was copied from the sibling `keyboard-keyboard` project's `images/keyboard-keyboard.jpg`; `keyboard-keyboard.webp` is the optimized delivery copy used by the deck.
 
-`assets/research/*.webp` are optimized delivery copies of the project-owned photos and research captures in `docs/`. The Discord captures are used as documentary evidence in the discovery cut; confirm participant permission or replace them with redrawn quotations before public distribution. The Melodicade MX reference is credited in speaker notes to Koop Instruments.
+`assets/kicad/board-top-crop.png` and `copper-routing.svg` were regenerated with KiCad 9 CLI from sibling repo `keyboard-keyboard`, branch `main`, commit `58f0e0e`. They show that source snapshot rather than a conceptual recreation; their canvases were cropped for stage readability.
+
+`assets/open-hardware/sparkfun-tpa2005d1.jpg`, `sparkfun-tpa2005d1-schematic.pdf`, and the PNG rendering of that schematic come from SparkFun's official BOB-11044 product documentation. The product is certified as open source hardware under OSHWA UID US001040; retain source attribution and the applicable hardware/documentation licenses when redistributing or adapting these assets.
+
+`assets/research/*.webp` are optimized delivery copies of the project-owned photos and research captures in `docs/`. The Discord captures are used as documentary evidence in the discovery cut; confirm participant permission or replace them with redrawn quotations before public distribution.
+
+`assets/research/melodicade-mx.webp` is an optimized delivery copy of the official Melodicade MX project photo from KOOP Instruments, sourced from `https://www.koopinstruments.com/instrument-projects/melodicade-mx`. It is visibly credited on the discovery slide and in speaker notes. Attribution does not itself grant reuse permission; confirm permission before redistributing the deck.

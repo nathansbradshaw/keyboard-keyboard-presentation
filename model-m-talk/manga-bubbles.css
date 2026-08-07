@@ -1,0 +1,331 @@
+/*
+ * Reusable manga balloons
+ *
+ * Manga-native silhouettes and placement helpers with the deck's existing
+ * color, halftone, and offset-shadow language.
+ *
+ * Required structure:
+ *   <div class="mb mb--speech mb--tail-bl mb--md">
+ *     <div class="mb__body"><p class="mb__text">Dialogue</p></div>
+ *   </div>
+ */
+
+.mb {
+  --mb-ink: #111;
+  --mb-paper: #fff;
+  --mb-accent: #111;
+  --mb-soft: rgba(17, 17, 17, .06);
+  --mb-width: 430px;
+  --mb-stroke: 3px;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: min(var(--mb-width), 100%);
+  padding: var(--mb-stroke);
+  background: var(--mb-ink);
+  color: var(--mb-ink);
+  filter: drop-shadow(8px 9px 0 var(--mb-accent));
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  text-align: center;
+  isolation: isolate;
+}
+
+.mb__body {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  align-content: center;
+  min-height: 100%;
+  padding: 25px 31px 23px;
+  background:
+    radial-gradient(circle at 1px 1px, var(--mb-soft) 1px, transparent 1.45px) 0 0 / 17px 17px,
+    var(--mb-paper);
+}
+
+.mb__name,
+.mb__jp,
+.mb__note { display: block; }
+
+.mb__name {
+  width: max-content;
+  max-width: 100%;
+  margin: -36px auto 11px -8px;
+  padding: 6px 10px 5px;
+  border: 2px solid var(--mb-ink);
+  background: var(--mb-accent);
+  color: #111;
+  box-shadow: 3px 3px 0 var(--mb-ink);
+  font: 950 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.mb__jp {
+  margin-bottom: 7px;
+  color: var(--mb-accent);
+  font: 900 20px/1.06 "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  letter-spacing: .02em;
+}
+
+.mb__text {
+  margin: 0;
+  color: inherit;
+  font-size: 27px;
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -.022em;
+}
+
+.mb__note {
+  margin-top: 9px;
+  color: #666;
+  font: 750 12px/1.15 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* Manga lettering: optional because ordinary technical copy benefits from case. */
+.mb--lettered .mb__text {
+  font-family: "Arial Narrow", "Avenir Next Condensed", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 950;
+  line-height: .96;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+}
+.mb--quiet .mb__text { font-size: .88em; font-weight: 720; }
+.mb--loud .mb__text { font-size: 1.18em; font-weight: 1000; line-height: .91; }
+
+/* Sizes and proportions */
+.mb--xs { --mb-width: 180px; }
+.mb--sm { --mb-width: 300px; }
+.mb--md { --mb-width: 430px; }
+.mb--lg { --mb-width: 620px; }
+.mb--wide { --mb-width: 850px; }
+.mb--tall { --mb-width: 255px; min-height: 350px; }
+.mb--xs .mb__body { padding: 16px 18px 15px; }
+.mb--xs .mb__text { font-size: 18px; }
+.mb--sm .mb__body { padding: 21px 24px 19px; }
+.mb--sm .mb__text { font-size: 23px; }
+.mb--lg .mb__text { font-size: 32px; }
+.mb--wide .mb__text { font-size: 37px; }
+.mb--compact .mb__body { padding-top: 15px; padding-bottom: 14px; }
+
+/* Vertical Japanese or compact vertical English lettering. */
+.mb--vertical { --mb-width: 190px; min-height: 360px; }
+.mb--vertical .mb__body { place-items: center; padding: 28px 22px; }
+.mb--vertical .mb__text,
+.mb__text--vertical {
+  width: max-content;
+  max-height: 300px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  font-size: 25px;
+  line-height: 1.15;
+  letter-spacing: .07em;
+  text-transform: none;
+}
+
+/* Deck tones color the offset shadow, small labels, and quiet halftone. */
+.mb--cyan { --mb-accent: #159b98; --mb-soft: rgba(21,155,152,.13); }
+.mb--magenta { --mb-accent: #f25aa2; --mb-soft: rgba(242,90,162,.12); }
+.mb--yellow { --mb-accent: #d99a00; --mb-soft: rgba(255,211,79,.23); }
+.mb--red { --mb-accent: #e64c5f; --mb-soft: rgba(230,76,95,.12); }
+.mb--mint { --mb-accent: #76ad85; --mb-soft: rgba(118,173,133,.15); }
+.mb--violet { --mb-accent: #8868d7; --mb-soft: rgba(136,104,215,.12); }
+.mb--plain { filter: none; }
+.mb--accented { filter: drop-shadow(10px 11px 0 var(--mb-accent)) drop-shadow(2px 2px 0 var(--mb-ink)); }
+.mb--dark { --mb-paper: #151515; --mb-ink: #fff; color: #fff; }
+.mb--dark .mb__name, .mb--dark .mb__note { color: #cfcfcf; }
+
+/* 1. Standard oval: the ordinary workhorse balloon. */
+.mb--speech,
+.mb--speech .mb__body {
+  border-radius: 49% 51% 48% 52% / 53% 47% 52% 48%;
+}
+
+/* 2. Soft cloud: friendly, enthusiastic, or chatty dialogue. */
+.mb--cloud .mb__body,
+.mb--mutter .mb__body {
+  clip-path: polygon(5% 31%, 10% 19%, 20% 18%, 27% 8%, 39% 12%, 50% 4%, 61% 11%, 73% 7%, 80% 17%, 92% 19%, 94% 31%, 100% 41%, 95% 52%, 99% 64%, 91% 71%, 90% 84%, 77% 84%, 69% 95%, 57% 90%, 46% 98%, 35% 91%, 22% 96%, 17% 84%, 5% 82%, 7% 69%, 0 61%, 5% 49%, 1% 39%);
+}
+.mb--cloud,
+.mb--mutter {
+  padding: 0;
+  background: transparent;
+  filter: drop-shadow(1.5px 0 0 var(--mb-ink)) drop-shadow(-1.5px 0 0 var(--mb-ink)) drop-shadow(0 1.5px 0 var(--mb-ink)) drop-shadow(0 -1.5px 0 var(--mb-ink)) drop-shadow(8px 9px 0 var(--mb-accent));
+}
+
+/* 3. Angular: blunt statements and assertive technical dialogue. */
+.mb--angular .mb__body {
+  clip-path: polygon(3% 8%, 96% 2%, 100% 89%, 93% 98%, 5% 94%, 0 16%);
+}
+.mb--angular {
+  padding: 0;
+  background: transparent;
+  filter: drop-shadow(1.5px 0 0 var(--mb-ink)) drop-shadow(-1.5px 0 0 var(--mb-ink)) drop-shadow(0 1.5px 0 var(--mb-ink)) drop-shadow(0 -1.5px 0 var(--mb-ink)) drop-shadow(8px 9px 0 var(--mb-accent));
+  transform: rotate(-.45deg);
+}
+
+/* 4. Shout: jagged impact without a colored presentation shadow. */
+.mb--shout,
+.mb--shout .mb__body {
+  clip-path: polygon(0 43%, 8% 36%, 3% 20%, 20% 21%, 23% 4%, 38% 13%, 50% 0, 60% 14%, 78% 4%, 80% 21%, 98% 18%, 91% 37%, 100% 48%, 91% 59%, 98% 79%, 81% 78%, 77% 97%, 61% 86%, 49% 100%, 39% 87%, 20% 98%, 18% 79%, 1% 82%, 8% 61%);
+}
+.mb--shout { padding: 5px; }
+.mb--shout .mb__body { min-height: 190px; padding: 40px 51px; }
+.mb--shout .mb__text { font-size: 36px; font-weight: 1000; line-height: .91; text-transform: uppercase; }
+
+/* 5. Thought: broad oval plus drifting circular tail. */
+.mb--thought .mb__body {
+  clip-path: polygon(5% 31%, 10% 19%, 20% 18%, 27% 8%, 39% 12%, 50% 4%, 61% 11%, 73% 7%, 80% 17%, 92% 19%, 94% 31%, 100% 41%, 95% 52%, 99% 64%, 91% 71%, 90% 84%, 77% 84%, 69% 95%, 57% 90%, 46% 98%, 35% 91%, 22% 96%, 17% 84%, 5% 82%, 7% 69%, 0 61%, 5% 49%, 1% 39%);
+}
+.mb--thought {
+  padding: 0;
+  background: transparent;
+  filter: drop-shadow(1.5px 0 0 var(--mb-ink)) drop-shadow(-1.5px 0 0 var(--mb-ink)) drop-shadow(0 1.5px 0 var(--mb-ink)) drop-shadow(0 -1.5px 0 var(--mb-ink)) drop-shadow(8px 9px 0 var(--mb-accent));
+}
+
+/* 6. Whisper: a broken line and softer lettering. */
+.mb--whisper {
+  padding: 0;
+  border: 2px dashed var(--mb-ink);
+  border-radius: 48% 52% 45% 55% / 55% 47% 53% 45%;
+  background: transparent;
+}
+.mb--whisper .mb__body { border-radius: inherit; }
+.mb--whisper .mb__text { font-size: 23px; font-weight: 680; font-style: italic; }
+
+/* 7. Narration: square or double-line editorial boxes. */
+.mb--narrator {
+  padding: 0;
+  border: 3px solid var(--mb-ink);
+  background: var(--mb-paper);
+  box-shadow: 0 0 0 5px var(--mb-paper), 0 0 0 7px var(--mb-ink);
+  filter: drop-shadow(8px 9px 0 var(--mb-accent));
+}
+.mb--narrator .mb__body { padding: 22px 26px 20px; }
+.mb--narrator .mb__text { font-family: "Arial Narrow", "Avenir Next Condensed", Arial, sans-serif; font-weight: 850; }
+.mb--narrator .mb__name { margin-bottom: 10px; text-align: left; }
+
+/* 8. Radio/system: a mechanical double-line balloon. */
+.mb--radio {
+  padding: 3px;
+  border: 2px solid var(--mb-ink);
+  border-radius: 5px;
+  background: var(--mb-paper);
+  box-shadow: 0 0 0 3px var(--mb-paper), 0 0 0 5px var(--mb-ink);
+  filter: drop-shadow(8px 9px 0 var(--mb-accent));
+}
+.mb--radio .mb__body { border: 1px dashed var(--mb-ink); border-radius: 2px; }
+.mb--radio .mb__text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 23px; }
+
+/* 9. Off-panel interruption: a cropped wedge entering the panel. */
+.mb--interrupt,
+.mb--interrupt .mb__body {
+  clip-path: polygon(0 7%, 89% 0, 100% 18%, 94% 39%, 100% 61%, 92% 82%, 84% 100%, 0 92%);
+}
+.mb--interrupt { padding: 4px; }
+.mb--interrupt .mb__body { min-height: 135px; padding-right: 48px; }
+.mb--interrupt.mb--from-right,
+.mb--interrupt.mb--from-right .mb__body {
+  clip-path: polygon(11% 0, 100% 7%, 100% 92%, 16% 100%, 8% 82%, 0 61%, 6% 39%, 0 18%);
+}
+.mb--interrupt.mb--from-right .mb__body { padding-right: 28px; padding-left: 48px; }
+
+/* 10. Mutter: tiny, low-energy aside or under-the-breath remark. */
+.mb--mutter { --mb-width: 190px; padding: 2px; }
+.mb--mutter .mb__body { padding: 17px 20px; }
+.mb--mutter .mb__text { color: #3f3f3f; font-size: 17px; font-weight: 650; line-height: 1.05; }
+
+/* Pointed tail placement. */
+.mb--tail-bl::before,
+.mb--tail-br::before,
+.mb--tail-tl::before,
+.mb--tail-tr::before,
+.mb--tail-l::before,
+.mb--tail-r::before,
+.mb--tail-bl::after,
+.mb--tail-br::after,
+.mb--tail-tl::after,
+.mb--tail-tr::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 47px;
+  height: 43px;
+  background: var(--mb-ink);
+  pointer-events: none;
+}
+.mb--tail-l::after,
+.mb--tail-r::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 43px;
+  height: 47px;
+  background: var(--mb-ink);
+  pointer-events: none;
+}
+.mb--tail-bl::before { left: 38px; bottom: -30px; clip-path: polygon(0 0, 100% 0, 13% 100%); }
+.mb--tail-bl::after { left: 44px; bottom: -22px; width: 37px; height: 34px; background: var(--mb-paper); clip-path: polygon(0 0, 100% 0, 13% 100%); }
+.mb--tail-br::before { right: 38px; bottom: -30px; clip-path: polygon(0 0, 100% 0, 87% 100%); }
+.mb--tail-br::after { right: 44px; bottom: -22px; width: 37px; height: 34px; background: var(--mb-paper); clip-path: polygon(0 0, 100% 0, 87% 100%); }
+.mb--tail-tl::before { left: 38px; top: -30px; clip-path: polygon(13% 0, 100% 100%, 0 100%); }
+.mb--tail-tl::after { left: 44px; top: -22px; width: 37px; height: 34px; background: var(--mb-paper); clip-path: polygon(13% 0, 100% 100%, 0 100%); }
+.mb--tail-tr::before { right: 38px; top: -30px; clip-path: polygon(87% 0, 100% 100%, 0 100%); }
+.mb--tail-tr::after { right: 44px; top: -22px; width: 37px; height: 34px; background: var(--mb-paper); clip-path: polygon(87% 0, 100% 100%, 0 100%); }
+.mb--tail-l::before { left: -31px; top: 50%; width: 43px; height: 47px; clip-path: polygon(100% 0, 100% 100%, 0 52%); transform: translateY(-50%); }
+.mb--tail-l::after { left: -22px; top: 50%; width: 34px; height: 37px; background: var(--mb-paper); clip-path: polygon(100% 0, 100% 100%, 0 52%); transform: translateY(-50%); }
+.mb--tail-r::before { right: -31px; top: 50%; width: 43px; height: 47px; clip-path: polygon(0 0, 100% 52%, 0 100%); transform: translateY(-50%); }
+.mb--tail-r::after { right: -22px; top: 50%; width: 34px; height: 37px; background: var(--mb-paper); clip-path: polygon(0 0, 100% 52%, 0 100%); transform: translateY(-50%); }
+
+/* Thought balloons exchange the pointed tail for two outlined bubbles. */
+.mb--thought.mb--tail-bl::before,
+.mb--thought.mb--tail-br::before,
+.mb--thought.mb--tail-tl::before,
+.mb--thought.mb--tail-tr::before,
+.mb--thought.mb--tail-bl::after,
+.mb--thought.mb--tail-br::after,
+.mb--thought.mb--tail-tl::after,
+.mb--thought.mb--tail-tr::after {
+  border: 3px solid var(--mb-ink);
+  border-radius: 50%;
+  background: var(--mb-paper);
+  clip-path: none;
+}
+.mb--thought.mb--tail-bl::before { left: 45px; bottom: -26px; width: 22px; height: 22px; }
+.mb--thought.mb--tail-bl::after { left: 27px; bottom: -44px; width: 9px; height: 9px; }
+.mb--thought.mb--tail-br::before { right: 45px; bottom: -26px; width: 22px; height: 22px; }
+.mb--thought.mb--tail-br::after { right: 27px; bottom: -44px; width: 9px; height: 9px; }
+.mb--thought.mb--tail-tl::before { left: 45px; top: -26px; width: 22px; height: 22px; }
+.mb--thought.mb--tail-tl::after { left: 27px; top: -44px; width: 9px; height: 9px; }
+.mb--thought.mb--tail-tr::before { right: 45px; top: -26px; width: 22px; height: 22px; }
+.mb--thought.mb--tail-tr::after { right: 27px; top: -44px; width: 9px; height: 9px; }
+
+/* Linked balloons carry alternating beats without forcing them into one shape. */
+.mb-group { position: relative; display: flex; align-items: flex-start; gap: 0; width: max-content; max-width: 100%; }
+.mb-group .mb { flex: 0 0 auto; }
+.mb-group .mb + .mb { margin-left: -18px; margin-top: 28px; }
+.mb-group--vertical { flex-direction: column; }
+.mb-group--vertical .mb + .mb { margin: -12px 0 0 42px; }
+.mb-group--separated { gap: 18px; }
+.mb-group--separated .mb + .mb { margin: 0; }
+
+/* Placement helpers */
+.mb--rotate-left { transform: rotate(-1.4deg); }
+.mb--rotate-right { transform: rotate(1.4deg); }
+.mb--rough { transform: rotate(-.5deg); }
+.mb.mb--plain { filter: none; }
+.mb.mb--accented { filter: drop-shadow(10px 11px 0 var(--mb-accent)) drop-shadow(2px 2px 0 var(--mb-ink)); }
+.mb.mb--shadow-left { filter: drop-shadow(-8px 9px 0 var(--mb-accent)); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .mb--enter-pop { animation: mb-pop-in .3s cubic-bezier(.2,.85,.28,1.2) both; }
+  @keyframes mb-pop-in {
+    from { opacity: 0; transform: scale(.88); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+@media print { .mb, .mb-group { break-inside: avoid; } }

@@ -1,13 +1,23 @@
-<section class="slide layout-diagram" data-auto-animate>
-  <header class="slide-head"><span class="eyebrow">Signal pipeline</span><h2 data-id="hall-title">Analog becomes digital</h2></header>
+<section class="slide layout-code filter-code-slide" data-auto-animate>
+  <header class="slide-head"><span class="eyebrow">switch.rs · actual filter</span><h2 data-id="hall-title">Four samples become one stable position</h2></header>
   <div class="content">
-    <div class="pipeline" data-id="hall-pipeline" data-stagger=".pipeline-step:not([data-id])" data-stagger-effect="step-wipe">
-      <div class="pipeline-step" data-id="hall-signal">Raw<br>ADC</div><div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">4-sample<br>average</div><div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">Delta from<br>dynamic baseline</div><div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">150 / 250 / 100<br>thresholds</div><div class="pipeline-arrow">→</div>
-      <div class="pipeline-step">Queued<br>event</div>
+    <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8">pub fn feed(&amp;mut self, raw: u16) -> u16 {
+    self.sum -= self.ring[self.index] as u32;
+    self.sum += raw as u32;
+    self.ring[self.index] = raw;
+    self.index = (self.index + 1) % FILTER_SIZE;
+    (self.sum &gt;&gt; FILTER_SHIFT) as u16
+}
+let delta = adc_value.abs_diff(baseline);</code></pre>
+    <div class="filter-deep-dive">
+      <div class="sample-window"><i>401</i><i>406</i><i>409</i><i>412</i><span>average → 407</span></div>
+      <div class="filter-facts">
+        <p><strong>O(1)</strong> rolling sum—no loop per sample.</p>
+        <p><strong>4 entries</strong> means division is a right shift.</p>
+        <p><strong>abs_diff</strong> accepts either magnet polarity.</p>
+      </div>
+      <div class="threshold-rail"><span>release 100</span><span>first 150</span><span>second 250</span></div>
     </div>
   </div>
-  <aside class="notes">This is the real software handoff. The three compile-time deltas are first actuation 150, second actuation 250, and release 100. A detected event is queued for lower-priority processing. Transition: the two press thresholds work together.</aside>
+  <aside class="notes">This is the actual ChannelFilter feed method plus the real delta calculation from switch.rs. Each key owns a four-entry ring buffer and rolling sum. Replacing one sample is constant time, and dividing by four becomes a right shift. The filter is primed with the boot baseline so startup does not begin at zero. abs_diff means either magnet polarity can move the signal in the accepted direction. The filtered distance from baseline then meets the 100, 150 and 250 count thresholds. Transition: inspect the state machine that gives those thresholds meaning.</aside>
 </section>

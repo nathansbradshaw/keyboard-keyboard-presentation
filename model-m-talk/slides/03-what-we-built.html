@@ -1,23 +1,24 @@
-<section class="slide layout-content quest-system-slide" data-auto-animate>
-  <header class="slide-head"><span class="eyebrow">System reveal</span><h2 data-id="opening-title">What we built</h2></header>
-  <div class="content quest-system-overview" data-id="opening-system">
-    <figure class="quest-build-photo">
-      <img src="assets/keyboard/keyboard-keyboard.webp" alt="The real 100-switch Hall effect Model M MIDI instrument">
-      <figcaption><span lang="ja">転生後</span> · The reincarnated Model M</figcaption>
-      <div class="quest-hardware-stamp"><strong>100</strong><span>HALL EFFECT<br>SWITCHES</span></div>
-      <img class="quest-phone-art fragment step-punch" data-fragment-index="2" src="assets/manga/synth-phone-card.png" alt="Synth Phone tone and voice effects engine">
-    </figure>
+<section class="slide layout-content two-builds-slide" data-auto-animate data-beat="setup" data-shot="split" data-emotion="anticipation">
+  <header class="slide-head"><span class="eyebrow">One new instrument · one returning character</span><h2 data-id="opening-title">What we built</h2></header>
+  <div class="content two-builds-stage" data-id="opening-system">
+    <article class="build-reveal-card keyboard-keyboard-card">
+      <figure><img src="assets/keyboard/keyboard-keyboard.webp" alt="The finished Keyboard Keyboard built inside an IBM Model M"></figure>
+      <div class="build-reveal-copy">
+        <span class="build-reveal-status">BUILT · NEW THIS YEAR</span>
+        <h3>Keyboard<br>Keyboard</h3>
+        <p class="keyboard-keyboard-joke"><strong>A piano keyboard</strong><span>on</span><strong>a computer keyboard.</strong></p>
+        <small>Yes. The name is the joke.</small>
+      </div>
+    </article>
 
-    <div class="quest-signal-chain" data-stagger=".quest-signal-node, .quest-signal-arrow" data-stagger-effect="step-wipe">
-      <div class="quest-signal-node" data-tone="physical"><span class="quest-node-label">INPUT · 物理</span><h3>100-switch Hall effect Model M</h3><p>Every key becomes a continuous position sensor.</p></div>
-      <div class="quest-signal-arrow"><span>DIN-5</span><strong>MIDI OUT</strong><small>31.25 kbaud</small></div>
-      <div class="quest-signal-node" data-tone="external"><span class="quest-node-label">ENGINE · 音声</span><h3>Synth Phone</h3><p>The tone generator and live voice-FX engine.</p></div>
-    </div>
-
-    <div class="quest-objective-strip fragment step-pop" data-fragment-index="3">
-      <span class="quest-objective-kicker"><span lang="ja">境界線</span> · SYSTEM BOUNDARY</span>
-      <strong>The keyboard owns performance. The phone owns sound.</strong>
-    </div>
+    <article class="build-reveal-card synthphone-card fragment step-pop" data-fragment-index="0">
+      <div class="synthphone-return-art"><span class="returning-badge">SEASON 2</span><img src="assets/manga/synth-phone-card.png" alt="Synthphone-e telephone synthesizer"></div>
+      <div class="build-reveal-copy">
+        <span class="build-reveal-status">UPGRADED · FROM LAST YEAR</span>
+        <h3>Synthphone-e</h3>
+        <p>Last year’s telephone synth, upgraded for this year’s build.</p>
+      </div>
+    </article>
   </div>
-  <aside class="notes">Start with the complete physical system. The modified Model M has 100 Hall effect key sensors. Its firmware turns continuous position into performance events and transmits standard DIN-5 MIDI at 31.25 kbaud. The external Synth Phone receives that data and owns tone generation plus live voice effects. The boundary sentence is the point: keyboard equals performance controller; phone equals sound engine. Transition: why should a room full of software people care?</aside>
+  <aside class="notes">Keep this reveal simple. First introduce Keyboard Keyboard and pause for the naming joke: it is a piano keyboard built on a computer keyboard. Do not explain the Hall sensors or MIDI yet; the rest of the talk earns those details. Then reveal Synthphone-e as the returning character from last year's project, now upgraded for this year's build. Two accomplishments, two clean beats. Transition: why should a room full of software people care?</aside>
 </section>

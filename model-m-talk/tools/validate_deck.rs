@@ -75,9 +75,9 @@ fn main() -> io::Result<()> {
             return Err(fail(format!("{index_name} does not load {required}")));
         }
     }
-    if canonical_deck && files.len() != 58 {
+    if canonical_deck && files.len() != 60 {
         return Err(fail(format!(
-            "manifest contains {} slides instead of 58",
+            "manifest contains {} slides instead of 60",
             files.len()
         )));
     }

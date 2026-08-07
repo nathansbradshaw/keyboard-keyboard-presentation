@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reusable manga dialogue balloons and panel placement examples for the Model M talk.">
+  <title>Manga Bubble Library</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="bubble-library.css">
+</head>
+<body>
+  <main class="bcl-shell">
+    <header class="bcl-hero">
+      <span class="bcl-kicker">COMPONENT SHEET · 01</span>
+      <h1>Manga balloon grammar</h1>
+      <p>Editable dialogue shapes shown inside actual panel compositions. Color and offset shadows stay; balloon proportion, silhouette, tail direction, and speaker placement do the storytelling.</p>
+    </header>
+
+    <nav class="bcl-nav" aria-label="Catalog sections">
+      <a href="#principles">Placement rules</a>
+      <a href="#panels">Panel recipes</a>
+      <a href="#families">Balloon families</a>
+      <a href="#modifiers">Modifiers</a>
+      <a href="storyboard-library.html">Storyboard catalog ↗</a>
+    </nav>
+
+    <section class="bcl-section" id="principles">
+      <div class="bcl-section-head"><span>00</span><h2>Placement before decoration</h2></div>
+      <div class="bcl-rules">
+        <article><strong>Point at the mouth</strong><p>Choose the tail after the actor is blocked. Side tails are often cleaner than dropping every tail downward.</p></article>
+        <article><strong>Protect the face</strong><p>Overlap hair or shoulders when useful, but keep eyes, mouth, hands, and the important prop readable.</p></article>
+        <article><strong>Shape follows volume</strong><p>Ordinary speech is compact. Long narration grows tall. Shouts expand into negative space.</p></article>
+        <article><strong>Use the panel edge</strong><p>Crop interruptions and narrator boxes against the frame instead of centering every object.</p></article>
+      </div>
+    </section>
+
+    <section class="bcl-section" id="panels">
+      <div class="bcl-section-head"><span>01</span><h2>Panel composition recipes</h2></div>
+      <div class="bcl-manga-page">
+        <article class="bcl-panel bcl-panel--standard">
+          <span class="bcl-panel-no">01 · ordinary dialogue</span>
+          <div class="bcl-tone bcl-tone--rings"></div>
+          <img class="bcl-actor" src="assets/characters/faces/mio/realization-big.png" alt="Mio realizing something">
+          <div class="mb mb--speech mb--tail-l mb--cyan mb--md">
+            <div class="mb__body"><span class="mb__name">Mio</span><span class="mb__jp" lang="ja">待って。</span><p class="mb__text">The same shape works in every key?</p></div>
+          </div>
+          <code>speech · tail-l · speaker left</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--vertical">
+          <span class="bcl-panel-no">02 · tall dialogue</span>
+          <div class="bcl-tone bcl-tone--speed"></div>
+          <img class="bcl-actor" src="assets/characters/faces/ren/annoyed-big.png" alt="Ren looking annoyed">
+          <div class="mb mb--speech mb--vertical mb--tail-r mb--magenta">
+            <div class="mb__body"><p class="mb__text" lang="ja">機構をもう一個追加するの？</p></div>
+          </div>
+          <code>vertical · tail-r</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--linked">
+          <span class="bcl-panel-no">03 · alternating dialogue</span>
+          <div class="bcl-tone bcl-tone--dots"></div>
+          <img class="bcl-actor bcl-actor--left" src="assets/characters/faces/mio/confused.png" alt="Mio confused">
+          <img class="bcl-actor bcl-actor--right" src="assets/characters/faces/ren/understands.png" alt="Ren understands">
+          <div class="mb-group">
+            <div class="mb mb--cloud mb--tail-bl mb--yellow mb--sm"><div class="mb__body"><p class="mb__text">But where are the black keys?</p></div></div>
+            <div class="mb mb--speech mb--tail-br mb--cyan mb--xs"><div class="mb__body"><p class="mb__text">There aren't any.</p></div></div>
+          </div>
+          <code>mb-group · two beats</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--thought">
+          <span class="bcl-panel-no">04 · internal thought</span>
+          <div class="bcl-tone bcl-tone--dread"></div>
+          <img class="bcl-actor" src="assets/characters/faces/mio/dread-big.png" alt="Mio feeling dread">
+          <div class="mb mb--thought mb--tail-br mb--violet mb--md mb--quiet">
+            <div class="mb__body"><span class="mb__jp" lang="ja">もしかして…</span><p class="mb__text">Velocity was hiding in time all along.</p></div>
+          </div>
+          <div class="mb mb--mutter mb--yellow"><div class="mb__body"><p class="mb__text">...that seems important.</p></div></div>
+          <code>thought + mutter</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--shout">
+          <span class="bcl-panel-no">05 · reaction peak</span>
+          <div class="bcl-tone bcl-tone--burst"></div>
+          <img class="bcl-actor" src="assets/characters/faces/ren/unhinged-max.png" alt="Ren in an exaggerated reaction">
+          <div class="mb mb--shout mb--red mb--lg mb--lettered"><div class="mb__body"><p class="mb__text">Why is everything diagonal?!</p></div></div>
+          <code>shout · negative space</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--narration">
+          <span class="bcl-panel-no">06 · editorial narration</span>
+          <img class="bcl-photo" src="assets/keyboard/keyboard-keyboard.webp" alt="The Model M MIDI keyboard">
+          <div class="mb mb--narrator mb--yellow mb--tall mb--lettered"><div class="mb__body"><p class="mb__text">Three PCB revisions and one extremely specific purchase order later...</p></div></div>
+          <div class="mb mb--narrator mb--mint mb--sm"><div class="mb__body"><p class="mb__text">The prototype finally made music.</p></div></div>
+          <code>narration boxes · edge anchored</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--whisper">
+          <span class="bcl-panel-no">07 · aside</span>
+          <div class="bcl-tone bcl-tone--dots"></div>
+          <img class="bcl-actor" src="assets/characters/faces/ren/exhausted-big.png" alt="Ren looking exhausted">
+          <div class="mb mb--whisper mb--tail-r mb--yellow mb--sm mb--quiet"><div class="mb__body"><span class="mb__name">off mic</span><p class="mb__text">We haven't tested all 104 keys.</p></div></div>
+          <code>whisper · compact aside</code>
+        </article>
+
+        <article class="bcl-panel bcl-panel--interrupt">
+          <span class="bcl-panel-no">08 · off-panel entrance</span>
+          <div class="bcl-tone bcl-tone--speed"></div>
+          <img class="bcl-actor" src="assets/characters/faces/mio/confident-big.png" alt="Mio looking confident">
+          <div class="mb mb--interrupt mb--from-right mb--magenta mb--lg mb--loud"><div class="mb__body"><p class="mb__text">Did someone say “one more feature”?</p></div></div>
+          <code>interrupt · crop at edge</code>
+        </article>
+      </div>
+    </section>
+
+    <section class="bcl-section" id="families">
+      <div class="bcl-section-head"><span>02</span><h2>Balloon families</h2></div>
+      <div class="bcl-family-grid">
+        <article><div class="bcl-sample"><div class="mb mb--speech mb--tail-bl mb--cyan mb--sm"><div class="mb__body"><p class="mb__text">Ordinary speech.</p></div></div></div><h3>Speech</h3><code>mb--speech</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--cloud mb--tail-br mb--magenta mb--sm"><div class="mb__body"><p class="mb__text">Friendly, animated dialogue!</p></div></div></div><h3>Cloud</h3><code>mb--cloud</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--angular mb--tail-r mb--cyan mb--sm"><div class="mb__body"><p class="mb__text">Precise. Technical. Blunt.</p></div></div></div><h3>Angular</h3><code>mb--angular</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--shout mb--red mb--sm"><div class="mb__body"><p class="mb__text">It worked!</p></div></div></div><h3>Shout</h3><code>mb--shout</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--thought mb--tail-bl mb--violet mb--sm"><div class="mb__body"><p class="mb__text">Maybe...</p></div></div></div><h3>Thought</h3><code>mb--thought</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--whisper mb--tail-l mb--yellow mb--sm"><div class="mb__body"><p class="mb__text">Keep this quiet.</p></div></div></div><h3>Whisper</h3><code>mb--whisper</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--narrator mb--mint mb--sm"><div class="mb__body"><p class="mb__text">Meanwhile...</p></div></div></div><h3>Narrator</h3><code>mb--narrator</code></article>
+        <article><div class="bcl-sample bcl-sample--dark"><div class="mb mb--radio mb--tail-bl mb--cyan mb--dark mb--sm"><div class="mb__body"><p class="mb__text">MIDI: ARMED</p></div></div></div><h3>Radio/system</h3><code>mb--radio</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--interrupt mb--from-right mb--magenta mb--sm"><div class="mb__body"><p class="mb__text">Wait!</p></div></div></div><h3>Interruption</h3><code>mb--interrupt</code></article>
+        <article><div class="bcl-sample"><div class="mb mb--mutter mb--yellow"><div class="mb__body"><p class="mb__text">...sure, why not.</p></div></div></div><h3>Mutter</h3><code>mb--mutter</code></article>
+      </div>
+    </section>
+
+    <section class="bcl-section" id="modifiers">
+      <div class="bcl-section-head"><span>03</span><h2>Mix-and-match modifiers</h2></div>
+      <div class="bcl-modifier-block">
+        <div><strong>Tails</strong><span>mb--tail-l</span><span>mb--tail-r</span><span>mb--tail-bl</span><span>mb--tail-br</span><span>mb--tail-tl</span><span>mb--tail-tr</span></div>
+        <div><strong>Proportion</strong><span>mb--xs</span><span>mb--sm</span><span>mb--md</span><span>mb--lg</span><span>mb--wide</span><span>mb--tall</span><span>mb--vertical</span></div>
+        <div><strong>Delivery</strong><span>mb--quiet</span><span>mb--loud</span><span>mb--lettered</span><span>mb--compact</span><span>mb--rotate-left</span><span>mb--rotate-right</span></div>
+        <div><strong>Treatment</strong><span>mb--plain</span><span>mb--accented</span><span>mb--dark</span><span>mb--shadow-left</span><span>mb-group</span><span>mb-group--vertical</span></div>
+      </div>
+    </section>
+
+    <footer class="bcl-foot">Copy/paste markup: MANGA_BUBBLES.md · Story composition: ANIME_STORYBOARD.md · Add Reveal's <code>fragment</code> class to the outer balloon or balloon group for staged dialogue.</footer>
+  </main>
+</body>
+</html>

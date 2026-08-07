@@ -1,11 +1,22 @@
-<section class="slide layout-diagram manga-cameo-slide" data-auto-animate>
-  <div class="manga-cameo callout-time fragment step-pop" data-sfx="ピンチ!!"><div class="manga-bubble"><span class="jp-text" lang="ja">1msごとに家賃がかかる。</span><span class="en-text">Every millisecond wants rent.</span></div></div>
-  <header class="slide-head"><span class="eyebrow">End-to-end timing</span><h2 data-id="firmware-title">Latency is full stack</h2></header>
+<section class="slide layout-code midi-wire-slide manga-cameo-slide" data-auto-animate>
+  <div class="manga-cameo callout-time fragment step-pop" data-sfx="ピンチ!!"><div class="manga-bubble"><span class="jp-text" lang="ja">三バイトにも時間がある。</span><span class="en-text">Even three bytes take time.</span></div></div>
+  <header class="slide-head"><span class="eyebrow">midi.rs · USART1 at 31,250 baud</span><h2 data-id="firmware-title">NoteOn costs 30 bits on the wire</h2></header>
   <div class="content">
-    <div class="latency" data-stagger=".card" data-stagger-group="2">
-      <div class="card tint" data-tone="time">1 ms scan frame</div><div class="card" data-tone="signal">4-sample average</div><div class="card yellow" data-tone="warning">3 confirmed crossings</div><div class="card" data-tone="time">Threshold interval</div>
-      <div class="card magenta" data-tone="system">RTIC event queue</div><div class="card" data-tone="warning">Blocking UART send</div><div class="card tint" data-tone="boundary">DIN-5 wire</div><div class="card dark" data-tone="external">External audio system</div>
+    <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8-10">pub fn note_on(&amp;mut self, note: u8, velocity: u8) {
+    let status = 0x90 | self.channel;
+    self.send_byte(status);
+    self.send_byte(note &amp; 0x7F);
+    self.send_byte(velocity &amp; 0x7F);
+}
+
+fn send_byte(&amp;mut self, byte: u8) {
+    nb::block!(self.tx.write(byte)).ok();
+}</code></pre>
+    <div class="wire-math">
+      <div class="midi-packet"><span>status</span><span>note</span><span>velocity</span><code>9n kk vv</code></div>
+      <div class="wire-equation"><span>3 bytes × 10 UART bits</span><b>30 / 31,250</b><strong>≈ 0.96 ms</strong></div>
+      <p>The priority-15 scan enqueues. Priority 2 performs these blocking writes.</p>
     </div>
   </div>
-  <aside class="notes">Separate known timing from inferred timing. The scan frame is one millisecond. DIN MIDI is 31.25 kilobaud; with standard UART framing, a three-byte message occupies about 0.96 milliseconds on the wire—an inference, not a measured end-to-end result. External phone processing is outside this repository. Transition: inspect the tools the firmware actually exposes.</aside>
+  <aside class="notes">This is the real note_on method and blocking send_byte wrapper. DIN MIDI uses USART1 at 31,250 baud. Each UART byte carries one start bit, eight data bits and one stop bit, so a three-byte NoteOn occupies thirty wire bits: about 0.96 milliseconds. That is an inferred serialization time, not a measured end-to-end latency. The priority-15 scan task only enqueues the event; priority 2 drains the queue and performs the blocking writes. External Synth Phone processing remains outside this repository. Transition: inspect the observability needed to debug all of this without a browser console.</aside>
 </section>

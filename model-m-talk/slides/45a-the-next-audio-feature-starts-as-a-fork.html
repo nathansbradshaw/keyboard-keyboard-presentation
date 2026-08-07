@@ -1,0 +1,24 @@
+<section class="slide layout-content amp-fork-slide">
+  <header class="slide-head"><span class="eyebrow">Planned integration · SparkFun BOB-11044 · OSHWA US001040</span><h2>The next audio feature starts as a licensed fork</h2></header>
+  <div class="content amp-fork-stage">
+    <div class="amp-source-visual">
+      <img class="amp-product" src="assets/open-hardware/sparkfun-tpa2005d1.jpg" alt="SparkFun TPA2005D1 mono audio amplifier breakout board">
+      <img class="amp-schematic" src="assets/open-hardware/sparkfun-tpa2005d1-schematic.png" alt="SparkFun's published schematic for the TPA2005D1 mono audio amplifier breakout">
+      <span class="source-stamp">PRODUCT + SCHEMATIC + CAD</span>
+    </div>
+    <div class="amp-integration">
+      <div class="amp-pipeline" data-stagger=".amp-node, .amp-arrow" data-stagger-effect="step-wipe">
+        <div class="amp-node"><small>CURRENT PCB</small><strong>Daisy<br>AUDIO OUT</strong><span>J2 · line-level</span></div>
+        <div class="amp-arrow">→</div>
+        <div class="amp-node red"><small>LICENSED FORK</small><strong>TPA2005D1</strong><span>class-D mono amp</span></div>
+        <div class="amp-arrow">→</div>
+        <div class="amp-node"><small>ENCLOSURE</small><strong>8 Ω<br>SPEAKER</strong><span>OUT+ / OUT−</span></div>
+      </div>
+      <div class="amp-specs">
+        <span><b>2.5–5.5 V</b>supply</span><span><b>1.4 W</b>into 8 Ω</span><span><b>DIFF / GND</b>input</span><span><b>SHUTDOWN</b>pin</span><span><b>10 kΩ</b>volume option</span><span class="warn"><b>250 kHz</b>keep near speaker</span>
+      </div>
+      <div class="fork-checklist"><strong>Our path:</strong><span>prototype the breakout</span><i>→</i><span>lift the relevant circuit</span><i>→</i><span>adapt it in KiCad</span><i>→</i><span>publish attribution + modified source</span></div>
+    </div>
+  </div>
+  <aside class="notes">This is the concrete open-hardware example. The current keyboard PCB already routes Daisy AUDIO_OUT_1 and AUDIO_OUT_2 to J2, while the current audio callback is pass-through. The proposed next step is to prototype SparkFun BOB-11044, then adapt the relevant TPA2005D1 circuit into our board. SparkFun specifies 2.5 to 5.5 volts, up to 1.4 watts into eight ohms, differential inputs that may also be ground-referenced, a shutdown input, and an optional ten-kilohm volume pot. Its class-D output switches around 250 kilohertz, so SparkFun says to keep the amplifier near the speaker. The speaker must connect across OUT+ and OUT−; neither output is speaker ground. OSHWA certification US001040 lists CERN for hardware, MIT for software, and CC BY-SA for documentation. We should preserve attribution, the applicable license notices, and release our modified source as required. Sources: https://www.sparkfun.com/sparkfun-mono-audio-amp-breakout-tpa2005d1.html · https://certification.oshwa.org/us001040.html · https://github.com/sparkfun/Mono_Audio_Amp_Breakout-TPA2005D1/tree/V_1.1 . Transition: this is exactly why a clean protocol boundary lets the instrument grow.</aside>
+</section>

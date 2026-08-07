@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Visual catalog and reusable anime storyboard components for the Model M presentation.">
+  <title>Anime Storyboard Library</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="storyboard-library.css">
+</head>
+<body>
+  <main class="sbl-shell">
+    <header class="sbl-hero">
+      <span class="sbl-kicker">COMPONENT SHEET · 02</span>
+      <h1>Anime storyboard library</h1>
+      <p>Reusable camera shots, character blocking, emotional backdrops, narrative beats, and a searchable inventory of the artwork already in the deck.</p>
+      <div class="sbl-counts" aria-label="Library contents">
+        <span class="sbl-count">16 shot recipes</span>
+        <span class="sbl-count" id="emotion-effect-count">25 emotion effects</span>
+        <span class="sbl-count" id="cast-expression-count">64 cast expressions</span>
+        <span class="sbl-count">34 supporting assets</span>
+        <span class="sbl-count">10 balloon families</span>
+      </div>
+    </header>
+
+    <nav class="sbl-nav" aria-label="Catalog sections">
+      <a href="#workflow">Workflow</a>
+      <a href="#shots">Shot recipes</a>
+      <a href="#effects">Emotion effects</a>
+      <a href="#beats">Story beats</a>
+      <a href="#cast">Cast expressions</a>
+      <a href="#assets">Props and references</a>
+      <a href="bubble-library.html">Bubble catalog ↗</a>
+    </nav>
+
+    <section class="sbl-section" id="workflow">
+      <div class="sbl-section-head">
+        <span class="sbl-section-no">00</span><h2>Storyboard workflow</h2>
+        <p class="sbl-section-dek">Start with the narrative job of the slide. Styling comes after the beat and shot have been chosen.</p>
+      </div>
+      <div class="sbl-code-layout">
+        <article class="sbl-code-card">
+          <h3>Build a scene in six decisions</h3>
+          <div class="sbl-flow">
+            <div class="sbl-flow-step">1 · Story beat — what changes?</div><div class="sbl-flow-arrow">↓</div>
+            <div class="sbl-flow-step">2 · Camera shot — what should dominate?</div><div class="sbl-flow-arrow">↓</div>
+            <div class="sbl-flow-step">3 · Blocking — who or what occupies the stage?</div><div class="sbl-flow-arrow">↓</div>
+            <div class="sbl-flow-step">4 · Dialogue — speech, thought, shout, or narration?</div><div class="sbl-flow-arrow">↓</div>
+            <div class="sbl-flow-step">5 · Emotion effect — one supporting visual signal</div><div class="sbl-flow-arrow">↓</div>
+            <div class="sbl-flow-step">6 · Reveal timing — what appears on each click?</div>
+          </div>
+        </article>
+        <article class="sbl-code-card">
+          <h3>Recommended slide metadata</h3>
+          <p>These attributes make intent visible while authoring and can later power a storyboard overview.</p>
+          <pre><code>&lt;section class="slide layout-content"
+  data-beat="realization"
+  data-shot="closeup"
+  data-emotion="insight"
+  data-transition="firmware implementation"&gt;
+  ...
+&lt;/section&gt;</code></pre>
+          <p>Keep the human delivery note in <code>&lt;aside class="notes"&gt;</code>: goal, reveal sequence, caveat, and transition.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sbl-section" id="shots">
+      <div class="sbl-section-head">
+        <span class="sbl-section-no">01</span><h2>Camera and blocking recipes</h2>
+        <p class="sbl-section-dek">Swap any actor, prop, bubble, or effect without changing the surrounding shot. Copy buttons provide a minimal starting structure.</p>
+      </div>
+      <div class="sbl-shot-grid">
+        <article class="sbl-shot-card" id="shot-establishing">
+          <div class="sbl-shot-meta"><strong>Establishing</strong><span>introduce a place, object, or chapter</span></div>
+          <div class="as-stage as-stage--mint as-shot--establishing">
+            <div class="as-fx as-fx--rings"></div>
+            <img class="as-prop as-prop--lead" src="assets/keyboard/keyboard-keyboard.webp" alt="Model M MIDI keyboard">
+            <img class="as-actor as-actor--lead as-actor--tilt-right" src="assets/characters/faces/mio/confident-big.png" alt="Mio confidently introducing the keyboard">
+            <div class="as-location-card"><strong>The workshop</strong><span>Saturday · too late</span></div>
+            <div class="as-story-caption">Begin wide. Establish the artifact before explaining it.</div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--establishing · actor--lead · prop--lead</span><button class="sbl-copy" data-copy-recipe="recipe-establishing">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-two">
+          <div class="sbl-shot-meta"><strong>Two-character</strong><span>dialogue, agreement, or disagreement</span></div>
+          <div class="as-stage as-stage--cyan as-shot--two">
+            <div class="as-fx as-fx--screentone"></div>
+            <img class="as-actor as-actor--lead as-actor--look-right" src="assets/characters/faces/mio/confused-big.png" alt="Mio looking confused">
+            <img class="as-actor as-actor--support as-actor--look-left" src="assets/characters/faces/ren/understands-big.png" alt="Ren understanding the problem">
+            <div class="mb mb--angular mb--cyan mb--sm sbl-bubble--center"><div class="mb__body"><span class="mb__jp" lang="ja">なるほど。</span><p class="mb__text">The geometry stays put.</p></div></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--two · actor--lead · actor--support</span><button class="sbl-copy" data-copy-recipe="recipe-two">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card">
+          <div class="sbl-shot-meta"><strong>Close-up</strong><span>realization, confession, or technical thesis</span></div>
+          <div class="as-stage as-stage--violet as-shot--closeup">
+            <div class="as-fx as-fx--rings"></div>
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/ren/frustrated-max.png" alt="Ren in an extreme frustrated close-up">
+            <div class="mb mb--thought mb--tail-br mb--violet mb--sm sbl-bubble--left"><div class="mb__body"><p class="mb__text">The baseline can move.</p></div></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--closeup · actor--lead · fx--rings</span><button class="sbl-copy" data-copy-recipe="recipe-closeup">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card">
+          <div class="sbl-shot-meta"><strong>Over the shoulder</strong><span>inspect hardware, code, or a clue</span></div>
+          <div class="as-stage as-stage--yellow as-shot--over-shoulder">
+            <div class="as-fx as-fx--rings"></div>
+            <img class="as-actor as-actor--lead as-actor--silhouette as-actor--look-right" src="assets/characters/faces/mio/realization-big.png" alt="Mio's shoulder and head framing the keyboard from the foreground">
+            <img class="as-prop as-prop--lead" src="assets/keyboard/keyboard-keyboard.webp" alt="Model M MIDI keyboard">
+            <div class="as-location-card"><strong>Evidence</strong><span>Follow the eyeline</span></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--over-shoulder · foreground observer · prop--lead</span><button class="sbl-copy" data-copy-recipe="recipe-over-shoulder">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card">
+          <div class="sbl-shot-meta"><strong>Split screen</strong><span>contrast, rivalry, or two valid perspectives</span></div>
+          <div class="as-stage as-stage--red as-shot--split">
+            <div class="as-fx as-fx--rays"></div>
+            <img class="as-actor as-actor--lead as-actor--look-right" src="assets/characters/faces/mio/confident-max.png" alt="Mio looking supremely confident">
+            <img class="as-actor as-actor--support as-actor--look-left" src="assets/characters/faces/ren/annoyed-max.png" alt="Ren looking very annoyed">
+            <div class="as-freeze-label"><strong>Architecture!</strong><span>versus · reality</span></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--split · lead · support</span><button class="sbl-copy" data-copy-recipe="recipe-split">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card">
+          <div class="sbl-shot-meta"><strong>Montage</strong><span>iteration, elapsed time, debugging, or research</span></div>
+          <div class="as-stage as-stage--cyan as-shot--montage">
+            <figure class="as-panel"><img src="assets/research/image_1.webp" alt="Custom split keyboard"><figcaption class="as-panel__label">Prototype</figcaption></figure>
+            <figure class="as-panel"><img src="assets/research/image_8.webp" alt="Breadboard sensing test"><figcaption class="as-panel__label">Proof</figcaption></figure>
+            <figure class="as-panel"><img src="assets/kicad/board-top-crop.png" alt="KiCad board render"><figcaption class="as-panel__label">Revision</figcaption></figure>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--montage · as-panel × 3</span><button class="sbl-copy" data-copy-recipe="recipe-montage">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card">
+          <div class="sbl-shot-meta"><strong>Reaction</strong><span>punch line, panic, victory, or defeat</span></div>
+          <div class="as-stage as-stage--red as-shot--reaction">
+            <div class="as-fx as-fx--fury"></div>
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/kaori/furious.png" alt="Kaori exploding with clenched-fist comedic rage">
+            <div class="mb mb--shout mb--red mb--sm sbl-bubble--right"><div class="mb__body"><p class="mb__text">One more feature?!</p></div></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--reaction · fx--fury · mb--shout</span><button class="sbl-copy" data-copy-recipe="recipe-reaction">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card">
+          <div class="sbl-shot-meta"><strong>Cliffhanger</strong><span>end an arc on an unresolved question</span></div>
+          <div class="as-stage as-stage--dark as-stage--violet as-shot--cliffhanger">
+            <div class="as-fx as-fx--dread"></div>
+            <img class="as-actor as-actor--lead as-actor--silhouette" src="assets/characters/faces/kaori/scandalized.png" alt="A mysterious scandalized silhouette">
+            <div class="as-cut-in">But can it survive the demo?</div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--cliffhanger · actor--silhouette · as-cut-in</span><button class="sbl-copy" data-copy-recipe="recipe-cliffhanger">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-insert">
+          <div class="sbl-shot-meta"><strong>Insert</strong><span>make one object, control, or clue undeniable</span></div>
+          <div class="as-stage as-stage--yellow as-shot--insert">
+            <div class="as-fx as-fx--screentone"></div>
+            <img class="as-prop as-prop--lead" src="assets/kicad/board-top-crop.png" alt="Close insert of the KiCad board render">
+            <img class="as-actor as-actor--support" src="assets/characters/faces/mio/realization-big.png" alt="Mio reacting to the board detail">
+            <div class="as-story-caption">Cut to evidence. Label only what the audience should inspect.</div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--insert · prop--lead · actor--support</span><button class="sbl-copy" data-copy-recipe="recipe-insert">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-extreme-closeup">
+          <div class="sbl-shot-meta"><strong>Extreme close-up</strong><span>emotional peak, tiny tell, or one decisive detail</span></div>
+          <div class="as-stage as-stage--red as-shot--extreme-closeup">
+            <div class="as-fx as-fx--dread"></div>
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/ren/furious-max.png" alt="Ren in a tightly cropped furious reaction">
+            <div class="as-cut-in">It routed on the first try.</div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--extreme-closeup · actor--lead</span><button class="sbl-copy" data-copy-recipe="recipe-extreme-closeup">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-low-angle">
+          <div class="sbl-shot-meta"><strong>Low angle</strong><span>authority, victory, threat, or heroic reveal</span></div>
+          <div class="as-stage as-stage--cyan as-shot--low-angle">
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/mio/confident-max.png" alt="Mio framed from below with exaggerated confidence">
+            <div class="as-freeze-label"><strong>Ship it.</strong><span>power position</span></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--low-angle · actor--lead</span><button class="sbl-copy" data-copy-recipe="recipe-low-angle">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-high-angle">
+          <div class="sbl-shot-meta"><strong>High angle</strong><span>vulnerability, isolation, defeat, or scale</span></div>
+          <div class="as-stage as-stage--violet as-shot--high-angle">
+            <div class="as-fx as-fx--defeat"></div>
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/ren/exhausted-big.png" alt="Ren made small within a high-angle composition">
+            <div class="mb mb--thought mb--tail-bc mb--violet mb--sm sbl-bubble--center"><div class="mb__body"><p class="mb__text">There are still 104 keys.</p></div></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--high-angle · actor--lead · negative space</span><button class="sbl-copy" data-copy-recipe="recipe-high-angle">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-dutch">
+          <div class="sbl-shot-meta"><strong>Dutch angle</strong><span>instability, panic, surprise, or rules breaking</span></div>
+          <div class="as-stage as-stage--red as-shot--dutch">
+            <div class="as-fx as-fx--speed"></div>
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/ren/unhinged-max.png" alt="Ren tilted into a chaotic composition">
+            <img class="as-prop as-prop--lead" src="assets/kicad/board-top-crop.png" alt="KiCad board tilted against Ren">
+            <div class="mb mb--shout mb--red mb--sm sbl-bubble--left"><div class="mb__body"><p class="mb__text">The ground plane is gone!</p></div></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--dutch · actor--lead · prop--lead</span><button class="sbl-copy" data-copy-recipe="recipe-dutch">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-three">
+          <div class="sbl-shot-meta"><strong>Three-character</strong><span>decision, triangle, team beat, or social pressure</span></div>
+          <div class="as-stage as-stage--mint as-shot--three">
+            <div class="as-fx as-fx--screentone"></div>
+            <img class="as-actor as-actor--support as-actor--look-right" src="assets/characters/faces/mio/confused-big.png" alt="Mio watching the center of the group">
+            <img class="as-actor as-actor--lead" src="assets/characters/faces/kaori/judging.png" alt="Kaori occupying the decision-making center">
+            <img class="as-actor as-actor--third as-actor--look-left" src="assets/characters/faces/ren/annoyed-big.png" alt="Ren watching the center of the group">
+            <div class="as-story-caption">Center the character who owns the decision—not necessarily the speaker.</div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--three · lead · support · third</span><button class="sbl-copy" data-copy-recipe="recipe-three">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-foreground-frame">
+          <div class="sbl-shot-meta"><strong>Foreground frame</strong><span>POV, surveillance, tension, or directed attention</span></div>
+          <div class="as-stage as-stage--yellow as-shot--foreground-frame">
+            <div class="as-fx as-fx--rings"></div>
+            <img class="as-actor as-actor--frame as-actor--silhouette as-actor--look-right" src="assets/characters/faces/mio/dread-big.png" alt="Mio silhouetted close to the camera">
+            <img class="as-prop as-prop--lead" src="assets/keyboard/keyboard-keyboard.webp" alt="Keyboard evidence between observer and subject">
+            <img class="as-actor as-actor--lead as-actor--look-left" src="assets/characters/faces/kaori/scheming.png" alt="Kaori observed across the keyboard">
+            <div class="as-story-caption">The foreground shape tells us whose viewpoint controls the shot.</div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--foreground-frame · actor--frame · lead</span><button class="sbl-copy" data-copy-recipe="recipe-foreground-frame">Copy recipe</button></div>
+        </article>
+
+        <article class="sbl-shot-card" id="shot-reveal">
+          <div class="sbl-shot-meta"><strong>Identity reveal</strong><span>entrance, new stakeholder, hidden system, or transformation</span></div>
+          <div class="as-stage as-stage--dark as-stage--violet as-shot--reveal">
+            <div class="as-fx as-fx--rays"></div>
+            <img class="as-actor as-actor--lead as-actor--silhouette" src="assets/characters/faces/kaori/triumphant.png" alt="Kaori entering as a mystery silhouette">
+            <div class="as-freeze-label"><strong>New challenger</strong><span>reveal on click</span></div>
+          </div>
+          <div class="sbl-recipe-actions"><span class="sbl-classline">as-shot--reveal · actor--lead · actor--silhouette</span><button class="sbl-copy" data-copy-recipe="recipe-reveal">Copy recipe</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sbl-section" id="effects">
+      <div class="sbl-section-head">
+        <span class="sbl-section-no">02</span><h2>Emotion and atmosphere</h2>
+        <p class="sbl-section-dek">Use one primary effect per beat. The effect should reinforce the emotional transition instead of filling empty space.</p>
+      </div>
+      <div class="sbl-effect-grid">
+        <div class="sbl-effect"><div class="as-fx as-fx--rays"></div><strong>rays · confidence</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--rings"></div><strong>rings · realization</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--speed"></div><strong>speed · urgency</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--dread"></div><strong>dread · pressure</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--defeat"></div><strong>defeat · collapse</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--sparkles"></div><strong>sparkles · delight</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--fury"></div><strong>fury · escalation</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--memory"></div><strong>memory · flashback</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--screentone"></div><strong>screentone · neutral</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--silence" data-mark="・・・"></div><strong>silence · awkward beat</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--blush"></div><strong>blush · embarrassment</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--shock"></div><strong>shock · alarm</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--romance"></div><strong>romance · affection</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--comedy"></div><strong>comedy · playful chaos</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--tension"></div><strong>tension · confrontation</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--celebration"></div><strong>confetti · victory</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--gloom"></div><strong>gloom · despair</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--focus"></div><strong>focus · determination</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--dream"></div><strong>dream · reverie</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--confusion"></div><strong>spirals · confusion</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--isolation"></div><strong>isolation · loneliness</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--anxiety"></div><strong>sweat · anxiety</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--freeze"></div><strong>freeze · disbelief</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--warmth"></div><strong>warmth · relief</strong></div>
+        <div class="sbl-effect"><div class="as-fx as-fx--suspense"></div><strong>suspense · unease</strong></div>
+      </div>
+    </section>
+
+    <section class="sbl-section" id="beats">
+      <div class="sbl-section-head">
+        <span class="sbl-section-no">03</span><h2>Anime story beats</h2>
+        <p class="sbl-section-dek">These are reusable narrative jobs rather than fixed visual themes.</p>
+      </div>
+      <div class="sbl-beat-grid">
+        <div class="as-eyecatch sbl-mini-eyecatch"><div class="as-eyecatch__copy"><small>EYECATCH · ARC 04</small><strong>The KiCad arc</strong><span>Routing begins.</span></div></div>
+        <article class="sbl-beat-card"><span class="as-beat-tag">Previously on…</span><h3>Recap</h3><p>Restate the last decision and the unresolved consequence. Use at a system boundary or after a long technical section.</p></article>
+        <article class="sbl-beat-card"><span class="as-beat-tag">Character file</span><h3>Freeze-frame introduction</h3><p>Pair one expression with a nameplate, role, and one defining contradiction.</p></article>
+        <article class="sbl-beat-card"><span class="as-beat-tag">Three weeks later</span><h3>Time jump</h3><p>Use a narrator box plus a montage. Show what changed rather than narrating every intermediate step.</p></article>
+        <article class="sbl-beat-card"><span class="as-beat-tag">System clear</span><h3>Victory result</h3><p>State what is now true, the evidence that proves it, and the capability unlocked next.</p></article>
+        <article class="sbl-beat-card"><span class="as-beat-tag">Next episode</span><h3>Cliffhanger</h3><p>End with the next constraint or question. Do not introduce an unrelated teaser.</p></article>
+      </div>
+    </section>
+
+    <section class="sbl-section" id="cast">
+      <div class="sbl-section-head">
+        <span class="sbl-section-no">04</span><h2>Recurring cast expressions</h2>
+        <p class="sbl-section-dek">Mio and Ren use base, big, and max intensities. Kaori uses one strong manga pose per reaction. Click any asset path to copy it.</p>
+      </div>
+      <div class="sbl-toolbar" data-filter-group="character" aria-label="Filter by character">
+        <button class="sbl-filter" data-filter="all" aria-pressed="true">All characters</button>
+        <button class="sbl-filter" data-filter="mio" aria-pressed="false">Mio</button>
+        <button class="sbl-filter" data-filter="ren" aria-pressed="false">Ren</button>
+        <button class="sbl-filter" data-filter="kaori" aria-pressed="false">Kaori</button>
+      </div>
+      <div class="sbl-toolbar" data-filter-group="level" aria-label="Filter by intensity">
+        <button class="sbl-filter" data-filter="all" aria-pressed="true">All intensities</button>
+        <button class="sbl-filter" data-filter="base" aria-pressed="false">Base</button>
+        <button class="sbl-filter" data-filter="big" aria-pressed="false">Big</button>
+        <button class="sbl-filter" data-filter="max" aria-pressed="false">Max</button>
+      </div>
+      <p class="sbl-filter-status" id="face-filter-status" aria-live="polite">Showing all 64 cast expressions.</p>
+      <div class="sbl-asset-grid" id="face-grid"></div>
+      <noscript><p class="sbl-empty">Enable JavaScript to render the asset inventory.</p></noscript>
+    </section>
+
+    <section class="sbl-section" id="assets">
+      <div class="sbl-section-head">
+        <span class="sbl-section-no">05</span><h2>Props, reactions, and references</h2>
+        <p class="sbl-section-dek">“Mixed” and “reuse check” badges mean the README provenance notes should be consulted before public redistribution.</p>
+      </div>
+      <div class="sbl-asset-grid" id="asset-grid"></div>
+      <noscript><p class="sbl-empty">Enable JavaScript to render the asset inventory.</p></noscript>
+    </section>
+
+    <footer class="sbl-foot">Authoring reference: ANIME_STORYBOARD.md · Bubble details: MANGA_BUBBLES.md · All components are plain HTML and CSS and remain compatible with Reveal fragments and PDF export.</footer>
+
+    <div hidden aria-hidden="true">
+      <code id="recipe-establishing">&lt;div class="as-stage as-stage--mint as-shot--establishing"&gt;
+  &lt;div class="as-fx as-fx--rings"&gt;&lt;/div&gt;
+  &lt;img class="as-prop as-prop--lead" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;div class="as-location-card"&gt;&lt;strong&gt;Location&lt;/strong&gt;&lt;span&gt;Time&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-two">&lt;div class="as-stage as-stage--cyan as-shot--two"&gt;
+  &lt;img class="as-actor as-actor--lead as-actor--look-right" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--support as-actor--look-left" src="assets/..." alt="..."&gt;
+  &lt;div class="mb mb--speech mb--tail-bl mb--cyan mb--md"&gt;&lt;div class="mb__body"&gt;...&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-closeup">&lt;div class="as-stage as-stage--violet as-shot--closeup"&gt;
+  &lt;div class="as-fx as-fx--rings"&gt;&lt;/div&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-over-shoulder">&lt;div class="as-stage as-stage--yellow as-shot--over-shoulder"&gt;
+  &lt;img class="as-actor as-actor--lead as-actor--silhouette as-actor--look-right" src="assets/..." alt="Foreground observer"&gt;
+  &lt;img class="as-prop as-prop--lead" src="assets/..." alt="..."&gt;
+  &lt;div class="as-location-card"&gt;&lt;strong&gt;Evidence&lt;/strong&gt;&lt;span&gt;Follow the eyeline&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-split">&lt;div class="as-stage as-stage--red as-shot--split"&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--support" src="assets/..." alt="..."&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-montage">&lt;div class="as-stage as-stage--cyan as-shot--montage"&gt;
+  &lt;figure class="as-panel"&gt;&lt;img src="assets/..." alt="..."&gt;&lt;figcaption class="as-panel__label"&gt;Beat 1&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;figure class="as-panel"&gt;...&lt;/figure&gt;
+  &lt;figure class="as-panel"&gt;...&lt;/figure&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-reaction">&lt;div class="as-stage as-stage--red as-shot--reaction"&gt;
+  &lt;div class="as-fx as-fx--fury"&gt;&lt;/div&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;div class="mb mb--shout mb--red mb--sm"&gt;&lt;div class="mb__body"&gt;...&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-cliffhanger">&lt;div class="as-stage as-stage--dark as-stage--violet as-shot--cliffhanger"&gt;
+  &lt;div class="as-fx as-fx--dread"&gt;&lt;/div&gt;
+  &lt;img class="as-actor as-actor--lead as-actor--silhouette" src="assets/..." alt="..."&gt;
+  &lt;div class="as-cut-in"&gt;But can it survive the demo?&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-insert">&lt;div class="as-stage as-stage--yellow as-shot--insert"&gt;
+  &lt;img class="as-prop as-prop--lead" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--support" src="assets/..." alt="..."&gt;
+  &lt;div class="as-story-caption"&gt;What should the audience inspect?&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-extreme-closeup">&lt;div class="as-stage as-stage--red as-shot--extreme-closeup"&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;div class="as-cut-in"&gt;The decisive beat.&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-low-angle">&lt;div class="as-stage as-stage--cyan as-shot--low-angle"&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;div class="as-freeze-label"&gt;&lt;strong&gt;Power beat&lt;/strong&gt;&lt;span&gt;optional label&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-high-angle">&lt;div class="as-stage as-stage--violet as-shot--high-angle"&gt;
+  &lt;div class="as-fx as-fx--defeat"&gt;&lt;/div&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-dutch">&lt;div class="as-stage as-stage--red as-shot--dutch"&gt;
+  &lt;div class="as-fx as-fx--speed"&gt;&lt;/div&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;img class="as-prop as-prop--lead" src="assets/..." alt="..."&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-three">&lt;div class="as-stage as-stage--mint as-shot--three"&gt;
+  &lt;img class="as-actor as-actor--support" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--third" src="assets/..." alt="..."&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-foreground-frame">&lt;div class="as-stage as-stage--yellow as-shot--foreground-frame"&gt;
+  &lt;img class="as-actor as-actor--frame as-actor--silhouette" src="assets/..." alt="..."&gt;
+  &lt;img class="as-prop as-prop--lead" src="assets/..." alt="..."&gt;
+  &lt;img class="as-actor as-actor--lead" src="assets/..." alt="..."&gt;
+&lt;/div&gt;</code>
+      <code id="recipe-reveal">&lt;div class="as-stage as-stage--dark as-stage--violet as-shot--reveal"&gt;
+  &lt;div class="as-fx as-fx--rays"&gt;&lt;/div&gt;
+  &lt;img class="as-actor as-actor--lead as-actor--silhouette" src="assets/..." alt="..."&gt;
+  &lt;div class="as-freeze-label"&gt;&lt;strong&gt;New challenger&lt;/strong&gt;&lt;span&gt;reveal on click&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code>
+    </div>
+  </main>
+  <script src="storyboard-library.js"></script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+/*
+ * Anime storyboard primitives
+ *
+ * Prefix: as- (anime storyboard). These classes provide blocking, framing,
+ * emotional backdrops, and recurring story beats without owning slide copy.
+ */
+
+.as-stage {
+  --as-ink: var(--ink, #15201d);
+  --as-paper: var(--paper, #fffdf4);
+  --as-accent: var(--magenta, #f25aa2);
+  --as-soft: rgba(242, 90, 162, .14);
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  overflow: hidden;
+  border: 6px solid #101116;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(21, 32, 29, .1) 1.2px, transparent 1.7px) 0 0 / 28px 28px,
+    var(--as-paper);
+  color: var(--as-ink);
+  box-shadow: 11px 11px 0 var(--as-accent);
+  isolation: isolate;
+}
+
+.as-stage--dark {
+  --as-ink: #fffdf4;
+  --as-paper: #11131c;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .08) 1.1px, transparent 1.6px) 0 0 / 28px 28px,
+    var(--as-paper);
+}
+.as-stage--cyan { --as-accent: #159b98; --as-soft: rgba(21, 155, 152, .16); }
+.as-stage--yellow { --as-accent: #d99a00; --as-soft: rgba(255, 211, 79, .25); }
+.as-stage--red { --as-accent: #e64c5f; --as-soft: rgba(230, 76, 95, .15); }
+.as-stage--violet { --as-accent: #8868d7; --as-soft: rgba(136, 104, 215, .16); }
+.as-stage--mint { --as-accent: #76ad85; --as-soft: rgba(118, 173, 133, .18); }
+
+/* Actor placement. Custom properties are an escape hatch for special shots. */
+.as-actor {
+  --actor-x: 50%;
+  --actor-y: -3%;
+  --actor-width: 34%;
+  --actor-anchor: -50%;
+  --actor-scale: 1;
+  --actor-facing: 1;
+  --actor-rotate: 0deg;
+  --actor-z: 3;
+  position: absolute;
+  z-index: var(--actor-z);
+  left: var(--actor-x);
+  bottom: var(--actor-y);
+  width: var(--actor-width);
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(7px 8px 0 rgba(16, 17, 22, .9));
+  transform: translateX(var(--actor-anchor)) rotate(var(--actor-rotate)) scaleX(var(--actor-facing)) scale(var(--actor-scale));
+  transform-origin: center bottom;
+  pointer-events: none;
+}
+.as-actor--left { --actor-x: 6%; --actor-anchor: 0%; }
+.as-actor--center { --actor-x: 50%; --actor-anchor: -50%; }
+.as-actor--right { --actor-x: 94%; --actor-anchor: -100%; }
+.as-actor--off-left { --actor-x: -8%; --actor-anchor: 0%; }
+.as-actor--off-right { --actor-x: 108%; --actor-anchor: -100%; }
+.as-actor--foreground { --actor-width: 48%; --actor-y: -15%; --actor-z: 5; }
+.as-actor--midground { --actor-width: 34%; --actor-z: 3; }
+.as-actor--background { --actor-width: 25%; --actor-y: 1%; --actor-z: 2; opacity: .86; }
+.as-actor--bust { --actor-width: 42%; --actor-y: -28%; }
+.as-actor--closeup { --actor-width: 65%; --actor-y: -38%; }
+.as-actor--look-left { --actor-facing: -1; }
+.as-actor--look-right { --actor-facing: 1; }
+.as-actor--tilt-left { --actor-rotate: -4deg; }
+.as-actor--tilt-right { --actor-rotate: 4deg; }
+.as-actor--silhouette { filter: brightness(0) drop-shadow(8px 9px 0 var(--as-accent)); }
+.as-actor--memory { opacity: .58; filter: grayscale(.55) sepia(.12) drop-shadow(6px 7px 0 rgba(16,17,22,.35)); }
+
+/* Props and documentary inserts use the same positioning language as actors. */
+.as-prop {
+  --prop-x: 50%;
+  --prop-y: 7%;
+  --prop-width: 50%;
+  --prop-anchor: -50%;
+  --prop-rotate: 0deg;
+  position: absolute;
+  z-index: 2;
+  left: var(--prop-x);
+  bottom: var(--prop-y);
+  width: var(--prop-width);
+  max-height: 78%;
+  margin: 0;
+  object-fit: contain;
+  transform: translateX(var(--prop-anchor)) rotate(var(--prop-rotate));
+  filter: drop-shadow(8px 9px 0 rgba(16,17,22,.82));
+}
+.as-prop--left { --prop-x: 5%; --prop-anchor: 0%; }
+.as-prop--right { --prop-x: 95%; --prop-anchor: -100%; }
+.as-prop--small { --prop-width: 26%; }
+.as-prop--large { --prop-width: 67%; }
+.as-prop--silhouette { filter: brightness(0) drop-shadow(8px 9px 0 var(--as-accent)); }
+
+/* Shot recipes. Lead/support classes make a shot reusable with any cast. */
+.as-shot--establishing .as-actor--lead { --actor-x: 83%; --actor-anchor: -50%; --actor-width: 25%; --actor-y: -3%; }
+.as-shot--establishing .as-prop--lead { --prop-x: 36%; --prop-width: 57%; }
+.as-shot--two .as-actor--lead { --actor-x: 19%; --actor-width: 35%; --actor-anchor: -50%; }
+.as-shot--two .as-actor--support { --actor-x: 81%; --actor-width: 35%; --actor-anchor: -50%; }
+.as-shot--closeup .as-actor--lead { --actor-x: 75%; --actor-anchor: -50%; --actor-width: 66%; --actor-y: -40%; }
+.as-shot--reaction .as-actor--lead { --actor-x: 50%; --actor-anchor: -50%; --actor-width: 56%; --actor-y: -25%; }
+.as-shot--over-shoulder .as-actor--lead {
+  --actor-x: -18%;
+  --actor-anchor: 0%;
+  --actor-width: 73%;
+  --actor-y: -35%;
+  --actor-z: 5;
+}
+.as-shot--over-shoulder .as-prop--lead {
+  --prop-x: 68%;
+  --prop-width: 59%;
+  --prop-y: 9%;
+}
+.as-shot--over-shoulder .as-location-card {
+  left: auto;
+  right: 26px;
+  top: 24px;
+}
+.as-shot--cliffhanger { background: #10121a; color: #fffdf4; }
+.as-shot--cliffhanger .as-actor--lead { --actor-x: 50%; --actor-anchor: -50%; --actor-width: 58%; --actor-y: -32%; }
+
+/* Detail and point-of-view shots. */
+.as-shot--insert .as-prop--lead {
+  --prop-x: 50%;
+  --prop-y: 6%;
+  --prop-width: 82%;
+  max-height: 86%;
+}
+.as-shot--insert .as-actor--support {
+  --actor-x: 96%;
+  --actor-anchor: -100%;
+  --actor-width: 25%;
+  --actor-y: -7%;
+  --actor-z: 5;
+}
+.as-shot--extreme-closeup .as-actor--lead {
+  --actor-x: 50%;
+  --actor-anchor: -50%;
+  --actor-width: 92%;
+  --actor-y: -72%;
+}
+.as-shot--extreme-closeup .as-cut-in {
+  top: auto;
+  bottom: 18px;
+  transform: rotate(-1deg);
+}
+
+/* Camera height changes the perceived power of the same character art. */
+.as-shot--low-angle::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -45%;
+  background: repeating-conic-gradient(from -4deg at 50% 102%, transparent 0 9deg, var(--as-soft) 9deg 12deg);
+}
+.as-shot--low-angle .as-actor--lead {
+  --actor-x: 50%;
+  --actor-anchor: -50%;
+  --actor-width: 70%;
+  --actor-y: -46%;
+  --actor-z: 4;
+}
+.as-shot--high-angle::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 3%;
+  width: 34%;
+  height: 10%;
+  border: 3px solid rgba(16,17,22,.18);
+  border-radius: 50%;
+  background: rgba(16,17,22,.08);
+  transform: translateX(-50%);
+}
+.as-shot--high-angle .as-actor--lead {
+  --actor-x: 50%;
+  --actor-anchor: -50%;
+  --actor-width: 29%;
+  --actor-y: 4%;
+  --actor-z: 3;
+}
+
+/* Instability, groups, and layered depth. */
+.as-shot--dutch::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: -12%;
+  top: 45%;
+  width: 125%;
+  height: 12px;
+  background: #101116;
+  box-shadow: 0 11px 0 var(--as-accent);
+  transform: rotate(-8deg);
+}
+.as-shot--dutch .as-actor--lead {
+  --actor-x: 66%;
+  --actor-anchor: -50%;
+  --actor-width: 63%;
+  --actor-y: -44%;
+  --actor-rotate: -7deg;
+  --actor-z: 4;
+}
+.as-shot--dutch .as-prop--lead {
+  --prop-x: 21%;
+  --prop-anchor: -50%;
+  --prop-width: 37%;
+  --prop-y: 12%;
+  --prop-rotate: 8deg;
+}
+.as-shot--three .as-actor--lead {
+  --actor-x: 50%;
+  --actor-anchor: -50%;
+  --actor-width: 39%;
+  --actor-y: -13%;
+  --actor-z: 4;
+}
+.as-shot--three .as-actor--support {
+  --actor-x: 17%;
+  --actor-anchor: -50%;
+  --actor-width: 31%;
+  --actor-y: -2%;
+  --actor-z: 3;
+}
+.as-shot--three .as-actor--third {
+  --actor-x: 83%;
+  --actor-anchor: -50%;
+  --actor-width: 31%;
+  --actor-y: -2%;
+  --actor-z: 3;
+}
+.as-shot--foreground-frame .as-actor--frame {
+  --actor-x: -7%;
+  --actor-anchor: 0%;
+  --actor-width: 65%;
+  --actor-y: -56%;
+  --actor-z: 6;
+}
+.as-shot--foreground-frame .as-actor--lead {
+  --actor-x: 76%;
+  --actor-anchor: -50%;
+  --actor-width: 34%;
+  --actor-y: 0%;
+  --actor-z: 3;
+}
+.as-shot--foreground-frame .as-prop--lead {
+  --prop-x: 56%;
+  --prop-width: 36%;
+  --prop-y: 7%;
+}
+.as-shot--foreground-frame.as-frame--right .as-actor--frame {
+  --actor-x: 107%;
+  --actor-anchor: -100%;
+}
+.as-shot--foreground-frame.as-frame--right .as-actor--lead { --actor-x: 24%; }
+
+/* A reveal is a centered entrance with a controllable silhouette treatment. */
+.as-shot--reveal::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(104deg, transparent 0 31%, var(--as-soft) 31.5% 68.5%, transparent 69%);
+  clip-path: polygon(42% 0, 58% 0, 84% 100%, 16% 100%);
+}
+.as-shot--reveal .as-actor--lead {
+  --actor-x: 50%;
+  --actor-anchor: -50%;
+  --actor-width: 54%;
+  --actor-y: -31%;
+  --actor-z: 4;
+}
+
+.as-shot--split::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: -10%;
+  width: 10px;
+  height: 120%;
+  background: #101116;
+  box-shadow: 7px 0 0 var(--as-accent);
+  transform: rotate(7deg);
+}
+.as-shot--split .as-actor--lead { --actor-x: 24%; --actor-width: 43%; --actor-anchor: -50%; }
+.as-shot--split .as-actor--support { --actor-x: 76%; --actor-width: 43%; --actor-anchor: -50%; }
+
+.as-shot--montage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 22px;
+}
+.as-panel {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 5px solid #101116;
+  background: var(--as-paper);
+  box-shadow: 7px 7px 0 var(--as-accent);
+}
+.as-panel:nth-child(2) { transform: translateY(18px) rotate(1deg); }
+.as-panel:nth-child(3) { transform: rotate(-1deg); }
+.as-panel > img { width: 100%; height: 100%; margin: 0; object-fit: cover; }
+.as-panel__label { position: absolute; left: 12px; bottom: 12px; padding: 6px 9px; border: 2px solid #101116; background: var(--as-paper); color: #101116; font: 950 13px/1 ui-monospace, monospace; }
+
+/* Emotional and editorial overlays. Place after media and before copy. */
+.as-fx {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.as-fx--rays { inset: -35%; background: repeating-conic-gradient(from 5deg at 58% 55%, transparent 0 8deg, var(--as-soft) 8deg 11deg); }
+.as-fx--rings { background: repeating-radial-gradient(circle at 67% 55%, transparent 0 34px, var(--as-soft) 36px 46px, transparent 48px 76px); }
+.as-fx--speed { background: repeating-linear-gradient(165deg, transparent 0 29px, var(--as-soft) 30px 37px, transparent 38px 59px); }
+.as-fx--dread { background: repeating-linear-gradient(94deg, transparent 0 22px, var(--as-soft) 23px 30px, transparent 31px 49px); -webkit-mask-image: linear-gradient(to bottom, #000, transparent 87%); mask-image: linear-gradient(to bottom, #000, transparent 87%); }
+.as-fx--defeat { background: repeating-linear-gradient(98deg, transparent 0 25px, var(--as-soft) 26px 31px, transparent 32px 48px); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 23%); mask-image: linear-gradient(to bottom, transparent, #000 23%); }
+.as-fx--sparkles { background: radial-gradient(circle, var(--as-accent) 0 4px, transparent 5px) 8% 12% / 92px 92px, radial-gradient(circle, var(--as-soft) 0 8px, transparent 9px) 45% 40% / 137px 137px; }
+.as-fx--fury { background: radial-gradient(circle at 50% 110%, rgba(230,76,95,.52), transparent 62%), repeating-linear-gradient(74deg, transparent 0 18px, rgba(230,76,95,.12) 19px 25px, transparent 26px 41px); }
+.as-fx--memory { background: radial-gradient(ellipse at center, rgba(255,253,244,.93) 0 27%, rgba(255,211,79,.26) 55%, rgba(16,17,22,.52) 100%); mix-blend-mode: screen; }
+.as-fx--screentone { background: radial-gradient(circle at 1px 1px, rgba(16,17,22,.22) 1.4px, transparent 1.8px) 0 0 / 11px 11px; opacity: .5; }
+.as-fx--blush {
+  background:
+    repeating-linear-gradient(108deg, transparent 0 11px, rgba(242,90,162,.3) 12px 16px, transparent 17px 29px) center 53% / 62% 32% no-repeat,
+    radial-gradient(ellipse at center, rgba(242,90,162,.19), transparent 64%);
+}
+.as-fx--shock {
+  inset: -22%;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255,253,244,.96) 0 8%, transparent 9%),
+    repeating-conic-gradient(from -5deg at 50% 48%, rgba(16,17,22,.88) 0 3deg, transparent 4deg 13deg, var(--as-accent) 14deg 17deg, transparent 18deg 29deg);
+}
+.as-fx--romance::before {
+  content: "\2665   \2661   \2665";
+  position: absolute;
+  inset: 9% 0 auto;
+  color: var(--as-accent);
+  font: 1000 clamp(42px, 6vw, 88px)/1 sans-serif;
+  letter-spacing: .22em;
+  text-align: center;
+  text-shadow: 4px 4px 0 rgba(255,253,244,.9);
+  transform: rotate(-5deg);
+}
+.as-fx--romance { background: radial-gradient(circle at 50% 44%, rgba(255,255,255,.96), var(--as-soft) 38%, transparent 72%); }
+.as-fx--comedy {
+  background:
+    radial-gradient(circle, var(--as-accent) 0 8px, transparent 9px) 0 0 / 56px 56px,
+    radial-gradient(circle, rgba(255,211,79,.8) 0 5px, transparent 6px) 28px 28px / 56px 56px,
+    repeating-conic-gradient(from 8deg at 50% 50%, transparent 0 12deg, var(--as-soft) 13deg 17deg, transparent 18deg 31deg);
+}
+.as-fx--tension {
+  background:
+    linear-gradient(90deg, rgba(230,76,95,.54), transparent 42%, rgba(16,17,22,.92) 49% 51%, transparent 58%, rgba(21,155,152,.54)),
+    repeating-linear-gradient(77deg, transparent 0 18px, rgba(16,17,22,.14) 19px 23px, transparent 24px 39px);
+}
+.as-fx--celebration {
+  background:
+    linear-gradient(27deg, transparent 45%, #f25aa2 46% 54%, transparent 55%) 4% 7% / 53px 61px,
+    linear-gradient(-32deg, transparent 44%, #159b98 45% 55%, transparent 56%) 25% 19% / 67px 53px,
+    linear-gradient(72deg, transparent 43%, #d99a00 44% 56%, transparent 57%) 47% 5% / 59px 71px,
+    radial-gradient(circle, #e64c5f 0 5px, transparent 6px) 0 0 / 77px 69px,
+    linear-gradient(to top, rgba(255,211,79,.26), transparent 72%);
+}
+.as-fx--gloom {
+  background:
+    repeating-linear-gradient(103deg, transparent 0 23px, rgba(16,17,22,.27) 24px 29px, transparent 30px 47px),
+    linear-gradient(to bottom, rgba(16,17,22,.76), rgba(16,17,22,.24) 58%, transparent 87%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
+}
+.as-fx--focus {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 2px), rgba(16,17,22,.64) calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px)),
+    linear-gradient(transparent calc(50% - 2px), rgba(16,17,22,.64) calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px)),
+    repeating-radial-gradient(circle at center, transparent 0 30px, var(--as-accent) 32px 36px, transparent 38px 62px);
+}
+.as-fx--dream {
+  background:
+    radial-gradient(circle at 18% 28%, rgba(255,255,255,.94) 0 17px, transparent 19px),
+    radial-gradient(circle at 72% 24%, rgba(242,90,162,.28) 0 28px, transparent 30px),
+    radial-gradient(circle at 49% 58%, rgba(136,104,215,.25) 0 39px, transparent 41px),
+    radial-gradient(circle at 88% 68%, rgba(21,155,152,.22) 0 22px, transparent 24px),
+    linear-gradient(135deg, rgba(242,90,162,.13), rgba(136,104,215,.18), rgba(21,155,152,.13));
+  filter: blur(.2px) saturate(.82);
+}
+.as-fx--confusion {
+  background:
+    repeating-radial-gradient(circle at 23% 35%, transparent 0 12px, rgba(136,104,215,.36) 13px 17px, transparent 18px 30px),
+    repeating-radial-gradient(circle at 78% 58%, transparent 0 17px, rgba(242,90,162,.28) 18px 22px, transparent 23px 39px),
+    linear-gradient(117deg, transparent 38%, var(--as-soft) 39% 61%, transparent 62%);
+}
+.as-fx--isolation {
+  background:
+    radial-gradient(circle at center, transparent 0 17%, rgba(16,17,22,.2) 34%, rgba(16,17,22,.86) 78%),
+    radial-gradient(circle at center, var(--as-soft) 0 4%, transparent 5%);
+}
+.as-fx--anxiety {
+  background:
+    radial-gradient(ellipse at 18% 15%, rgba(21,155,152,.5) 0 8px, transparent 9px) 0 0 / 71px 82px,
+    radial-gradient(ellipse at 71% 7%, rgba(21,155,152,.34) 0 6px, transparent 7px) 0 0 / 93px 67px,
+    repeating-linear-gradient(87deg, transparent 0 16px, rgba(16,17,22,.12) 17px 20px, transparent 21px 38px),
+    linear-gradient(to bottom, rgba(21,155,152,.2), transparent 68%);
+}
+.as-fx--freeze {
+  background:
+    conic-gradient(from 19deg at 14% 0, transparent 0 9%, rgba(21,155,152,.28) 10% 15%, transparent 16% 100%),
+    conic-gradient(from 201deg at 84% 100%, transparent 0 11%, rgba(136,104,215,.24) 12% 18%, transparent 19% 100%),
+    repeating-linear-gradient(133deg, transparent 0 29px, rgba(21,155,152,.22) 30px 34px, transparent 35px 58px),
+    linear-gradient(135deg, rgba(216,248,250,.82), rgba(255,255,255,.12));
+}
+.as-fx--warmth {
+  background:
+    radial-gradient(circle at 50% 58%, rgba(255,253,244,.94) 0 12%, rgba(255,211,79,.54) 24%, rgba(242,90,162,.19) 51%, transparent 73%),
+    repeating-conic-gradient(from 4deg at 50% 58%, transparent 0 13deg, rgba(255,211,79,.16) 14deg 18deg, transparent 19deg 34deg);
+}
+.as-fx--suspense {
+  background:
+    linear-gradient(117deg, transparent 0 46%, rgba(230,76,95,.72) 47% 49%, transparent 50%),
+    repeating-linear-gradient(90deg, rgba(16,17,22,.82) 0 7px, transparent 8px 29px),
+    linear-gradient(to top, rgba(16,17,22,.67), transparent 72%);
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+  opacity: .78;
+}
+.as-fx--silence::before {
+  content: attr(data-mark);
+  position: absolute;
+  right: 4%;
+  top: 11%;
+  color: var(--as-accent);
+  font: 1000 clamp(48px, 7vw, 96px)/1 "Hiragino Sans", "Yu Gothic", sans-serif;
+  letter-spacing: .06em;
+  text-shadow: 4px 4px 0 #101116;
+  transform: rotate(5deg);
+}
+.as-fx--flash { background: rgba(255,255,255,.88); opacity: 0; }
+
+/* Story information: locations, cut-ins, captions, and character freeze frames. */
+.as-location-card,
+.as-story-caption,
+.as-freeze-label,
+.as-cut-in {
+  position: absolute;
+  z-index: 8;
+  border: 4px solid #101116;
+  background: var(--as-paper);
+  color: #101116;
+  box-shadow: 7px 7px 0 var(--as-accent);
+}
+.as-location-card { left: 28px; top: 26px; padding: 13px 17px; transform: rotate(-1.5deg); }
+.as-location-card strong { display: block; font-size: 23px; line-height: 1; }
+.as-location-card span { display: block; margin-top: 7px; font: 850 13px/1 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.as-story-caption { left: 28px; bottom: 27px; max-width: 65%; padding: 13px 17px; font: 900 18px/1.15 ui-monospace, monospace; }
+.as-freeze-label { right: 30px; bottom: 32px; max-width: 55%; padding: 18px 22px; transform: rotate(-2deg); }
+.as-freeze-label strong { display: block; color: var(--as-accent); font-size: 38px; line-height: .95; text-transform: uppercase; }
+.as-freeze-label span { display: block; margin-top: 10px; font: 850 14px/1.15 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.as-cut-in { left: 4%; right: 4%; top: 50%; padding: 23px 34px; background: #101116; color: #fffdf4; font-size: 38px; font-weight: 1000; line-height: .98; text-align: center; text-transform: uppercase; transform: translateY(-50%) rotate(-1deg); }
+
+/* Independent actor + bubble grouping for recurring side commentary. */
+.as-dialogue-cameo {
+  --cameo-actor-width: 220px;
+  --cameo-bubble-width: 330px;
+  position: absolute;
+  z-index: 10;
+  width: 540px;
+  height: 500px;
+  pointer-events: none;
+}
+.as-dialogue-cameo__actor {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  width: var(--cameo-actor-width);
+  max-width: none;
+  max-height: 100%;
+  margin: 0;
+  object-fit: contain;
+  object-position: right bottom;
+  filter: drop-shadow(8px 9px 0 rgba(16,17,22,.82));
+}
+.as-dialogue-cameo__bubble {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 42px;
+  width: var(--cameo-bubble-width);
+}
+.as-dialogue-cameo--left .as-dialogue-cameo__actor { left: 0; right: auto; object-position: left bottom; }
+.as-dialogue-cameo--left .as-dialogue-cameo__bubble { left: auto; right: 0; }
+
+.as-eyecatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+  overflow: hidden;
+  border: 8px solid #101116;
+  background: #101116;
+  color: #fffdf4;
+  box-shadow: 14px 14px 0 var(--magenta, #f25aa2);
+  text-align: center;
+}
+.as-eyecatch::before { content: ""; position: absolute; inset: -35%; background: repeating-conic-gradient(from 4deg, transparent 0 8deg, rgba(53,214,208,.19) 8deg 11deg); }
+.as-eyecatch__copy { position: relative; z-index: 2; padding: 34px; }
+.as-eyecatch__copy small { color: var(--yellow, #ffd34f); font: 950 16px/1 ui-monospace, monospace; letter-spacing: .14em; }
+.as-eyecatch__copy strong { display: block; margin-top: 18px; color: #fffdf4; font-size: 64px; line-height: .94; text-shadow: 6px 6px 0 #000; }
+.as-eyecatch__copy span { display: block; margin-top: 16px; color: var(--cyan, #35d6d0); font-size: 24px; font-weight: 900; }
+
+.as-beat-tag {
+  display: inline-flex;
+  padding: 7px 11px;
+  border: 3px solid #101116;
+  background: var(--yellow, #ffd34f);
+  color: #101116;
+  box-shadow: 4px 4px 0 #101116;
+  font: 950 13px/1 ui-monospace, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .as-stage.present .as-fx--rays { animation: as-rays-drift 28s linear infinite; }
+  .as-stage.present .as-fx--flash { animation: as-impact-flash .42s ease-out both; }
+  .as-stage.present .as-actor--enter-left { animation: as-enter-left .48s cubic-bezier(.2,.85,.28,1.2) both; }
+  .as-stage.present .as-actor--enter-right { animation: as-enter-right .48s cubic-bezier(.2,.85,.28,1.2) both; }
+  @keyframes as-rays-drift { to { transform: rotate(360deg); } }
+  @keyframes as-impact-flash { 0% { opacity: .9; } 100% { opacity: 0; } }
+  @keyframes as-enter-left { from { opacity: 0; translate: -100px 0; } }
+  @keyframes as-enter-right { from { opacity: 0; translate: 100px 0; } }
+}
+
+@media print {
+  .as-stage, .as-eyecatch { break-inside: avoid; }
+}

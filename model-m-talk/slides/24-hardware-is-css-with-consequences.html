@@ -1,9 +1,26 @@
-<section class="slide layout-split manga-cameo-slide">
-  <div class="manga-cameo callout-warning fragment step-pop" data-sfx="ズン…"><div class="manga-bubble"><span class="jp-text" lang="ja">Undoの代償＝再発注。</span><span class="en-text">Undo now costs shipping.</span></div></div>
-  <header class="slide-head"><span class="eyebrow">Cross-discipline translation</span><h2>Hardware is CSS with consequences</h2></header>
-  <div class="content slide-body">
-    <div class="card tint"><span class="badge">Web layout</span><div class="big-number">4 px</div><p class="big-copy">Move it.</p></div>
-    <div class="card magenta"><span class="badge">PCB layout</span><div class="big-number">38</div><p class="big-copy">Reroute traces. Order another board.</p></div>
+<section class="slide layout-content kicad-beginner-slide">
+  <header class="slide-head"><span class="eyebrow">Beginner map · the minimum viable KiCad loop</span><h2>KiCad is seven small questions</h2></header>
+  <div class="content kicad-beginner-stage">
+    <div class="kicad-loop" data-stagger=".kicad-loop-step" data-stagger-effect="step-wipe">
+      <div class="kicad-loop-step"><b>01</b><strong>Schematic</strong><span>What connects?</span></div>
+      <div class="kicad-loop-step"><b>02</b><strong>Annotate</strong><span>What is each part?</span></div>
+      <div class="kicad-loop-step"><b>03</b><strong>Footprints</strong><span>What physically fits?</span></div>
+      <div class="kicad-loop-step"><b>04</b><strong>Place</strong><span>Where does it live?</span></div>
+      <div class="kicad-loop-step"><b>05</b><strong>Route</strong><span>Where does copper go?</span></div>
+      <div class="kicad-loop-step"><b>06</b><strong>ERC + DRC</strong><span>What did we break?</span></div>
+      <div class="kicad-loop-step"><b>07</b><strong>Gerbers</strong><span>What can the fab build?</span></div>
+    </div>
+    <div class="kicad-source-card">
+      <span class="badge">The board file is readable text</span>
+      <pre><code class="language-lisp">(general
+  (thickness 1.6))
+
+(layers
+  (0  "F.Cu" power)
+  (2  "B.Cu" signal)
+  (25 "Edge.Cuts" user))</code></pre>
+      <p><strong>Start with one key.</strong> Run checks constantly. Render before ordering.</p>
+    </div>
   </div>
-  <aside class="notes">This is analogy, not equivalence. PCB consequences include money, time, signal integrity, and physical interference. Transition: routing is a system of tradeoffs.</aside>
+  <aside class="notes">For someone intimidated by KiCad, translate the application into seven ordinary questions. A schematic describes relationships. Annotation gives parts stable names. Footprints connect symbols to real packages. Placement creates the physical system. The ratsnest is simply a to-do list of connections; routing turns it into copper. ERC checks electrical intent and DRC checks physical rules. Gerbers and drill files are the build artifact. The excerpt on the right is copied from the current board file: KiCad source is structured text, diffable in Git. Our practical advice is to prove one key, run ERC and DRC throughout the process, and use the 3D viewer before spending money. Transition: now look at the shared routing tradeoffs in firmware.</aside>
 </section>

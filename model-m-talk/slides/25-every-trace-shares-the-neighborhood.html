@@ -1,12 +1,27 @@
-<section class="slide layout-content">
-  <header class="slide-head"><span class="eyebrow">Routing strategy</span><h2>Every trace shares the neighborhood</h2></header>
-  <div class="content grid-3" data-stagger=".card" data-stagger-group="2">
-    <div class="card tint" data-tone="system"><h3>3 shared select lines</h3><p>D7/D8/D9 select X0–X7 across every mux.</p></div>
-    <div class="card" data-tone="signal"><h3>9 direct ADC paths</h3><p>AM1–AM9 land on Daisy A0–A8.</p></div>
-    <div class="card yellow" data-tone="system"><h3>4 decoded muxes</h3><p>U1 selects AM10–AM13 over shared A9/A10.</p></div>
-    <div class="card" data-tone="signal"><h3>2 pot muxes</h3><p>AM14–AM15 share the A11 input.</p></div>
-    <div class="card magenta" data-tone="warning"><h3>Analog references</h3><p>Ground quality changes every threshold decision.</p></div>
-    <div class="card dark" data-tone="physical"><h3>Physical enclosure</h3><p>Ribs, screws, and connector access still win.</p></div>
+<section class="slide layout-code mux-code-slide">
+  <header class="slide-head"><span class="eyebrow">hardware.rs · condensed GPIO addressing</span><h2>Three GPIO bits address 104 sensor channels</h2></header>
+  <div class="content">
+    <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-5|6-10|11-15">pub fn set_mux_channel(ch: usize, s0: &mut Pin,
+                       s1: &mut Pin, s2: &mut Pin) {
+    if ch &amp; 0b001 != 0 { s0.set_high() }
+    else                { s0.set_low() }
+
+    if ch &amp; 0b010 != 0 { s1.set_high() }
+    else                { s1.set_low() }
+
+    if ch &amp; 0b100 != 0 { s2.set_high() }
+    else                { s2.set_low() }
+}</code></pre>
+    <div class="mux-deep-dive">
+      <div class="mux-equation"><strong>13 muxes × 8 channels</strong><span>= 104 addressable readings</span><small>100 are populated as keys</small></div>
+      <table class="bit-table">
+        <tr><th>ch</th><th>S2</th><th>S1</th><th>S0</th></tr>
+        <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>3</td><td>0</td><td>1</td><td>1</td></tr>
+        <tr><td>7</td><td>1</td><td>1</td><td>1</td></tr>
+      </table>
+      <p>Each address is broadcast first; the ADC fan-in is read second.</p>
+    </div>
   </div>
-  <aside class="notes">This is the implemented signal topology, not a generic keyboard matrix. The scan addresses one mux channel across the board, reads nine direct ADCs, then selects four decoded muxes. Transition: the real errata make these constraints memorable.</aside>
+  <aside class="notes">This code is faithful to hardware.rs; only the concrete Daisy pin types are shortened to Pin for readability. One three-bit channel address is broadcast to all thirteen key muxes, making 104 addressable slots. One hundred are mapped to physical switches. For each channel, firmware reads the nine direct ADC inputs and then selects the four decoded muxes. The trick saves GPIO and ADC pins, but means every signal shares address timing, settling time and ground quality. Transition: the board mistakes show where that shared architecture can fail.</aside>
 </section>
