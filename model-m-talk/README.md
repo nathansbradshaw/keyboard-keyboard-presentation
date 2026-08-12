@@ -15,11 +15,14 @@ rustc server.rs -o target/model-m-talk-server
 
 Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed, for example `./target/model-m-talk-server 8080`. Reveal.js is loaded from jsDelivr, so the first run needs internet access. A browser that has already cached those files can run the deck offline.
 
+Pages hot-reload: the server injects a small poller into every page shell (root pages and each slide group's `index.html`) that watches the deck folder for edits and reloads the tab automatically. No extra setup or build step required — just edit a slide and save.
+
 Three entry points are available:
 
 - `/` — the primary discovery-led cut: research → false hope → acceptance → build
 - `/technical.html` — the 60-slide technical-first cut
 - `/discovery.html` — a direct alias for the primary discovery-led sequence
+- `/keyboard-keyboard/` — a standalone cut with its own slide fragments and manifest
 - `/compare.html` — both cuts side by side, with links to open either one full-size
 
 ## Controls
@@ -35,6 +38,7 @@ Three entry points are available:
 
 - Individual slide markup and notes: `slides/*.html`
 - Discovery-cut slide markup and notes: `slides-discovery/*.html`
+- keyboard-keyboard cut markup, notes, and page shell: `keyboard-keyboard/`. Its `slide-manifest.js` is generated, not hand-edited: add or remove a numbered `NN-slug.html` fragment and the order updates itself — the dev server (`server.rs`) generates it live for any `<folder>/slide-manifest.js` request, and `tools/generate-manifest.sh <folder>` regenerates the static copy used by the production build (wired into the deploy workflow).
 - Slide order: `slide-manifest.js`
 - Discovery-cut order: `slide-manifest-discovery.js`
 - Slide loading/bootstrap: `slide-loader.js`
