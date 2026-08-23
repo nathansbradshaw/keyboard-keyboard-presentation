@@ -48,6 +48,100 @@ fn fail(message: impl Into<String>) -> io::Error {
     io::Error::other(message.into())
 }
 
+fn validate_manga_border_integrity(deck_dir: &Path) -> io::Result<()> {
+    let relative_path = Path::new("keyboard-keyboard/manga-21-30.css");
+    let path = deck_dir.join(relative_path);
+    if !path.is_file() {
+        return Ok(());
+    }
+
+    let css = fs::read_to_string(&path)?;
+    let mut line_start = 0;
+    for (line_index, line) in css.lines().enumerate() {
+        if !line.contains("clip-path:") {
+            line_start += line.len() + 1;
+            continue;
+        }
+
+        let property_index = line_start + line.find("clip-path:").unwrap_or(0);
+        let before_property = &css[..property_index];
+        let Some(rule_start) = before_property.rfind('{') else {
+            return Err(fail(format!(
+                "{}:{} has clip-path outside a CSS rule",
+                relative_path.display(),
+                line_index + 1
+            )));
+        };
+        let selector_start = before_property[..rule_start]
+            .rfind('}')
+            .map_or(0, |index| index + 1);
+        let selector = before_property[selector_start..rule_start].trim();
+
+        let allowed_decoration = selector.ends_with(".slide-head::after");
+        if !allowed_decoration {
+            return Err(fail(format!(
+                "{}:{} clips a structural element ({selector}); use a borderless pseudo-element instead",
+                relative_path.display(),
+                line_index + 1
+            )));
+        }
+
+        line_start += line.len() + 1;
+    }
+
+    Ok(())
+}
+
+fn validate_opening_arc_border_integrity(deck_dir: &Path) -> io::Result<()> {
+    let relative_path = Path::new("styles.css");
+    let css = fs::read_to_string(deck_dir.join(relative_path))?;
+    let protected_panels = [
+        ".kk-recap-strip .as-panel",
+        ".kk-quest-cut .quest-card--primary",
+        ".kk-mechanism-page .buckling-diagram-stage",
+        ".kk-mechanism-page .buckling-verdict",
+        ".kk-clue-page .velocity-discovery-card",
+        ".kk-constraint-finale .constraint-medium",
+        ".keyboard-build-card--idea",
+        ".keyboard-build-card--kicad",
+        ".keyboard-build-card--reference",
+    ];
+
+    let mut line_start = 0;
+    for (line_index, line) in css.lines().enumerate() {
+        if !line.contains("clip-path: polygon") {
+            line_start += line.len() + 1;
+            continue;
+        }
+
+        let property_index = line_start + line.find("clip-path:").unwrap_or(0);
+        let before_property = &css[..property_index];
+        let Some(rule_start) = before_property.rfind('{') else {
+            line_start += line.len() + 1;
+            continue;
+        };
+        let selector_start = before_property[..rule_start]
+            .rfind('}')
+            .map_or(0, |index| index + 1);
+        let selector = before_property[selector_start..rule_start].trim();
+
+        if protected_panels
+            .iter()
+            .any(|protected| selector.contains(protected))
+        {
+            return Err(fail(format!(
+                "{}:{} clips protected structural panel {selector}",
+                relative_path.display(),
+                line_index + 1
+            )));
+        }
+
+        line_start += line.len() + 1;
+    }
+
+    Ok(())
+}
+
 fn main() -> io::Result<()> {
     let mut arguments = std::env::args_os().skip(1);
     let deck_dir = arguments
@@ -63,6 +157,8 @@ fn main() -> io::Result<()> {
         .and_then(|value| value.into_string().ok())
         .unwrap_or_else(|| "slide-manifest.js".into());
     let canonical_deck = manifest_name == "slide-manifest.js";
+    validate_manga_border_integrity(&deck_dir)?;
+    validate_opening_arc_border_integrity(&deck_dir)?;
     let index = fs::read_to_string(deck_dir.join(&index_name))?;
     let manifest = fs::read_to_string(deck_dir.join(&manifest_name))?;
     let files = manifest_files(&manifest);

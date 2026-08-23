@@ -1,4 +1,6 @@
-<section class="slide layout-code midi-wire-slide manga-cameo-slide" data-auto-animate data-beat="midi-backpressure">
+<section class="slide layout-code midi-wire-slide manga-cameo-slide manga-firmware-arc manga-firmware-backpressure" data-auto-animate data-beat="midi-backpressure">
+    <div class="firmware-manga-sfx firmware-manga-sfx--left" lang="ja" aria-hidden="true">ズズズ</div>
+    <img class="firmware-reaction firmware-reaction--backpressure" src="assets/characters/faces/kaori/scandalized.png" alt="" aria-hidden="true">
     <div class="manga-cameo callout-time fragment step-pop" data-sfx="ピンチ!!">
         <div class="manga-bubble">
             <span class="jp-text" lang="ja">三バイトにも時間がある。</span>
@@ -27,6 +29,7 @@ fn send_byte(byte: u8) {
         <div class="wire-math">
             <div class="midi-packet"><span>status</span><span>note</span><span>velocity</span><code>9n kk vv</code></div>
             <div class="wire-equation"><span>3 bytes × 10 UART bits</span><b>30 / 31,250</b><strong>≈ 0.96 ms</strong></div>
+            <!-- English review: “Queue 64” is compressed and potentially ambiguous; formal prose would read “64-entry queue.” Original text intentionally preserved. -->
             <p><strong>Queue 64:</strong> scan now, send later.</p>
         </div>
     </div>

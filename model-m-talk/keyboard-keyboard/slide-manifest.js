@@ -54,4 +54,5 @@ window.SLIDE_FILES = [
   "keyboard-keyboard/53-can-we-sell-it.html",
   "keyboard-keyboard/57-quest-objective.html",
   "keyboard-keyboard/58-closing.html",
+  "keyboard-keyboard/59-photo-credits.html",
 ];

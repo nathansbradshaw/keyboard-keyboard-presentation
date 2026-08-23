@@ -3707,21 +3707,12 @@ body { overflow: hidden; }
 }
 .keyboard-build-card--idea {
   background-color: #fff0a9;
-  clip-path: polygon(0 2%, 98% 0, 100% 96%, 2% 100%);
-  filter: drop-shadow(10px 10px 0 var(--charcoal));
-  transform: rotate(-1.7deg);
 }
 .keyboard-build-card--kicad {
   background-color: #cef5f1;
-  clip-path: polygon(2% 0, 100% 3%, 97% 100%, 0 97%);
-  filter: drop-shadow(10px 10px 0 var(--charcoal));
-  transform: translateY(8px) rotate(1deg);
 }
 .keyboard-build-card--reference {
   background-color: #ffd9e9;
-  clip-path: polygon(0 3%, 98% 0, 100% 100%, 2% 97%);
-  filter: drop-shadow(10px 10px 0 var(--charcoal));
-  transform: rotate(-1.1deg);
 }
 .keyboard-build-card > * { position: relative; z-index: 1; }
 .keyboard-build-number {
@@ -4210,6 +4201,473 @@ body { overflow: hidden; }
   transform: rotate(-8deg);
 }
 
+/* Keyboard Keyboard opening act (slides 01–10): a denser manga page language.
+   These rules are deliberately scoped so the remainder of the deck is unchanged.
+   Structural frames stay rectangular and axis-aligned; angle only borderless
+   accents, stamps, type, and character art. */
+.reveal .slides section.kk-manga-act {
+  box-shadow:
+    inset 0 0 0 9px #08080d,
+    inset 0 0 0 14px var(--paper),
+    inset 0 0 0 18px #08080d;
+}
+.kk-manga-act .slide-head h2 {
+  width: max-content;
+  max-width: 1120px;
+  padding-right: 22px;
+  text-shadow: 5px 5px 0 rgba(53,214,208,.42);
+}
+.kk-manga-act .slide-head h2::after {
+  content: "";
+  display: block;
+  width: 104%;
+  height: 8px;
+  margin-top: 10px;
+  background: #08080d;
+  box-shadow: 10px 7px 0 var(--magenta);
+  transform: skewX(-28deg) rotate(-.5deg);
+}
+
+/* 01 · full-bleed anime key art framed as the first printed page. */
+.reveal .slides section.kk-opening-poster {
+  box-shadow: inset 0 0 0 13px #08080d, inset 0 0 0 20px var(--paper);
+}
+.kk-opening-poster::before {
+  z-index: 2;
+  inset: 0;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.24) 1.5px, transparent 2px) 0 0 / 12px 12px,
+    repeating-conic-gradient(from -5deg at 77% 58%, transparent 0 7deg, rgba(255,255,255,.11) 7.4deg 9deg);
+  transform: none;
+  mix-blend-mode: screen;
+}
+.kk-opening-poster .title-art {
+  filter: saturate(1.12) contrast(1.05);
+}
+.kk-opening-poster .title-shade {
+  z-index: 1;
+  background:
+    linear-gradient(98deg, rgba(8,8,13,.96) 0 40%, rgba(8,8,13,.7) 48%, rgba(8,8,13,.08) 75%),
+    linear-gradient(0deg, rgba(8,8,13,.55), transparent 40%);
+  clip-path: polygon(0 0, 55% 0, 67% 100%, 0 100%);
+}
+.kk-opening-poster .title-copy {
+  z-index: 6;
+  left: 76px;
+  top: 82px;
+  width: 735px;
+  padding: 28px 34px 32px;
+  border: 6px solid var(--paper);
+  background: rgba(8,8,13,.66);
+  box-shadow: 12px 12px 0 var(--magenta), 20px 20px 0 #08080d;
+  transform: rotate(-.65deg);
+}
+.kk-opening-poster .title-copy h1 {
+  font-size: 69px;
+  text-shadow: -4px 0 var(--cyan), 5px 6px 0 var(--magenta), 10px 11px 0 #000;
+}
+.kk-opening-poster .episode-stamp {
+  border-width: 4px;
+  color: var(--paper);
+  transform: rotate(-2deg);
+}
+.kk-opening-frame {
+  position: absolute;
+  z-index: 8;
+  inset: 30px;
+  border: 6px solid var(--paper);
+  box-shadow: 0 0 0 7px #08080d;
+  pointer-events: none;
+}
+.kk-opening-frame i {
+  position: absolute;
+  right: 19%;
+  width: 8px;
+  height: 58%;
+  background: #08080d;
+  box-shadow: 9px 0 0 var(--yellow);
+  transform: rotate(24deg);
+}
+.kk-opening-frame i:nth-child(1) { top: -8%; }
+.kk-opening-frame i:nth-child(2) { right: 13%; bottom: -13%; height: 47%; transform: rotate(49deg); }
+.kk-opening-frame i:nth-child(3) { right: 31%; bottom: -12%; height: 33%; transform: rotate(72deg); }
+.kk-opening-frame span {
+  position: absolute;
+  right: 30px;
+  top: 28px;
+  padding: 16px 11px;
+  border: 4px solid #08080d;
+  background: var(--yellow);
+  color: #08080d;
+  box-shadow: 7px 7px 0 var(--magenta);
+  font: 1000 25px/1.1 "Hiragino Sans", "Yu Gothic", sans-serif;
+  letter-spacing: .17em;
+  writing-mode: vertical-rl;
+  transform: rotate(1.5deg);
+}
+
+/* 02 · recap montage becomes three uneven manga memories. */
+.reveal .slides section.kk-recap-strip {
+  background:
+    linear-gradient(112deg, transparent 0 64%, rgba(242,90,162,.13) 64.3% 65%, transparent 65.3%),
+    radial-gradient(circle at 1px 1px, rgba(8,8,13,.16) 1.4px, transparent 1.8px) 0 0 / 13px 13px,
+    var(--paper);
+}
+.kk-recap-strip::before {
+  inset: -240px;
+  background: repeating-conic-gradient(from 5deg at 52% 64%, transparent 0 8deg, rgba(8,8,13,.045) 8.4deg 10deg);
+  transform: none;
+}
+.kk-recap-strip .as-shot--montage {
+  height: 530px;
+  margin-top: 20px;
+  padding: 30px 34px 36px;
+  overflow: visible;
+  border: 7px solid #08080d;
+  border-radius: 0;
+  background: rgba(255,253,244,.8);
+  box-shadow: 12px 12px 0 var(--cyan), 20px 20px 0 #08080d;
+}
+.kk-recap-strip .as-panel {
+  overflow: visible;
+  border-width: 7px;
+  border-radius: 0;
+  box-shadow: 9px 9px 0 var(--magenta);
+}
+.kk-recap-strip .as-panel:nth-child(3) {
+  box-shadow: 9px 9px 0 var(--yellow);
+  filter: grayscale(.9) contrast(1.2);
+}
+.kk-recap-strip .as-panel > img { object-fit: cover; }
+.kk-recap-strip .as-panel__label {
+  left: 15px;
+  bottom: 15px;
+  padding: 10px 13px;
+  border-width: 3px;
+  box-shadow: 4px 4px 0 #08080d;
+  font-size: 15px;
+}
+.kk-recap-strip.present .eyebrow,
+.kk-recap-strip .as-panel {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 03 · two QR cards presented as a framed manga insert page. */
+.reveal .slides section.kk-qr-episode {
+  background:
+    linear-gradient(101deg, #101116 0 28%, transparent 28.3%),
+    radial-gradient(circle at 1px 1px, rgba(8,8,13,.18) 1.3px, transparent 1.8px) 0 0 / 12px 12px,
+    var(--cream) !important;
+}
+.kk-qr-episode::before {
+  inset: -300px;
+  background: repeating-conic-gradient(from -8deg at 15% 52%, transparent 0 8deg, rgba(255,211,79,.2) 8.5deg 11deg);
+  transform: none;
+}
+.kk-qr-episode .last-demo-links { position: relative; z-index: 4; }
+.kk-qr-episode .last-demo-links blockquote {
+  color: var(--paper);
+  text-shadow: -4px 0 var(--cyan), 5px 6px 0 var(--magenta), 10px 10px 0 #000;
+  transform: rotate(-2deg);
+}
+.kk-qr-episode .last-demo-qr-grid {
+  gap: 30px;
+  padding: 25px;
+  border: 7px solid #08080d;
+  background: rgba(255,253,244,.92);
+  box-shadow: 12px 12px 0 var(--magenta), 20px 20px 0 #08080d;
+}
+.kk-qr-episode .qr-card { border-width: 6px; border-radius: 2px; }
+.kk-qr-episode .qr-card--demo,
+.kk-qr-episode .qr-card--channel { transform: none; }
+.kk-qr-frame {
+  position: absolute;
+  z-index: 7;
+  inset: 30px;
+  border: 6px solid #08080d;
+  pointer-events: none;
+}
+.kk-qr-frame i { position: absolute; left: 27%; top: -5%; width: 8px; height: 110%; background: #08080d; transform: rotate(3deg); }
+.kk-qr-frame i:nth-child(2) { left: auto; right: 4%; top: 68%; width: 28%; height: 7px; transform: rotate(-9deg); }
+.kk-qr-frame span {
+  position: absolute;
+  left: 25px;
+  bottom: 24px;
+  padding: 9px 13px;
+  border: 4px solid #08080d;
+  background: var(--yellow);
+  color: #08080d;
+  box-shadow: 6px 6px 0 var(--magenta);
+  font: 1000 23px/1 "Hiragino Sans", "Yu Gothic", sans-serif;
+  transform: rotate(-3deg);
+}
+
+/* 04 · the quest is a dramatic anime mission card with a cast reaction. */
+.reveal .slides section.kk-quest-cut {
+  background:
+    repeating-linear-gradient(162deg, transparent 0 34px, rgba(126,99,200,.1) 35px 41px, transparent 42px 64px),
+    linear-gradient(135deg, #fffdf4, #eee9ff 68%, #ffd7ea),
+    var(--paper);
+}
+.kk-quest-cut::before {
+  inset: -330px;
+  background: repeating-conic-gradient(from 3deg at 78% 68%, transparent 0 7deg, rgba(242,90,162,.11) 7.4deg 9deg);
+  transform: none;
+}
+.kk-quest-cut .human-opening-stage--solo {
+  position: relative;
+  min-height: 540px;
+  margin-top: 20px;
+}
+.kk-quest-cut .quest-card--primary {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 390px;
+  padding: 64px 390px 62px 65px;
+  overflow: hidden;
+  border-width: 7px;
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(104,71,184,.13) 1.3px, transparent 1.7px) 0 0 / 12px 12px,
+    linear-gradient(135deg, var(--paper), #eee9ff);
+  box-shadow: 14px 14px 0 #7e63c8, 23px 23px 0 #08080d;
+  transform: none;
+}
+.kk-quest-cut .quest-card--primary::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 390px;
+  height: 100%;
+  background: repeating-conic-gradient(from 6deg at 80% 62%, transparent 0 8deg, rgba(242,90,162,.19) 8.4deg 11deg);
+}
+.kk-quest-cut .quest-label,
+.kk-quest-cut .quest-card h3,
+.kk-quest-cut .quest-meta { position: relative; z-index: 2; }
+.kk-quest-cut .quest-card h3 { font-size: 55px; }
+.kk-quest-cut .badge { border-radius: 2px; box-shadow: 4px 4px 0 #08080d; transform: rotate(-1deg); }
+.kk-quest-cut .badge:nth-child(2) { transform: rotate(1deg); }
+.kk-quest-character {
+  position: absolute;
+  z-index: 5;
+  right: 5px;
+  bottom: 43px;
+  width: 385px;
+  height: 465px;
+  object-fit: contain;
+  object-position: right bottom;
+  filter: drop-shadow(-8px 7px 0 #08080d) drop-shadow(-14px 0 0 var(--cyan));
+  transform: rotate(2deg);
+  pointer-events: none;
+}
+
+/* 05 · exaggerated boss-introduction composition. */
+.reveal .slides section.kk-boss-reveal {
+  background:
+    radial-gradient(circle at 50% 60%, rgba(126,99,200,.5), transparent 28%),
+    linear-gradient(180deg, #151124, #08080d) !important;
+  box-shadow: inset 0 0 0 11px var(--magenta), inset 0 0 0 18px #08080d;
+}
+.kk-boss-reveal::before {
+  inset: -420px;
+  background: repeating-conic-gradient(from -4deg at 50% 61%, transparent 0 5deg, rgba(255,255,255,.16) 5.3deg 6.5deg, transparent 6.8deg 10deg, rgba(242,90,162,.15) 10.4deg 12deg);
+  transform-origin: 50% 61%;
+}
+.kk-boss-reveal .chapter-jp {
+  display: inline-block;
+  position: relative;
+  z-index: 8;
+  padding: 13px 23px 11px;
+  border: 5px solid var(--paper);
+  background: var(--magenta);
+  box-shadow: 9px 9px 0 var(--cyan), 15px 15px 0 #000;
+  color: var(--paper);
+  font-size: 42px;
+  letter-spacing: .09em;
+  transform: rotate(-1.5deg);
+}
+.kk-boss-reveal .challenger-reveal-stage {
+  overflow: visible;
+  border: 8px solid var(--paper);
+  border-radius: 0;
+  background: #08080d;
+  box-shadow: 14px 14px 0 var(--magenta), 24px 24px 0 #000;
+  clip-path: polygon(4% 0, 96% 0, 100% 9%, 100% 91%, 96% 100%, 4% 100%, 0 91%, 0 9%);
+}
+.kk-boss-reveal .challenger-reveal-stage .as-prop--lead {
+  --prop-width: 72%;
+  filter: drop-shadow(0 20px 0 rgba(0,0,0,.55));
+}
+.kk-boss-reveal.present .chapter-inner,
+.kk-boss-reveal .chapter-jp,
+.kk-boss-reveal .challenger-reveal-stage,
+.kk-boss-reveal .as-prop--lead {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 06 · the design fork reads as a two-page duel. */
+.reveal .slides section.kk-design-duel {
+  background:
+    linear-gradient(90deg,
+      rgba(53,214,208,.13) 0 calc(50% - 5px),
+      #08080d calc(50% - 5px) calc(50% + 5px),
+      rgba(242,90,162,.13) calc(50% + 5px) 100%),
+    var(--paper);
+}
+.kk-design-duel::before {
+  inset: 0;
+  background:
+    repeating-conic-gradient(from 3deg at 25% 64%, transparent 0 8deg, rgba(53,214,208,.08) 8.4deg 10deg),
+    repeating-conic-gradient(from 3deg at 75% 64%, transparent 0 8deg, rgba(242,90,162,.07) 8.4deg 10deg);
+  transform: none;
+  animation: none !important;
+}
+.kk-design-duel .content { max-width: 1400px; }
+.kk-design-duel .fork-panel-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 42px;
+  height: 485px;
+  margin-top: 24px;
+}
+.kk-design-duel .fork-panel {
+  min-height: 0;
+  height: 465px;
+  padding: 30px 34px 76px;
+  border-width: 8px;
+  border-radius: 2px;
+  box-shadow: 12px 12px 0 var(--tone), 20px 20px 0 #08080d;
+  clip-path: none;
+}
+.kk-design-duel .fork-panel:nth-child(1),
+.kk-design-duel .fork-panel:nth-child(2) { transform: none; }
+.kk-design-duel .fork-panel .usb-icon { margin-top: 20px; }
+.kk-design-duel .fork-panel .midi-build-image {
+  width: 360px;
+  height: 160px;
+  margin-top: 18px;
+}
+.kk-design-duel .fork-panel .manga-sfx { right: 8px; bottom: 12px; }
+.kk-design-duel .manga-cameo {
+  z-index: 12;
+  animation: none !important;
+  transition: none !important;
+  transform: none;
+}
+.kk-design-duel .eyebrow,
+.kk-design-duel .fork-panel,
+.kk-design-duel .fork-panel *,
+.kk-design-duel .manga-cameo * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 07 · tighten the mechanism page into an inked technical spread. */
+.reveal .slides section.kk-mechanism-page {
+  box-shadow: inset 0 0 0 9px #08080d, inset 0 0 0 14px var(--yellow), inset 0 0 0 18px #08080d;
+}
+.kk-mechanism-page .buckling-diagram-stage,
+.kk-mechanism-page .buckling-verdict {
+  border-radius: 0;
+  transform: none;
+}
+.kk-mechanism-page,
+.kk-mechanism-page::before,
+.kk-mechanism-page .eyebrow,
+.kk-mechanism-page .buckling-diagram-stage,
+.kk-mechanism-page .buckling-verdict,
+.kk-mechanism-page .big-copy {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 08 · two research clues become opposed evidence panels. */
+.reveal .slides section.kk-clue-page {
+  background:
+    linear-gradient(104deg, rgba(126,99,200,.12) 0 49%, transparent 49.3%),
+    linear-gradient(76deg, transparent 0 50.4%, rgba(53,214,208,.13) 50.7%),
+    radial-gradient(circle at 1px 1px, rgba(8,8,13,.09) 1.2px, transparent 1.7px) 0 0 / 14px 14px,
+    var(--paper);
+}
+.kk-clue-page::before {
+  inset: -420px;
+  background: repeating-conic-gradient(from 1deg at 50% 62%, transparent 0 8deg, rgba(8,8,13,.045) 8.4deg 10deg);
+  transform: none;
+}
+.kk-clue-page .velocity-discovery-stage { position: relative; gap: 20px 42px; }
+.kk-clue-page .velocity-discovery-card {
+  border-width: 7px;
+  border-radius: 2px;
+}
+.kk-clue-page .velocity-discovery-card--stacked,
+.kk-clue-page .velocity-discovery-card--hall { transform: none; }
+.kk-clue-page .velocity-clue-number { border-radius: 0; }
+.kk-clue-page .velocity-discovery-photo,
+.kk-clue-page .hall-discovery-photo,
+.kk-clue-page .hall-discovery-path div,
+.kk-clue-page .hall-discovery-trace { border-radius: 0; }
+.kk-clue-reaction {
+  position: absolute;
+  z-index: 9;
+  right: 12px;
+  top: -168px;
+  width: 185px;
+  height: 205px;
+  object-fit: contain;
+  filter: drop-shadow(-6px 5px 0 #08080d) drop-shadow(-10px 0 0 var(--yellow));
+  transform: rotate(3deg);
+  pointer-events: none;
+}
+
+/* 09 · preserve the interruption layout while making the cut harsher. */
+.reveal .slides section.kk-interruption-page {
+  box-shadow: inset 0 0 0 10px var(--magenta), inset 0 0 0 17px #08080d;
+}
+.kk-interruption-page .interruption-progress { clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%); }
+.kk-interruption-page .interruption-bubble .mb__body {
+  clip-path: polygon(0 0, 96% 0, 100% 13%, 100% 100%, 5% 100%, 0 86%);
+}
+.kk-interruption-page .enterprise-jabs span { border-radius: 0; }
+.kk-interruption-page .developer-window,
+.kk-interruption-page .developer-id { border-radius: 0; }
+
+/* 10 · a season-finale thesis page, still on the warm-paper palette. */
+.reveal .slides section.kk-constraint-finale {
+  background:
+    repeating-conic-gradient(from -5deg at 50% 72%, transparent 0 7deg, rgba(53,214,208,.08) 7.4deg 9deg),
+    radial-gradient(circle at 50% 72%, rgba(255,211,79,.22), transparent 46%),
+    var(--paper);
+  box-shadow: inset 0 0 0 10px #08080d, inset 0 0 0 16px var(--cyan), inset 0 0 0 20px #08080d;
+}
+.kk-constraint-finale .constraint-medium {
+  border-width: 8px;
+  border-radius: 2px;
+  box-shadow: 12px 12px 0 var(--tone), 19px 19px 0 #08080d;
+  transform: none;
+}
+.kk-constraint-finale .constraint-payoff {
+  border-width: 6px;
+  border-radius: 0;
+  box-shadow: 9px 9px 0 var(--magenta), 15px 15px 0 #08080d;
+}
+.kk-constraint-finale .manga-cameo { z-index: 12; }
+.kk-constraint-reaction {
+  position: absolute;
+  z-index: 10;
+  right: 34px;
+  bottom: -5px;
+  width: 145px;
+  height: 165px;
+  object-fit: contain;
+  filter: drop-shadow(-5px 4px 0 #08080d) drop-shadow(-9px 0 0 var(--yellow));
+  transform: rotate(3deg);
+  pointer-events: none;
+}
+
 @keyframes hover { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-9px) rotate(1deg); } }
 @keyframes alarm { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 @keyframes titleDrift { from { transform: scale(1.015) translate3d(0,0,0); } to { transform: scale(1.07) translate3d(-18px,-7px,0); } }
@@ -4233,6 +4691,316 @@ body { overflow: hidden; }
 .layout-title.present .title-art { animation: titleDrift 14s ease-out both; }
 .slide.present .eyebrow { animation: stampIn .48s cubic-bezier(.22,1,.36,1) both; }
 .layout-chapter.present .chapter-inner { animation: chapterIn .7s cubic-bezier(.22,1,.36,1) both; }
+
+/* Slides 41–58 · final-arc manga pass
+   The late deck keeps its technical diagrams and exact copy, but gains a
+   stronger panel rhythm, screentone, ink framing, and anime-style staging. */
+.reveal .slides section.slide.manga-final-arc {
+  --arc-accent: var(--cyan);
+  --arc-soft: rgba(53,214,208,.16);
+  --arc-shadow: var(--magenta);
+  box-shadow:
+    inset 0 0 0 6px #101116,
+    inset 0 0 0 11px rgba(255,253,244,.88);
+}
+.reveal .slides section.slide.manga-final-arc:not(.layout-chapter):not(.layout-demo):not(.manga-objective):not(.manga-closing-beat) {
+  background:
+    linear-gradient(118deg, transparent 0 68%, rgba(16,17,22,.11) 68.2% 68.8%, transparent 69% 100%),
+    radial-gradient(circle at 1px 1px, rgba(16,17,22,.14) 1.35px, transparent 1.8px) 0 0 / 29px 29px,
+    radial-gradient(circle at 82% 18%, var(--arc-soft), transparent 32%),
+    linear-gradient(145deg, rgba(255,255,255,.72), transparent 46%, var(--arc-soft)),
+    var(--paper) !important;
+}
+.manga-final-arc:not(.layout-chapter):not(.layout-demo):not(.manga-objective):not(.manga-closing-beat)::before {
+  inset: -18%;
+  background:
+    repeating-conic-gradient(from 6deg at 86% 20%, transparent 0 7deg, var(--arc-soft) 7.25deg 8.1deg),
+    repeating-linear-gradient(102deg, transparent 0 72px, rgba(16,17,22,.025) 73px 75px, transparent 76px 118px);
+  transform: none;
+  opacity: 1;
+}
+.manga-final-arc > * { z-index: 2; }
+.manga-final-arc .slide-head { display: inline-block; min-width: 720px; }
+.manga-final-arc .slide-head::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -18px;
+  right: 7%;
+  bottom: -18px;
+  height: 15px;
+  border: 3px solid #101116;
+  background: var(--arc-accent);
+  box-shadow: 7px 7px 0 var(--arc-shadow);
+  transform: skewX(-18deg) rotate(-.35deg);
+}
+.manga-final-arc .slide-head h2 {
+  text-shadow: 4px 4px 0 rgba(255,255,255,.9), 7px 7px 0 var(--arc-soft);
+}
+.manga-final-arc .eyebrow {
+  border-radius: 2px 10px 2px 10px;
+  box-shadow: 5px 5px 0 var(--arc-accent), 8px 8px 0 #101116;
+  transform: rotate(-1.1deg);
+}
+.manga-final-arc .card,
+.manga-final-arc .terminal,
+.manga-final-arc .quest-card,
+.manga-final-arc .pipeline-step,
+.manga-final-arc .voice,
+.manga-final-arc .wire-equation {
+  border-radius: 2px 16px 3px 13px;
+}
+.manga-final-arc .card:nth-child(odd) { transform: rotate(-.32deg); }
+.manga-final-arc .card:nth-child(even) { transform: rotate(.32deg); }
+
+.manga-tech-action { --arc-accent: var(--cyan); --arc-soft: rgba(53,214,208,.2); --arc-shadow: #7257c2; }
+.manga-debug-beat { --arc-accent: #8868d7; --arc-soft: rgba(136,104,215,.2); --arc-shadow: var(--yellow); }
+.manga-character-beat { --arc-accent: var(--magenta); --arc-soft: rgba(242,90,162,.18); --arc-shadow: var(--cyan); }
+.manga-system-beat { --arc-accent: #7257c2; --arc-soft: rgba(114,87,194,.18); --arc-shadow: var(--magenta); }
+.manga-mode-beat { --arc-accent: var(--magenta); --arc-soft: rgba(242,90,162,.16); --arc-shadow: var(--cyan); }
+.manga-retro-beat { --arc-accent: #d99a00; --arc-soft: rgba(255,211,79,.25); --arc-shadow: var(--magenta); }
+.manga-boss-beat { --arc-accent: var(--red); --arc-soft: rgba(239,79,79,.17); --arc-shadow: var(--yellow); }
+.manga-next-beat { --arc-accent: var(--yellow); --arc-soft: rgba(255,211,79,.24); --arc-shadow: var(--magenta); }
+.manga-demo-beat { --arc-accent: var(--cyan); --arc-soft: rgba(53,214,208,.18); --arc-shadow: var(--magenta); }
+
+/* Technical action panels. */
+.manga-tech-action .codeblock {
+  border-width: 6px;
+  border-radius: 2px 18px 3px 13px;
+  box-shadow: 11px 11px 0 var(--cyan), 17px 17px 0 #101116;
+  transform: rotate(-.35deg);
+}
+.manga-tech-action .midi-packet {
+  border-width: 5px;
+  border-radius: 1px 13px 2px 10px;
+  box-shadow: 7px 7px 0 var(--magenta);
+  transform: rotate(.8deg);
+}
+.manga-tech-action .wire-equation {
+  border: 5px solid #101116;
+  background:
+    repeating-conic-gradient(from 5deg at 92% 80%, transparent 0 11deg, rgba(242,90,162,.12) 11.3deg 13deg),
+    #fff2b9;
+  box-shadow: 8px 8px 0 var(--yellow), 13px 13px 0 #101116;
+  transform: rotate(-.9deg);
+}
+.manga-tech-action .amp-source-visual {
+  border-width: 6px;
+  border-radius: 2px 17px 3px 11px;
+  box-shadow: 10px 10px 0 var(--cyan), 16px 16px 0 #101116;
+  transform: rotate(-.45deg);
+}
+.manga-tech-action .amp-node { border-width: 5px; box-shadow: 7px 7px 0 #101116; }
+.manga-tech-action .amp-node:nth-of-type(3) { transform: translateY(-9px) rotate(-1.4deg); box-shadow: 9px 9px 0 var(--magenta), 14px 14px 0 #101116; }
+
+/* Debugging defeat: a six-panel tool spread leading to one dramatic reaction. */
+.manga-debug-beat .debug-grid .card { border-width: 5px; box-shadow: 7px 7px 0 var(--card-tone), 11px 11px 0 #101116; }
+.manga-debug-beat .reaction-debug-card.storyboard-debug-shot {
+  border-width: 7px;
+  border-radius: 1px 18px 2px 12px;
+  box-shadow: 13px 13px 0 #8868d7, 20px 20px 0 #101116;
+  transform: rotate(-.7deg);
+}
+
+/* Returning-character and character-sheet beats. */
+.manga-character-beat.layout-chapter {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.11) 1.2px, transparent 1.7px) 0 0 / 26px 26px,
+    repeating-conic-gradient(from 4deg at 50% 62%, transparent 0 7deg, rgba(242,90,162,.14) 7.2deg 8.7deg),
+    var(--night) !important;
+}
+.manga-character-beat.layout-chapter::before {
+  inset: -16%;
+  background: repeating-conic-gradient(from 7deg at 50% 62%, transparent 0 8deg, rgba(53,214,208,.14) 8.2deg 9.2deg);
+  transform: none;
+}
+.manga-character-beat.layout-chapter .chapter-inner h2 { text-shadow: -6px 0 var(--cyan), 7px 7px 0 var(--magenta), 12px 12px 0 #000; }
+.manga-character-beat .phone-reveal-stage {
+  border-width: 7px;
+  border-radius: 2px 18px 3px 12px;
+  box-shadow: 13px 13px 0 var(--magenta), 21px 21px 0 #000;
+  transform: rotate(-.7deg);
+}
+.manga-character-beat.layout-split .slide-body { position: relative; isolation: isolate; }
+.manga-character-beat.layout-split .slide-body::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 48%;
+  top: -16px;
+  width: 15px;
+  height: 630px;
+  border: 3px solid #101116;
+  background: var(--magenta);
+  box-shadow: 7px 0 0 var(--cyan);
+  transform: rotate(5deg);
+}
+.manga-character-beat.layout-split .card:first-child { transform: rotate(-.8deg); box-shadow: 11px 11px 0 var(--magenta), 17px 17px 0 #101116; }
+.manga-character-beat.layout-split .stack .card:nth-child(odd) { transform: translateX(7px) rotate(.5deg); }
+.manga-character-beat.layout-split .stack .card:nth-child(even) { transform: translateX(-4px) rotate(-.45deg); }
+
+/* System and mode diagrams read as connected manga panels. */
+.manga-system-beat .pipeline { position: relative; padding: 32px 18px 39px; border: 6px solid #101116; background: rgba(255,253,244,.82); box-shadow: 12px 12px 0 #7257c2, 19px 19px 0 #101116; transform: rotate(-.35deg); }
+.manga-system-beat .pipeline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(110deg, transparent 0 45px, rgba(114,87,194,.08) 46px 49px, transparent 50px 78px);
+  pointer-events: none;
+}
+.manga-system-beat .pipeline-step { position: relative; z-index: 1; border-width: 5px; box-shadow: 6px 6px 0 var(--arc-shadow); }
+.manga-system-beat .pipeline-step:nth-of-type(4n+1) { transform: rotate(-1deg); }
+.manga-system-beat .pipeline-step:nth-of-type(4n+3) { transform: rotate(.8deg); }
+.manga-system-beat .grid-4 .card { border-width: 5px; min-height: 150px; display: grid; place-items: center; text-align: center; }
+
+.manga-mode-beat .voice-tree {
+  position: relative;
+  width: 1120px;
+  padding: 44px 58px;
+  border: 7px solid #101116;
+  background:
+    repeating-conic-gradient(from 2deg at 22% 50%, transparent 0 10deg, rgba(242,90,162,.14) 10.3deg 11.8deg),
+    rgba(255,253,244,.92);
+  box-shadow: 13px 13px 0 var(--magenta), 21px 21px 0 #101116;
+  transform: rotate(-.5deg);
+}
+.manga-mode-beat .voice-source { border-width: 6px; box-shadow: 10px 10px 0 var(--yellow), 16px 16px 0 #101116; }
+.manga-mode-beat .voice { border-width: 5px; box-shadow: 7px 7px 0 var(--cyan), 11px 11px 0 #101116; }
+.manga-mode-beat.layout-split .slide-body { position: relative; gap: 58px; }
+.manga-mode-beat.layout-split .slide-body::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: -24px;
+  width: 18px;
+  height: 650px;
+  background: #101116;
+  box-shadow: 8px 0 0 var(--cyan);
+  transform: translateX(-50%) rotate(7deg);
+}
+.manga-mode-beat.layout-split .card { position: relative; z-index: 1; min-height: 380px; display: grid; align-content: center; border-width: 6px; }
+.manga-mode-beat.layout-split .card:first-child { transform: rotate(-1.1deg); box-shadow: 12px 12px 0 var(--magenta), 19px 19px 0 #101116; }
+.manga-mode-beat.layout-split .card:last-child { transform: rotate(.9deg); box-shadow: 12px 12px 0 var(--cyan), 19px 19px 0 #101116; }
+.manga-mode-beat--harmony .card:last-child { box-shadow: 12px 12px 0 var(--yellow), 19px 19px 0 #101116; }
+
+/* Retrospective contact sheets. */
+.manga-retro-beat .terminal { border-width: 6px; box-shadow: 11px 11px 0 var(--cyan), 17px 17px 0 #101116; }
+.manga-retro-beat .terminal:first-child { transform: rotate(-.8deg); }
+.manga-retro-beat .terminal:last-child { transform: rotate(.7deg); box-shadow: 11px 11px 0 var(--magenta), 17px 17px 0 #101116; }
+.manga-retro-beat.layout-gallery .content { gap: 30px; perspective: 1200px; }
+.manga-retro-beat.layout-gallery .card { min-height: 235px; display: grid; align-content: center; border-width: 6px; box-shadow: 10px 10px 0 var(--card-tone), 16px 16px 0 #101116; }
+.manga-retro-beat.layout-gallery .card:nth-child(3n+1) { transform: rotate(-1.1deg); }
+.manga-retro-beat.layout-gallery .card:nth-child(3n+2) { transform: translateY(-8px) rotate(.4deg); }
+.manga-retro-beat.layout-gallery .card:nth-child(3n) { transform: rotate(1deg); }
+
+/* Boss, preview, and demo escalation. */
+.manga-boss-beat::before {
+  inset: -25%;
+  background:
+    repeating-conic-gradient(from 3deg at 82% 52%, transparent 0 5deg, rgba(239,79,79,.16) 5.2deg 6.5deg),
+    radial-gradient(circle at 1px 1px, rgba(16,17,22,.12) 1.3px, transparent 1.8px) 0 0 / 24px 24px;
+  transform: rotate(-2deg);
+}
+.manga-boss-beat .issue-card { border-width: 4px; border-radius: 1px 9px 2px 7px; }
+.manga-next-beat .quest-log { perspective: 900px; }
+.manga-next-beat .quest-log > div {
+  border: 4px solid #101116;
+  background: rgba(16,17,22,.94);
+  color: var(--paper);
+  box-shadow: 7px 7px 0 var(--yellow);
+}
+.manga-next-beat .quest-log > div:nth-child(odd) { transform: rotate(-.5deg); }
+.manga-next-beat .quest-log > div:nth-child(even) { transform: translateX(11px) rotate(.35deg); }
+.manga-demo-beat:not(.layout-demo) .terminal { border-width: 6px; box-shadow: 11px 11px 0 var(--cyan), 17px 17px 0 #101116; transform: rotate(-.7deg); }
+.manga-demo-beat:not(.layout-demo) .quest-card { border-width: 6px; box-shadow: 12px 12px 0 var(--yellow), 19px 19px 0 #101116; transform: rotate(1deg); }
+.manga-demo-beat.layout-demo {
+  background:
+    repeating-conic-gradient(from 4deg at 50% 46%, transparent 0 5deg, rgba(53,214,208,.13) 5.2deg 6.2deg),
+    radial-gradient(circle at 50% 46%, rgba(242,90,162,.24), transparent 27%),
+    var(--night) !important;
+}
+.manga-demo-beat.layout-demo::before {
+  inset: -35%;
+  background: repeating-conic-gradient(from 8deg at 50% 46%, transparent 0 7deg, rgba(255,255,255,.055) 7.2deg 8deg);
+  transform: none;
+}
+.manga-demo-beat.layout-demo h2 { color: var(--paper); text-shadow: -9px 0 var(--cyan), 9px 9px 0 var(--magenta), 16px 16px 0 #000 !important; transform: rotate(-1deg); }
+.manga-demo-beat.layout-demo .status-light {
+  padding: 13px 17px;
+  border: 4px solid var(--paper);
+  background: #101116;
+  box-shadow: 6px 6px 0 var(--magenta);
+  transform: rotate(-.6deg);
+}
+.manga-demo-beat.layout-demo .status-light:nth-child(even) { transform: rotate(.6deg); box-shadow-color: var(--cyan); }
+
+/* Finale and closing key art. */
+.manga-finale-beat { box-shadow: inset 0 0 0 7px var(--paper), inset 0 0 0 14px #101116 !important; }
+.manga-finale-beat::before {
+  inset: -30%;
+  background:
+    repeating-conic-gradient(from 2deg at 50% 54%, transparent 0 6deg, rgba(53,214,208,.12) 6.2deg 7.2deg),
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1.2px, transparent 1.7px) 0 0 / 25px 25px;
+  transform: none;
+}
+.manga-closing-beat { display: block !important; padding: 0 !important; background: var(--cream) !important; text-align: left !important; }
+.manga-closing-beat .closing-cast {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.manga-closing-beat::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: auto;
+  height: auto;
+  background:
+    linear-gradient(90deg, rgba(255,253,244,.98) 0 38%, rgba(255,253,244,.88) 49%, rgba(255,253,244,.18) 68%, transparent 79%),
+    linear-gradient(0deg, rgba(16,17,22,.18), transparent 32%);
+  transform: none;
+}
+.manga-closing-beat > div {
+  position: absolute;
+  z-index: 3;
+  left: 76px;
+  top: 50%;
+  width: 760px;
+  transform: translateY(-50%) rotate(-.6deg);
+}
+.manga-closing-beat blockquote {
+  max-width: 720px;
+  padding: 38px 42px 44px;
+  border: 7px solid #101116;
+  background: rgba(255,253,244,.93);
+  box-shadow: 14px 14px 0 var(--cyan), 22px 22px 0 #101116;
+  font-size: 54px;
+  line-height: 1.06;
+}
+.manga-closing-beat cite {
+  display: inline-block;
+  margin: 38px 0 0 26px;
+  padding: 12px 16px;
+  border: 4px solid #101116;
+  background: var(--yellow);
+  box-shadow: 7px 7px 0 var(--magenta);
+  transform: rotate(1.4deg);
+}
+.manga-closing-beat::after { z-index: 4; color: var(--paper); text-shadow: 2px 2px 0 #101116; }
+
+@media (prefers-reduced-motion: reduce) {
+  .manga-final-arc .card,
+  .manga-final-arc .terminal,
+  .manga-final-arc .pipeline,
+  .manga-final-arc .voice-tree,
+  .manga-final-arc .codeblock,
+  .manga-closing-beat > div { transition: none !important; }
+}
 
 .reveal .slides section .fragment.step-pop {
   opacity: 0;
@@ -4877,34 +5645,55 @@ img.schematic-example.real-schematic-render {
 .assembly-choice {
   position: relative;
   display: grid;
-  grid-template-columns: 170px 1fr;
+  grid-template-columns: 272px 1fr;
   grid-template-rows: auto auto 1fr auto;
-  column-gap: 25px;
+  column-gap: 22px;
   min-height: 323px;
-  padding: 23px 24px 20px;
+  padding: 18px 19px 17px;
   border: 6px solid var(--charcoal);
   box-shadow: 9px 9px 0 var(--charcoal);
 }
 .assembly-choice--bench { background: #ffd9e9; transform: rotate(-.6deg); }
 .assembly-choice--fab { background: #cef5f1; transform: rotate(.6deg); }
+.assembly-photo {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1 / 5;
+  min-width: 0;
+  height: 276px;
+  margin: 0;
+  overflow: hidden;
+  border: 5px solid var(--charcoal);
+  background: var(--charcoal);
+  box-shadow: 6px 6px 0 var(--charcoal);
+}
+.assembly-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.04) contrast(1.04);
+}
+.assembly-photo--bench img { object-position: 72% center; }
+.assembly-photo--fab img { object-position: 53% 64%; }
+.assembly-photo figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px 9px;
+  border-top: 4px solid var(--charcoal);
+  background: rgba(8,8,13,.9);
+  color: white;
+}
+.assembly-photo figcaption b { color: var(--yellow); font: 1000 12px/1 ui-monospace, monospace; letter-spacing: .12em; }
+.assembly-photo figcaption span { font-size: 13px; font-weight: 850; line-height: 1; }
 .assembly-choice > small { grid-column: 2; align-self: end; margin-bottom: 7px; font: 1000 14px/1 ui-monospace, monospace; letter-spacing: .14em; }
 .assembly-choice h3 { grid-column: 2; font-size: 29px; }
 .assembly-choice p { grid-column: 2; margin-top: 12px; color: #40564e; font-size: 19px; font-weight: 750; line-height: 1.18; }
-.assembly-tag { grid-column: 1 / 3; align-self: end; margin-top: 17px; padding: 9px 11px 7px; border: 3px solid var(--charcoal); background: var(--paper); font: 1000 14px/1 ui-monospace, monospace; text-align: center; }
-.assembly-chip,
-.assembly-machine { position: relative; grid-row: 1 / 4; align-self: center; width: 150px; height: 150px; border: 5px solid var(--charcoal); background: var(--charcoal); box-shadow: 7px 7px 0 var(--yellow); }
-.assembly-chip::before { content: ""; position: absolute; inset: 37px; border: 5px solid var(--paper); background: #2d4a6b; }
-.assembly-chip i { position: absolute; left: 14px; right: 14px; height: 5px; background: repeating-linear-gradient(90deg, var(--paper) 0 7px, transparent 7px 15px); }
-.assembly-chip i:first-child { top: 22px; }
-.assembly-chip i:nth-child(3) { bottom: 22px; }
-.assembly-chip b { position: absolute; right: -13px; bottom: -12px; padding: 7px 8px 5px; border: 3px solid var(--charcoal); background: var(--magenta); color: white; font: 1000 15px/1 ui-monospace, monospace; transform: rotate(-6deg); }
-.assembly-machine { overflow: hidden; background: linear-gradient(90deg, transparent 47%, var(--paper) 48% 52%, transparent 53%), #2578a5; }
-.assembly-machine::before { content: ""; position: absolute; left: 20px; right: 20px; bottom: 22px; height: 39px; border: 4px solid var(--charcoal); background: var(--forest); }
-.assembly-machine i { position: absolute; top: 20px; width: 27px; height: 48px; border: 4px solid var(--charcoal); background: var(--yellow); }
-.assembly-machine i:nth-child(1) { left: 18px; }
-.assembly-machine i:nth-child(2) { left: 60px; }
-.assembly-machine i:nth-child(3) { left: 102px; }
-.assembly-machine b { position: absolute; right: 7px; bottom: 7px; display: grid; place-items: center; width: 41px; height: 41px; border: 4px solid var(--charcoal); border-radius: 50%; background: var(--cyan); color: var(--charcoal); font-size: 24px; }
+.assembly-tag { grid-column: 2; align-self: end; margin-top: 17px; padding: 9px 10px 7px; border: 3px solid var(--charcoal); background: var(--paper); font: 1000 12px/1 ui-monospace, monospace; text-align: center; }
 .assembly-versus { display: grid; place-items: center; width: 70px; height: 70px; border: 5px solid var(--charcoal); border-radius: 50%; background: var(--yellow); box-shadow: 6px 6px 0 var(--charcoal); font: 1000 24px/1 ui-monospace, monospace; transform: rotate(-7deg); }
 .easyeda-lane { display: grid; grid-template-columns: 230px 1fr; align-items: stretch; gap: 18px; margin-top: 24px; }
 .easyeda-mark { display: grid; padding: 14px 17px 12px; border: 5px solid var(--charcoal); background: #3156a6; box-shadow: 7px 7px 0 var(--charcoal); color: white; text-decoration: none; }
@@ -4918,6 +5707,87 @@ img.schematic-example.real-schematic-render {
 .assembly-payoff { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 20px; padding: 14px 21px 12px; border: 5px solid var(--charcoal); background: var(--charcoal); box-shadow: 8px 8px 0 var(--cyan); color: white; }
 .assembly-payoff strong { color: var(--yellow); font-size: 23px; }
 .assembly-payoff span { font: 850 16px/1.1 ui-monospace, monospace; }
+
+/* 59 · Photo credits */
+.photo-credits-slide::before {
+  inset: 0;
+  width: auto;
+  height: auto;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(21,32,29,.08) 1.3px, transparent 1.8px) 0 0 / 18px 18px,
+    linear-gradient(118deg, rgba(53,214,208,.16), transparent 34%),
+    repeating-conic-gradient(from 5deg at 92% 14%, transparent 0 9deg, rgba(76,118,215,.08) 9.3deg 10.4deg);
+  transform: none;
+}
+.photo-credits-stage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  width: 100%;
+  max-width: none !important;
+  margin-top: 18px;
+}
+.photo-credit-panel {
+  min-width: 0;
+  padding: 15px 17px 17px;
+  border: 5px solid var(--charcoal);
+  background: var(--paper);
+  box-shadow: 8px 8px 0 var(--charcoal);
+}
+.photo-credit-panel--open { background: #cef5f1; transform: rotate(-.25deg); }
+.photo-credit-panel--more { background: #dfe8ff; transform: rotate(.25deg); }
+.photo-credit-panel > header {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.photo-credit-panel > header > b {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--charcoal);
+  color: var(--yellow);
+  font: 1000 17px/1 ui-monospace, monospace;
+}
+.photo-credit-panel header small { display: block; margin-bottom: 4px; font: 1000 10px/1 ui-monospace, monospace; letter-spacing: .13em; }
+.photo-credit-panel header h3 { font-size: 22px; line-height: 1; }
+.photo-credit-list { display: grid; gap: 6px; }
+.photo-credit-list a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 15px;
+  min-height: 42px;
+  padding: 7px 9px 6px;
+  border: 3px solid var(--charcoal);
+  background: rgba(255,253,244,.92);
+  color: var(--charcoal);
+  text-decoration: none;
+}
+.photo-credit-list a::after { content: "↗"; display: none; }
+.photo-credit-list strong { min-width: 0; color: var(--charcoal); font-size: 14px; line-height: 1.05; }
+.photo-credit-list span { color: #40564e; font: 900 10px/1.08 ui-monospace, monospace; text-align: right; white-space: nowrap; }
+.photo-credit-list .photo-credit--review { background: #fff0a9; }
+.photo-credit-list .photo-credit--review span { color: #8c5500; }
+.photo-credit-owned {
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 13px 17px 12px;
+  border: 5px solid var(--charcoal);
+  background: var(--charcoal);
+  box-shadow: 7px 7px 0 var(--magenta);
+  color: white;
+}
+.photo-credit-owned > b { padding: 8px 10px 7px; background: var(--yellow); color: var(--charcoal); font: 1000 12px/1 ui-monospace, monospace; white-space: nowrap; }
+.photo-credit-owned p { color: white; font-size: 14px; font-weight: 750; line-height: 1.15; }
+.photo-credit-owned p strong { color: var(--cyan); }
+.photo-credit-owned a { color: var(--yellow); font: 900 11px/1.1 ui-monospace, monospace; text-decoration: none; text-align: right; white-space: nowrap; }
 
 /* 19 · Communities */
 .electronics-community-stage { width: 100%; max-width: none !important; margin-top: 21px; }
@@ -5377,6 +6247,204 @@ img.schematic-example.real-schematic-render {
 .firmware-debug-slide .debug-grid .card p { margin-top: 10px; font-size: 18px; line-height: 1.14; }
 .firmware-debug-payoff { grid-column: 1 / -1; }
 .firmware-debug-payoff p { color: #624c17; font-size: 15px; font-weight: 850; }
+
+/* keyboard-keyboard 31–40 manga field-guide pass. */
+.reveal .slides section.slide.manga-firmware-arc {
+  --firmware-accent: #7257c2;
+  --firmware-soft: rgba(114,87,194,.16);
+  --firmware-shadow: var(--magenta);
+  box-shadow:
+    inset 0 0 0 6px #101116,
+    inset 0 0 0 11px rgba(255,253,244,.9);
+  background:
+    linear-gradient(118deg, transparent 0 68%, rgba(16,17,22,.12) 68.2% 68.8%, transparent 69% 100%),
+    radial-gradient(circle at 1px 1px, rgba(16,17,22,.14) 1.35px, transparent 1.8px) 0 0 / 27px 27px,
+    radial-gradient(circle at 85% 20%, var(--firmware-soft), transparent 31%),
+    linear-gradient(145deg, rgba(255,255,255,.74), transparent 46%, var(--firmware-soft)),
+    var(--paper) !important;
+}
+.manga-firmware-arc::before {
+  inset: -18%;
+  width: auto;
+  height: auto;
+  background:
+    repeating-conic-gradient(from 6deg at 88% 22%, transparent 0 7deg, var(--firmware-soft) 7.2deg 8.2deg),
+    repeating-linear-gradient(102deg, transparent 0 72px, rgba(16,17,22,.03) 73px 75px, transparent 76px 118px);
+  transform: none;
+  opacity: 1;
+}
+.manga-firmware-arc > * { z-index: 2; }
+.manga-firmware-arc .slide-head { display: inline-block; min-width: 760px; }
+.manga-firmware-arc .slide-head::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -18px;
+  right: 5%;
+  bottom: -18px;
+  height: 15px;
+  border: 3px solid #101116;
+  background: var(--firmware-accent);
+  box-shadow: 7px 7px 0 var(--firmware-shadow);
+  transform: skewX(-18deg) rotate(-.35deg);
+}
+.manga-firmware-arc .slide-head h2 {
+  text-shadow: 4px 4px 0 rgba(255,255,255,.92), 7px 7px 0 var(--firmware-soft);
+}
+.manga-firmware-arc .eyebrow {
+  border-radius: 2px 10px 2px 10px;
+  box-shadow: 5px 5px 0 var(--firmware-accent), 8px 8px 0 #101116;
+  transform: rotate(-1.1deg);
+}
+.firmware-manga-sfx {
+  position: absolute;
+  z-index: 8 !important;
+  color: var(--firmware-accent);
+  font: 1000 74px/.82 "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  letter-spacing: -.1em;
+  white-space: nowrap;
+  pointer-events: none;
+  -webkit-text-stroke: 2px #101116;
+  text-shadow: 6px 6px 0 var(--firmware-shadow), 11px 11px 0 #101116;
+}
+.firmware-manga-sfx--left { left: 26px; bottom: 74px; transform: rotate(-10deg); }
+.firmware-manga-sfx--right { right: 34px; bottom: 70px; transform: rotate(9deg); }
+.firmware-reaction {
+  position: absolute;
+  z-index: 5 !important;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(8px 8px 0 #101116) drop-shadow(-5px 0 0 var(--firmware-accent));
+}
+.manga-firmware-flow { --firmware-accent: #7257c2; --firmware-soft: rgba(114,87,194,.18); --firmware-shadow: var(--magenta); }
+.manga-firmware-scan { --firmware-accent: #008b95; --firmware-soft: rgba(0,139,149,.17); --firmware-shadow: var(--yellow); }
+.manga-firmware-deadline { --firmware-accent: #d94752; --firmware-soft: rgba(217,71,82,.16); --firmware-shadow: var(--yellow); }
+.manga-firmware-calibration { --firmware-accent: #2f9f62; --firmware-soft: rgba(47,159,98,.17); --firmware-shadow: var(--cyan); }
+.manga-firmware-filter { --firmware-accent: #008b95; --firmware-soft: rgba(0,139,149,.17); --firmware-shadow: var(--cyan); }
+.manga-firmware-state { --firmware-accent: #2f9f62; --firmware-soft: rgba(47,159,98,.17); --firmware-shadow: var(--yellow); }
+.manga-firmware-backpressure { --firmware-accent: #d06f15; --firmware-soft: rgba(208,111,21,.18); --firmware-shadow: var(--magenta); }
+.manga-firmware-mapping { --firmware-accent: #c83f88; --firmware-soft: rgba(200,63,136,.17); --firmware-shadow: var(--cyan); }
+.manga-firmware-training { --firmware-accent: #d99a00; --firmware-soft: rgba(255,211,79,.24); --firmware-shadow: var(--magenta); }
+.manga-firmware-observability { --firmware-accent: #8868d7; --firmware-soft: rgba(136,104,215,.18); --firmware-shadow: var(--yellow); }
+
+.manga-firmware-flow .pipeline {
+  position: relative;
+  padding: 43px 24px 52px;
+  border: 7px solid #101116;
+  border-radius: 2px 18px 3px 12px;
+  background: rgba(255,253,244,.88);
+  box-shadow: 13px 13px 0 var(--firmware-accent), 21px 21px 0 #101116;
+  transform: rotate(-.35deg);
+}
+.manga-firmware-flow .pipeline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(110deg, transparent 0 44px, var(--firmware-soft) 45px 50px, transparent 51px 78px);
+  pointer-events: none;
+}
+.manga-firmware-flow .pipeline-step { position: relative; z-index: 1; min-width: 145px; border-width: 5px; border-radius: 2px 14px 3px 10px; box-shadow: 7px 7px 0 var(--firmware-shadow); }
+.manga-firmware-flow .pipeline-step:nth-of-type(4n+1) { transform: rotate(-1.1deg); }
+.manga-firmware-flow .pipeline-step:nth-of-type(4n+3) { transform: rotate(.9deg); }
+.manga-firmware-flow .pipeline-arrow { position: relative; z-index: 1; }
+
+.manga-firmware-scan .codeblock,
+.manga-firmware-filter .codeblock,
+.manga-firmware-state .codeblock,
+.manga-firmware-backpressure .codeblock {
+  border-width: 6px;
+  border-radius: 2px 18px 3px 12px;
+  box-shadow: 11px 11px 0 var(--firmware-accent), 18px 18px 0 #101116;
+  transform: rotate(-.3deg);
+}
+.manga-firmware-scan .scan-budget > div,
+.manga-firmware-filter .sample-window i,
+.manga-firmware-filter .filter-facts p,
+.manga-firmware-state .state-node {
+  border-radius: 2px 12px 3px 9px;
+  border-width: 5px;
+  box-shadow: 7px 7px 0 var(--firmware-shadow), 11px 11px 0 #101116;
+}
+.manga-firmware-scan .scan-budget > div:nth-child(odd) { transform: rotate(-.8deg); }
+.manga-firmware-scan .scan-budget > div:nth-child(even) { transform: rotate(.8deg); }
+.manga-firmware-filter .sample-window { transform: rotate(.7deg); }
+.manga-firmware-filter .filter-facts p:nth-child(odd) { transform: rotate(-.45deg); }
+.manga-firmware-filter .filter-facts p:nth-child(even) { transform: rotate(.45deg); }
+.manga-firmware-state .state-node:nth-of-type(1) { transform: rotate(-1deg); }
+.manga-firmware-state .state-node:nth-of-type(5) { transform: rotate(1deg); }
+
+.manga-firmware-deadline .priority-ladder {
+  padding: 16px 18px 21px;
+  border: 6px solid #101116;
+  background: rgba(255,253,244,.82);
+  box-shadow: 11px 11px 0 var(--firmware-accent), 18px 18px 0 #101116;
+  transform: rotate(-.4deg);
+}
+.manga-firmware-deadline .priority-lane { border-radius: 2px 11px 3px 8px; border-width: 4px; }
+.manga-firmware-deadline .priority-lane:nth-child(odd) { transform: translateX(-4px) rotate(-.35deg); }
+.manga-firmware-deadline .priority-lane:nth-child(even) { transform: translateX(4px) rotate(.35deg); }
+.manga-firmware-deadline .priority-contract { border-width: 6px; border-radius: 2px 16px 3px 11px; box-shadow: 10px 10px 0 #7d74c8, 16px 16px 0 #101116; transform: rotate(.7deg); }
+
+.manga-firmware-calibration .baseline-sequence {
+  padding: 15px 17px 20px;
+  border: 6px solid #101116;
+  background: rgba(255,253,244,.86);
+  box-shadow: 11px 11px 0 var(--firmware-accent), 18px 18px 0 #101116;
+  transform: rotate(-.35deg);
+}
+.manga-firmware-calibration .baseline-step { border-radius: 2px 10px 3px 7px; }
+.manga-firmware-calibration .baseline-step:nth-child(odd) { transform: translateX(-4px) rotate(-.35deg); }
+.manga-firmware-calibration .baseline-step:nth-child(even) { transform: translateX(4px) rotate(.35deg); }
+.manga-firmware-calibration .baseline-code-card { border-width: 6px; border-radius: 2px 16px 3px 11px; box-shadow: 10px 10px 0 var(--cyan), 16px 16px 0 #101116; transform: rotate(.55deg); }
+.firmware-reaction--calibration { right: 6px; bottom: 18px; width: 205px; height: 230px; opacity: .24; transform: rotate(4deg); }
+
+.manga-firmware-backpressure .midi-packet { border-width: 5px; border-radius: 2px 14px 3px 10px; box-shadow: 8px 8px 0 var(--magenta), 13px 13px 0 #101116; transform: rotate(.9deg); }
+.manga-firmware-backpressure .wire-equation { border-width: 6px; border-radius: 2px 16px 3px 11px; box-shadow: 9px 9px 0 var(--yellow), 15px 15px 0 #101116; transform: rotate(-.8deg); }
+.firmware-reaction--backpressure { right: 12px; bottom: 6px; width: 190px; height: 210px; opacity: .2; transform: rotate(5deg); }
+
+.manga-firmware-mapping .mapping-code-stack {
+  padding: 14px 16px 19px;
+  border: 6px solid #101116;
+  background: rgba(255,253,244,.84);
+  box-shadow: 11px 11px 0 var(--firmware-accent), 18px 18px 0 #101116;
+  transform: rotate(-.35deg);
+}
+.manga-firmware-mapping .mapping-code-card { border-width: 5px; border-radius: 2px 11px 3px 8px; }
+.manga-firmware-mapping .mapping-boundary-card { border-width: 5px; border-radius: 2px 14px 3px 10px; box-shadow: 8px 8px 0 var(--firmware-shadow), 13px 13px 0 #101116; }
+.manga-firmware-mapping .mapping-boundary-card:nth-child(odd) { transform: rotate(.7deg); }
+.manga-firmware-mapping .mapping-boundary-card:nth-child(even) { transform: rotate(-.7deg); }
+
+.manga-firmware-training .recipe-step { border-width: 5px; border-radius: 2px 15px 3px 10px; box-shadow: 8px 8px 0 var(--firmware-shadow), 13px 13px 0 #101116; }
+.manga-firmware-training .recipe-step:nth-of-type(odd) { transform: rotate(-.8deg); }
+.manga-firmware-training .recipe-step:nth-of-type(even) { transform: rotate(.8deg); }
+.manga-firmware-training .recipe-variants { padding: 12px 14px 16px; border: 5px solid #101116; background: rgba(255,253,244,.85); box-shadow: 8px 8px 0 var(--firmware-accent); transform: rotate(.25deg); }
+.manga-firmware-training .recipe-variants article { border-width: 4px; }
+
+.manga-firmware-observability .debug-grid .card { border-width: 5px; border-radius: 2px 14px 3px 10px; box-shadow: 8px 8px 0 var(--card-tone), 13px 13px 0 #101116; }
+.manga-firmware-observability .debug-grid .card:nth-child(odd) { transform: rotate(-.6deg); }
+.manga-firmware-observability .debug-grid .card:nth-child(even) { transform: rotate(.6deg); }
+.firmware-reaction--observability { right: 12px; bottom: 8px; width: 180px; height: 198px; opacity: .19; transform: rotate(4deg); }
+
+.manga-firmware-arc .priority-payoff,
+.manga-firmware-arc .baseline-warning,
+.manga-firmware-arc .mapping-payoff,
+.manga-firmware-arc .recipe-payoff,
+.manga-firmware-arc .firmware-debug-payoff {
+  border-width: 5px;
+  border-radius: 2px 11px 3px 8px;
+  box-shadow: 8px 8px 0 var(--firmware-shadow), 13px 13px 0 #101116;
+  transform: rotate(-.25deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manga-firmware-arc .pipeline,
+  .manga-firmware-arc .codeblock,
+  .manga-firmware-arc .priority-ladder,
+  .manga-firmware-arc .baseline-sequence,
+  .manga-firmware-arc .mapping-code-stack,
+  .manga-firmware-arc .recipe-step,
+  .manga-firmware-arc .card { transition: none !important; }
+}
 .addition-check span { padding-left: 14px; border-left: 3px solid var(--charcoal); color: #40564e; font-size: 15px; font-weight: 800; line-height: 1.05; }
 .addition-check strong { color: var(--charcoal); }
 .board-surgery-rule--finish { margin-top: 20px; box-shadow-color: var(--magenta); }
@@ -5607,3 +6675,283 @@ img.schematic-example.real-schematic-render {
   font-weight: 850;
 }
 .wicki-modelm-caveat b { color: #625aa5; font: 1000 12px/1 ui-monospace, monospace; letter-spacing: .1em; }
+
+/* keyboard-keyboard file-numbered slides 11–20 (including 14b).
+   Visual manga pass only; original English stays in the slide fragments.
+   Keep structural borders un-clipped; polygon cuts belong on borderless
+   decoration, not on cards, tags, banners, or frames. */
+.manga-sequence {
+  --manga-accent: var(--magenta);
+  --manga-accent-rgb: 242, 90, 162;
+  isolation: isolate;
+}
+.manga-sequence--signal,
+.manga-sequence--blueprint {
+  --manga-accent: var(--cyan);
+  --manga-accent-rgb: 53, 214, 208;
+}
+.manga-sequence--legacy {
+  --manga-accent: #65b58a;
+  --manga-accent-rgb: 101, 181, 138;
+}
+.manga-sequence--warning {
+  --manga-accent: var(--red);
+  --manga-accent-rgb: 239, 79, 79;
+}
+.manga-sequence--roadmap {
+  --manga-accent: #4c76d7;
+  --manga-accent-rgb: 76, 118, 215;
+}
+.manga-sequence--field-guide {
+  --manga-accent: #d89c00;
+  --manga-accent-rgb: 216, 156, 0;
+}
+.reveal .slides section.manga-sequence:not(.manga-sequence--interruption) {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(21,32,29,.16) 1.25px, transparent 1.7px) 0 0 / 24px 24px,
+    linear-gradient(118deg, rgba(var(--manga-accent-rgb),.12), transparent 29%),
+    repeating-linear-gradient(166deg, transparent 0 31px, rgba(var(--manga-accent-rgb),.045) 31px 33px),
+    var(--paper) !important;
+  box-shadow: inset 0 0 0 6px #101116, inset 0 0 0 11px rgba(255,253,244,.9);
+}
+.manga-sequence .slide-head { padding-left: 23px; }
+.manga-sequence .slide-head::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  bottom: -5px;
+  width: 10px;
+  background: var(--manga-accent);
+  box-shadow: 7px 0 0 var(--charcoal), 12px 0 0 rgba(var(--manga-accent-rgb),.34);
+  transform: skewY(-8deg);
+}
+.manga-sequence .slide-head::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 6px;
+  top: -12px;
+  width: 310px;
+  height: 94px;
+  border-top: 6px solid rgba(var(--manga-accent-rgb),.58);
+  border-right: 6px solid rgba(var(--manga-accent-rgb),.58);
+  background: radial-gradient(circle, rgba(var(--manga-accent-rgb),.3) 0 3px, transparent 3.5px) 0 0 / 18px 18px;
+  clip-path: polygon(48% 0, 100% 0, 100% 100%, 93% 100%);
+  pointer-events: none;
+}
+.manga-sequence .eyebrow {
+  border-radius: 0;
+  box-shadow: 5px 5px 0 var(--charcoal), 9px 9px 0 var(--manga-accent);
+  transform: rotate(-.45deg);
+}
+.manga-sequence .slide-head h2 {
+  position: relative;
+  width: max-content;
+  max-width: 1380px;
+  text-shadow: 3px 3px 0 var(--paper), 7px 7px 0 rgba(var(--manga-accent-rgb),.3);
+}
+.manga-sequence .content { isolation: isolate; }
+.manga-sequence .content::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -13px -17px -15px;
+  border: 3px solid rgba(var(--manga-accent-rgb),.48);
+  transform: rotate(-.1deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+.manga-sequence .piano-forte-principle,
+.manga-sequence .piano-forte-example,
+.manga-sequence .keyboard-build-card,
+.manga-sequence .source-parent,
+.manga-sequence .source-result,
+.manga-sequence .license-panel,
+.manga-sequence .vendor-panel,
+.manga-sequence .kicad-roadmap-card,
+.manga-sequence .schematic-canvas,
+.manga-sequence .schematic-action,
+.manga-sequence .kicad-export-step,
+.manga-sequence .kicad-loop-step,
+.manga-sequence .kicad-source-card,
+.manga-sequence .datasheet-page,
+.manga-sequence .datasheet-lesson { border-radius: 1px; }
+.manga-sequence .piano-forte-payoff,
+.manga-sequence .kicad-roadmap-payoff,
+.manga-sequence .schematic-rule,
+.manga-sequence .kicad-export-payoff,
+.manga-sequence .datasheet-payoff {
+  position: relative;
+  border-radius: 1px;
+}
+.manga-sequence .piano-forte-payoff::after,
+.manga-sequence .kicad-roadmap-payoff::after,
+.manga-sequence .schematic-rule::after,
+.manga-sequence .kicad-export-payoff::after,
+.manga-sequence .datasheet-payoff::after {
+  content: "";
+  position: absolute;
+  right: 34px;
+  bottom: -18px;
+  width: 30px;
+  height: 22px;
+  border-right: 5px solid var(--charcoal);
+  border-bottom: 5px solid var(--charcoal);
+  background: inherit;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  transform: skewX(-18deg);
+}
+
+/* 11 · piano/forte measurement as paired action panels. */
+.manga-sequence--signal .piano-forte-principle {
+  border-width: 6px;
+  border-radius: 1px;
+  background-image: radial-gradient(circle, rgba(21,32,29,.09) 0 2px, transparent 2.5px);
+  background-size: 17px 17px;
+  box-shadow: 10px 10px 0 #9a72ef, 16px 16px 0 #101116;
+  transform: rotate(-.25deg);
+}
+.manga-sequence--signal .piano-forte-example--soft { transform: rotate(-.5deg); box-shadow: 10px 10px 0 var(--cyan), 16px 16px 0 #101116; }
+.manga-sequence--signal .piano-forte-example--loud { transform: rotate(.45deg); box-shadow: 10px 10px 0 var(--magenta), 16px 16px 0 #101116; }
+.manga-sequence--signal .piano-forte-trace {
+  background-image: repeating-linear-gradient(107deg, transparent 0 42px, rgba(255,255,255,.055) 43px 46px);
+}
+
+/* 12–14b · origin, inheritance, licensing, and interruption story beats. */
+.manga-sequence--origin .keyboard-build-card { transform: none; }
+.open-source-parents-slide .source-merge { gap: 13px; margin-top: 42px; perspective: 1100px; }
+.open-source-parents-slide .source-parent,
+.open-source-parents-slide .source-result {
+  position: relative;
+  overflow: hidden;
+  border-width: 5px;
+  background-image:
+    radial-gradient(circle, rgba(21,32,29,.11) 0 2px, transparent 2.5px),
+    linear-gradient(145deg, rgba(53,214,208,.15), transparent 55%);
+  background-size: 17px 17px, auto;
+  box-shadow: 9px 9px 0 var(--charcoal);
+}
+.open-source-parents-slide .source-parent:first-child { transform: rotateY(2deg) rotate(-.7deg); }
+.open-source-parents-slide .source-parent:nth-child(3) { transform: translateY(7px) rotateY(-2deg) rotate(.55deg); }
+.open-source-parents-slide .source-result {
+  padding-right: 112px;
+  background-image:
+    radial-gradient(circle, rgba(21,32,29,.1) 0 2px, transparent 2.5px),
+    repeating-conic-gradient(from 5deg at 82% 78%, transparent 0 8deg, rgba(101,181,138,.22) 8deg 11deg);
+  background-size: 17px 17px, auto;
+  box-shadow: 9px 9px 0 #65b58a, 15px 15px 0 #101116;
+  transform: rotateY(-2deg) rotate(-.4deg);
+}
+.open-source-parents-slide .source-parent::before,
+.open-source-parents-slide .source-result::before {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  color: var(--paper);
+  font: 1000 47px/1 ui-monospace, monospace;
+  -webkit-text-stroke: 2px var(--charcoal);
+  text-shadow: 3px 3px 0 var(--manga-accent);
+  transform: rotate(5deg);
+}
+.open-source-parents-slide .source-parent:first-child::before { content: "01"; }
+.open-source-parents-slide .source-parent:nth-child(3)::before { content: "02"; }
+.open-source-parents-slide .source-result::before { content: "03"; }
+.open-source-parents-slide .source-result::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  bottom: -12px;
+  width: 195px;
+  height: 245px;
+  background: url("assets/characters/faces/ren/understands-big.png") right bottom / contain no-repeat;
+  filter: drop-shadow(-5px 5px 0 rgba(21,32,29,.82));
+  pointer-events: none;
+}
+.open-source-parents-slide .source-arrow { text-shadow: 4px 4px 0 var(--charcoal); transform: rotate(-4deg); }
+.manga-sequence--warning .oshw-permission {
+  border-radius: 1px;
+  background-image: radial-gradient(circle, rgba(21,32,29,.12) 0 2px, transparent 2.5px);
+  background-size: 18px 18px;
+  transform: rotate(-.35deg);
+}
+.manga-sequence--warning .license-panel { transform: rotate(.28deg); box-shadow: 8px 8px 0 var(--red); }
+.manga-sequence--warning .vendor-panel { transform: translateY(3px) rotate(-.24deg); box-shadow: 8px 8px 0 var(--cyan); }
+.manga-sequence--warning .license-check:nth-child(odd),
+.manga-sequence--warning .vendor-card:nth-child(even) { background-image: linear-gradient(105deg, rgba(239,79,79,.075), transparent 48%); }
+.manga-sequence--interruption .interruption-stage {
+  box-shadow: inset 0 0 0 7px rgba(242,90,162,.28);
+  clip-path: polygon(0 0, 98% 0, 100% 6%, 100% 100%, 2% 100%, 0 94%);
+}
+.manga-sequence--interruption .interruption-bubble { filter: drop-shadow(10px 11px 0 rgba(53,214,208,.8)); }
+
+/* 15–18 · consecutive KiCad production cels. */
+.manga-sequence--roadmap .kicad-roadmap-app {
+  background-image:
+    url("assets/characters/faces/mio/realization-big.png"),
+    linear-gradient(105deg, #3372cf 0 67%, #29579d 100%);
+  background-position: calc(100% - 190px) 17%, center;
+  background-repeat: no-repeat;
+  background-size: 118px auto, auto;
+}
+.manga-sequence--roadmap .kicad-roadmap-card:nth-of-type(1) { transform: rotate(-1.2deg); }
+.manga-sequence--roadmap .kicad-roadmap-card:nth-of-type(2) { transform: translateY(7px) rotate(.85deg); }
+.manga-sequence--roadmap .kicad-roadmap-card:nth-of-type(3) { transform: rotate(-.75deg); }
+.manga-sequence--blueprint .schematic-canvas {
+  position: relative;
+  box-shadow: 10px 10px 0 var(--cyan), 18px 18px 0 #08080d;
+}
+.manga-sequence--blueprint .schematic-canvas::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 47px;
+  width: 145px;
+  height: 145px;
+  border-top: 5px solid var(--cyan);
+  border-right: 5px solid var(--cyan);
+  background: radial-gradient(circle, rgba(53,214,208,.23) 0 2px, transparent 2.5px) 0 0 / 15px 15px;
+  clip-path: polygon(48% 0, 100% 0, 100% 100%);
+  pointer-events: none;
+}
+.manga-sequence--blueprint .schematic-action:nth-child(odd) { transform: rotate(-.35deg); }
+.manga-sequence--blueprint .schematic-action:nth-child(even) { transform: translateX(4px) rotate(.3deg); }
+.manga-sequence--payoff .kicad-export-step {
+  background-image: radial-gradient(circle, rgba(21,32,29,.1) 0 2px, transparent 2.5px);
+  background-size: 17px 17px;
+}
+.manga-sequence--payoff .kicad-export-step--plot { transform: rotate(-1.15deg); }
+.manga-sequence--payoff .kicad-export-step--zip { transform: translateY(7px) rotate(.9deg); }
+.manga-sequence--payoff .kicad-export-step--order { transform: rotate(-.8deg); }
+
+/* 19–20 · framed field-guide cards with a final anime reaction. */
+.manga-sequence--field-guide .kicad-loop-step:nth-child(4n + 1),
+.manga-sequence--field-guide .datasheet-lesson:nth-child(4n + 1) { transform: rotate(-.4deg); }
+.manga-sequence--field-guide .kicad-loop-step:nth-child(4n + 2),
+.manga-sequence--field-guide .datasheet-lesson:nth-child(4n + 2) { transform: translateY(2px) rotate(.35deg); }
+.manga-sequence--field-guide .kicad-loop-step:nth-child(4n + 3),
+.manga-sequence--field-guide .datasheet-lesson:nth-child(4n + 3) { transform: translateX(3px) rotate(.3deg); }
+.manga-sequence--field-guide .kicad-loop-step:nth-child(4n),
+.manga-sequence--field-guide .datasheet-lesson:nth-child(4n) { transform: translateY(2px) rotate(-.3deg); }
+.manga-sequence--field-guide .kicad-source-card {
+  background-image:
+    linear-gradient(135deg, rgba(242,90,162,.12), transparent 33%),
+    radial-gradient(circle, rgba(53,214,208,.13) 0 2px, transparent 2.5px);
+  background-size: auto, 19px 19px;
+  box-shadow: 9px 9px 0 #087f83, 14px 14px 0 var(--charcoal);
+}
+.manga-sequence--field-guide .electronics-datasheet-stage { position: relative; }
+.manga-sequence--field-guide .electronics-datasheet-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  right: -10px;
+  bottom: -56px;
+  width: 150px;
+  height: 215px;
+  background: url("assets/characters/faces/mio/realization-big.png") right bottom / contain no-repeat;
+  filter: drop-shadow(-5px 5px 0 rgba(21,32,29,.78));
+  pointer-events: none;
+}
+.manga-sequence--field-guide .datasheet-payoff { padding-right: 145px; }

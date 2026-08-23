@@ -71,6 +71,7 @@ Because the browser loads slide fragments with `fetch`, opening `index.html` dir
 - `manga-panel-grid`, `manga-quote-stage`, and `manga-objective` reproduce the reaction-panel, punch-line, and season-finale layouts from the earlier deck.
 - `manga-cameo` is a large, rotated, text-only corner callout with Japanese headline copy, an English translation, an offset cyan/ink shadow, and a typographic `ドン!!` impact mark.
 - Manga reactions and character bubbles use concise Japanese copy with adjacent English translations; `lang="ja"` and a Japanese-capable system font stack keep the typography intentional and accessible.
+- Keep `clip-path` on borderless decorative pseudo-elements. Do not apply it directly to bordered cards, photos, banners, or frames: the browser clips their painted border and creates broken corners. In the keyboard-keyboard cut, structural frames also stay axis-aligned; put rotation or skew on borderless accents, stamps, type, and character art instead.
 - Semantic card tones repeat throughout the deck: cyan rays mean insight, green bursts mean success, orange rings mean time, teal diagonals mean signal, sage contours mean physical hardware, violet grids mean software/system, red stripes mean warning, magenta dashed frames mean protocol boundaries, and pink dots mean external systems.
 - Slow ray rotation, floating stamps, chromatic title drift, cameo movement, and objective pulses run only while their slide is present and collapse under `prefers-reduced-motion`.
 
@@ -133,6 +134,8 @@ The standalone PNGs under `assets/manga/` were copied from the project root and 
 `assets/keyboard/keyboard-keyboard.jpg` was copied from the sibling `keyboard-keyboard` project's `images/keyboard-keyboard.jpg`; `keyboard-keyboard.webp` is the optimized delivery copy used by the deck.
 
 `assets/pcb-rework/*.png` are project-owned photographs supplied by the presenter showing the keyboard PCB bodge wires and the actual U1 removal/replacement. The matching `.webp` files are optimized delivery copies used by the keyboard-keyboard field-guide slides.
+
+`assets/electronics-tips/assembly/hand-smt-placement.webp` is an optimized delivery copy of Wikimedia Commons contributor Aisart's “Soldering a 0805,” showing soldering tweezers on a small surface-mount component. The source is licensed CC BY-SA 3.0 / GFDL and is available at `https://commons.wikimedia.org/wiki/File:Soldering_a_0805.jpg`. `assets/electronics-tips/assembly/pick-and-place-line.webp` is an optimized delivery copy of Wikimedia Commons contributor Shixart1985's photograph “Machine places components on a circuit board during manufacturing in a factory environment,” licensed CC BY 2.0 and available at `https://commons.wikimedia.org/wiki/File:Machine_places_components_on_a_circuit_board_during_manufacturing_in_a_factory_environment.jpg`. Both images are cropped in CSS for the factory-assembly slide; no endorsement by the photographers is implied.
 
 `assets/kicad/board-top-crop.png` and `copper-routing.svg` were regenerated with KiCad 9 CLI from sibling repo `keyboard-keyboard`, branch `main`, commit `58f0e0e`. They show that source snapshot rather than a conceptual recreation; their canvases were cropped for stage readability.
 
