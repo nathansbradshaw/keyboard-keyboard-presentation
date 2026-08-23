@@ -6371,34 +6371,64 @@ img.schematic-example.real-schematic-render {
 .parts-count strong { color: var(--magenta); font: 1000 85px/.9 ui-monospace, monospace; letter-spacing: -.08em; }
 .parts-count--finish strong { color: var(--yellow); font-size: 108px; }
 .parts-count span { font-size: 20px; font-weight: 850; }
-.parts-count--finish:has(.parts-candidate-photo) {
+.parts-count--finish:has(.parts-selected-component) {
   grid-template-rows: auto 104px auto auto;
   gap: 6px;
   padding: 13px 15px 12px;
 }
-.parts-count--finish:has(.parts-candidate-photo) strong { font-size: 66px; line-height: .78; }
-.parts-count--finish:has(.parts-candidate-photo) span { font-size: 15px; }
-.parts-candidate-photo {
-  position: relative;
+.parts-count--finish:has(.parts-selected-component) > b {
+  color: var(--yellow);
+  font: 1000 48px/.82 ui-monospace, monospace;
+  letter-spacing: -.08em;
+}
+.parts-count--finish:has(.parts-selected-component) > span { font-size: 15px; }
+.parts-selected-component {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   height: 104px;
-  margin: 0;
-  overflow: hidden;
   border: 3px solid var(--paper);
-  background: #0e1917;
-}
-.parts-candidate-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
-.parts-candidate-photo figcaption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 5px 7px 4px;
-  background: rgba(16,25,24,.86);
-  color: var(--cyan);
-  font: 1000 9px/1 ui-monospace, monospace;
-  letter-spacing: .08em;
+  background: linear-gradient(145deg, #253632, #101715);
   text-align: left;
+}
+.parts-selected-component > i {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 62px;
+  margin-left: 13px;
+  border: 3px solid var(--paper);
+  border-radius: 5px;
+  background: #090d0c;
+  box-shadow: -12px 0 0 -9px var(--cyan), 12px 0 0 -9px var(--cyan);
+  color: var(--cyan);
+  font-style: normal;
+}
+.parts-selected-component > i::before,
+.parts-selected-component > i::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  width: 5px;
+  height: 17px;
+  background: var(--paper);
+}
+.parts-selected-component > i::before { left: 10px; box-shadow: 17px 0 0 var(--paper); }
+.parts-selected-component > i::after { right: 10px; }
+.parts-selected-component > i span { font: 1000 15px/1 ui-monospace, monospace; }
+.parts-selected-component > div { display: grid; gap: 7px; }
+.parts-selected-component > div strong {
+  color: var(--yellow);
+  font: 1000 27px/.9 ui-monospace, monospace;
+  letter-spacing: -.05em;
+}
+.parts-selected-component > div span {
+  color: var(--cyan);
+  font: 900 10px/1 ui-monospace, monospace;
+  letter-spacing: .08em;
 }
 .parts-filter-stack {
   position: relative;
@@ -7792,20 +7822,16 @@ img.schematic-example.real-schematic-render {
 }
 .reveal .slides section.piano-forte-slide .piano-forte-reaction {
   opacity: 0;
+  visibility: hidden;
   transition: none;
 }
-.reveal .slides section.piano-forte-slide .piano-forte-reaction--question,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-principle.visible) .piano-forte-reaction--principle,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-example--soft.visible) .piano-forte-reaction--soft,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-example--loud.visible) .piano-forte-reaction--loud,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-payoff.visible) .piano-forte-reaction--solved {
+.reveal .slides section.piano-forte-slide:not(:has(.piano-forte-stage .current-fragment)) .piano-forte-reaction--question,
+.reveal .slides section.piano-forte-slide:has(.piano-forte-principle.current-fragment) .piano-forte-reaction--principle,
+.reveal .slides section.piano-forte-slide:has(.piano-forte-example--soft.current-fragment) .piano-forte-reaction--soft,
+.reveal .slides section.piano-forte-slide:has(.piano-forte-example--loud.current-fragment) .piano-forte-reaction--loud,
+.reveal .slides section.piano-forte-slide:has(.piano-forte-payoff.current-fragment) .piano-forte-reaction--solved {
   opacity: .23;
-}
-.reveal .slides section.piano-forte-slide:has(.piano-forte-principle.visible) .piano-forte-reaction--question,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-example--soft.visible) .piano-forte-reaction--principle,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-example--loud.visible) .piano-forte-reaction--soft,
-.reveal .slides section.piano-forte-slide:has(.piano-forte-payoff.visible) .piano-forte-reaction--loud {
-  opacity: 0;
+  visibility: visible;
 }
 
 /* 12–14b · origin, inheritance, licensing, and interruption story beats. */
