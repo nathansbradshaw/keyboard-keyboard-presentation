@@ -15,11 +15,10 @@ let delta = adc_value.abs_diff(baseline);</code></pre>
         <div class="filter-deep-dive">
             <div class="sample-window"><i>401</i><i>406</i><i>409</i><i>412</i><span>average → 407</span></div>
             <div class="filter-facts">
-                <p><strong>O(1)</strong> update—replace one sample in a rolling sum.</p>
-                <p><strong>4 entries</strong> makes division a two-bit shift.</p>
-                <p><strong>≈ 1.5 ms</strong> average age at a 1 kHz sample rate.</p>
+                <p><strong>O(1)</strong> rolling-sum update</p>
+                <p><strong>4 samples</strong> · two-bit divide</p>
+                <p><strong>≈ 1.5 ms</strong> average age</p>
             </div>
-            <div class="threshold-rail"><span>release 100</span><span>first 150</span><span>second 250</span></div>
         </div>
     </div>
     <aside class="notes">

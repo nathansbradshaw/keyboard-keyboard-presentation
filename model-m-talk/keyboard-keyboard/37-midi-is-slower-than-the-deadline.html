@@ -27,7 +27,7 @@ fn send_byte(byte: u8) {
         <div class="wire-math">
             <div class="midi-packet"><span>status</span><span>note</span><span>velocity</span><code>9n kk vv</code></div>
             <div class="wire-equation"><span>3 bytes × 10 UART bits</span><b>30 / 31,250</b><strong>≈ 0.96 ms</strong></div>
-            <p><strong>Queue 64:</strong> absorb bursts; never make UART backpressure the scanner’s problem.</p>
+            <p><strong>Queue 64:</strong> scan now, send later.</p>
         </div>
     </div>
     <aside class="notes">

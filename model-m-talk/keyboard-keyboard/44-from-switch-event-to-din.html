@@ -1,0 +1,52 @@
+<section class="slide layout-content midi-code-path-slide" data-auto-animate data-beat="midi-code-path">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">経路</span> · MIDI FIELD GUIDE · 15 · <code>process_events</code></span>
+        <h2>Follow one press from intent to DIN</h2>
+    </header>
+
+    <div class="content midi-code-path-stage">
+        <div class="midi-event-path" data-stagger=".midi-path-node, .midi-path-arrow" data-stagger-group="2" data-stagger-effect="step-wipe">
+            <article class="midi-path-node midi-path-node--sense"><small>PRIORITY 15</small><b>01</b><strong>Switch state</strong><span>cross second threshold</span><code>NoteOn { velocity }</code></article>
+            <div class="midi-path-arrow">→</div>
+            <article class="midi-path-node midi-path-node--queue"><small>BOUNDARY</small><b>02</b><strong>Queue intent</strong><span>fixed capacity: 64</span><code>(switch_idx, event)</code></article>
+            <div class="midi-path-arrow">→</div>
+            <article class="midi-path-node midi-path-node--route"><small>PRIORITY 2</small><b>03</b><strong>Route it</strong><span>note · octave · channel</span><code>process_events</code></article>
+            <div class="midi-path-arrow">→</div>
+            <article class="midi-path-node midi-path-node--wire"><small>TRANSPORT</small><b>04</b><strong>Serialize</strong><span>status · note · velocity</span><code>USART1 → DIN</code></article>
+        </div>
+
+        <div class="midi-routing-example fragment step-panel" data-fragment-index="4">
+            <div><small>MELODY KEY</small><code>switch 0 · velocity 100</code></div>
+            <span>→</span>
+            <div><small>TABLE + SETTINGS</small><code>note 54 · channel 1</code></div>
+            <span>→</span>
+            <div class="midi-routing-bytes"><small>WIRE BYTES</small><code>90 36 64</code></div>
+        </div>
+
+        <div class="midi-code-path-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">検出と送信を分離する</span>
+            <strong>The scan owns time. The MIDI task owns the wire.</strong>
+        </div>
+
+        <aside class="midi-rx-caveat fragment step-panel" data-fragment-index="6">
+            <b>RX TODAY</b><span>USART1 receives bytes and flashes LED2, but message parsing is future work.</span>
+        </aside>
+    </div>
+
+    <aside class="notes">
+        Follow one concrete melody key. At priority 15, the switch state machine sees
+        the second threshold and creates SwitchEvent::NoteOn with a computed velocity.
+        timer_handler pairs that semantic event with the switch index and puts it in
+        the fixed 64-entry queue. It then spawns process_events and returns to its
+        scan work. At priority 2, process_events looks up the musical note, applies
+        the octave setting, selects the melody or drum channel, and calls MidiSender.
+        For switch zero at the default octave setting and velocity 100, the table's
+        note 78 is transposed down two octaves to note 54, hexadecimal 0x36, on
+        channel 1: bytes 90 36 64. MidiSender blocks while the UART serializes those
+        bytes, but only in the low-priority task. This is why MIDI never steals the
+        one-millisecond scan deadline. Be explicit about the
+        current receive limitation: bytes are drained only to show activity on LED2;
+        there is no MIDI parser or thru behavior yet. Closing transition: the final
+        engineering boundary is now visible from magnetic motion to musical message.
+    </aside>
+</section>

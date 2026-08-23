@@ -4,17 +4,16 @@
         <h2>Observability is a hardware feature</h2>
     </header>
     <div class="content debug-grid" data-stagger=".card" data-stagger-group="2">
-        <div class="card tint" data-tone="signal"><h3>RTT logs</h3><p>Raw ADC, filtered value, baseline, delta, and emitted event.</p></div>
-        <div class="card" data-tone="system"><h3>DIAG_LOGGING</h3><p>Compile detailed traces in only when the timing budget permits.</p></div>
-        <div class="card yellow" data-tone="system"><h3>Probe + GDB</h3><p>Flash, halt, inspect memory, and catch panics on the target.</p></div>
-        <div class="card" data-tone="insight"><h3>Three LEDs</h3><p>Heartbeat, MIDI TX, and MIDI RX without attaching a computer.</p></div>
-        <div class="card magenta" data-tone="signal"><h3>128×32 OLED</h3><p>Channels, settings, calibration state, and the last event.</p></div>
-        <div class="card dark" data-tone="boundary"><h3>MIDI monitor</h3><p>Verify bytes after firmware but before the synthesizer.</p></div>
+        <div class="card tint" data-tone="signal"><h3>RTT logs</h3><p>Raw → filtered → event</p></div>
+        <div class="card" data-tone="system"><h3>DIAG_LOGGING</h3><p>Detailed traces when timing permits</p></div>
+        <div class="card yellow" data-tone="system"><h3>Probe + GDB</h3><p>Flash · halt · inspect</p></div>
+        <div class="card" data-tone="insight"><h3>Three LEDs</h3><p>Heartbeat · MIDI TX · MIDI RX</p></div>
+        <div class="card magenta" data-tone="signal"><h3>128×32 OLED</h3><p>Channels · calibration · last event</p></div>
+        <div class="card dark" data-tone="boundary"><h3>MIDI monitor</h3><p>Bytes before the synthesizer</p></div>
 
         <div class="firmware-debug-payoff fragment step-punch" data-fragment-index="3">
             <span lang="ja">層ごとに証拠を残す</span>
             <strong>Sensor → state → queue → bytes → sound</strong>
-            <p>Instrument every boundary, including queue overflow and missed deadlines.</p>
         </div>
     </div>
     <aside class="notes">

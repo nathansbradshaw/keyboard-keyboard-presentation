@@ -15,22 +15,22 @@
             <article class="firmware-file firmware-file--target">
                 <small>.cargo/config.toml</small>
                 <strong>thumbv7em-none-eabihf</strong>
-                <span>Cortex-M7 + hardware floating point</span>
+                <span>CPU target</span>
             </article>
             <article class="firmware-file firmware-file--memory">
                 <small>memory.x</small>
                 <strong>FLASH · DTCMRAM · SRAM</strong>
-                <span>The linker places code and data in real silicon.</span>
+                <span>Memory map</span>
             </article>
             <article class="firmware-file firmware-file--probe">
                 <small>Embed.toml</small>
                 <strong>STM32H750V</strong>
-                <span>Probe, flash, RTT logs, and a GDB connection.</span>
+                <span>Probe + debug</span>
             </article>
             <article class="firmware-file firmware-file--runtime">
                 <small>src/main.rs</small>
                 <strong><code>#![no_std]</code> + RTIC</strong>
-                <span>No operating system. Interrupts are the scheduler.</span>
+                <span>Runtime + scheduler</span>
             </article>
         </div>
 
@@ -38,7 +38,6 @@
             <div class="firmware-terminal-bar"><i></i><i></i><i></i><span>firmware</span></div>
             <pre><code class="language-bash">rustup target add thumbv7em-none-eabihf
 cargo run --release</code></pre>
-            <p><code>cargo</code> builds for the configured target; the repository’s runner hands the ELF to <code>probe-rs</code>.</p>
             <b>YOUR FIRST CONTRACT</b>
             <span>MCU + memory map + debug probe must agree.</span>
         </aside>

@@ -94,6 +94,13 @@
     </div>
 
     <aside class="notes">
-TODO
+        A Hall sensor reports continuously as the magnet moves with the key. The
+        firmware does not need an infinite set of thresholds; it chooses two fixed
+        positions and measures the elapsed time between them. A slow press takes
+        longer to cross that distance and maps to a low MIDI velocity. A fast press
+        crosses quickly and maps to a high velocity. The 70 ms / velocity 18 and
+        8 ms / velocity 116 examples make that inverse relationship visible; the
+        production mapping spans MIDI velocity 1 through 127. Transition: now that
+        the core sensing idea works, zoom out to how someone builds the whole board.
     </aside>
 </section>

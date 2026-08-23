@@ -1,0 +1,73 @@
+<section class="slide layout-content midi-setup-slide" data-auto-animate data-beat="midi-uart-setup">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">設定</span> · MIDI FIELD GUIDE · 14 · <code>main.rs</code> + <code>midi.rs</code></span>
+        <h2>USART1 becomes a MIDI port</h2>
+    </header>
+
+    <div class="content midi-setup-stage">
+        <article class="midi-setup-code midi-setup-code--uart">
+            <small>1 · CONFIGURE THE PERIPHERAL</small>
+            <pre><code class="language-rust">let tx = daisy13.into_alternate::&lt;7&gt;();
+let rx = daisy14.into_alternate::&lt;7&gt;();
+
+let serial = USART1.serial(
+    (tx, rx),
+    SerialConfig {
+        baudrate: 31_250_u32.bps(),
+        ..Default::default()
+    },
+    clocks,
+)?;
+
+let (tx, midi_rx) = serial.split();
+let midi_sender = MidiSender::new(tx, 0);</code></pre>
+        </article>
+
+        <article class="midi-setup-code midi-setup-code--sender fragment step-panel" data-fragment-index="3">
+            <small>2 · ENCODE A MESSAGE</small>
+            <pre><code class="language-rust">pub fn note_on(
+    &amp;mut self,
+    note: u8,
+    velocity: u8,
+) {
+    let status = 0x90 | self.channel;
+    self.send_byte(status);
+    self.send_byte(note &amp; 0x7F);
+    self.send_byte(velocity &amp; 0x7F);
+}
+
+fn send_byte(&amp;mut self, byte: u8) {
+    nb::block!(self.tx.write(byte)).ok();
+}</code></pre>
+        </article>
+
+        <div class="midi-hardware-rail fragment step-panel" data-fragment-index="4">
+            <article><b>D13</b><small>USART1_TX</small><span>DIN-5 MIDI out</span></article>
+            <div>→</div>
+            <article><b>31,250</b><small>BAUD · 8-N-1</small><span>standard MIDI rate</span></article>
+            <div>→</div>
+            <article><b>D14</b><small>USART1_RX</small><span>6N138 isolated input</span></article>
+        </div>
+
+        <div class="midi-setup-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">UART が運ぶ。MIDI が意味を与える。</span>
+            <strong>UART moves bytes. <code>MidiSender</code> gives them meaning.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        There is no special MIDI peripheral inside the STM32. At boot, main.rs puts
+        Daisy pins D13 and D14 into alternate function 7, configures USART1 for
+        31,250 baud with the HAL defaults, splits it into transmit and receive halves,
+        and gives TX to MidiSender. The sender begins on zero-indexed channel zero,
+        displayed to musicians as channel 1. MidiSender is intentionally thin. It
+        combines the message family with the four-bit channel, masks each data byte
+        to seven bits, and writes the bytes through the UART. The snippets are
+        condensed from the repository: some ownership and clock arguments are
+        shortened for readability. Physically, TX reaches the DIN-5 output circuit;
+        RX enters through the 6N138 optocoupler. The current receive path does not
+        decode messages: timer_handler drains available RX bytes and flashes the MIDI
+        RX LED. Transition: place that transport at the end of the real-time event
+        path and follow one key press all the way out.
+    </aside>
+</section>

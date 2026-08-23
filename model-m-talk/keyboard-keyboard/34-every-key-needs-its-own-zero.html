@@ -6,11 +6,11 @@
 
     <div class="content baseline-deep-stage">
         <div class="baseline-sequence" data-stagger=".baseline-step" data-stagger-effect="step-wipe">
-            <article class="baseline-step"><b>01</b><div><small>BOOT</small><strong>64 samples / slot</strong><span>Average the actual resting board.</span></div></article>
-            <article class="baseline-step"><b>02</b><div><small>PRIME</small><strong>Fill all 4 filter slots</strong><span>No fake ramp from zero on startup.</span></div></article>
-            <article class="baseline-step"><b>03</b><div><small>IDLE ONLY</small><strong>IIR · 1 / 1024</strong><span>Follow temperature and supply drift slowly.</span></div></article>
-            <article class="baseline-step"><b>04</b><div><small>GUARDRAIL</small><strong>Clamp to ±40</strong><span>A held chord cannot rewrite “rest.”</span></div></article>
-            <article class="baseline-step"><b>05</b><div><small>ESCAPE HATCH</small><strong>HE75 recalibrates</strong><span>Snapshot a new known-good resting state.</span></div></article>
+            <article class="baseline-step"><b>01</b><div><small>BOOT</small><strong>64 samples / slot</strong></div></article>
+            <article class="baseline-step"><b>02</b><div><small>PRIME</small><strong>Fill 4 filter slots</strong></div></article>
+            <article class="baseline-step"><b>03</b><div><small>IDLE ONLY</small><strong>IIR · 1 / 1024</strong></div></article>
+            <article class="baseline-step"><b>04</b><div><small>GUARDRAIL</small><strong>Clamp to ±40</strong></div></article>
+            <article class="baseline-step"><b>05</b><div><small>ESCAPE HATCH</small><strong>HE75 recalibrates</strong></div></article>
         </div>
 
         <aside class="baseline-code-card fragment step-panel" data-fragment-index="5">
@@ -26,12 +26,11 @@ if state.is_idle()
         anchor.saturating_add(40),
     );
 }</code></pre>
-            <p><code>abs_diff</code> accepts either magnet polarity. Tracking only while idle protects the reference.</p>
         </aside>
 
         <div class="baseline-warning fragment step-punch" data-fragment-index="6">
             <b>CALIBRATION RULE</b>
-            <strong>Nothing may be pressed when “rest” is learned.</strong>
+            <strong>Nothing pressed while learning “rest.”</strong>
         </div>
     </div>
 

@@ -1,0 +1,63 @@
+<section class="slide layout-content midi-vocabulary-slide" data-auto-animate data-beat="midi-vocabulary">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">語彙</span> · MIDI FIELD GUIDE · 13 · <code>midi.rs</code></span>
+        <h2>One cable carries a whole performance</h2>
+    </header>
+
+    <div class="content midi-vocabulary-stage">
+        <div class="midi-message-grid" data-stagger=".midi-message-card" data-stagger-group="2">
+            <article class="midi-message-card midi-message-card--notes">
+                <small><code>8n / 9n</code> · 3 BYTES</small>
+                <strong>Note Off / On</strong>
+                <span>pitch + strike velocity</span>
+                <em>70 melody keys</em>
+            </article>
+            <article class="midi-message-card midi-message-card--cc">
+                <small><code>Bn</code> · 3 BYTES</small>
+                <strong>Control Change</strong>
+                <span>controller number + value</span>
+                <em>pots · vibrato · CC 123</em>
+            </article>
+            <article class="midi-message-card midi-message-card--program">
+                <small><code>Cn</code> · 2 BYTES</small>
+                <strong>Program Change</strong>
+                <span>select a receiver voice</span>
+                <em>triangle · square · saw</em>
+            </article>
+            <article class="midi-message-card midi-message-card--bend">
+                <small><code>En</code> · 3 BYTES</small>
+                <strong>Pitch Bend</strong>
+                <span>14-bit value · center 8192</span>
+                <em>two data bytes: LSB + MSB</em>
+            </article>
+        </div>
+
+        <aside class="midi-channel-card fragment step-panel" data-fragment-index="4">
+            <small>OUR DEFAULT ROUTING</small>
+            <div><b>CH 1</b><strong>Melody</strong><span>Wicki–Hayden note map</span></div>
+            <div><b>CH 10</b><strong>Drums</strong><span>20 General MIDI notes</span></div>
+            <p>Channels and programs can be changed on the OLED settings screen.</p>
+        </aside>
+
+        <div class="midi-vocabulary-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">同じ線。違う意味。</span>
+            <strong>The status byte says how to interpret the data that follows.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        These are the message families implemented by MidiSender. Note On and Note
+        Off carry note and velocity. Control Change carries a controller number and
+        its value; the firmware uses CC for twelve pots, vibrato on CC 1, volume when
+        a mapped pot uses CC 7, and All Notes Off on CC 123. Program Change is the
+        exception here: it has only one data byte, so two bytes total. Three special
+        keys select programs zero, one, and two for triangle, square, and saw in the
+        paired synth. Pitch bend packs a fourteen-bit value into two seven-bit data
+        bytes, with 0x2000, decimal 8192, as center. By default melody uses channel 1
+        and drum pads use channel 10; code stores those as zero and nine. Both are
+        editable in the settings screen. The important protocol idea is that the
+        upper nibble of the status byte selects the message family, while the lower
+        nibble selects the channel. Transition: now configure an ordinary UART to
+        put those bytes onto a MIDI cable.
+    </aside>
+</section>

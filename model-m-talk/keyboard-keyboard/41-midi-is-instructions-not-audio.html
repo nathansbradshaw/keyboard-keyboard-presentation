@@ -1,0 +1,59 @@
+<section class="slide layout-content midi-primer-slide" data-auto-animate data-beat="midi-primer">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">命令</span> · MIDI FIELD GUIDE · 12</span>
+        <h2>MIDI is instructions, not audio</h2>
+    </header>
+
+    <div class="content midi-primer-stage">
+        <div class="midi-contract" data-stagger=".midi-contract-node, .midi-contract-arrow" data-stagger-group="2" data-stagger-effect="step-wipe">
+            <article class="midi-contract-node midi-contract-node--controller">
+                <small>CONTROLLER</small>
+                <strong>Model M</strong>
+                <span>decides what happened</span>
+            </article>
+            <div class="midi-contract-arrow">→</div>
+            <article class="midi-contract-node midi-contract-node--message">
+                <small>MESSAGE</small>
+                <strong>NoteOn</strong>
+                <code>90 3C 64</code>
+            </article>
+            <div class="midi-contract-arrow">→</div>
+            <article class="midi-contract-node midi-contract-node--receiver">
+                <small>RECEIVER</small>
+                <strong>Synth</strong>
+                <span>decides how it sounds</span>
+            </article>
+        </div>
+
+        <div class="midi-byte-breakdown fragment step-panel" data-fragment-index="3">
+            <article class="midi-byte midi-byte--status"><b>90</b><small>STATUS</small><strong>Note On · channel 1</strong><span><code>1001 nnnn</code></span></article>
+            <article class="midi-byte midi-byte--note"><b>3C</b><small>DATA 1</small><strong>Note 60 · middle C</strong><span>0–127</span></article>
+            <article class="midi-byte midi-byte--velocity"><b>64</b><small>DATA 2</small><strong>Velocity 100</strong><span>0–127</span></article>
+        </div>
+
+        <div class="midi-primer-facts fragment step-panel" data-fragment-index="4">
+            <span><b>16</b> logical channels share one cable</span>
+            <span><b>7-bit</b> data makes 0–127 the recurring range</span>
+            <span><b>NoteOff</b> ends the note: <code>80 3C 00</code></span>
+        </div>
+
+        <div class="midi-primer-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">演奏を送る。音は送らない。</span>
+            <strong>Send the performance. Let the receiver make the sound.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        MIDI is a control protocol. It does not put audio on the cable. Our keyboard
+        is the controller: it decides that a key became note 60 with velocity 100.
+        The receiving synthesizer chooses the oscillator, sample, envelope, effects,
+        speakers, and therefore the actual sound. Read the example in hexadecimal.
+        0x90 is Note On on MIDI channel 1; the firmware stores that channel as zero
+        because the low nibble ranges from zero through fifteen. 0x3C is decimal 60,
+        middle C. 0x64 is decimal 100, the strike velocity. Channel voice data bytes
+        are seven-bit values, so notes, ordinary velocities, controller numbers, and
+        controller values recur in the range zero through 127. A separate Note Off
+        ends the note. Transition: Note On is only one word in the performance
+        vocabulary that this keyboard sends.
+    </aside>
+</section>

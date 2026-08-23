@@ -27,8 +27,7 @@
                     <figcaption><b>ACTUAL PCB</b><span>KiCad</span></figcaption>
                 </figure>
                 <small>KiCad</small>
-                <h3>Plot all the files</h3>
-                <p>Copper, mask, silk, outline, paste, drill data, etc.</p>
+                <h3>Plot</h3>
             </article>
 
             <span class="kicad-export-arrow fragment" data-fragment-index="1" aria-hidden="true">→</span>
@@ -46,8 +45,7 @@
                     <figcaption><b>REAL UPLOAD</b><span>Gerber preview</span></figcaption>
                 </figure>
                 <small>Before money</small>
-                <h3>Double Check The Design</h3>
-                <p>Ensure that you uploaded the correct thing.</p>
+                <h3>Inspect</h3>
             </article>
 
             <span class="kicad-export-arrow fragment" data-fragment-index="2" aria-hidden="true">→</span>
@@ -65,8 +63,7 @@
                     <figcaption><b>$44.90</b><span>5 boards · before shipping</span></figcaption>
                 </figure>
                 <small>Fabricator</small>
-                <h3>Drain The Piggy Bank</h3>
-                <p>2 layers · FR-4 · 1.6 mm · 447.04 × 162.81 mm.</p>
+                <h3>Order</h3>
             </article>
         </div>
 
@@ -76,12 +73,20 @@
         >
             <span class="kicad-export-check" aria-hidden="true">✓</span>
             <strong>The design becomes manufacturing instructions.</strong>
-            <p>DRC clean · outline closed · drills visible · layers aligned</p>
             <span class="kicad-export-sfx" lang="ja">発注!</span>
         </div>
     </div>
 
     <aside class="notes">
-        TODO
+        The fabrication handoff has three beats. First, plot the manufacturing
+        layers and drill data from KiCad: copper, mask, silkscreen, outline, paste,
+        and holes. Second, inspect the uploaded Gerbers rather than assuming the
+        editor view is what the factory received. Confirm the outline is closed,
+        drills are visible, layers align, and the upload is the intended revision.
+        Third, check the order itself. This project used two-layer, 1.6 mm FR-4 at
+        447.04 by 162.81 millimeters; the shown quote is $44.90 for five boards
+        before shipping. The joke is that clicking Order turns design decisions
+        into expensive physical facts. Transition: keep the workflow manageable by
+        reducing KiCad to seven recurring questions.
     </aside>
 </section>

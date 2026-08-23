@@ -8,31 +8,30 @@
         <div class="priority-ladder" data-stagger=".priority-lane" data-stagger-effect="step-wipe">
             <article class="priority-lane priority-lane--scan">
                 <b>P15</b>
-                <div><small>HARD DEADLINE · TIM2</small><strong>Scan → filter → enqueue</strong><span>Every 1 ms. Keep it bounded.</span></div>
+                <div><small>HARD DEADLINE · TIM2</small><strong>Scan → filter → enqueue</strong></div>
                 <code>timer_handler</code>
             </article>
             <article class="priority-lane priority-lane--audio">
                 <b>P8</b>
-                <div><small>DMA INTERRUPT</small><strong>Audio pass-through</strong><span>Serviced above control-plane work.</span></div>
+                <div><small>DMA INTERRUPT</small><strong>Audio pass-through</strong></div>
                 <code>audio_handler</code>
             </article>
             <article class="priority-lane priority-lane--midi">
                 <b>P2</b>
-                <div><small>SOFT DEADLINE</small><strong>Route event → write MIDI</strong><span>May block on UART without delaying the next scan.</span></div>
+                <div><small>SOFT DEADLINE</small><strong>Route event → write MIDI</strong></div>
                 <code>process_events</code>
             </article>
             <article class="priority-lane priority-lane--display">
                 <b>P1</b>
-                <div><small>BEST EFFORT</small><strong>Draw the OLED</strong><span>Human feedback can wait.</span></div>
+                <div><small>BEST EFFORT</small><strong>Draw the OLED</strong></div>
                 <code>display_update</code>
             </article>
         </div>
 
         <aside class="priority-contract fragment step-panel" data-fragment-index="4">
             <small>RTIC RESOURCE MODEL</small>
-            <div><b>LOCAL</b><span>Owned by one task</span></div>
-            <div><b>SHARED</b><span>Accessed through a lock</span></div>
-            <p>Interrupt safety becomes an architectural constraint the compiler can check.</p>
+            <div><b>LOCAL</b><span>One owner</span></div>
+            <div><b>SHARED</b><span>Locked access</span></div>
         </aside>
 
         <div class="priority-payoff fragment step-punch" data-fragment-index="5">

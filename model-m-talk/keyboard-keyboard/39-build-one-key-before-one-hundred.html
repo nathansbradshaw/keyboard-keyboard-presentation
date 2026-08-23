@@ -6,13 +6,13 @@
 
     <div class="content firmware-recipe-stage">
         <div class="recipe-path" data-stagger=".recipe-step, .recipe-arrow" data-stagger-group="2" data-stagger-effect="step-wipe">
-            <article class="recipe-step"><b>01</b><small>PROVE OUTPUT</small><strong>Send middle C</strong><span>Fixed note. Fixed velocity. MIDI monitor sees it.</span><em>TEST: transport</em></article>
+            <article class="recipe-step"><b>01</b><small>PROVE OUTPUT</small><strong>Send middle C</strong><span>Fixed note + velocity</span><em>TEST: transport</em></article>
             <div class="recipe-arrow">→</div>
-            <article class="recipe-step"><b>02</b><small>PROVE INPUT</small><strong>Log one sensor</strong><span>Record rest, slow press, hard press, and release.</span><em>TEST: signal margin</em></article>
+            <article class="recipe-step"><b>02</b><small>PROVE INPUT</small><strong>Log one sensor</strong><span>Rest + press + release</span><em>TEST: signal margin</em></article>
             <div class="recipe-arrow">→</div>
-            <article class="recipe-step"><b>03</b><small>PROVE INTENT</small><strong>Emit once</strong><span>Hysteresis + debounce + one NoteOn / NoteOff pair.</span><em>TEST: event trace</em></article>
+            <article class="recipe-step"><b>03</b><small>PROVE INTENT</small><strong>Emit once</strong><span>One NoteOn / NoteOff</span><em>TEST: event trace</em></article>
             <div class="recipe-arrow">→</div>
-            <article class="recipe-step"><b>04</b><small>PROVE SCALE</small><strong>Scan every key</strong><span>Map geometry, queue bursts, and measure the deadline.</span><em>TEST: worst-case chord</em></article>
+            <article class="recipe-step"><b>04</b><small>PROVE SCALE</small><strong>Scan every key</strong><span>Map + queue + deadline</span><em>TEST: worst-case chord</em></article>
         </div>
 
         <div class="recipe-variants fragment step-panel" data-fragment-index="4">
@@ -24,7 +24,6 @@
         <div class="recipe-payoff fragment step-punch" data-fragment-index="5">
             <span lang="ja">各段階で音を出す</span>
             <strong>Keep a sound-producing checkpoint at every stage.</strong>
-            <p>When step 4 fails, steps 1–3 are still known good.</p>
         </div>
     </div>
 
