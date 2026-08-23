@@ -15,6 +15,39 @@ document.querySelectorAll("[data-stagger]").forEach((container) => {
   });
 });
 
+// Give plain Reveal fragments the same intentional entrance motion as the
+// deck's authored step-* effects. Built-in Reveal effects keep their native
+// behavior, and any fragment with an explicit step-* class remains untouched.
+const revealFragmentEffects = new Set([
+  "custom",
+  "fade-out",
+  "fade-up",
+  "fade-down",
+  "fade-left",
+  "fade-right",
+  "fade-in-then-out",
+  "fade-in-then-semi-out",
+  "semi-fade-out",
+  "current-visible",
+  "grow",
+  "shrink",
+  "strike",
+  "highlight-red",
+  "highlight-green",
+  "highlight-blue",
+  "highlight-current-red",
+  "highlight-current-green",
+  "highlight-current-blue",
+]);
+
+document.querySelectorAll(".fragment").forEach((fragment) => {
+  const hasEntranceEffect = [...fragment.classList].some(
+    (className) =>
+      className.startsWith("step-") || revealFragmentEffects.has(className),
+  );
+  if (!hasEntranceEffect) fragment.classList.add("step-rise");
+});
+
 // Reveal's speaker view uses per-slide timing data. These defaults create a
 // realistic 35–45 minute talk while reserving a longer block for the demo.
 document.querySelectorAll("section.slide").forEach((slide) => {

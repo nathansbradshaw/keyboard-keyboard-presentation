@@ -238,8 +238,8 @@
   --manga-cameo: url("../assets/characters/faces/kaori/scheming.png");
 }
 .component-constraints-slide::before { background-position: right -48px bottom -140px, center, center, 0 0; }
-.parts-filter:nth-child(odd) { border-left-width: 8px; }
-.parts-filter:nth-child(even) { border-right-width: 8px; }
+.parts-filter:nth-of-type(odd) { border-left-width: 8px; }
+.parts-filter:nth-of-type(even) { border-right-width: 8px; }
 
 /* 23 · Factory triumph, framed like a versus spread. */
 .reveal .slides section.factory-assembly-slide {

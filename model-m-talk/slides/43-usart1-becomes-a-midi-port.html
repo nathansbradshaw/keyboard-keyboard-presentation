@@ -47,6 +47,10 @@ fn send_byte(&amp;mut self, byte: u8) {
             <article><b>31,250</b><small>BAUD · 8-N-1</small><span>standard MIDI rate</span></article>
             <div>→</div>
             <article><b>D14</b><small>USART1_RX</small><span>6N138 isolated input</span></article>
+            <figure class="midi-hardware-photo">
+                <img src="assets/midi/midi-ports-and-cable.webp" alt="Real five-pin DIN MIDI input, output, and thru ports with a cable connected">
+                <figcaption>THE PHYSICAL PORT</figcaption>
+            </figure>
         </div>
 
         <div class="midi-setup-payoff fragment step-punch" data-fragment-index="5">
@@ -55,6 +59,7 @@ fn send_byte(&amp;mut self, byte: u8) {
         </div>
     </div>
 
+    <img class="slide-corner-reaction" src="assets/characters/faces/mio/confident-big.png" alt="" aria-hidden="true">
     <aside class="notes">
         There is no special MIDI peripheral inside the STM32. At boot, main.rs puts
         Daisy pins D13 and D14 into alternate function 7, configures USART1 for
@@ -67,7 +72,9 @@ fn send_byte(&amp;mut self, byte: u8) {
         shortened for readability. Physically, TX reaches the DIN-5 output circuit;
         RX enters through the 6N138 optocoupler. The current receive path does not
         decode messages: timer_handler drains available RX bytes and flashes the MIDI
-        RX LED. Transition: place that transport at the end of the real-time event
+        RX LED. The photograph shows the physical five-pin DIN interface that these
+        UART settings ultimately drive. Photo by Pretzelpaws, CC BY-SA 3.0.
+        Transition: place that transport at the end of the real-time event
         path and follow one key press all the way out.
     </aside>
 </section>

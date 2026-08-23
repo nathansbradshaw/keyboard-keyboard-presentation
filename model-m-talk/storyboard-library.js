@@ -15,6 +15,14 @@ const characterSets = [
   },
 ];
 
+const fullBodyPoseSets = [
+  { character: "Kaori", folder: "kaori" },
+  { character: "Mio", folder: "mio" },
+  { character: "Ren", folder: "ren" },
+];
+
+const fullBodyPoses = ["neutral", "presenting", "thinking", "celebrating"];
+
 const supportingAssets = [
   { group: "Legacy reactions", kind: "reaction", files: ["brunette-skeptical.png", "brunette-uh-oh.png", "brunette-eureka.png", "blond-panic.png", "blond-exhausted.png", "blond-triumph.png"], root: "assets/characters/reactions/", rights: "project art" },
   { group: "Manga props and cards", kind: "prop", files: ["electronuck-cook.png", "n8-it-works.png", "it-worked.png", "cat-midi-keyboard.png", "nani-reaction.png", "one-more-feature.png", "model-m-card.png", "hall-effect-card.png", "synth-phone-card.png"], root: "assets/manga/", rights: "mixed" },
@@ -24,8 +32,10 @@ const supportingAssets = [
 ];
 
 const faceGrid = document.querySelector("#face-grid");
+const poseGrid = document.querySelector("#pose-grid");
 const assetGrid = document.querySelector("#asset-grid");
 const castExpressionCount = document.querySelector("#cast-expression-count");
+const fullBodyPoseCount = document.querySelector("#full-body-pose-count");
 const emotionEffectCount = document.querySelector("#emotion-effect-count");
 const faceFilterStatus = document.querySelector("#face-filter-status");
 
@@ -92,6 +102,23 @@ if (faceGrid) {
   });
   if (castExpressionCount) {
     castExpressionCount.textContent = `${faceGrid.children.length} cast expressions`;
+  }
+}
+
+if (poseGrid) {
+  fullBodyPoseSets.forEach(({ character, folder }) => {
+    fullBodyPoses.forEach((pose) => {
+      poseGrid.append(makeAssetCard({
+        path: `assets/characters/poses/${folder}/${pose}.png`,
+        title: `${character} · ${titleCase(pose)}`,
+        subtitle: "full-body pose",
+        character,
+        kind: "pose",
+      }));
+    });
+  });
+  if (fullBodyPoseCount) {
+    fullBodyPoseCount.textContent = `${poseGrid.children.length} full-body poses`;
   }
 }
 

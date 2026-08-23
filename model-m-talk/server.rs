@@ -26,7 +26,11 @@ const LIVE_RELOAD_SCRIPT: &str = r#"<script>
     const target = new URL(configuredPath, document.baseURI);
     target.search = location.search;
     target.hash = location.hash;
-    location.replace(target.href);
+    if (target.href === location.href) {
+      location.reload();
+    } else {
+      location.replace(target.href);
+    }
   };
   const poll = async () => {
     try {
@@ -296,7 +300,7 @@ fn send(
     body: &[u8],
 ) -> std::io::Result<()> {
     let headers = format!(
-        "HTTP/1.1 {status}\r\nContent-Type: {content_type}\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+        "HTTP/1.1 {status}\r\nContent-Type: {content_type}\r\nContent-Length: {}\r\nCache-Control: no-store\r\nConnection: close\r\n\r\n",
         body.len()
     );
     stream.write_all(headers.as_bytes())?;

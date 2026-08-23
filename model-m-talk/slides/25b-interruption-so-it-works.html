@@ -1,0 +1,66 @@
+<section
+    class="slide interruption-slide interruption-slide--postfab"
+    data-beat="interruption"
+    data-shot="audience-cutaway"
+    data-emotion="false-confidence"
+    data-timing="25"
+>
+    <div class="interruption-progress" aria-label="The presentation narrative is interrupted">
+        <span>SCHEMATIC</span>
+        <i aria-hidden="true">→</i>
+        <span>DRC ✓</span>
+        <i aria-hidden="true">→</i>
+        <span>PCB ARRIVES</span>
+        <strong><span aria-hidden="true">✕</span> NARRATIVE INTERRUPTED</strong>
+    </div>
+
+    <div class="interruption-stage">
+        <div class="interruption-copy">
+            <span class="interruption-kicker"><span lang="ja">完成した？</span> · BUILD COMPLETE?</span>
+
+            <div class="mb mb--interrupt mb--magenta mb--wide mb--loud interruption-bubble">
+                <div class="mb__body">
+                    <p class="interruption-preface">The checks passed. The factory built it.</p>
+                    <p class="mb__text">So it <em>works</em>, right?</p>
+                </div>
+            </div>
+
+            <p class="interruption-subtext fragment step-pop" data-fragment-index="0">
+                No. It exists. Now we measure it.
+            </p>
+        </div>
+
+        <div class="interruption-developer" aria-label="Mio asks whether a fabricated board must work because its automated checks passed">
+            <div class="developer-window" aria-hidden="true">
+                <div class="developer-window-bar"><i></i><i></i><i></i><span>hardware-ci.yml</span></div>
+                <code><b>✓</b> ERC&nbsp;&nbsp; <b>✓</b> DRC&nbsp;&nbsp; <span>✓ GERBER</span></code>
+            </div>
+            <img
+                src="assets/characters/poses/mio/thinking.png"
+                alt="Mio standing thoughtfully with one hand at her chin"
+            />
+            <div class="developer-id">
+                <small>// AUDIENCE INTERRUPT</small>
+                <strong>OPTIMISTIC SOFTWARE ENGINEER</strong>
+                <span>green checks · strong assumptions · no multimeter yet</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="interruption-sfx" aria-hidden="true">
+        <span lang="ja">完成?!</span>
+        <small>the physical world has entered the chat</small>
+    </div>
+
+    <aside class="notes">
+        Let the green checks create false confidence: “The checks passed. The
+        factory built it. So it works, right?” Then reveal the distinction: “No.
+        It exists. Now we measure it.” ERC and DRC prove that the design follows
+        the rules they were given. Fabrication proves that a factory could make
+        the submitted files. Neither proves the assumptions, component choices,
+        assembly, power behavior, analog signals, or firmware on the physical
+        board. Mio appears here as an optimistic software engineer rather than the
+        recurring corporate skeptic. Transition: the PCB has become evidence, so
+        bring out the measurement and rework toolbelt.
+    </aside>
+</section>

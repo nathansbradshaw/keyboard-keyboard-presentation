@@ -7,8 +7,8 @@
     data-emotion="confidence"
 >
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">実証</span> · ELECTRONICS FIELD GUIDE · 02</span>
-        <h2>Prove one key before buying one PCB</h2>
+        <span class="eyebrow"><span lang="ja">実証</span> · ELECTRONICS FIELD GUIDE · 03</span>
+        <h2>Build a prototype</h2>
     </header>
 
     <div class="content breadboard-poc-stage">
@@ -17,32 +17,33 @@
                 src="assets/research/image_8.webp"
                 alt="The actual keyboard-keyboard proof of concept: five keys wired on breadboards to a microcontroller, sensor boards, and an oscilloscope"
             >
-            <figcaption><b>ACTUAL POC</b><span>Five keys · breadboards · real measurements</span></figcaption>
+            <figcaption><b>ACTUAL POC</b><span>Five keys was all we needed</span></figcaption>
             <span class="breadboard-poc-stamp">IT LIVES!</span>
         </figure>
 
         <div class="breadboard-poc-steps" data-stagger=".breadboard-poc-step" data-stagger-effect="step-pop">
             <article class="breadboard-poc-step breadboard-poc-step--question">
-                <b>01</b><div><small>RISKIEST QUESTION</small><strong>Can key motion become a usable signal?</strong></div>
+                <b>01</b><div><small>RISKIEST QUESTION</small><strong>Can we actually measure velocity?</strong></div>
             </article>
             <article class="breadboard-poc-step breadboard-poc-step--wire">
-                <b>02</b><div><small>BUILD THE THIN SLICE</small><strong>Key + magnet + Hall sensor + ADC</strong></div>
+                <b>02</b><div><small>IS EVERYTHING COMPATIBLE</small><strong>Does the daisy work with the MUX and HE?</strong></div>
             </article>
             <article class="breadboard-poc-step breadboard-poc-step--measure">
-                <b>03</b><div><small>MEASURE, DON'T GUESS</small><strong>Voltage · noise · travel · timing</strong></div>
+                <b>03</b><div><small>ARE THERE UNEXPECTED BEHAVIORS</small><strong>Does the device behave as expected?</strong></div>
             </article>
             <article class="breadboard-poc-step breadboard-poc-step--prove">
-                <b>04</b><div><small>END-TO-END PROOF</small><strong>Press the key → hear the MIDI note</strong></div>
+                <b>04</b><div><small>END-TO-END PROOF</small><strong>Does the small scale device work as expected?</strong></div>
             </article>
         </div>
 
         <div class="breadboard-poc-payoff fragment step-punch" data-fragment-index="5">
             <span lang="ja">小さく証明</span>
             <strong>A breadboard is cheaper than a board revision.</strong>
-            <p>Prove the physics. Then scale.</p>
+
         </div>
     </div>
 
+    <img class="slide-corner-reaction" src="assets/characters/faces/ren/happy-big.png" alt="" aria-hidden="true">
     <aside class="notes">
         This is the actual keyboard-keyboard proof of concept. Before paying for a
         full-size PCB, I put five keys, Hall sensors, the controller, sensor boards,
@@ -57,7 +58,7 @@
         chain to justify the next investment. If one key cannot work on a breadboard,
         one hundred copies on a PCB will only make the mistake more expensive.
         Photo: the presenter's original keyboard-keyboard POC, also used in the
-        discovery deck. Transition: once the physics works, turn the catalog into a
-        constrained parts search.
+        discovery deck. Transition: once the physics works, enter KiCad and follow
+        the board from electrical intent to manufacturing.
     </aside>
 </section>

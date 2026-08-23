@@ -6,11 +6,11 @@ The established Mio and Ren emotions are available at three intensities:
 - `emotion-big.png` — stronger slide-readable acting
 - `emotion-max.png` — maximum comedic overreaction
 
-All files are text-free transparent PNGs with simple TV-anime cel rendering and flat color. The established Mio and Ren sets also use a narrow off-white separation edge.
+All files are text-free transparent PNGs. Mio and Ren follow Kaori's polished anime/manga rendering language: fine dark linework, rich cel contrast, layered hard-edged shadows, controlled blush, glossy hair and eye highlights, dimensional anatomy, and theatrical slide-readable acting. Their silhouettes end in clean alpha rather than a pale sticker border.
 
 ## Mio (美緒)
 
-An original character with dusty-rose hair, gray-violet eyes, and a cream sweatshirt:
+An original character with long, loose espresso-brown waves, subtle smoky-lavender highlights, gray-violet eyes, and lilac-and-gold hair clips. Her relaxed gyaru-influenced outfit is a dusty-pink short-sleeve T-shirt, medium-light blue straight-leg jeans, and white low-top canvas sneakers with pink laces, finished with restrained gold jewelry and dusty-pink nails:
 
 - `confident`
 - `confused`
@@ -21,7 +21,7 @@ An original character with dusty-rose hair, gray-violet eyes, and a cream sweats
 
 ## Ren (蓮)
 
-An original character with navy hair, amber eyes, a charcoal shirt, and a muted-cyan strap:
+An original character with warm medium-brown skin, navy hair in a loose low ponytail, and amber-brown eyes. Ren wears a brick-red short-sleeve T-shirt under a warm off-white button-up worn open with casually rolled sleeves, plus the established muted-cyan diagonal strap:
 
 - `understands`
 - `happy`
@@ -60,3 +60,5 @@ An original high-energy character with a huge coral-pink ponytail, amber-gold ey
 - `knocked-out` — harmless spiral-eyed defeat
 
 Kaori's set currently uses one strong, slide-readable pose per reaction. Add intensity variants only where a specific slide needs them.
+
+Full-body neutral, presenting, thinking, and celebrating poses for all three characters live in `../poses/`. See `../poses/README.md` for their naming and wardrobe details.
