@@ -1,0 +1,61 @@
+<section
+    class="slide layout-content kicad-beginner-slide kicad-habits-slide"
+    data-timing="40"
+    data-beat="kicad-field-guide"
+    data-shot="recap-board"
+    data-emotion="practical"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">設計習慣</span> · KiCad FIELD GUIDE · 00</span>
+        <h2>Keep KiCad small: ask seven questions</h2>
+    </header>
+
+    <div class="content kicad-beginner-stage">
+        <div
+            class="kicad-loop"
+            data-stagger=".kicad-loop-step"
+            data-stagger-effect="step-wipe"
+            data-stagger-group="2"
+        >
+            <div class="kicad-loop-step"><b>01</b><strong>Schematic</strong><span>What connects?</span></div>
+            <div class="kicad-loop-step"><b>02</b><strong>Annotate</strong><span>What is each part?</span></div>
+            <div class="kicad-loop-step"><b>03</b><strong>Footprints</strong><span>What physically fits?</span></div>
+            <div class="kicad-loop-step"><b>04</b><strong>Place</strong><span>Where does it live?</span></div>
+            <div class="kicad-loop-step"><b>05</b><strong>Route</strong><span>Where does copper go?</span></div>
+            <div class="kicad-loop-step"><b>06</b><strong>ERC + DRC</strong><span>What did we break?</span></div>
+            <div class="kicad-loop-step"><b>07</b><strong>Plot</strong><span>What can the fab build?</span></div>
+        </div>
+
+        <aside class="kicad-source-card fragment step-panel" data-fragment-index="4">
+            <span class="badge">THE SOFTWARE ENGINEER'S ADVANTAGE</span>
+            <pre><code class="language-lisp">(general
+  (thickness 1.6))
+
+(layers
+  (0  "F.Cu" power)
+  (2  "B.Cu" signal)
+  (25 "Edge.Cuts" user))</code></pre>
+            <div class="kicad-review-habits">
+                <p><b>COMMIT</b><span>Known-good checkpoints</span></p>
+                <p><b>CHECK</b><span>ERC + DRC as you work</span></p>
+                <p><b>INSPECT</b><span>1:1 print + Gerber viewer</span></p>
+            </div>
+        </aside>
+    </div>
+
+    <aside class="notes">
+        This is the mental map to keep after the three KiCad walkthroughs. The
+        application looks enormous, but the work is a loop of seven ordinary
+        questions: what connects, what each part is called, what package fits,
+        where it lives, where the copper goes, whether the rules still pass, and
+        what the fabricator will actually receive. The project files are
+        structured text, so put the whole project—including custom symbols and
+        footprints—in Git and make known-good checkpoints. Do not save ERC and
+        DRC for the end. For anything mechanical, print the board at one-to-one
+        scale and place the real parts on the paper. Finally, inspect the plotted
+        Gerbers rather than assuming the editor view is what the factory sees.
+        The cheapest board revision is the one caught before checkout.
+        Transition: the next set of habits starts one level lower, with choosing
+        and proving the actual electronic parts.
+    </aside>
+</section>

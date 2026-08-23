@@ -1,0 +1,62 @@
+<section
+    class="slide layout-content breadboard-poc-slide"
+    data-auto-animate
+    data-beat="risk-reduction"
+    data-shot="project-evidence"
+    data-emotion="confidence"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">実証</span> · ELECTRONICS FIELD GUIDE · 02</span>
+        <h2>Prove one key before buying one PCB</h2>
+    </header>
+
+    <div class="content breadboard-poc-stage">
+        <figure class="breadboard-poc-photo fragment step-panel" data-fragment-index="0">
+            <img
+                src="assets/research/image_8.webp"
+                alt="The actual keyboard-keyboard proof of concept: five keys wired on breadboards to a microcontroller, sensor boards, and an oscilloscope"
+            >
+            <figcaption><b>ACTUAL POC</b><span>Five keys · breadboards · real measurements</span></figcaption>
+            <span class="breadboard-poc-stamp">IT LIVES!</span>
+        </figure>
+
+        <div class="breadboard-poc-steps" data-stagger=".breadboard-poc-step" data-stagger-effect="step-pop">
+            <article class="breadboard-poc-step breadboard-poc-step--question">
+                <b>01</b><div><small>RISKIEST QUESTION</small><strong>Can key motion become a usable signal?</strong></div>
+            </article>
+            <article class="breadboard-poc-step breadboard-poc-step--wire">
+                <b>02</b><div><small>BUILD THE THIN SLICE</small><strong>Key + magnet + Hall sensor + ADC</strong></div>
+            </article>
+            <article class="breadboard-poc-step breadboard-poc-step--measure">
+                <b>03</b><div><small>MEASURE, DON'T GUESS</small><strong>Voltage · noise · travel · timing</strong></div>
+            </article>
+            <article class="breadboard-poc-step breadboard-poc-step--prove">
+                <b>04</b><div><small>END-TO-END PROOF</small><strong>Press the key → hear the MIDI note</strong></div>
+            </article>
+        </div>
+
+        <div class="breadboard-poc-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">小さく証明</span>
+            <strong>A breadboard is cheaper than a board revision.</strong>
+            <p>Prove the new physics first. Scale only what survives the bench.</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+        This is the actual keyboard-keyboard proof of concept. Before paying for a
+        full-size PCB, I put five keys, Hall sensors, the controller, sensor boards,
+        and test equipment on breadboards. The goal was not to make a pretty mini
+        keyboard. It was to retire the riskiest assumption: could the magnet and
+        Hall sensor produce a repeatable signal across real key travel, could the
+        controller read it, and could that motion become a MIDI note? Build the
+        smallest end-to-end slice, then measure voltage range, noise, travel, timing,
+        and repeatability. A POC does not prove the full board. It will not reveal
+        every routing, grounding, power-distribution, manufacturing, or hundred-key
+        scaling problem—we later found those too. It proves enough of the sensing
+        chain to justify the next investment. If one key cannot work on a breadboard,
+        one hundred copies on a PCB will only make the mistake more expensive.
+        Photo: the presenter's original keyboard-keyboard POC, also used in the
+        discovery deck. Transition: once the physics works, turn the catalog into a
+        constrained parts search.
+    </aside>
+</section>

@@ -1,6 +1,31 @@
 /* global Reveal */
 
 (async () => {
+  // Speaker-view preview windows can survive a full hot reload. Carry a deck
+  // identity in their query string so a stale preview that lands on another
+  // page shell can route itself back to the presentation that opened it.
+  const presentationRoutes = {
+    "keyboard-keyboard": "keyboard-keyboard/",
+  };
+  const requestedPresentationId = new URLSearchParams(
+    window.location.search,
+  ).get("deck");
+  const currentPresentationId =
+    document.documentElement.dataset.presentationId;
+  const requestedPresentationRoute =
+    presentationRoutes[requestedPresentationId];
+
+  if (
+    requestedPresentationRoute &&
+    requestedPresentationId !== currentPresentationId
+  ) {
+    const target = new URL(requestedPresentationRoute, document.baseURI);
+    target.search = window.location.search;
+    target.hash = window.location.hash;
+    window.location.replace(target.href);
+    return;
+  }
+
   const root = document.querySelector("#slide-root");
   const files = window.SLIDE_FILES;
   const retryableStatuses = new Set([408, 425, 429, 500, 502, 503, 504]);

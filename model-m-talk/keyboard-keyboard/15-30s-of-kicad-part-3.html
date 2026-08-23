@@ -1,0 +1,87 @@
+<section
+    class="slide layout-content kicad-export-slide"
+    data-auto-animate
+    data-beat="fabrication-handoff"
+    data-shot="process-flow"
+    data-emotion="payoff"
+>
+    <header class="slide-head">
+        <span class="eyebrow"
+            ><span lang="ja">製造へ</span> · 30 SECONDS OF KiCad · PART 3</span
+        >
+        <h2>Buy the board</h2>
+    </header>
+
+    <div class="content kicad-export-stage">
+        <div class="kicad-export-flow" aria-label="Export, inspect, and order workflow">
+            <article
+                class="kicad-export-step kicad-export-step--plot fragment step-panel"
+                data-fragment-index="0"
+            >
+                <span class="kicad-export-number">01</span>
+                <figure class="kicad-export-visual kicad-export-board">
+                    <img
+                        src="assets/kicad/board-top-crop.png"
+                        alt="The actual keyboard_keyboard PCB routed in KiCad"
+                    >
+                    <figcaption><b>ACTUAL PCB</b><span>KiCad</span></figcaption>
+                </figure>
+                <small>KiCad</small>
+                <h3>Plot all the files</h3>
+                <p>Copper, mask, silk, outline, paste, drill data, etc.</p>
+            </article>
+
+            <span class="kicad-export-arrow fragment" data-fragment-index="1" aria-hidden="true">→</span>
+
+            <article
+                class="kicad-export-step kicad-export-step--zip fragment step-panel"
+                data-fragment-index="1"
+            >
+                <span class="kicad-export-number">02</span>
+                <figure class="kicad-export-visual kicad-export-photo kicad-export-photo--viewer">
+                    <img
+                        src="assets/kicad/jlcpcb-keyboard-quote.png"
+                        alt="JLCPCB Gerber preview showing the actual front and back of the keyboard PCB"
+                    >
+                    <figcaption><b>REAL UPLOAD</b><span>Gerber preview</span></figcaption>
+                </figure>
+                <small>Before money</small>
+                <h3>Double Check The Design</h3>
+                <p>Ensure that you uploaded the correct thing.</p>
+            </article>
+
+            <span class="kicad-export-arrow fragment" data-fragment-index="2" aria-hidden="true">→</span>
+
+            <article
+                class="kicad-export-step kicad-export-step--order fragment step-panel"
+                data-fragment-index="2"
+            >
+                <span class="kicad-export-number">03</span>
+                <figure class="kicad-export-visual kicad-export-photo kicad-export-photo--quote">
+                    <img
+                        src="assets/kicad/jlcpcb-keyboard-quote.png"
+                        alt="Actual JLCPCB quote with two layers, FR-4, 1.6 millimeter thickness, and a 44 dollar 90 cent board price"
+                    >
+                    <figcaption><b>$44.90</b><span>5 boards · before shipping</span></figcaption>
+                </figure>
+                <small>Fabricator</small>
+                <h3>Drain The Piggy Bank</h3>
+                <p>2 layers · FR-4 · 1.6 mm · 447.04 × 162.81 mm.</p>
+            </article>
+        </div>
+
+        <div
+            class="kicad-export-payoff fragment step-punch"
+            data-fragment-index="3"
+        >
+            <span class="kicad-export-check" aria-hidden="true">✓</span>
+            <strong>The design becomes manufacturing instructions.</strong>
+            <p>DRC clean · outline closed · drills visible · layers aligned</p>
+            <span class="kicad-export-sfx" lang="ja">発注!</span>
+        </div>
+    </div>
+
+    <aside class="notes">
+        TODO
+    </aside>
+</section>

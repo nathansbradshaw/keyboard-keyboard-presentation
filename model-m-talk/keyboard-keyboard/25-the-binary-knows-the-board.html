@@ -1,0 +1,65 @@
+<section
+    class="slide layout-content firmware-entry-slide"
+    data-auto-animate
+    data-beat="firmware-entry"
+    data-shot="system-blueprint"
+    data-emotion="curiosity"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">組み込み</span> · FIRMWARE FIELD GUIDE · 01</span>
+        <h2>The binary knows the board before <code>main</code></h2>
+    </header>
+
+    <div class="content firmware-entry-stage">
+        <div class="firmware-file-stack" data-stagger=".firmware-file" data-stagger-effect="step-wipe">
+            <article class="firmware-file firmware-file--target">
+                <small>.cargo/config.toml</small>
+                <strong>thumbv7em-none-eabihf</strong>
+                <span>Cortex-M7 + hardware floating point</span>
+            </article>
+            <article class="firmware-file firmware-file--memory">
+                <small>memory.x</small>
+                <strong>FLASH · DTCMRAM · SRAM</strong>
+                <span>The linker places code and data in real silicon.</span>
+            </article>
+            <article class="firmware-file firmware-file--probe">
+                <small>Embed.toml</small>
+                <strong>STM32H750V</strong>
+                <span>Probe, flash, RTT logs, and a GDB connection.</span>
+            </article>
+            <article class="firmware-file firmware-file--runtime">
+                <small>src/main.rs</small>
+                <strong><code>#![no_std]</code> + RTIC</strong>
+                <span>No operating system. Interrupts are the scheduler.</span>
+            </article>
+        </div>
+
+        <aside class="firmware-boot-card fragment step-panel" data-fragment-index="4">
+            <div class="firmware-terminal-bar"><i></i><i></i><i></i><span>firmware</span></div>
+            <pre><code class="language-bash">rustup target add thumbv7em-none-eabihf
+cargo run --release</code></pre>
+            <p><code>cargo</code> builds for the configured target; the repository’s runner hands the ELF to <code>probe-rs</code>.</p>
+            <b>YOUR FIRST CONTRACT</b>
+            <span>MCU + memory map + debug probe must agree.</span>
+        </aside>
+
+        <div class="firmware-entry-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">コードも回路の一部</span>
+            <strong>The repository is part of the circuit.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        Start by making embedded Rust concrete. This crate does not build a desktop
+        executable. The cargo target selects ARM Cortex-M with hardware floating
+        point. memory.x tells the linker where the STM32H750's flash and RAM regions
+        live. Embed.toml names the exact chip and enables RTT and GDB through the
+        debug probe. main.rs opts out of the standard library and lets RTIC turn
+        interrupts into scheduled tasks. The two commands are the shortest path on
+        a machine where probe-rs is already installed: add the target once, then
+        cargo run --release uses the runner declared in .cargo/config.toml. For your
+        own keyboard, choose the MCU first and copy its proven target, memory, and
+        probe configuration before writing scanning logic. Transition: once the
+        binary can boot, give every stage exactly one responsibility.
+    </aside>
+</section>

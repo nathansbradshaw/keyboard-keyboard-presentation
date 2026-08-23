@@ -1,0 +1,58 @@
+<section class="slide layout-content firmware-mapping-slide" data-auto-animate data-beat="data-driven-routing">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">対応表</span> · FIRMWARE FIELD GUIDE · 09 · <code>constants.rs</code></span>
+        <h2>Tables separate copper from music</h2>
+    </header>
+
+    <div class="content firmware-mapping-stage">
+        <div class="mapping-code-stack" data-stagger=".mapping-code-card" data-stagger-effect="step-wipe">
+            <article class="mapping-code-card mapping-code-card--physical">
+                <small>PHYSICAL ADDRESS</small>
+                <pre><code class="language-rust">SWITCH_MAP[0] = (0, 4); // AM1 · X4
+SWITCH_MAP[1] = (0, 6); // AM1 · X6
+
+let raw = mux_raw[mux][channel];</code></pre>
+            </article>
+            <article class="mapping-code-card mapping-code-card--musical">
+                <small>MUSICAL POLICY</small>
+                <pre><code class="language-rust">SWITCH_TO_NOTE[0] = 78;
+SWITCH_TO_NOTE[1] = 80;
+
+let note = map[switch_idx] + octave;</code></pre>
+            </article>
+            <article class="mapping-code-card mapping-code-card--routing">
+                <small>EVENT ROUTING</small>
+                <pre><code class="language-rust">HE1..HE70   =&gt; melody channel
+HE71..HE80  =&gt; controls + settings
+HE81..HE100 =&gt; GM drum notes</code></pre>
+            </article>
+        </div>
+
+        <div class="mapping-boundary">
+            <article class="mapping-boundary-card fragment step-panel" data-fragment-index="3"><b>PCB REVISION?</b><strong>Edit the physical map.</strong><span>Keep the state machine.</span></article>
+            <article class="mapping-boundary-card fragment step-panel" data-fragment-index="4"><b>NEW LAYOUT?</b><strong>Edit the note map.</strong><span>Keep the scanner.</span></article>
+            <article class="mapping-boundary-card fragment step-panel" data-fragment-index="5"><b>USB MIDI?</b><strong>Swap the transport.</strong><span>Keep the events.</span></article>
+        </div>
+
+        <div class="mapping-payoff fragment step-punch" data-fragment-index="6">
+            <span lang="ja">配線は事実。音程は方針。</span>
+            <strong>Wiring is fact. Pitch is policy.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        constants.rs contains three useful boundaries. SWITCH_MAP describes physical
+        truth: which mux and channel feed each logical switch index. SWITCH_TO_NOTE
+        describes the Wicki-Hayden musical layout. process_events then applies policy:
+        the first seventy switches are melody, later keys select voices and settings,
+        and the final twenty route General MIDI drum notes to the drum channel. The
+        snippets are condensed examples rather than contiguous source. This data-driven
+        split is what makes the firmware reusable. A PCB revision changes physical
+        mapping. A new isomorphic layout changes note mapping. USB MIDI or BLE MIDI
+        changes transport. None of those should require rewriting the per-key state
+        machine. On your keyboard, generate these tables from one source of truth if
+        possible, and test that every physical switch maps to exactly one intended
+        function. Transition: assemble those boundaries into the smallest build plan
+        that produces sound early.
+    </aside>
+</section>

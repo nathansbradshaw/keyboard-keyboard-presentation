@@ -1,0 +1,74 @@
+<section
+    class="slide layout-content electronics-community-slide"
+    data-auto-animate
+    data-beat="community"
+    data-shot="community-roster"
+    data-emotion="invitation"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">仲間</span> · ELECTRONICS FIELD GUIDE · 05</span>
+        <h2>Three communities helped debug this board</h2>
+    </header>
+
+    <div class="content electronics-community-stage">
+        <div class="community-grid" data-stagger=".community-card" data-stagger-effect="step-pop">
+            <a class="community-card community-card--zmk" href="https://zmk.dev/" target="_blank" rel="noreferrer">
+                <img src="assets/electronics-tips/zmk.webp" alt="ZMK community icon">
+                <div><small>FIRMWARE + KEYBOARDS</small><h3>ZMK</h3><p>Wireless keyboard hardware, firmware, shields, and debugging.</p></div>
+                <span class="community-join">OPEN ↗</span>
+            </a>
+            <a class="community-card community-card--embedded community-card--used" href="https://discord.gg/SrJEYjq" target="_blank" rel="noreferrer">
+                <img src="assets/electronics-tips/embedded-engineering.webp" alt="Embedded Engineering community icon">
+                <div><small>EMBEDDED SYSTEMS</small><h3>Embedded Engineering</h3><p>MCUs, buses, power, PCB design, firmware, and test strategy.</p></div>
+                <span class="community-used">ASKED HERE ✓</span>
+                <span class="community-join">JOIN ↗</span>
+            </a>
+            <a class="community-card community-card--daisy community-card--used" href="https://discord.com/invite/KqSgCCpM9T" target="_blank" rel="noreferrer">
+                <img src="assets/electronics-tips/daisy-seed.webp" alt="Daisy Seed community icon">
+                <div><small>AUDIO + DSP</small><h3>Daisy Seed</h3><p>Audio hardware, real-time DSP, codecs, noise, and instruments.</p></div>
+                <span class="community-used">ASKED HERE ✓</span>
+                <span class="community-join">JOIN ↗</span>
+            </a>
+            <a class="community-card community-card--maker community-card--used" href="https://kbatelier.org/" target="_blank" rel="noreferrer">
+                <img src="assets/electronics-tips/keyboard-maker.webp" alt="Keyboard Atelier community icon">
+                <div><small>BUILDERS + FABRICATION</small><h3>Keyboard Atelier</h3><p>Layouts, cases, switches, PCBs, assembly, and build experience.</p></div>
+                <span class="community-used">ASKED HERE ✓</span>
+                <span class="community-join">OPEN ↗</span>
+            </a>
+        </div>
+
+        <div class="community-question fragment step-panel" data-fragment-index="4">
+            <b>REAL POST</b>
+            <span><strong>Phantom keys · 100 Hall sensors · 3.3 V rail sag</strong></span>
+            <i>→</i>
+            <span><strong>Engagement + practical insight from all three</strong></span>
+        </div>
+
+        <div class="community-payoff fragment step-punch" data-fragment-index="5">
+            <strong>I did not just find communities. I found reviewers.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        This is firsthand, not a generic list of recommendations. I took the same
+        real board problem to Embedded Engineering, Daisy Seed, and Keyboard
+        Atelier, and got engagement and useful insight from all three communities.
+        The problem was phantom keypresses on some builds. I reported that the
+        MT9105ET supply measured roughly 2.44 to 2.8 volts on the failing boards,
+        versus 2.71 to 3.16 volts on the working board, while the datasheet specifies
+        a 3-volt minimum. I included the roughly 700-milliamp draw seen when the
+        keyboard and Daisy ran correctly from a 3.3-volt bench supply, plus the
+        LM317 test that measured 3.33 volts unloaded but fell to 2.5 volts when
+        connected to the PCB. I also linked the KiCanvas schematic and explained
+        the cuts, bodges, and tests already attempted. That specificity gave people
+        something concrete to reason about. ZMK remains here as another strong
+        keyboard community, but the three “Asked here” cards are the groups used
+        to troubleshoot this board. Be a good community member: search first,
+        redact secrets, ask a narrow question, and return with the outcome.
+        The cards link to https://zmk.dev/ · https://discord.gg/SrJEYjq ·
+        https://discord.com/invite/KqSgCCpM9T · https://kbatelier.org/ . The icons
+        are the respective community or Discord server icons supplied for the
+        presentation. Transition: before manufacture, turn that community knowledge
+        into one deliberate review pass.
+    </aside>
+</section>

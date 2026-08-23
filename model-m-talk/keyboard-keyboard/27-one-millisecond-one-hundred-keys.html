@@ -1,0 +1,42 @@
+<section class="slide layout-code scan-code-slide" data-auto-animate data-beat="scan-hot-path">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">走査</span> · FIRMWARE FIELD GUIDE · 03 · <code>main.rs</code></span>
+        <h2 data-id="firmware-title">One millisecond. One hundred keys.</h2>
+    </header>
+    <div class="content">
+        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8-14">for ch in 0..MUX_CHANNELS {
+    set_mux_channel(ch, s0, s1, s2);
+    delay(480 * 10); // analog settling
+    let readings = read_all_adcs(adc, adc_pins);
+    for (mux, &amp;val) in readings.iter().enumerate() {
+        mux_raw[mux][ch] = val;
+    }
+    for decoder_idx in 0..4u8 {
+        set_decoder(decoder_idx, enb_a, enb_b, enb_c);
+        delay(480 * 5);
+        mux_raw[9 + decoder_idx as usize][ch] =
+            read_shared_adc(decoder_idx);
+    }
+}</code></pre>
+        <div class="scan-budget">
+            <div><strong>8</strong><span>broadcast addresses</span></div>
+            <div><strong>9</strong><span>direct reads / address</span></div>
+            <div><strong>4</strong><span>decoded reads / address</span></div>
+            <div class="scan-total"><strong>104</strong><span>slots cover 100 keys</span></div>
+            <p>Address lines are shared. ADC inputs provide the parallelism.</p>
+        </div>
+    </div>
+    <aside class="notes">
+        This is the actual structure of timer_handler with concrete pin types and
+        error plumbing compressed. TIM2 runs every millisecond. For each of eight
+        mux channel addresses, firmware broadcasts three address bits to every mux,
+        waits for the analog signal to settle, reads nine dedicated ADC inputs, then
+        selects and reads four additional muxes through the decoder. Thirteen times
+        eight gives 104 physical slots; SWITCH_MAP chooses the hundred populated
+        Hall sensors. This is the key scaling trick for a custom keyboard: GPIO sets
+        an address, ADC pins read groups in parallel, and a table describes which
+        slots actually exist. Measure settling time on your own mux, sensor, source
+        impedance, and PCB before copying these delays. Transition: a fast loop is
+        useful only if slower work cannot steal its deadline.
+    </aside>
+</section>

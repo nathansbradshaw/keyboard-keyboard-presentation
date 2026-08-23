@@ -1,0 +1,64 @@
+<section
+    class="slide layout-content kicad-roadmap-slide"
+    data-auto-animate
+    data-beat="kicad-roadmap"
+    data-shot="process-flow"
+    data-emotion="orientation"
+    data-timing="30"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">設計図</span> · THE KiCad ROADMAP</span>
+        <h2>KiCad takes us from <em>idea</em> to <em>factory</em></h2>
+    </header>
+
+    <div class="content kicad-roadmap-stage">
+        <div class="kicad-roadmap-app" aria-label="KiCad is the tool used for all three stages">
+            <span class="kicad-roadmap-app-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span><small>THE TOOL</small><strong>KiCad</strong></span>
+            <p>One project. Three stages of the same board.</p>
+        </div>
+
+        <div
+            class="kicad-roadmap-flow"
+            aria-label="KiCad workflow: schematic, then PCB, then Gerber fabrication files"
+            data-stagger=".kicad-roadmap-card"
+            data-stagger-effect="step-panel"
+            data-stagger-group="1"
+        >
+            <article class="kicad-roadmap-card kicad-roadmap-card--schematic">
+                <span class="kicad-roadmap-number">01</span>
+                <figure><img src="assets/kicad/schematic-hall-mux-crop.png" alt="The keyboard schematic in KiCad"></figure>
+                <small>LOGIC</small>
+                <h3>Schematic</h3>
+                <p>What connects?</p>
+            </article>
+
+            <span class="kicad-roadmap-arrow fragment step-panel" data-fragment-index="1" aria-hidden="true">→</span>
+
+            <article class="kicad-roadmap-card kicad-roadmap-card--pcb">
+                <span class="kicad-roadmap-number">02</span>
+                <figure><img src="assets/kicad/board-top-crop.png" alt="The physical keyboard PCB in KiCad"></figure>
+                <small>PHYSICAL</small>
+                <h3>PCB</h3>
+                <p>Where do parts and copper go?</p>
+            </article>
+
+            <span class="kicad-roadmap-arrow fragment step-panel" data-fragment-index="2" aria-hidden="true">→</span>
+
+            <article class="kicad-roadmap-card kicad-roadmap-card--gerber">
+                <span class="kicad-roadmap-number">03</span>
+                <figure><img src="assets/kicad/jlcpcb-keyboard-quote.png" alt="The keyboard Gerber files in a fabrication preview"></figure>
+                <small>MANUFACTURING</small>
+                <h3>Gerber</h3>
+                <p>What does the factory build?</p>
+            </article>
+        </div>
+
+        <div class="kicad-roadmap-payoff fragment step-punch" data-fragment-index="3">
+            <strong>Next: one fast pass through each.</strong>
+            <span>connections → placement + copper → fabrication files</span>
+        </div>
+    </div>
+
+    <aside class="notes">Before we dive into the buttons and shortcuts, here is the whole KiCad journey. KiCad is the tool, and we will look at three stages of the same board. First, the schematic records electrical intent: what connects to what. Second, the PCB turns that logic into physical footprints, placement, and copper. Third, Gerber files package the finished board as manufacturing instructions a factory can build. The next three slides take one quick pass through each stage: schematic, PCB, then Gerber. Transition: start with the schematic—the board before it has a physical location.</aside>
+</section>

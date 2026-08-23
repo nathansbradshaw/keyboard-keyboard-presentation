@@ -1,0 +1,60 @@
+<section
+    class="slide layout-content electronics-datasheet-slide"
+    data-auto-animate
+    data-beat="electronics-field-guide"
+    data-shot="evidence-board"
+    data-emotion="practical"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">仕様書</span> · ELECTRONICS FIELD GUIDE · 01</span>
+        <h2>The datasheet is the source code</h2>
+    </header>
+
+    <div class="content electronics-datasheet-stage">
+        <figure class="datasheet-page fragment step-panel" data-fragment-index="0">
+            <img
+                src="assets/electronics-tips/mt910x-page-4.webp"
+                alt="Page four of the MagnTek MT910X Hall-effect sensor datasheet, showing its functional block diagram and maximum ratings"
+            >
+            <figcaption>MT910X · MagnTek · Rev 1.9 · p. 4</figcaption>
+            <span class="datasheet-stamp">PRIMARY SOURCE</span>
+        </figure>
+
+        <div class="datasheet-lessons" data-stagger=".datasheet-lesson" data-stagger-effect="step-pop">
+            <article class="datasheet-lesson">
+                <b>01</b><div><small>BEHAVIOR</small><strong>What does it actually do?</strong><span>Transfer curve · timing · noise · accuracy</span></div>
+            </article>
+            <article class="datasheet-lesson">
+                <b>02</b><div><small>BOUNDARIES</small><strong>Where will it survive?</strong><span>Supply · current · temperature · absolute max</span></div>
+            </article>
+            <article class="datasheet-lesson">
+                <b>03</b><div><small>CONNECTION</small><strong>How must it be wired?</strong><span>Pinout · typical circuit · bypass parts</span></div>
+            </article>
+            <article class="datasheet-lesson">
+                <b>04</b><div><small>PHYSICAL REALITY</small><strong>Will it land on the board?</strong><span>Package · footprint · orientation · dimensions</span></div>
+            </article>
+        </div>
+
+        <div class="datasheet-payoff fragment step-punch" data-fragment-index="5">
+            <strong>A product page tells you why to buy it.</strong>
+            <span>A datasheet tells you how not to break it.</span>
+        </div>
+    </div>
+
+    <aside class="notes">
+        Electronics tip one: read the datasheet. Treat it like API documentation
+        for a physical component. The product page is a summary; the datasheet is
+        where the behavioral contract lives. For this Hall sensor, the useful
+        questions include its supply voltage, quiescent output, sensitivity,
+        noise, package orientation, and the location of the sensing element—not
+        merely whether the listing says “Hall effect.” Start with the functional
+        description and typical application, then check electrical limits and
+        the exact package drawing for the orderable suffix. “Absolute maximum” is
+        the edge of damage, not a recommended operating point. Finally, verify
+        that the schematic symbol pin numbers agree with the PCB footprint.
+        Source shown: MagnTek MT910X series datasheet Rev 1.9,
+        https://www.magntek.com.cn/upload/pdf/202404/%E7%A3%81%E6%80%A7%E7%94%B5%E6%B5%81-%E7%BA%BF%E6%80%A7%E9%9C%8D%E5%B0%94%E8%8A%AF%E7%89%87MT9102%E4%BA%A7%E5%93%81%E8%A7%84%E6%A0%BC%E4%B9%A6.pdf .
+        Transition: a datasheet can validate one part, but first we must choose it
+        from a catalog containing thousands.
+    </aside>
+</section>

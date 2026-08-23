@@ -1,0 +1,66 @@
+<section
+    class="slide layout-content pcb-rework-slide"
+    data-auto-animate
+    data-beat="board-surgery-removal"
+    data-shot="rework-methods"
+    data-emotion="careful"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">再作業</span> · ELECTRONICS FIELD GUIDE · 09</span>
+        <h2>Remove the part—not the pads</h2>
+    </header>
+
+    <div class="content pcb-rework-stage">
+        <div class="rework-photo-story fragment step-panel" data-fragment-index="0">
+            <figure>
+                <img src="assets/pcb-rework/ic-footprint-removed.webp" alt="Close-up of the U1 footprint after the original surface-mount IC was removed">
+                <figcaption><b>01 · REMOVE</b><span>Every joint molten. Lift—never pry.</span></figcaption>
+            </figure>
+            <i aria-hidden="true">→</i>
+            <figure>
+                <img src="assets/pcb-rework/ic-replacement-installed.webp" alt="Close-up of the replacement surface-mount IC soldered onto the U1 footprint">
+                <figcaption><b>02 · REPLACE</b><span>Align pin 1. Tack corners. Solder + inspect.</span></figcaption>
+            </figure>
+
+            <div class="rework-method-list" data-stagger=".rework-method-note" data-stagger-effect="step-pop">
+                <article class="rework-method-note"><b>2 PINS</b><div><strong>Heat both ends</strong><span>Fresh solder + flux, then lift gently.</span></div></article>
+                <article class="rework-method-note"><b>IC</b><div><strong>Heat the whole joint</strong><span>Low airflow; move evenly; never pry.</span></div></article>
+                <article class="rework-method-note"><b>THT</b><div><strong>Sacrifice the cheap part</strong><span>Cut leads; clear one plated hole at a time.</span></div></article>
+            </div>
+        </div>
+
+        <div class="rework-sequence fragment step-panel" data-fragment-index="4">
+            <span><b>1</b> Shield neighbors</span><i>→</i>
+            <span><b>2</b> Add flux + fresh solder</span><i>→</i>
+            <span><b>3</b> Heat, then lift</span><i>→</i>
+            <span><b>4</b> Wick + inspect</span>
+        </div>
+
+        <div class="board-surgery-rule board-surgery-rule--warning fragment step-punch" data-fragment-index="5">
+            <span lang="ja">引っ張らない</span>
+            <strong>If it needs force, the solder is not molten.</strong>
+            <p>More flux and patience cost less than a ripped pad or via.</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+        These photos show the actual U1 removal and replacement. Choose the removal
+        method by package, thermal mass, and whether the part needs to survive. For
+        a two-terminal resistor, capacitor, or diode, add flux
+        and a little fresh solder; the new flux helps the old joint flow. Heat both
+        ends nearly together with two irons, hot tweezers, or a broad solder blob,
+        then lift with almost no force. For an IC, protect nearby plastics with
+        Kapton or a shield, use low airflow so tiny parts do not fly away, and move
+        heat evenly around the package. Lift only when every joint is visibly molten.
+        Through-hole connectors are heat sinks. If the inexpensive component is
+        already faulty, cut its body or leads and desolder one pin at a time rather
+        than trying to save it at the board's expense. A low-melting-point removal
+        alloy can help on stubborn multi-pin packages. After removal, add flux, wick
+        only until the pads are flat, clean the residue as appropriate for the flux,
+        and inspect for lifted pads or solder bridges under magnification. Work with
+        ventilation, observe ESD precautions, disconnect power, and discharge large
+        capacitors. The key rule is tactile: if the component resists, stop pulling.
+        Transition: with clean pads, installing a replacement is the easy case—but
+        the board can also accept a component the schematic never planned for.
+    </aside>
+</section>

@@ -7,9 +7,9 @@
               1 0 0 0 0
               0 0 0 0 1" result="mono"/>
     <feComponentTransfer in="mono">
-      <feFuncR type="linear" slope="3" intercept="-1"/>
-      <feFuncG type="linear" slope="3" intercept="-1"/>
-      <feFuncB type="linear" slope="3" intercept="-1"/>
+      <feFuncR type="linear" slope="7" intercept="-3"/>
+      <feFuncG type="linear" slope="7" intercept="-3"/>
+      <feFuncB type="linear" slope="7" intercept="-3"/>
     </feComponentTransfer>
   </filter>
   <rect width="900" height="1200" filter="url(#static)"/>

@@ -73,6 +73,24 @@ const updateJapaneseSlideNumber = () => {
   counter.innerHTML = `<span class="jp-slide-count" lang="ja">第${japaneseNumber(current)}頁 ／ 全${japaneseNumber(total)}頁</span>`;
 };
 
+// Subfolder decks use a parent <base> for shared assets. Give Reveal Notes an
+// explicit presentation URL so its preview frames reopen the same deck rather
+// than resolving to a top-level page shell.
+const configuredPresentationUrl = document.documentElement.dataset.presentationUrl;
+const presentationId = document.documentElement.dataset.presentationId;
+let presentationUrl;
+
+if (configuredPresentationUrl) {
+  const resolvedPresentationUrl = new URL(
+    configuredPresentationUrl,
+    document.baseURI,
+  );
+  if (presentationId) {
+    resolvedPresentationUrl.searchParams.set("deck", presentationId);
+  }
+  presentationUrl = resolvedPresentationUrl.href;
+}
+
 Reveal.initialize({
   width: 1600,
   height: 900,
@@ -92,6 +110,7 @@ Reveal.initialize({
   autoAnimateUnmatched: false,
   defaultTiming: 35,
   totalTime: 40 * 60,
+  url: presentationUrl,
   slideNumber: false,
   plugins: [RevealNotes, RevealHighlight],
   keyboard: {

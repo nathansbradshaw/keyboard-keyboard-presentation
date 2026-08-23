@@ -1,0 +1,56 @@
+<section
+    class="slide layout-content component-constraints-slide"
+    data-auto-animate
+    data-beat="parts-selection"
+    data-shot="decision-funnel"
+    data-emotion="clarity"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">部品選び</span> · ELECTRONICS FIELD GUIDE · 03</span>
+        <h2>Do not browse 1,000 parts. Eliminate 997.</h2>
+    </header>
+
+    <div class="content component-constraints-stage">
+        <div class="parts-funnel" aria-label="A thousand catalog results narrowed by constraints to three candidates">
+            <div class="parts-count parts-count--start fragment step-panel" data-fragment-index="0">
+                <small>CATALOG RESULTS</small><strong>1,000+</strong><span>“Hall sensor”</span>
+            </div>
+            <div class="parts-filter-stack" data-stagger=".parts-filter" data-stagger-effect="step-pop">
+                <span class="parts-filter">3.3 V supply</span>
+                <span class="parts-filter">analog output</span>
+                <span class="parts-filter">right sensitivity</span>
+                <span class="parts-filter">placeable package</span>
+                <span class="parts-filter">in stock + assemblable</span>
+                <span class="parts-filter">price at your quantity</span>
+            </div>
+            <div class="parts-count parts-count--finish fragment step-punch" data-fragment-index="7">
+                <small>REAL CANDIDATES</small><strong>3</strong><span>Now read every datasheet.</span>
+            </div>
+        </div>
+
+        <div class="constraint-lanes fragment step-panel" data-fragment-index="8">
+            <div><b>MUST</b><span>Electrical compatibility · function · physical fit</span></div>
+            <div><b>SHOULD</b><span>Preferred package · low noise · familiar supplier</span></div>
+            <div><b>CAN BEND</b><span>Brand · one specification · a little cost</span></div>
+        </div>
+
+        <div class="constraint-payoff fragment step-punch" data-fragment-index="9">
+            <span lang="ja">妥協は設計</span>
+            <strong>There is no “best” part—only the best fit for these constraints.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        Parts catalogs are hostile to open-ended browsing. Before searching, turn
+        the project into filters. Separate hard constraints from preferences: the
+        part must run at the system voltage, expose the needed signal, physically
+        fit, and be orderable. Noise, bandwidth, package size, supplier, and price
+        may be negotiable depending on the prototype. Stock and assembly support
+        are design constraints too; a perfect part that cannot be purchased or
+        placed is not perfect. Narrow the field first, then compare the remaining
+        datasheets. Expect compromise. We often trade a little sensitivity, board
+        area, cost, or hand-solderability to get the combination that actually
+        ships. Transition: package choice decides whether we should solder the
+        board—or pay the factory to do it.
+    </aside>
+</section>

@@ -132,10 +132,26 @@ The standalone PNGs under `assets/manga/` were copied from the project root and 
 
 `assets/keyboard/keyboard-keyboard.jpg` was copied from the sibling `keyboard-keyboard` project's `images/keyboard-keyboard.jpg`; `keyboard-keyboard.webp` is the optimized delivery copy used by the deck.
 
+`assets/pcb-rework/*.png` are project-owned photographs supplied by the presenter showing the keyboard PCB bodge wires and the actual U1 removal/replacement. The matching `.webp` files are optimized delivery copies used by the keyboard-keyboard field-guide slides.
+
 `assets/kicad/board-top-crop.png` and `copper-routing.svg` were regenerated with KiCad 9 CLI from sibling repo `keyboard-keyboard`, branch `main`, commit `58f0e0e`. They show that source snapshot rather than a conceptual recreation; their canvases were cropped for stage readability.
 
+`assets/kicad/jlcpcb-keyboard-quote.png` is a project-owned capture of the actual `keyboard_keyboard` Gerber upload and PCB quote in JLCPCB. It is cropped in CSS on the fabrication-handoff slide to show the front/back Gerber preview and the selected board specifications without redrawing the vendor UI.
+
 `assets/open-hardware/sparkfun-tpa2005d1.jpg`, `sparkfun-tpa2005d1-schematic.pdf`, and the PNG rendering of that schematic come from SparkFun's official BOB-11044 product documentation. The product is certified as open source hardware under OSHWA UID US001040; retain source attribution and the applicable hardware/documentation licenses when redistributing or adapting these assets.
+
+`assets/open-hardware/sparkfun-mark.svg` is the SparkFun flame mark from the CC0-licensed Simple Icons vector collection. SparkFun's official Press & Media page publishes downloadable logo assets and says users may choose among its logo variants. It is used only to identify SparkFun; SparkFun® is a trademark of SparkFun Electronics, Inc.
+
+`assets/open-hardware/arduino-logo.svg` is Arduino's unmodified color logo from its official Brand Identity page. Arduino's trademark guidance permits the logo for descriptive or explanatory purposes inside publication content and requests a trademark acknowledgment. It is used only to identify Arduino; Arduino® is a trademark of Arduino S.r.l.
 
 `assets/research/*.webp` are optimized delivery copies of the project-owned photos and research captures in `docs/`. The Discord captures are used as documentary evidence in the discovery cut; confirm participant permission or replace them with redrawn quotations before public distribution.
 
 `assets/research/melodicade-mx.webp` is an optimized delivery copy of the official Melodicade MX project photo from KOOP Instruments, sourced from `https://www.koopinstruments.com/instrument-projects/melodicade-mx`. It is visibly credited on the discovery slide and in speaker notes. Attribution does not itself grant reuse permission; confirm permission before redistributing the deck.
+
+`assets/research/gateron-exploded-he-switch.jpg` is the downloaded source image and `gateron-exploded-he-switch.webp` is its optimized delivery copy. The image depicts a Gateron KS-20 Magnetic Orange switch; RTINGS modified Gateron's original to highlight the permanent magnet and PCB-mounted Hall sensor. It is sourced from `https://www.rtings.com/keyboard/learn/what-is-a-hall-effect-keyboard` and visibly credits both Gateron and RTINGS. Attribution does not itself grant reuse permission; confirm permission before redistributing the deck.
+
+`assets/keyboard/ibm-model-m-spanish-keyboard.jpg` is a 1280-pixel delivery copy of the CC0-licensed “IBM Model M Spanish Keyboard” photo by Wikimedia Commons contributor Wilfredor, sourced from `https://commons.wikimedia.org/wiki/File:IBM_Model_M_Spanish_Keyboard.jpg`. `ibm-model-m-spanish-keyboard-cutout.png` is the background-removed presentation asset used on the keyboard-keyboard cut's challenger-reveal slide.
+
+`assets/ui/usb-connector.png` is a background-removed crop of a CC0-licensed photo by Wikimedia Commons contributor Evan-Amos, sourced from `https://en.wikipedia.org/wiki/File:USB-Connector-Standard.jpg`. Used on the keyboard-keyboard cut's design-fork slide.
+
+`assets/keyboard/buckling-spring-mechanism.jpg` is a patent-style cross-section diagram of the IBM buckling spring switch, sourced from a third-party blog post at `https://www.valoroso.it/`. **Reuse check**: likely derived from expired IBM patent artwork (which would be public domain), but provenance is not independently confirmed. Confirm permission before public redistribution. Used on the keyboard-keyboard cut's buckling-spring-mechanism slide.

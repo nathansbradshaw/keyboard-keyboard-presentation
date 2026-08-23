@@ -16,12 +16,24 @@ const LIVE_RELOAD_PATH: &str = "/__live-reload__";
 const LIVE_RELOAD_SCRIPT: &str = r#"<script>
 (() => {
   let known = null;
+  const reloadCurrentDeck = () => {
+    const configuredPath = document.documentElement.dataset.presentationUrl;
+    if (!configuredPath) {
+      location.reload();
+      return;
+    }
+
+    const target = new URL(configuredPath, document.baseURI);
+    target.search = location.search;
+    target.hash = location.hash;
+    location.replace(target.href);
+  };
   const poll = async () => {
     try {
       const response = await fetch("/__live-reload__", { cache: "no-store" });
       const value = await response.text();
       if (known !== null && value !== known) {
-        location.reload();
+        reloadCurrentDeck();
         return;
       }
       known = value;

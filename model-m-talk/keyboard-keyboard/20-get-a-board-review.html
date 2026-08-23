@@ -1,0 +1,59 @@
+<section
+    class="slide layout-content board-review-slide"
+    data-auto-animate
+    data-beat="preflight-review"
+    data-shot="review-loop"
+    data-emotion="caution"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">査読</span> · ELECTRONICS FIELD GUIDE · 06</span>
+        <h2>Before “Order,” invite someone to disagree</h2>
+    </header>
+
+    <div class="content board-review-stage">
+        <div class="review-layers">
+            <article class="review-layer review-layer--tools fragment step-panel" data-fragment-index="0">
+                <span class="review-number">01</span><small>THE TOOLS</small><h3>ERC + DRC</h3>
+                <p>Find broken rules: unconnected nets, clearances, missing power pins, board-edge mistakes.</p>
+                <b>CONSISTENCY</b>
+            </article>
+            <article class="review-layer review-layer--human fragment step-panel" data-fragment-index="1">
+                <span class="review-number">02</span><small>THE HUMAN</small><h3>Design review</h3>
+                <p>Find broken assumptions: wrong architecture, fragile power, impossible assembly, bad test access.</p>
+                <b>JUDGMENT</b>
+            </article>
+            <article class="review-layer review-layer--ai fragment step-panel" data-fragment-index="2">
+                <span class="review-number">03</span><small>THE AI</small><h3>Second set of questions</h3>
+                <p>Useful for checklists and suspicious omissions. It can also sound certain while being wrong.</p>
+                <b>SKEPTICISM</b>
+            </article>
+        </div>
+
+        <div class="review-checklist fragment step-panel" data-fragment-index="3">
+            <span>POWER</span><span>PIN 1 + POLARITY</span><span>FOOTPRINTS</span><span>CONNECTORS</span><span>TEST POINTS</span><span>FAB RULES</span>
+        </div>
+
+        <div class="review-payoff fragment step-punch" data-fragment-index="4">
+            <span class="review-grain" aria-hidden="true">◇</span>
+            <div><small>AI RULE</small><strong>Use it to generate questions—not confidence.</strong></div>
+            <p>Verify every claim against the datasheet, design rules, measurements, or an experienced reviewer.</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+        Run the automated checks, then ask a human to review the schematic, layout,
+        BOM, and fabrication preview. A design-rule checker proves that the layout
+        follows the rules it was given; it cannot prove the rules or the circuit are
+        correct. A reviewer can challenge assumptions about current paths, analog
+        return, decoupling, connector orientation, assembly access, and whether the
+        board can be tested. If no human is available, an AI review is still useful
+        for generating a checklist, noticing inconsistent labels, or asking about
+        missing protection. But treat every AI statement as an unverified review
+        comment. It may invent a pin function, confuse package variants, recommend
+        unnecessary changes, or miss a fatal issue. Require evidence: exact
+        datasheet page, fabricator rule, calculation, or measurement. The final
+        authority remains the primary documentation and accountable engineering
+        judgment. Close the field guide with the preflight: power, polarity,
+        footprints, connectors, test points, and fab rules—then order a small batch.
+    </aside>
+</section>

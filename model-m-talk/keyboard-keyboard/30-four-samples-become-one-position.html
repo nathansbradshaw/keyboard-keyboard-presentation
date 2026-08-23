@@ -1,0 +1,38 @@
+<section class="slide layout-code filter-code-slide" data-auto-animate data-beat="rolling-filter">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">平滑化</span> · FIRMWARE FIELD GUIDE · 06 · <code>switch.rs</code></span>
+        <h2>Four samples become one stable position</h2>
+    </header>
+    <div class="content">
+        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8">pub fn feed(&amp;mut self, raw: u16) -> u16 {
+    self.sum -= self.ring[self.index] as u32;
+    self.sum += raw as u32;
+    self.ring[self.index] = raw;
+    self.index = (self.index + 1) % FILTER_SIZE;
+    (self.sum &gt;&gt; FILTER_SHIFT) as u16
+}
+let delta = adc_value.abs_diff(baseline);</code></pre>
+        <div class="filter-deep-dive">
+            <div class="sample-window"><i>401</i><i>406</i><i>409</i><i>412</i><span>average → 407</span></div>
+            <div class="filter-facts">
+                <p><strong>O(1)</strong> update—replace one sample in a rolling sum.</p>
+                <p><strong>4 entries</strong> makes division a two-bit shift.</p>
+                <p><strong>≈ 1.5 ms</strong> average age at a 1 kHz sample rate.</p>
+            </div>
+            <div class="threshold-rail"><span>release 100</span><span>first 150</span><span>second 250</span></div>
+        </div>
+    </div>
+    <aside class="notes">
+        This is the actual ChannelFilter feed method and delta calculation. Each key
+        owns four samples and a running sum. Replacing one entry is constant time,
+        and dividing by four becomes a right shift. With samples at ages zero, one,
+        two, and three milliseconds, the moving average's mean age is approximately
+        1.5 milliseconds; that figure is derived from the window geometry, not a
+        measured end-to-end latency. A longer filter would suppress more noise but
+        add more delay and smear the threshold crossings used for velocity. Start
+        your keyboard with raw logging, choose the smallest filter that makes idle
+        noise comfortably smaller than the release threshold, and validate it with
+        real key strikes. Transition: position is still not a NoteOn; state gives
+        the thresholds meaning.
+    </aside>
+</section>

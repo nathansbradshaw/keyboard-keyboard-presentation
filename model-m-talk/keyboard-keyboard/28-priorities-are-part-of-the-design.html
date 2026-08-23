@@ -1,0 +1,57 @@
+<section class="slide layout-content firmware-priority-slide" data-auto-animate data-beat="rtic-priorities">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">締切</span> · FIRMWARE FIELD GUIDE · 04 · RTIC</span>
+        <h2>Priorities are part of the instrument</h2>
+    </header>
+
+    <div class="content firmware-priority-stage">
+        <div class="priority-ladder" data-stagger=".priority-lane" data-stagger-effect="step-wipe">
+            <article class="priority-lane priority-lane--scan">
+                <b>P15</b>
+                <div><small>HARD DEADLINE · TIM2</small><strong>Scan → filter → enqueue</strong><span>Every 1 ms. Keep it bounded.</span></div>
+                <code>timer_handler</code>
+            </article>
+            <article class="priority-lane priority-lane--audio">
+                <b>P8</b>
+                <div><small>DMA INTERRUPT</small><strong>Audio pass-through</strong><span>Serviced above control-plane work.</span></div>
+                <code>audio_handler</code>
+            </article>
+            <article class="priority-lane priority-lane--midi">
+                <b>P2</b>
+                <div><small>SOFT DEADLINE</small><strong>Route event → write MIDI</strong><span>May block on UART without delaying the next scan.</span></div>
+                <code>process_events</code>
+            </article>
+            <article class="priority-lane priority-lane--display">
+                <b>P1</b>
+                <div><small>BEST EFFORT</small><strong>Draw the OLED</strong><span>Human feedback can wait.</span></div>
+                <code>display_update</code>
+            </article>
+        </div>
+
+        <aside class="priority-contract fragment step-panel" data-fragment-index="4">
+            <small>RTIC RESOURCE MODEL</small>
+            <div><b>LOCAL</b><span>Owned by one task</span></div>
+            <div><b>SHARED</b><span>Accessed through a lock</span></div>
+            <p>Interrupt safety becomes an architectural constraint the compiler can check.</p>
+        </aside>
+
+        <div class="priority-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">速い処理より、予測できる処理</span>
+            <strong>Real-time means bounded—not merely fast.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        The priority numbers come directly from the RTIC task attributes in main.rs.
+        TIM2 is priority 15 because missing that deadline makes the physical scan
+        irregular. The DMA audio interrupt is priority 8. Event routing and blocking
+        MIDI output run at priority 2. OLED drawing is priority 1 because stale UI is
+        preferable to stale input. RTIC also forces resources into local ownership
+        or explicit shared access, which makes interrupt safety visible in the type
+        structure. For your keyboard, list every recurring job, its maximum acceptable
+        delay, and its worst-case execution time before assigning priorities. Do not
+        put logging, display I/O, allocation, or serial backpressure in the scan path.
+        Transition: the first scan cannot mean anything until each physical sensor
+        has a reference point.
+    </aside>
+</section>

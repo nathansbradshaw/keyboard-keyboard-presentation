@@ -1,0 +1,99 @@
+<section
+    class="slide layout-content piano-forte-slide"
+    data-auto-animate
+    data-beat="resolution"
+    data-shot="technical-payoff"
+    data-emotion="clarity"
+>
+    <header class="slide-head">
+        <span class="eyebrow"
+            ><span lang="ja">強弱を測る</span> · Piano / forte · solved</span
+        >
+        <h2>Hall Effect Gives Us Infinate Measuring Points</h2>
+    </header>
+
+    <div class="content piano-forte-stage">
+        <div
+            class="piano-forte-principle fragment step-panel"
+            data-fragment-index="0"
+        >
+            <div class="piano-forte-sensor" aria-hidden="true">
+                <span class="piano-forte-keycap">KEY</span>
+                <i class="piano-forte-magnet">N · S</i>
+                <b>HALL</b>
+            </div>
+            <div>
+                <small>THE SENSOR</small>
+                <strong>Report Measured Hall Effect.</strong>
+            </div>
+            <span class="piano-forte-arrow" aria-hidden="true">→</span>
+            <div>
+                <small>THE FIRMWARE</small>
+                <strong>Measure the time between two fixed points.</strong>
+            </div>
+        </div>
+
+        <div class="piano-forte-examples">
+            <article
+                class="piano-forte-example piano-forte-example--soft fragment step-panel"
+                data-fragment-index="1"
+            >
+                <header>
+                    <span class="piano-forte-mark">p</span>
+                    <div><small>PIANO </small><h3>Slow key press</h3></div>
+                    <strong>soft</strong>
+                </header>
+                <div class="piano-forte-trace">
+                    <svg viewBox="0 0 600 150" role="img" aria-label="A slow key press takes a long time to travel between the first and second thresholds">
+                        <path class="piano-forte-grid" d="M0 48H600 M0 112H600" />
+                        <path class="piano-forte-line" d="M12 18 C116 18 160 27 229 48 S385 93 510 112 S565 128 588 134" />
+                    </svg>
+                    <span class="piano-forte-threshold piano-forte-threshold--one">t₁</span>
+                    <span class="piano-forte-threshold piano-forte-threshold--two">t₂</span>
+                </div>
+                <div class="piano-forte-result">
+                    <span><b>70 ms</b><small>LONG Δt</small></span>
+                    <i aria-hidden="true">→</i>
+                    <span><b>18</b><small>MIDI VELOCITY</small></span>
+                </div>
+            </article>
+
+            <article
+                class="piano-forte-example piano-forte-example--loud fragment step-panel"
+                data-fragment-index="2"
+            >
+                <header>
+                    <span class="piano-forte-mark">f</span>
+                    <div><small>FORTE</small><h3>Fast key press</h3></div>
+                    <strong>loud</strong>
+                </header>
+                <div class="piano-forte-trace">
+                    <svg viewBox="0 0 600 150" role="img" aria-label="A fast key press takes a short time to travel between the first and second thresholds">
+                        <path class="piano-forte-grid" d="M0 48H600 M0 112H600" />
+                        <path class="piano-forte-line" d="M12 18 C76 18 102 25 126 48 S152 93 177 112 S291 132 588 134" />
+                    </svg>
+                    <span class="piano-forte-threshold piano-forte-threshold--one">t₁</span>
+                    <span class="piano-forte-threshold piano-forte-threshold--two">t₂</span>
+                </div>
+                <div class="piano-forte-result">
+                    <span><b>8 ms</b><small>SHORT Δt</small></span>
+                    <i aria-hidden="true">→</i>
+                    <span><b>116</b><small>MIDI VELOCITY</small></span>
+                </div>
+            </article>
+        </div>
+
+        <div
+            class="piano-forte-payoff fragment step-punch"
+            data-fragment-index="3"
+        >
+            <span lang="ja">解決</span>
+            <strong>1 key satisfies the piano/forte requirement</strong>
+            <p>HE position + elapsed time → MIDI velocity 1–127</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+TODO
+    </aside>
+</section>

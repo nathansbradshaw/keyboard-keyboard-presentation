@@ -1,0 +1,70 @@
+<section
+    class="slide layout-content factory-assembly-slide"
+    data-auto-animate
+    data-beat="manufacturing-strategy"
+    data-shot="assembly-flow"
+    data-emotion="relief"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">実装</span> · ELECTRONICS FIELD GUIDE · 04</span>
+        <h2>For tiny parts, buy the assembled board</h2>
+    </header>
+
+    <div class="content factory-assembly-stage">
+        <div class="assembly-comparison">
+            <article class="assembly-choice assembly-choice--bench fragment step-panel" data-fragment-index="0">
+                <small>YOUR BENCH</small>
+                <div class="assembly-chip" aria-hidden="true"><i></i><b>2 mm</b><i></i></div>
+                <h3>Tweezers. Paste. Rework.</h3>
+                <p>Fine for a few large parts. Painful when the board is dense or the leads disappear underneath.</p>
+                <span class="assembly-tag">0402 · QFN · MANY COPIES</span>
+            </article>
+
+            <div class="assembly-versus fragment" data-fragment-index="1" aria-hidden="true">VS</div>
+
+            <article class="assembly-choice assembly-choice--fab fragment step-panel" data-fragment-index="2">
+                <small>THE FAB'S LINE</small>
+                <div class="assembly-machine" aria-hidden="true"><i></i><i></i><i></i><b>✓</b></div>
+                <h3>Paste. Place. Reflow.</h3>
+                <p>The factory already owns the stencil, pick-and-place machine, oven, and inspection workflow.</p>
+                <span class="assembly-tag">REPEATABLE · COMPACT · READY TO TEST</span>
+            </article>
+        </div>
+
+        <div class="easyeda-lane fragment step-panel" data-fragment-index="3">
+            <a href="https://easyeda.com/" target="_blank" rel="noreferrer" class="easyeda-mark" aria-label="Open EasyEDA">
+                <small>ONE LOW-FRICTION PATH</small><strong>EasyEDA</strong><span>easyeda.com</span>
+            </a>
+            <div class="easyeda-flow" aria-label="Design to assembly order flow">
+                <span><b>01</b>Schematic + PCB</span><i>→</i>
+                <span><b>02</b>LCSC part numbers</span><i>→</i>
+                <span><b>03</b>BOM + pick &amp; place</span><i>→</i>
+                <span><b>04</b>JLCPCB assembly</span>
+            </div>
+        </div>
+
+        <div class="assembly-payoff fragment step-punch" data-fragment-index="4">
+            <strong>Design for the factory you plan to use.</strong>
+            <span>Check stock · assembly class · orientation · footprint · substitutions</span>
+        </div>
+    </div>
+
+    <aside class="notes">
+        A compact board can contain parts that are technically hand-solderable but
+        strategically silly to hand-solder. Once the design uses many small passives,
+        fine-pitch packages, or no-lead packages such as QFN, ask the fabricator to
+        assemble it. You provide a verified BOM and component placement file in
+        addition to the fabrication files. EasyEDA is a low-friction route because
+        the editor connects component records and LCSC part numbers to JLCPCB's
+        ordering and SMT assembly flow. This is convenience, not permission to stop
+        checking: EasyEDA's own documentation warns that library entries can be
+        wrong. Verify every symbol, footprint, package, pin one, polarity, stock
+        status, and the assembly preview. If one specialized connector or switch is
+        not supported, let the fab place the tiny commodity parts and hand-install
+        the exception. Sources: https://easyeda.com/ ·
+        https://docs.easyeda.com/en/Schematic/Libraries/ ·
+        https://prodocs.easyeda.com/en/pcb/order-order-parts/ .
+        Transition: tools and factories help, but communities prevent expensive
+        mistakes that automated checks cannot recognize.
+    </aside>
+</section>

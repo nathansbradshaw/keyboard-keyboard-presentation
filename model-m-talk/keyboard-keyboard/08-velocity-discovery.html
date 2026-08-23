@@ -1,0 +1,125 @@
+<section
+    class="slide layout-content velocity-discovery-slide"
+    data-auto-animate
+    data-beat="discovery"
+    data-shot="split"
+    data-emotion="realization"
+>
+    <header class="slide-head">
+        <span class="eyebrow"
+            ><span lang="ja">速度の手掛かり</span> · Discovery · velocity</span
+        >
+        <h2>Two clues changed the question</h2>
+    </header>
+
+    <div class="content velocity-discovery-stage">
+        <article
+            class="velocity-discovery-card velocity-discovery-card--stacked fragment step-panel"
+            data-fragment-index="0"
+        >
+            <header>
+                <span class="velocity-clue-number">LEAD 01</span>
+                <div>
+                    <small>PROJECT REFERENCE</small>
+                    <h3>Melodicade MX</h3>
+                </div>
+            </header>
+
+            <figure class="velocity-discovery-photo">
+                <img
+                    src="assets/research/melodicade-mx.webp"
+                    alt="The Melodicade MX, a compact MIDI instrument made with mechanical keyboard switches"
+                />
+                <figcaption>KOOP Instruments · project reference</figcaption>
+            </figure>
+
+            <div class="stacked-switch-discovery">
+                <div class="stacked-trip stacked-trip--first">
+                    <small>TOP SWITCH</small><strong>t₁</strong>
+                </div>
+                <div class="stacked-gap"><span>Δx</span><small>known gap</small></div>
+                <div class="stacked-trip stacked-trip--second">
+                    <small>BOTTOM SWITCH</small><strong>t₂</strong>
+                </div>
+                <div class="stacked-result">
+                    <small>STACKED SWITCHES</small>
+                    <strong>Δt → velocity</strong>
+                </div>
+            </div>
+        </article>
+
+        <article
+            class="velocity-discovery-card velocity-discovery-card--hall fragment step-panel"
+            data-fragment-index="1"
+        >
+            <header>
+                <span class="velocity-clue-number">LEAD 02</span>
+                <div>
+                    <small>NEW SENSING MODEL</small>
+                    <h3>Hall effect switches</h3>
+                </div>
+            </header>
+
+            <div class="hall-discovery-mechanism">
+                <figure class="hall-discovery-photo">
+                    <img
+                        src="assets/research/gateron-exploded-he-switch.webp"
+                        alt="Exploded Gateron KS-20 Hall effect switch showing the permanent magnet in the stem above a Hall sensor"
+                    />
+                    <figcaption>Image: Gateron · highlights: RTINGS</figcaption>
+                </figure>
+
+                <div class="hall-discovery-reading">
+                    <div class="hall-discovery-path" aria-label="As the key moves, the magnet moves closer to the Hall sensor and changes its analog output">
+                        <div><small>KEY TRAVEL</small><strong>magnet moves</strong></div>
+                        <span aria-hidden="true">↓</span>
+                        <div><small>HALL SENSOR</small><strong>field changes</strong></div>
+                        <span aria-hidden="true">↓</span>
+                        <div><small>OUTPUT</small><strong>analog position</strong></div>
+                    </div>
+
+                    <div class="hall-discovery-trace">
+                        <svg viewBox="0 0 560 94" role="img" aria-label="A continuous signal changing as a key moves">
+                            <path class="hall-trace-grid" d="M0 24H560 M0 47H560 M0 70H560" />
+                            <path class="hall-trace-threshold" d="M0 38H560" />
+                            <path class="hall-trace-line" d="M0 76 C72 76 91 74 124 70 S188 58 220 44 S282 18 325 20 S382 39 418 52 S486 67 560 69" />
+                        </svg>
+                        <span>continuous travel signal</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="hall-discovery-copy">
+                Instead of waiting for one contact to close, measure how the key moves.
+            </p>
+        </article>
+
+        <div
+            class="velocity-discovery-payoff fragment step-punch"
+            data-fragment-index="2"
+        >
+            <span lang="ja">発見</span>
+            <div>
+                <strong>Velocity was not hiding in the click.</strong>
+                <p>It was hiding in the motion between up and down.</p>
+            </div>
+        </div>
+    </div>
+
+    <aside class="notes">
+        This is the discovery payoff. First, Melodicade MX showed that an
+        expressive instrument could estimate velocity with two stacked switch
+        events: the known distance between them and the elapsed time from t1 to
+        t2 give a speed estimate. Then Hall effect switches gave us a different
+        model: the Gateron KS-20 exploded view makes the mechanism visible. The
+        magnet rides inside the moving stem; the Hall sensor sits on the PCB
+        beneath it and exposes key position as an analog signal throughout the
+        press. These were two separate leads, not the same
+        mechanism. Together they changed our question from “did the key click?”
+        to “how did the key move?” Melodicade MX photo and project reference:
+        KOOP Instruments, https://www.koopinstruments.com/instrument-projects/melodicade-mx.
+        Hall effect switch image: Gateron, modified by RTINGS to highlight key
+        components, https://www.rtings.com/keyboard/learn/what-is-a-hall-effect-keyboard.
+        Transition: compare two sampled trip points with continuous travel.
+    </aside>
+</section>

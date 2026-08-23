@@ -1,0 +1,47 @@
+<section class="slide layout-code midi-wire-slide manga-cameo-slide" data-auto-animate data-beat="midi-backpressure">
+    <div class="manga-cameo callout-time fragment step-pop" data-sfx="ピンチ!!">
+        <div class="manga-bubble">
+            <span class="jp-text" lang="ja">三バイトにも時間がある。</span>
+            <span class="en-text">Even three bytes take time.</span>
+        </div>
+    </div>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">境界</span> · FIRMWARE FIELD GUIDE · 08 · <code>midi.rs</code></span>
+        <h2>MIDI is slower than the scan deadline</h2>
+    </header>
+    <div class="content">
+        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-5|7-10|12-14">// priority 15
+pending.push((switch_idx, event)).ok();
+event_queue.enqueue(item).ok();
+process_events::spawn().ok();
+
+// priority 2
+let status = 0x90 | channel;
+send_byte(status);
+send_byte(note &amp; 0x7F);
+send_byte(velocity &amp; 0x7F);
+
+fn send_byte(byte: u8) {
+    nb::block!(tx.write(byte)).ok();
+}</code></pre>
+        <div class="wire-math">
+            <div class="midi-packet"><span>status</span><span>note</span><span>velocity</span><code>9n kk vv</code></div>
+            <div class="wire-equation"><span>3 bytes × 10 UART bits</span><b>30 / 31,250</b><strong>≈ 0.96 ms</strong></div>
+            <p><strong>Queue 64:</strong> absorb bursts; never make UART backpressure the scanner’s problem.</p>
+        </div>
+    </div>
+    <aside class="notes">
+        The snippets are condensed from timer_handler, process_events, and midi.rs.
+        DIN MIDI uses USART1 at 31,250 baud. In the configured UART framing, each
+        byte occupies a start bit, eight data bits, and a stop bit. A three-byte
+        NoteOn therefore occupies 30 wire bits, or about 0.96 milliseconds. That is
+        an inferred serialization time, not measured end-to-end latency, but it is
+        already almost the entire scan period. A chord makes the conflict obvious.
+        The priority-15 task queues intent into a heapless 64-entry SPSC queue; the
+        priority-2 task drains it and may block on UART. Fixed capacity avoids a heap,
+        but enqueue currently discards its error, so a production revision should
+        count and expose overflows. For your design, calculate transport time before
+        choosing queue depth, and instrument every drop path. Transition: after
+        timing is isolated, tables keep the PCB geometry out of the musical policy.
+    </aside>
+</section>

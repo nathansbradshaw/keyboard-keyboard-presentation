@@ -1,0 +1,52 @@
+<section class="slide layout-content baseline-deep-slide" data-auto-animate data-beat="per-key-calibration">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">基準</span> · FIRMWARE FIELD GUIDE · 05</span>
+        <h2>Every key needs its own zero</h2>
+    </header>
+
+    <div class="content baseline-deep-stage">
+        <div class="baseline-sequence" data-stagger=".baseline-step" data-stagger-effect="step-wipe">
+            <article class="baseline-step"><b>01</b><div><small>BOOT</small><strong>64 samples / slot</strong><span>Average the actual resting board.</span></div></article>
+            <article class="baseline-step"><b>02</b><div><small>PRIME</small><strong>Fill all 4 filter slots</strong><span>No fake ramp from zero on startup.</span></div></article>
+            <article class="baseline-step"><b>03</b><div><small>IDLE ONLY</small><strong>IIR · 1 / 1024</strong><span>Follow temperature and supply drift slowly.</span></div></article>
+            <article class="baseline-step"><b>04</b><div><small>GUARDRAIL</small><strong>Clamp to ±40</strong><span>A held chord cannot rewrite “rest.”</span></div></article>
+            <article class="baseline-step"><b>05</b><div><small>ESCAPE HATCH</small><strong>HE75 recalibrates</strong><span>Snapshot a new known-good resting state.</span></div></article>
+        </div>
+
+        <aside class="baseline-code-card fragment step-panel" data-fragment-index="5">
+            <pre><code class="language-rust">let delta = filtered.abs_diff(baseline);
+
+if state.is_idle()
+    &amp;&amp; delta &lt; RELEASE_DELTA
+{
+    let tracked = ((baseline as u32 * 1023
+        + filtered as u32) / 1024) as u16;
+    baseline = tracked.clamp(
+        anchor.saturating_sub(40),
+        anchor.saturating_add(40),
+    );
+}</code></pre>
+            <p><code>abs_diff</code> accepts either magnet polarity. Tracking only while idle protects the reference.</p>
+        </aside>
+
+        <div class="baseline-warning fragment step-punch" data-fragment-index="6">
+            <b>CALIBRATION RULE</b>
+            <strong>Nothing may be pressed when “rest” is learned.</strong>
+        </div>
+    </div>
+
+    <aside class="notes">
+        The firmware calibrates every physical switch separately because magnet
+        height, sensor offset, assembly tolerance, temperature, and analog routing
+        vary across the board. At boot, it averages 64 samples for each populated
+        slot and primes every four-sample filter with that value. During normal use,
+        a baseline can move only while the state machine is idle and the filtered
+        signal is inside the release band. The IIR moves by one part in 1024 per scan
+        and is clamped within 40 ADC counts of the last calibration anchor. The
+        manual recalibration key snapshots a new anchor. The code uses an absolute
+        delta, so either magnet polarity can work. The practical rule for your own
+        build is simple: calibration is a measurement procedure, not a magic fix;
+        the mechanism must be completely at rest. Transition: now reduce noise
+        without hiding a fast key press.
+    </aside>
+</section>

@@ -1,0 +1,53 @@
+<section class="slide layout-code state-code-slide manga-cameo-slide" data-beat="velocity-state-machine">
+    <div class="manga-cameo callout-success fragment step-pop" data-sfx="クリア!!">
+        <div class="manga-bubble">
+            <span class="jp-text" lang="ja">ノートオンは一回。関門は二つ。</span>
+            <span class="en-text">One NoteOn. Two checkpoints.</span>
+        </div>
+    </div>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">状態</span> · FIRMWARE FIELD GUIDE · 07 · <code>switch.rs</code></span>
+        <h2>Two thresholds, one NoteOn</h2>
+    </header>
+    <div class="content">
+        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8-18|20">SwitchPhase::Idle =&gt; {
+    if delta &gt;= FIRST_DELTA {
+        self.phase = FirstActuated { tick };
+    }
+    None
+}
+
+FirstActuated { tick: t1 } =&gt; {
+    if delta &gt;= SECOND_DELTA {
+        let elapsed = tick.saturating_sub(t1);
+        let velocity = if elapsed &gt;= 80 { 1 } else {
+            let v = 127u32
+                .saturating_sub((elapsed * 126) / 80);
+            (v + 1).min(127) as u8
+        };
+        Some(SwitchEvent::NoteOn { velocity })
+    } else { None }
+}
+// Every transition requires 3 confirmations.</code></pre>
+        <div class="state-deep-dive">
+            <div class="state-node"><b>IDLE</b><span>Δ &lt; 150</span></div><div class="state-arrow">→<small>3 ticks</small></div>
+            <div class="state-node time"><b>FIRST</b><span>save t₁</span></div><div class="state-arrow">→<small>3 ticks</small></div>
+            <div class="state-node success"><b>FULL</b><span>emit once</span></div>
+            <p>Fixed distance + measured time = strike velocity.</p>
+        </div>
+    </div>
+    <aside class="notes">
+        This excerpt is compressed from the real match arms while preserving the
+        implemented behavior. A key begins Idle. Crossing an absolute ADC delta of
+        150 for three consecutive scans records t1 and emits nothing. Crossing 250
+        for three scans computes elapsed milliseconds. The 80-millisecond window is
+        mapped inversely into MIDI velocity 1 through 127, so a fast crossing becomes
+        a louder strike. FullyActuated emits NoteOn only once. Falling below the
+        separate release threshold of 100 for three scans returns to Idle and emits
+        NoteOff. The separated press and release thresholds provide hysteresis. For
+        a digital switch, use the same state/event boundary with debounce and a fixed
+        velocity; for an analog switch, tune both distances from recorded data.
+        Transition: even a perfect event can still violate the scan deadline if it
+        is sent synchronously.
+    </aside>
+</section>

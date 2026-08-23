@@ -1,0 +1,33 @@
+<section class="slide layout-content kicad-schematic-slide" data-timing="45">
+  <header class="slide-head">
+    <span class="eyebrow">KiCad in 30 seconds · part 1</span>
+    <h2>A schematic shows the whole project—and how it <em>connects</em></h2>
+  </header>
+
+  <div class="content kicad-schematic-stage">
+    <figure class="schematic-canvas" aria-label="A real KiCad schematic crop from keyboard_keyboard showing Hall sensors and analog multiplexers">
+      <div class="schematic-canvas-bar" aria-hidden="true">
+        <span><i></i><i></i><i></i></span>
+        <strong>Schematic Editor · keyboard_keyboard</strong>
+        <code>Grid 50 mil</code>
+      </div>
+
+      <img class="schematic-example real-schematic-render" src="assets/kicad/schematic-hall-mux-crop.png" alt="KiCad 9 schematic crop showing MT9102ET Hall sensors HE63 through HE66, their power and decoupling connections, and SN74LV4051A analog multiplexers AM4 through AM6 with named nets">
+
+      <figcaption><span>Real project</span><b>MT9102ET sensors → SN74LV4051A muxes</b></figcaption>
+    </figure>
+
+    <div class="schematic-howto schematic-overview" data-stagger=".schematic-action" data-stagger-effect="step-wipe" data-stagger-group="1">
+      <div class="schematic-action"><b>1</b><span><strong>Place components</strong><small>Add the parts your project needs</small></span></div>
+      <div class="schematic-action"><b>2</b><span><strong>Define connections</strong><small>Show which parts connect to each other</small></span></div>
+      <div class="schematic-action"><b>3</b><span><strong>Read the design</strong><small>Understand the electrical plan at a glance</small></span></div>
+
+      <div class="schematic-rule fragment step-punch" data-fragment-index="3">
+        <span lang="ja">電気の設計図</span>
+        <p><strong>The electrical big picture</strong><small>What connects—not where parts sit on the board.</small></p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">A schematic is the high-level electrical design of the project. You place symbols for the components you need, then define how those components connect to one another. The result is easy to read: you can follow a signal through the system and understand the whole design without thinking about where anything physically sits on the board. This is the real keyboard_keyboard schematic, with MT9102ET Hall sensors connected to SN74LV4051A multiplexers. It describes electrical intent, not physical layout. Transition: the PCB editor takes this readable plan and turns it into physical placement and copper.</aside>
+</section>

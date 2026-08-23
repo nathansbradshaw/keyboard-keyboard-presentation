@@ -1,0 +1,47 @@
+<section class="slide layout-content firmware-recipe-slide" data-auto-animate data-beat="build-your-own-firmware">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">実装順</span> · BUILD YOUR OWN · 10</span>
+        <h2>Build one trustworthy key before one hundred</h2>
+    </header>
+
+    <div class="content firmware-recipe-stage">
+        <div class="recipe-path" data-stagger=".recipe-step, .recipe-arrow" data-stagger-group="2" data-stagger-effect="step-wipe">
+            <article class="recipe-step"><b>01</b><small>PROVE OUTPUT</small><strong>Send middle C</strong><span>Fixed note. Fixed velocity. MIDI monitor sees it.</span><em>TEST: transport</em></article>
+            <div class="recipe-arrow">→</div>
+            <article class="recipe-step"><b>02</b><small>PROVE INPUT</small><strong>Log one sensor</strong><span>Record rest, slow press, hard press, and release.</span><em>TEST: signal margin</em></article>
+            <div class="recipe-arrow">→</div>
+            <article class="recipe-step"><b>03</b><small>PROVE INTENT</small><strong>Emit once</strong><span>Hysteresis + debounce + one NoteOn / NoteOff pair.</span><em>TEST: event trace</em></article>
+            <div class="recipe-arrow">→</div>
+            <article class="recipe-step"><b>04</b><small>PROVE SCALE</small><strong>Scan every key</strong><span>Map geometry, queue bursts, and measure the deadline.</span><em>TEST: worst-case chord</em></article>
+        </div>
+
+        <div class="recipe-variants fragment step-panel" data-fragment-index="4">
+            <article><b>DIGITAL MATRIX</b><span>GPIO scan → debounce → fixed velocity</span></article>
+            <article><b>HALL / ANALOG</b><span>ADC scan → baseline → two thresholds → velocity</span></article>
+            <article><b>TRANSPORT</b><span>DIN, USB, or BLE begins after <code>SwitchEvent</code></span></article>
+        </div>
+
+        <div class="recipe-payoff fragment step-punch" data-fragment-index="5">
+            <span lang="ja">各段階で音を出す</span>
+            <strong>Keep a sound-producing checkpoint at every stage.</strong>
+            <p>When step 4 fails, steps 1–3 are still known good.</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+        This is the recommended implementation order for someone building a musical
+        keyboard. First prove the output path with a hard-coded middle C and inspect
+        it in a MIDI monitor. Second read only one physical key and record its raw
+        values at rest, during slow travel, during hard travel, and on release. Use
+        those measurements to choose filter size and thresholds. Third make the key
+        produce exactly one NoteOn and one NoteOff, including ugly half presses and
+        repeated taps. Add velocity only after the event trace is reliable. Fourth
+        scale the scan topology, mapping tables, and queue, then test worst-case
+        chords and controls. A conventional digital matrix skips ADC calibration and
+        usually uses fixed velocity. Hall effect keeps the two-distance model. DIN,
+        USB, and BLE are interchangeable only after the semantic event boundary.
+        The debugging advantage of this order is enormous: every stage preserves a
+        known sound-producing checkpoint. Transition: make the final system capable
+        of telling you which layer is lying.
+    </aside>
+</section>

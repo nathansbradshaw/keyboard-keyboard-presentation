@@ -1,0 +1,63 @@
+<section
+    class="slide layout-content pcb-bodge-slide"
+    data-auto-animate
+    data-beat="board-surgery-trace"
+    data-shot="repair-procedure"
+    data-emotion="resourceful"
+>
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">応急処置</span> · ELECTRONICS FIELD GUIDE · 08</span>
+        <h2>A bad trace is not a dead board</h2>
+    </header>
+
+    <div class="content pcb-bodge-stage">
+        <figure class="bodge-photo fragment step-panel" data-fragment-index="0">
+            <img
+                class="bodge-photo-overview"
+                src="assets/pcb-rework/keyboard-bodge-overview.webp"
+                alt="Back of the keyboard PCB with long orange bodge wires routed between corrected electrical endpoints"
+            >
+            <img
+                class="bodge-photo-detail"
+                src="assets/pcb-rework/jumper-bodge-closeup.webp"
+                alt="Close-up of a short insulated black jumper soldered between two through-hole pins"
+            >
+            <figcaption><b>THE ACTUAL PATCH</b><span>Long reroutes + one very short jumper</span></figcaption>
+            <span class="bodge-board-stamp">REV A.1</span>
+        </figure>
+
+        <ol class="bodge-steps" data-stagger=".bodge-step" data-stagger-effect="step-pop">
+            <li class="bodge-step"><b>01</b><div><small>POWER OFF</small><strong>Find both endpoints</strong><span>Use the schematic, layout, and continuity mode.</span></div></li>
+            <li class="bodge-step"><b>02</b><div><small>ISOLATE</small><strong>Cut the wrong copper</strong><span>One clean cut; then prove the old path is open.</span></div></li>
+            <li class="bodge-step"><b>03</b><div><small>PREP</small><strong>Expose, flux, and tin</strong><span>Prefer pads or vias. Scrape solder mask only if needed.</span></div></li>
+            <li class="bodge-step"><b>04</b><div><small>BRIDGE</small><strong>Route and anchor the wire</strong><span>Keep it short, insulated, and clear of sharp edges.</span></div></li>
+            <li class="bodge-step"><b>05</b><div><small>VERIFY</small><strong>Continuity, shorts, then power</strong><span>Use current limiting and test the real behavior.</span></div></li>
+        </ol>
+
+        <div class="board-surgery-rule fragment step-punch" data-fragment-index="6">
+            <span lang="ja">固定する</span>
+            <strong>The solder makes contact. Strain relief makes it survive.</strong>
+            <p>Kapton, UV mask, or a small adhesive dot—after the repair passes.</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+        These are the actual bodges from this project. A bodge wire is a controlled
+        PCB revision, not an admission of defeat. Begin unpowered. Identify the two
+        electrical endpoints from the schematic and PCB
+        layout, then confirm them with continuity mode. If an existing trace connects
+        something it should not, cut it with a sharp knife and magnification. Make
+        one shallow cut, inspect it, and prove the connection is open before adding
+        anything. Use an exposed pad or via as the new attachment point whenever
+        possible. If there is no accessible copper, gently scrape a few millimeters
+        of solder mask, add flux, and tin the copper without lingering long enough
+        to delaminate it. Pre-tin a short piece of insulated 30 AWG wire, solder each
+        end, then anchor the wire so movement cannot pull on the pads. Kapton is good
+        for temporary restraint; UV-curable solder mask or electronics-safe adhesive
+        can become the final strain relief after the electrical repair is proven.
+        Check the intended continuity and adjacent shorts with power off. First
+        power-up should use a current-limited supply. Never use continuity or
+        resistance mode on a powered board. Transition: sometimes the copper is
+        correct and the component is what has to leave.
+    </aside>
+</section>
