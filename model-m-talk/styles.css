@@ -54,9 +54,9 @@ body { overflow: hidden; }
   right: -24px;
   bottom: -64px;
   display: block;
-  width: 292px;
+  width: var(--reaction-width, 292px);
   max-width: none;
-  max-height: 330px;
+  max-height: var(--reaction-max-height, 330px);
   margin: 0;
   border: 0;
   background: transparent;
@@ -76,8 +76,8 @@ body { overflow: hidden; }
 }
 .reveal .slides section.slide .slide-corner-reaction--high { bottom: 40px; }
 .reveal .slides section.slide .slide-corner-reaction--large {
-  width: 350px;
-  max-height: 390px;
+  --reaction-width: 350px;
+  --reaction-max-height: 390px;
   opacity: .19;
 }
 .reveal .slides section.slide .slide-corner-reaction--soft { opacity: .14; }
@@ -2236,6 +2236,12 @@ body { overflow: hidden; }
 .interruption-slide--builder .interruption-bubble .mb__text {
   font-size: 53px;
 }
+.interruption-slide--builder .interruption-developer > img {
+  right: 68px;
+  bottom: -4px;
+  width: auto;
+  height: 735px;
+}
 .interruption-slide--firmware .interruption-bubble .mb__text {
   font-size: 55px;
 }
@@ -2646,6 +2652,18 @@ body { overflow: hidden; }
 .manga-objective.present .objective-title { animation: chromaDrift 5.5s ease-in-out infinite; }
 .manga-objective.present .objective-card { animation: objectivePulse 3.8s ease-in-out infinite; }
 .manga-objective.present .objective-status.visible { animation: statusBlink 2.4s ease-in-out infinite; }
+.reveal .slides section.manga-objective .objective-reaction {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
+}
+.reveal .slides section.manga-objective:not(:has(.objective-card.visible)) .objective-reaction--waiting,
+.reveal .slides section.manga-objective:has(.objective-card.visible):not(:has(.objective-status.visible)) .objective-reaction--revealed,
+.reveal .slides section.manga-objective:has(.objective-status.visible) .objective-reaction--loading {
+  opacity: .34;
+  visibility: visible;
+  transition: opacity 180ms ease, visibility 0s;
+}
 .manga-cameo.visible { animation: cameoFloat 5.2s ease-in-out infinite; }
 .piano-visual {
   position: relative;
@@ -3062,6 +3080,20 @@ body { overflow: hidden; }
   max-height: none;
   filter: drop-shadow(-9px 7px 0 #08080d) drop-shadow(-15px 0 0 var(--cyan));
   pointer-events: none;
+}
+.production-character--confident {
+  transition: opacity 180ms ease, visibility 0s;
+}
+.production-character--overwhelmed {
+  z-index: 21;
+  right: 430px;
+  bottom: -38px;
+  height: 480px;
+  filter: drop-shadow(-9px 7px 0 #08080d) drop-shadow(-15px 0 0 var(--red));
+}
+.production-boss:has(.production-character--overwhelmed.visible) .production-character--confident {
+  opacity: 0;
+  visibility: hidden;
 }
 .production-yamete {
   position: absolute;
@@ -6100,8 +6132,7 @@ img.schematic-example.real-schematic-render {
 .board-review-slide::before,
 .pcb-toolbelt-slide::before,
 .pcb-bodge-slide::before,
-.pcb-rework-slide::before,
-.pcb-addition-slide::before {
+.pcb-rework-slide::before {
   inset: 0;
   width: auto;
   height: auto;
@@ -6118,8 +6149,7 @@ img.schematic-example.real-schematic-render {
 .board-review-slide .slide-head h2,
 .pcb-toolbelt-slide .slide-head h2,
 .pcb-bodge-slide .slide-head h2,
-.pcb-rework-slide .slide-head h2,
-.pcb-addition-slide .slide-head h2 { max-width: 1320px; }
+.pcb-rework-slide .slide-head h2 { max-width: 1320px; }
 
 /* 16 · Datasheets */
 .electronics-datasheet-stage {
@@ -6343,6 +6373,17 @@ img.schematic-example.real-schematic-render {
 
 /* 17 · Component constraints */
 .component-constraints-stage { width: 100%; max-width: none !important; margin-top: 24px; }
+.reveal .slides section.slide.component-constraints-slide .component-constraint-reaction {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
+}
+.reveal .slides section.slide.component-constraints-slide:not(:has(.parts-count--finish.visible)) .component-constraint-reaction--search,
+.reveal .slides section.slide.component-constraints-slide:has(.parts-count--finish.visible) .component-constraint-reaction--resolved {
+  opacity: .23;
+  visibility: visible;
+  transition: opacity 180ms ease, visibility 0s;
+}
 .parts-funnel {
   display: grid;
   grid-template-columns: 320px 1fr 300px;
@@ -6973,37 +7014,6 @@ img.schematic-example.real-schematic-render {
 .board-surgery-rule--warning { margin-top: 21px; box-shadow-color: var(--red); }
 .board-surgery-rule--warning > span { background: var(--red); color: white; }
 
-/* 24 · Adding components */
-.pcb-addition-stage { width: 100%; max-width: none !important; margin-top: 22px; }
-.addition-blueprints { display: grid; grid-template-columns: repeat(2, 1fr); gap: 19px 23px; }
-.addition-blueprint { display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: 22px; min-height: 188px; padding: 17px 20px; border: 5px solid var(--charcoal); background: var(--paper); box-shadow: 7px 7px 0 var(--charcoal); }
-.addition-blueprint--pads { background: #fff0a9; transform: rotate(-.35deg); }
-.addition-blueprint--across { background: #cef5f1; transform: rotate(.3deg); }
-.addition-blueprint--inline { background: #ffd9e9; transform: rotate(.3deg); }
-.addition-blueprint--flying { background: #dfe8ff; transform: rotate(-.3deg); }
-.addition-blueprint small { display: block; margin-bottom: 7px; font: 1000 11px/1 ui-monospace, monospace; letter-spacing: .13em; }
-.addition-blueprint h3 { font-size: 28px; line-height: 1.02; }
-.addition-blueprint p { margin-top: 9px; color: #40564e; font-size: 16px; font-weight: 750; line-height: 1.12; }
-.addition-diagram { position: relative; width: 171px; height: 139px; border: 5px solid var(--charcoal); background: #277957; box-shadow: 5px 5px 0 var(--charcoal); overflow: hidden; }
-.addition-diagram i { position: absolute; top: 60px; width: 53px; height: 18px; background: #d9af62; }
-.addition-diagram i:first-child { left: 0; }
-.addition-diagram i:nth-of-type(2) { right: 0; }
-.addition-diagram b { position: absolute; z-index: 2; left: 49px; top: 43px; display: grid; place-items: center; width: 62px; height: 48px; border: 5px solid var(--charcoal); background: #e5d7bd; font: 1000 13px/1 ui-monospace, monospace; }
-.addition-diagram span { position: absolute; right: 5px; top: 4px; display: grid; place-items: center; width: 34px; height: 34px; border: 3px solid var(--charcoal); border-radius: 50%; background: var(--yellow); font: 1000 21px/1 ui-monospace, monospace; }
-.addition-diagram--across b { left: 48px; top: 28px; width: 64px; height: 35px; background: var(--cyan); }
-.addition-diagram--across i { top: 84px; width: 76px; }
-.addition-diagram--across::before, .addition-diagram--across::after { content: ""; position: absolute; top: 60px; width: 6px; height: 30px; background: var(--charcoal); }
-.addition-diagram--across::before { left: 60px; transform: rotate(-25deg); }
-.addition-diagram--across::after { right: 60px; transform: rotate(25deg); }
-.addition-diagram--inline::after { content: ""; position: absolute; left: 77px; top: 48px; width: 12px; height: 52px; background: #277957; transform: rotate(18deg); }
-.addition-diagram--inline span { background: var(--red); color: white; }
-.addition-diagram--flying b { left: 55px; top: 22px; width: 52px; height: 52px; background: #30383e; color: white; }
-.addition-diagram--flying i { top: 96px; width: 74px; height: 7px; background: var(--yellow); transform-origin: center; }
-.addition-diagram--flying i:first-of-type { left: 1px; transform: rotate(-31deg); }
-.addition-diagram--flying i:nth-of-type(2) { right: 1px; transform: rotate(31deg); }
-.addition-check { display: grid; grid-template-columns: auto repeat(4, 1fr); align-items: center; gap: 12px; margin-top: 24px; padding: 13px 16px 11px; border: 5px solid var(--charcoal); background: var(--paper); box-shadow: 7px 7px 0 var(--magenta); }
-.addition-check > b { padding: 9px 11px 7px; background: var(--charcoal); color: var(--yellow); font: 1000 13px/1 ui-monospace, monospace; letter-spacing: .1em; }
-
 /* keyboard-keyboard firmware field guide. */
 .firmware-entry-slide .slide-head h2,
 .firmware-priority-slide .slide-head h2,
@@ -7427,11 +7437,6 @@ img.schematic-example.real-schematic-render {
   .manga-firmware-arc .recipe-step,
   .manga-firmware-arc .card { transition: none !important; }
 }
-.addition-check span { padding-left: 14px; border-left: 3px solid var(--charcoal); color: #40564e; font-size: 15px; font-weight: 800; line-height: 1.05; }
-.addition-check strong { color: var(--charcoal); }
-.board-surgery-rule--finish { margin-top: 20px; box-shadow-color: var(--magenta); }
-.board-surgery-rule--finish > span { background: var(--cyan); }
-
 /* keyboard-keyboard MIDI field guide. */
 .midi-primer-slide .slide-head h2,
 .midi-vocabulary-slide .slide-head h2,
@@ -7992,18 +7997,3 @@ img.schematic-example.real-schematic-render {
   background-size: auto, 19px 19px;
   box-shadow: 9px 9px 0 #087f83, 14px 14px 0 var(--charcoal);
 }
-.manga-sequence--field-guide .electronics-datasheet-stage { position: relative; }
-.manga-sequence--field-guide .electronics-datasheet-stage::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  right: -82px;
-  bottom: -116px;
-  width: 470px;
-  height: 520px;
-  background: url("assets/characters/faces/mio/realization-big.png") right bottom / contain no-repeat;
-  opacity: .16;
-  filter: grayscale(.85) contrast(1.35);
-  pointer-events: none;
-}
-.manga-sequence--field-guide .datasheet-payoff { padding-right: 145px; }

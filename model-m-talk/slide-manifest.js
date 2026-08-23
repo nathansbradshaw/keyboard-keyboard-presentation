@@ -28,7 +28,6 @@ window.SLIDE_FILES = [
   "slides/27-post-pcb-toolbelt.html",
   "slides/28-bodge-a-trace.html",
   "slides/29-remove-and-replace-components.html",
-  "slides/30-add-components-after-fabrication.html",
   "slides/31-interruption-how-do-i-program-it.html",
   "slides/32-the-binary-knows-the-board.html",
   "slides/33-one-way-flow-explicit-responsibilities.html",
