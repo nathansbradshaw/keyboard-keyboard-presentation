@@ -4381,28 +4381,6 @@ body { overflow: hidden; }
 .kk-qr-episode .qr-card { border-width: 6px; border-radius: 2px; }
 .kk-qr-episode .qr-card--demo,
 .kk-qr-episode .qr-card--channel { transform: none; }
-.kk-qr-frame {
-  position: absolute;
-  z-index: 7;
-  inset: 30px;
-  border: 6px solid #08080d;
-  pointer-events: none;
-}
-.kk-qr-frame i { position: absolute; left: 27%; top: -5%; width: 8px; height: 110%; background: #08080d; transform: rotate(3deg); }
-.kk-qr-frame i:nth-child(2) { left: auto; right: 4%; top: 68%; width: 28%; height: 7px; transform: rotate(-9deg); }
-.kk-qr-frame span {
-  position: absolute;
-  left: 25px;
-  bottom: 24px;
-  padding: 9px 13px;
-  border: 4px solid #08080d;
-  background: var(--yellow);
-  color: #08080d;
-  box-shadow: 6px 6px 0 var(--magenta);
-  font: 1000 23px/1 "Hiragino Sans", "Yu Gothic", sans-serif;
-  transform: rotate(-3deg);
-}
-
 /* 04 · the quest is a dramatic anime mission card with a cast reaction. */
 .reveal .slides section.kk-quest-cut {
   background:
@@ -6425,6 +6403,14 @@ img.schematic-example.real-schematic-render {
 .manga-firmware-observability .debug-grid .card:nth-child(even) { transform: rotate(.6deg); }
 .firmware-reaction--observability { right: 12px; bottom: 8px; width: 180px; height: 198px; opacity: .19; transform: rotate(4deg); }
 
+/* Bottom-right character art is atmospheric, like the field-guide cameos on
+   slides 21–30: visible over the page texture, but behind every content panel. */
+.background-character {
+  z-index: 1 !important;
+  opacity: .16 !important;
+  filter: grayscale(.85) contrast(1.35) !important;
+}
+
 .manga-firmware-arc .priority-payoff,
 .manga-firmware-arc .baseline-warning,
 .manga-firmware-arc .mapping-payoff,
@@ -6945,13 +6931,14 @@ img.schematic-example.real-schematic-render {
 .manga-sequence--field-guide .electronics-datasheet-stage::after {
   content: "";
   position: absolute;
-  z-index: 4;
-  right: -10px;
-  bottom: -56px;
-  width: 150px;
-  height: 215px;
+  z-index: -1;
+  right: -82px;
+  bottom: -116px;
+  width: 470px;
+  height: 520px;
   background: url("assets/characters/faces/mio/realization-big.png") right bottom / contain no-repeat;
-  filter: drop-shadow(-5px 5px 0 rgba(21,32,29,.78));
+  opacity: .16;
+  filter: grayscale(.85) contrast(1.35);
   pointer-events: none;
 }
 .manga-sequence--field-guide .datasheet-payoff { padding-right: 145px; }
