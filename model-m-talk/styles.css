@@ -4654,6 +4654,31 @@ body { overflow: hidden; }
 .reveal .slides section.kk-boss-reveal .challenger-identity-reveal.visible {
   filter: drop-shadow(0 20px 0 rgba(0,0,0,.55));
 }
+.reveal .slides section.kk-boss-reveal .challenger-reaction {
+  transition: opacity 180ms ease;
+}
+.reveal .slides section.kk-boss-reveal .challenger-reaction--revealed,
+.reveal .slides section.kk-boss-reveal:has(.challenger-identity-reveal.visible) .challenger-reaction--waiting {
+  opacity: 0;
+}
+.reveal .slides section.kk-boss-reveal:has(.challenger-identity-reveal.visible) .challenger-reaction--revealed {
+  opacity: .34;
+}
+.reveal .slides section.kk-design-duel .discovery-reaction {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+.reveal .slides section.kk-design-duel .discovery-reaction--question,
+.reveal .slides section.kk-design-duel:has(.fork-panel[data-fragment-index="0"].visible) .discovery-reaction--converter,
+.reveal .slides section.kk-design-duel:has(.fork-panel[data-fragment-index="1"].visible) .discovery-reaction--build,
+.reveal .slides section.kk-design-duel:has(.manga-cameo[data-fragment-index="2"].visible) .discovery-reaction--velocity {
+  opacity: .23;
+}
+.reveal .slides section.kk-design-duel:has(.fork-panel[data-fragment-index="0"].visible) .discovery-reaction--question,
+.reveal .slides section.kk-design-duel:has(.fork-panel[data-fragment-index="1"].visible) .discovery-reaction--converter,
+.reveal .slides section.kk-design-duel:has(.manga-cameo[data-fragment-index="2"].visible) .discovery-reaction--build {
+  opacity: 0;
+}
 .kk-boss-reveal.present .chapter-inner,
 .kk-boss-reveal .chapter-jp,
 .kk-boss-reveal .challenger-reveal-stage,
@@ -4763,17 +4788,60 @@ body { overflow: hidden; }
 .kk-clue-page .hall-discovery-photo,
 .kk-clue-page .hall-discovery-path div,
 .kk-clue-page .hall-discovery-trace { border-radius: 0; }
-.kk-clue-reaction {
+.kk-clue-reaction-frame {
   position: absolute;
   z-index: 9;
-  right: 12px;
-  top: -168px;
-  width: 185px;
-  height: 205px;
-  object-fit: contain;
-  filter: drop-shadow(-6px 5px 0 #08080d) drop-shadow(-10px 0 0 var(--yellow));
+  right: 18px;
+  top: -174px;
+  width: 164px;
+  height: 164px;
+  overflow: hidden;
+  border: 6px solid #08080d;
+  background: var(--yellow);
+  box-shadow: -8px 8px 0 var(--magenta), -13px 13px 0 #08080d;
   transform: rotate(3deg);
   pointer-events: none;
+}
+.kk-clue-reaction {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  object-fit: contain;
+  object-position: center 18%;
+  transform: scale(1.45);
+  transform-origin: center 22%;
+}
+.reveal .slides section.kk-clue-page .velocity-reaction {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+.reveal .slides section.kk-clue-page .velocity-reaction--question,
+.reveal .slides section.kk-clue-page:has(.velocity-discovery-card--stacked.visible) .velocity-reaction--stacked,
+.reveal .slides section.kk-clue-page:has(.velocity-discovery-card--hall.visible) .velocity-reaction--hall {
+  opacity: 1;
+}
+.reveal .slides section.kk-clue-page:has(.velocity-discovery-card--stacked.visible) .velocity-reaction--question,
+.reveal .slides section.kk-clue-page:has(.velocity-discovery-card--hall.visible) .velocity-reaction--stacked {
+  opacity: 0;
+}
+.reveal .slides section.open-source-parents-slide .open-source-reaction {
+  opacity: 0;
+  transition: none;
+}
+.reveal .slides section.open-source-parents-slide .open-source-reaction--search,
+.reveal .slides section.open-source-parents-slide:has(.source-parent[data-tone="physical"].visible) .open-source-reaction--mechanical,
+.reveal .slides section.open-source-parents-slide:has(.source-parent[data-tone="signal"].visible) .open-source-reaction--electrical,
+.reveal .slides section.open-source-parents-slide:has(.source-result.visible) .open-source-reaction--result {
+  opacity: .23;
+}
+.reveal .slides section.open-source-parents-slide:has(.source-parent[data-tone="physical"].visible) .open-source-reaction--search,
+.reveal .slides section.open-source-parents-slide:has(.source-parent[data-tone="signal"].visible) .open-source-reaction--mechanical,
+.reveal .slides section.open-source-parents-slide:has(.source-result.visible) .open-source-reaction--electrical {
+  opacity: 0;
 }
 
 /* 09 · preserve the interruption layout while making the cut harsher. */
@@ -7399,6 +7467,8 @@ img.schematic-example.real-schematic-render {
   position: absolute;
   right: 10px;
   top: 7px;
+  left: auto;
+  bottom: auto;
   color: var(--paper);
   font: 1000 47px/1 ui-monospace, monospace;
   -webkit-text-stroke: 2px var(--charcoal);

@@ -14,7 +14,11 @@
     </header>
 
     <div class="content velocity-discovery-stage">
-        <img class="kk-clue-reaction" src="assets/characters/faces/mio/realization-big.png" alt="" aria-hidden="true">
+        <div class="kk-clue-reaction-frame" aria-hidden="true">
+            <img class="kk-clue-reaction velocity-reaction velocity-reaction--question" src="assets/characters/faces/mio/confused-big.png" alt="">
+            <img class="kk-clue-reaction velocity-reaction velocity-reaction--stacked" src="assets/characters/faces/mio/realization-big.png" alt="">
+            <img class="kk-clue-reaction velocity-reaction velocity-reaction--hall" src="assets/characters/faces/mio/dread-big.png" alt="">
+        </div>
         <article
             class="velocity-discovery-card velocity-discovery-card--stacked fragment step-panel"
             data-fragment-index="0"
@@ -97,20 +101,8 @@
     </div>
 
     <aside class="notes">
-        This is the discovery payoff. First, Melodicade MX showed that an
-        expressive instrument could estimate velocity with two stacked switch
-        events: the known distance between them and the elapsed time from t1 to
-        t2 give a speed estimate. Then Hall effect switches gave us a different
-        model: the Gateron KS-20 exploded view makes the mechanism visible. The
-        magnet rides inside the moving stem; the Hall sensor sits on the PCB
-        beneath it and exposes key position as an analog signal throughout the
-        press. These were two separate leads, not the same
-        mechanism. Together they changed our question from “did the key click?”
-        to “how did the key move?” Melodicade MX photo and project reference:
-        KOOP Instruments, https://www.koopinstruments.com/instrument-projects/melodicade-mx.
-        Hall effect switch image: Gateron, modified by RTINGS to highlight key
-        components, https://www.rtings.com/keyboard/learn/what-is-a-hall-effect-keyboard.
-        Transition: the sensing clues solved the principle; open designs made
-        the Model M implementation practical.
+        0. So we did some research into how we can turn one keypress into loud/soft, piano/forte by measuring the velocity of the key press. This is how electronic midi keyboards do it.
+        1. Our research led us to the Melodicade MX, a midi instrument that uses 2 stacked switches to measure key velocity. This clever solution allows for a single small key to measure velocity. As an asie this also is what lead us to use the wikihayden design. more on that later.
+        2. Some people in the ZMK discord suggested using a Hall Effect sensor, whixh allows us to define two actuation points for velocity sensing. The downside is that we'd have to build HE keyboard from scratch with no expierence on using HE and not many examples of HE keyboards.
     </aside>
 </section>

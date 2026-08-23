@@ -1,33 +1,90 @@
-<section class="slide layout-content open-source-parents-slide manga-sequence manga-sequence--legacy">
-  <header class="slide-head"><span class="eyebrow">Discovery question 03</span><h2>We do not have to start from zero</h2></header>
-  <div class="content source-merge" data-stagger=".source-parent, .source-arrow, .source-result" data-stagger-effect="step-wipe">
-    <div class="card source-parent source-parent--photo" data-tone="physical">
-      <small>MECHANICAL REFERENCE</small>
-      <figure class="source-project-photo">
-        <img src="assets/reference-projects/mod-mmm-board.webp" alt="The curved mod-mmm replacement PCB mounted inside an IBM Model M case">
-        <figcaption>Real curved Model M replacement PCB</figcaption>
-      </figure>
-      <h3>mod-mmm</h3><code>github.com/dcpedit/mod-mmm</code>
+<section
+    class="slide layout-content open-source-parents-slide manga-sequence manga-sequence--legacy"
+>
+    <header class="slide-head">
+        <span class="eyebrow">Discovery question 03</span>
+        <h2>Hippity Hoppity</h2>
+    </header>
+    <div
+        class="content source-merge"
+        data-stagger=".source-parent, .source-arrow, .source-result"
+        data-stagger-effect="step-wipe"
+    >
+        <div
+            class="card source-parent source-parent--photo"
+            data-tone="physical"
+        >
+            <small>MECHANICAL REFERENCE</small>
+            <figure class="source-project-photo">
+                <img
+                    src="assets/reference-projects/mod-mmm-board.webp"
+                    alt="The curved mod-mmm replacement PCB mounted inside an IBM Model M case"
+                />
+                <figcaption>Real curved Model M replacement PCB</figcaption>
+            </figure>
+            <h3>mod-mmm</h3>
+            <code>github.com/dcpedit/mod-mmm</code>
+        </div>
+        <div class="source-arrow">+</div>
+        <div class="card source-parent source-parent--photo" data-tone="signal">
+            <small>ELECTRICAL REFERENCE</small>
+            <figure class="source-project-photo">
+                <img
+                    src="assets/reference-projects/he60-assembled.webp"
+                    alt="An assembled HE60 Hall-effect keyboard PCB fitted with magnetic switches"
+                />
+                <figcaption>Real Hall-effect keyboard PCB</figcaption>
+            </figure>
+            <h3>HE60</h3>
+            <code>github.com/peppapighs/HE60</code>
+        </div>
+        <div class="source-arrow">→</div>
+        <div
+            class="card source-result source-result--photo"
+            data-tone="success"
+        >
+            <small>OUR ADAPTATION</small>
+            <figure class="source-project-photo source-project-photo--result">
+                <img
+                    src="assets/keyboard/keyboard-keyboard.webp"
+                    alt="The finished Model M MIDI instrument with colored key groups, controls, and OLED display"
+                />
+                <figcaption>The physical build</figcaption>
+            </figure>
+            <h3>Model M MIDI instrument</h3>
+        </div>
     </div>
-    <div class="source-arrow">+</div>
-    <div class="card source-parent source-parent--photo" data-tone="signal">
-      <small>ELECTRICAL REFERENCE</small>
-      <figure class="source-project-photo">
-        <img src="assets/reference-projects/he60-assembled.webp" alt="An assembled HE60 Hall-effect keyboard PCB fitted with magnetic switches">
-        <figcaption>Real Hall-effect keyboard PCB</figcaption>
-      </figure>
-      <h3>HE60</h3><code>github.com/peppapighs/HE60</code>
-    </div>
-    <div class="source-arrow">→</div>
-    <div class="card source-result source-result--photo" data-tone="success">
-      <small>OUR ADAPTATION</small>
-      <figure class="source-project-photo source-project-photo--result">
-        <img src="assets/keyboard/keyboard-keyboard.webp" alt="The finished Model M MIDI instrument with colored key groups, controls, and OLED display">
-        <figcaption>The physical build</figcaption>
-      </figure>
-      <h3>Model M MIDI instrument</h3>
-    </div>
-  </div>
-  <img class="slide-corner-reaction slide-corner-reaction--left" src="assets/characters/faces/mio/realization-big.png" alt="" aria-hidden="true">
-  <aside class="notes">The Model M decision looked like a massive measurement and PCB task until mod-mmm provided a mechanical starting point. HE60 provided an open Hall-effect electrical reference. These photographs show the real parent projects beside the finished adaptation: the curve comes from the Model M problem, while the analog sensing model comes from a Hall-effect keyboard. This is normal open-source engineering: understand both sources, then adapt them for a different geometry, controller, channel count, firmware, and musical purpose. mod-mmm photograph by dcpedit from the CC BY 4.0 mod-mmm repository. HE60 photograph by peppapighs from the GPL-3.0 HE60 repository. Transition: at this point, a software engineer may reasonably ask why any of this matters.</aside>
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left open-source-reaction open-source-reaction--search"
+        src="assets/characters/faces/mio/confident-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left open-source-reaction open-source-reaction--mechanical"
+        src="assets/characters/faces/mio/realization-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left open-source-reaction open-source-reaction--electrical"
+        src="assets/characters/faces/mio/amazed-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left open-source-reaction open-source-reaction--result"
+        src="assets/characters/faces/mio/sorcery-max.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <aside class="notes">
+        0. After realizing that HE was a must and that we had to build a model M replacement from scratch, we began to see if there was an existing open-source project that could serve as a starting point.
+        1. We found a project called the mod-mmm that provided a mechanical starting point and an open-source reference for the Model M keyboard, this saves us a lot of effort trying to measure an old keyboard from scratch.
+        2. We found a HE keyboard (which was hard to find) that provides the concept of how to build a HE keyboard.
+        3.I have a Model M.
+        I have Hall Effect switches.
+        UH!
+        Hall Effect Model M.
+    </aside>
 </section>

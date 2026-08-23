@@ -31,7 +31,9 @@
                 class="manga-panel fork-panel tone-dread fragment step-panel"
                 data-fragment-index="1"
             >
-                <span class="jp-line" lang="ja">選択肢B：MIDI対応キーボードを自作</span>
+                <span class="jp-line" lang="ja"
+                    >選択肢B：MIDI対応キーボードを自作</span
+                >
                 <figure class="midi-build-image">
                     <img
                         src="assets/keyboard/keyboard-keyboard.webp"
@@ -54,12 +56,39 @@
             ><span class="en-text">Piano Forte is a must</span>
         </div>
     </div>
-    <img class="slide-corner-reaction slide-corner-reaction--left" src="assets/characters/faces/mio/confused-big.png" alt="" aria-hidden="true">
+    <img
+        class="slide-corner-reaction slide-corner-reaction--right discovery-reaction discovery-reaction--question"
+        src="assets/characters/faces/mio/confused-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--right discovery-reaction discovery-reaction--converter"
+        src="assets/characters/faces/mio/confident-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--right discovery-reaction discovery-reaction--build"
+        src="assets/characters/faces/mio/dread-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--right discovery-reaction discovery-reaction--velocity"
+        src="assets/characters/faces/mio/realization-big.png"
+        alt=""
+        aria-hidden="true"
+    />
     <aside class="notes">
-        Reveal Path A first, then Path B, so each panel's sfx lands as a beat of
-        its own—"too easy" versus "here we go." On the third click, the cameo
-        lands the actual constraint: not just MIDI out, but touch-sensitive
-        MIDI out, which neither path gets for free. Transition: that single
-        condition is why a keyboard alone was not the answer.
+        0. This lead to the first issue, How do you make a keyboard sing? An I
+        am not talking about the click clack of you cherry blue lovers out
+        there, How do you make it sing midi? 1. Our intial though was do USB to
+        midi, we could build out a converter to turn the serial into midi. It
+        would be easy, universal and cheap. It probably already existed, but it
+        wasn't what we wanted. 2. Our next thought was to build a custom MIDI
+        interface from scratch. This would give us more control and flexibility
+        over the MIDI output, but would mean we had to build it ourselves.
+        3. regardless of what we did, the solution had to have touch response, expression. Piano Forte, it had to be lowd and soft from the same key.
     </aside>
 </section>
