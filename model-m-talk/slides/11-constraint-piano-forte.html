@@ -9,8 +9,7 @@
         <span class="eyebrow"
             ><span lang="ja">強弱を測る</span> · Piano / forte · solved</span
         >
-        <!-- English review: "Infinate" is misspelled; the standard spelling is "Infinite." Original text intentionally preserved. -->
-        <h2>Hall Effect Gives Us Infinate Measuring Points</h2>
+        <h2>Hall Effect Gives Us Infinite Measuring Points</h2>
     </header>
 
     <div class="content piano-forte-stage">
@@ -18,20 +17,24 @@
             class="piano-forte-principle fragment step-panel"
             data-fragment-index="0"
         >
-            <div class="piano-forte-sensor" aria-hidden="true">
-                <span class="piano-forte-keycap">KEY</span>
-                <i class="piano-forte-magnet">N · S</i>
-                <b>HALL</b>
-            </div>
-            <div>
-                <small>THE SENSOR</small>
-                <!-- English review: "Report Measured Hall Effect." reads like a sentence fragment. Original text intentionally preserved. -->
-                <strong>Report Measured Hall Effect.</strong>
+            <div class="piano-forte-principle-step">
+                <span class="piano-forte-step-number" aria-hidden="true"
+                    >01</span
+                >
+                <div>
+                    <small>HALL SENSOR</small>
+                    <strong>Tracks key position continuously.</strong>
+                </div>
             </div>
             <span class="piano-forte-arrow" aria-hidden="true">→</span>
-            <div>
-                <small>THE FIRMWARE</small>
-                <strong>Measure the time between two fixed points.</strong>
+            <div class="piano-forte-principle-step">
+                <span class="piano-forte-step-number" aria-hidden="true"
+                    >02</span
+                >
+                <div>
+                    <small>FIRMWARE</small>
+                    <strong>Times travel between two fixed points.</strong>
+                </div>
             </div>
         </div>
 
@@ -42,16 +45,35 @@
             >
                 <header>
                     <span class="piano-forte-mark">p</span>
-                    <div><small>PIANO </small><h3>Slow key press</h3></div>
+                    <div>
+                        <small>PIANO </small>
+                        <h3>Slow key press</h3>
+                    </div>
                     <strong>soft</strong>
                 </header>
                 <div class="piano-forte-trace">
-                    <svg viewBox="0 0 600 150" role="img" aria-label="A slow key press takes a long time to travel between the first and second thresholds">
-                        <path class="piano-forte-grid" d="M0 48H600 M0 112H600" />
-                        <path class="piano-forte-line" d="M12 18 C116 18 160 27 229 48 S385 93 510 112 S565 128 588 134" />
+                    <svg
+                        viewBox="0 0 600 150"
+                        role="img"
+                        aria-label="A slow key press takes a long time to travel between the first and second thresholds"
+                    >
+                        <path
+                            class="piano-forte-grid"
+                            d="M0 48H600 M0 112H600"
+                        />
+                        <path
+                            class="piano-forte-line"
+                            d="M12 18 C116 18 160 27 229 48 S385 93 510 112 S565 128 588 134"
+                        />
                     </svg>
-                    <span class="piano-forte-threshold piano-forte-threshold--one">t₁</span>
-                    <span class="piano-forte-threshold piano-forte-threshold--two">t₂</span>
+                    <span
+                        class="piano-forte-threshold piano-forte-threshold--one"
+                        >t₁</span
+                    >
+                    <span
+                        class="piano-forte-threshold piano-forte-threshold--two"
+                        >t₂</span
+                    >
                 </div>
                 <div class="piano-forte-result">
                     <span><b>70 ms</b><small>LONG Δt</small></span>
@@ -66,16 +88,35 @@
             >
                 <header>
                     <span class="piano-forte-mark">f</span>
-                    <div><small>FORTE</small><h3>Fast key press</h3></div>
+                    <div>
+                        <small>FORTE</small>
+                        <h3>Fast key press</h3>
+                    </div>
                     <strong>loud</strong>
                 </header>
                 <div class="piano-forte-trace">
-                    <svg viewBox="0 0 600 150" role="img" aria-label="A fast key press takes a short time to travel between the first and second thresholds">
-                        <path class="piano-forte-grid" d="M0 48H600 M0 112H600" />
-                        <path class="piano-forte-line" d="M12 18 C76 18 102 25 126 48 S152 93 177 112 S291 132 588 134" />
+                    <svg
+                        viewBox="0 0 600 150"
+                        role="img"
+                        aria-label="A fast key press takes a short time to travel between the first and second thresholds"
+                    >
+                        <path
+                            class="piano-forte-grid"
+                            d="M0 48H600 M0 112H600"
+                        />
+                        <path
+                            class="piano-forte-line"
+                            d="M12 18 C76 18 102 25 126 48 S152 93 177 112 S291 132 588 134"
+                        />
                     </svg>
-                    <span class="piano-forte-threshold piano-forte-threshold--one">t₁</span>
-                    <span class="piano-forte-threshold piano-forte-threshold--two">t₂</span>
+                    <span
+                        class="piano-forte-threshold piano-forte-threshold--one"
+                        >t₁</span
+                    >
+                    <span
+                        class="piano-forte-threshold piano-forte-threshold--two"
+                        >t₂</span
+                    >
                 </div>
                 <div class="piano-forte-result">
                     <span><b>8 ms</b><small>SHORT Δt</small></span>
@@ -95,16 +136,41 @@
         </div>
     </div>
 
-    <img class="slide-corner-reaction slide-corner-reaction--left" src="assets/characters/faces/mio/amazed-big.png" alt="" aria-hidden="true">
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left piano-forte-reaction piano-forte-reaction--question"
+        src="assets/characters/faces/mio/confused-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left piano-forte-reaction piano-forte-reaction--principle"
+        src="assets/characters/faces/mio/realization-big.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left piano-forte-reaction piano-forte-reaction--soft"
+        src="assets/characters/faces/mio/pleading.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left piano-forte-reaction piano-forte-reaction--loud"
+        src="assets/characters/faces/mio/maniacal.png"
+        alt=""
+        aria-hidden="true"
+    />
+    <img
+        class="slide-corner-reaction slide-corner-reaction--left piano-forte-reaction piano-forte-reaction--solved"
+        src="assets/characters/faces/mio/teasing-wink.png"
+        alt=""
+        aria-hidden="true"
+    />
     <aside class="notes">
-        A Hall sensor reports continuously as the magnet moves with the key. The
-        firmware does not need an infinite set of thresholds; it chooses two fixed
-        positions and measures the elapsed time between them. A slow press takes
-        longer to cross that distance and maps to a low MIDI velocity. A fast press
-        crosses quickly and maps to a high velocity. The 70 ms / velocity 18 and
-        8 ms / velocity 116 examples make that inverse relationship visible; the
-        production mapping spans MIDI velocity 1 through 127. Transition: now that
-        the core sensing idea works, the next audience question is how to build the
-        whole board.
+        0. The hall effect switches create a variable change in the voltage, which is measured by the ADC, this gives us a continuous stream of voltage readings.
+        We can choose two points on that stream and those points can be used to define the first key press and the second key press. we can measure the time between to calculate the velocity.
+        1. So a soft key press is defined by a long time between the first and second actuation points
+        2. A loud key press is defined by a short time between the first and second actuation points.
+        The sensing idea now works on one key. The next problem is avoiding a complete mechanical and electrical design from zero, so look for open-source parents.
     </aside>
 </section>

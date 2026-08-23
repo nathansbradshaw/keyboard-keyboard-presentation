@@ -15,6 +15,30 @@ const characterSets = [
   },
 ];
 
+const singlePoseFaces = [
+  { character: "Kaori", folder: "kaori", emotion: "mischievous-confidence" },
+  { character: "Mio", folder: "mio", emotion: "mischievous-confidence" },
+  { character: "Ren", folder: "ren", emotion: "mischievous-confidence" },
+  { character: "Kaori", folder: "kaori", emotion: "maniacal" },
+  { character: "Mio", folder: "mio", emotion: "maniacal" },
+  { character: "Ren", folder: "ren", emotion: "maniacal" },
+  { character: "Kaori", folder: "kaori", emotion: "evil" },
+  { character: "Mio", folder: "mio", emotion: "evil" },
+  { character: "Ren", folder: "ren", emotion: "evil" },
+  { character: "Mio", folder: "mio", emotion: "scandalized" },
+  { character: "Ren", folder: "ren", emotion: "scandalized" },
+  { character: "Mio", folder: "mio", emotion: "teasing-wink" },
+  { character: "Ren", folder: "ren", emotion: "teasing-wink" },
+  { character: "Mio", folder: "mio", emotion: "flustered" },
+  { character: "Ren", folder: "ren", emotion: "flustered" },
+  { character: "Mio", folder: "mio", emotion: "pouting" },
+  { character: "Ren", folder: "ren", emotion: "pouting" },
+  { character: "Mio", folder: "mio", emotion: "pleading" },
+  { character: "Ren", folder: "ren", emotion: "pleading" },
+  { character: "Mio", folder: "mio", emotion: "ugly-crying" },
+  { character: "Ren", folder: "ren", emotion: "ugly-crying" },
+];
+
 const fullBodyPoseSets = [
   { character: "Kaori", folder: "kaori" },
   { character: "Mio", folder: "mio" },
@@ -22,6 +46,15 @@ const fullBodyPoseSets = [
 ];
 
 const fullBodyPoses = ["neutral", "presenting", "thinking", "celebrating"];
+
+const sceneSpecificPoses = [
+  { character: "Mio", folder: "mio", pose: "warning-model-m", subtitle: "Model M warning" },
+  { character: "Kaori", folder: "kaori", pose: "flustered-screwdriver", subtitle: "Model M interlude · flustered" },
+  { character: "Kaori", folder: "kaori", pose: "confident-model-m", subtitle: "Model M interlude · confident" },
+  { character: "Mio", folder: "mio", pose: "lovestruck-model-m-warning", subtitle: "Model M interlude · lovestruck warning" },
+  { character: "Mio", folder: "mio", pose: "tsundere-baka", subtitle: "Model M interlude · embarrassed denial" },
+  { character: "Ren", folder: "ren", pose: "confident-screwdriver", subtitle: "Model M interlude · confident senpai" },
+];
 
 const supportingAssets = [
   { group: "Legacy reactions", kind: "reaction", files: ["brunette-skeptical.png", "brunette-uh-oh.png", "brunette-eureka.png", "blond-panic.png", "blond-exhausted.png", "blond-triumph.png"], root: "assets/characters/reactions/", rights: "project art" },
@@ -100,6 +133,15 @@ if (faceGrid) {
       });
     });
   });
+  singlePoseFaces.forEach(({ character, folder, emotion }) => {
+    faceGrid.append(makeAssetCard({
+      path: `assets/characters/faces/${folder}/${emotion}.png`,
+      title: `${character} · ${titleCase(emotion)}`,
+      subtitle: "single slide-readable pose",
+      character,
+      level: "base",
+    }));
+  });
   if (castExpressionCount) {
     castExpressionCount.textContent = `${faceGrid.children.length} cast expressions`;
   }
@@ -116,6 +158,15 @@ if (poseGrid) {
         kind: "pose",
       }));
     });
+  });
+  sceneSpecificPoses.forEach(({ character, folder, pose, subtitle }) => {
+    poseGrid.append(makeAssetCard({
+      path: `assets/characters/poses/${folder}/${pose}.png`,
+      title: `${character} · ${titleCase(pose)}`,
+      subtitle,
+      character,
+      kind: "pose",
+    }));
   });
   if (fullBodyPoseCount) {
     fullBodyPoseCount.textContent = `${poseGrid.children.length} full-body poses`;

@@ -1,14 +1,19 @@
 <section class="slide layout-content manga-cameo-slide kk-manga-act kk-constraint-finale">
-  <!-- Proofreading note (English unchanged): "Embedded systems are an art of constraints" is grammatically possible but awkward because it equates plural systems with a singular art form. "Embedded-systems development is the art of constraints" would be more idiomatic. -->
-  <img class="kk-constraint-reaction background-character" src="assets/characters/faces/ren/understands-big.png" alt="" aria-hidden="true">
+  <img class="kk-constraint-reaction background-character constraint-reaction constraint-reaction--question" src="assets/characters/faces/ren/annoyed-big.png" alt="" aria-hidden="true">
+  <img class="kk-constraint-reaction background-character constraint-reaction constraint-reaction--pixel" src="assets/characters/faces/ren/understands-big.png" alt="" aria-hidden="true">
+  <img class="kk-constraint-reaction background-character constraint-reaction constraint-reaction--chiptune" src="assets/characters/faces/ren/happy-big.png" alt="" aria-hidden="true">
+  <img class="kk-constraint-reaction background-character constraint-reaction constraint-reaction--embedded" src="assets/characters/faces/ren/mischievous-confidence.png" alt="" aria-hidden="true">
   <div class="manga-cameo callout-insight fragment step-pop" data-sfx="ドン!!"><div class="manga-bubble"><span class="jp-text" lang="ja">制約こそ表現だ。</span><span class="en-text">The constraint is the expression.</span></div></div>
-  <header class="slide-head"><span class="eyebrow">The invitation</span><h2>Embedded systems are an art of constraints</h2></header>
+  <header class="slide-head"><span class="eyebrow">The invitation</span><h2>Embedded-systems development is the art of constraints</h2></header>
   <div class="content thesis-argument">
     <div class="constraint-manga-grid" data-stagger=".constraint-medium" data-stagger-effect="step-panel">
       <article class="manga-panel constraint-medium tone-confident">
         <span class="jp-line" lang="ja">小さな世界</span>
         <small>01 · LIMITED RESOLUTION</small>
-        <div class="pixel-art-demo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="pixel-art-demo">
+          <img src="assets/pixel-art/terraria-forest.png" alt="Terraria character standing among trees and sunflowers in a pixel-art forest">
+          <span>TERRARIA</span>
+        </div>
         <h3>Pixel art</h3>
         <span class="manga-sfx" data-meaning="place the pixel">カチッ</span>
       </article>
@@ -25,12 +30,22 @@
       <article class="manga-panel constraint-medium tone-dread dark">
         <span class="jp-line" lang="ja">物理が参戦</span>
         <small>03 · PHYSICAL COMPUTATION</small>
-        <div class="embedded-art-demo" aria-hidden="true"><span class="chip-core">MCU</span><i></i><i></i><i></i><i></i></div>
+        <div class="embedded-art-demo">
+          <span class="chip-core" aria-hidden="true">MCU</span><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+          <img class="embedded-reality" src="assets/electronics-tips/daisy-seed-rev4.webp" alt="Electrosmith Daisy Seed Rev4 embedded audio microcontroller module">
+        </div>
         <h3>Embedded</h3>
         <span class="manga-sfx" data-meaning="the medium fights back">ピコーン</span>
       </article>
     </div>
     <p class="thesis-payoff constraint-payoff fragment step-punch" data-fragment-index="3"><span lang="ja">制約は邪魔じゃない。</span> Constraints make the project.</p>
   </div>
-  <aside class="notes">Reveal the three manga panels one beat at a time: pixel art, chiptune, then embedded. Invite software engineers to see embedded development as a creative medium, not merely software with fewer resources. Pixel art gets its character from a finite grid and palette. Chiptune gets its recognizable sound from a small number of voices, simple waveforms, and tiny memory budgets. Embedded systems ask us to work with clocks, memory, power, mechanical geometry, analog noise, and physical tolerances. Those limits force deliberate choices and make the result distinctive. In this project, the medium includes an old shell, one hundred analog sensors, a one-millisecond scan, and DIN MIDI. Transition: if MIDI keyboards are already solved, why deliberately choose these constraints?</aside>
+  <aside class="notes">
+      0. Embeded Development is an art of contraints. As we are limited in what we can do, we often build something increadable.
+      1. Think like pixel art. Every pixel is a deliberate choice. That choice is what makes the image look good.
+      2. Chiptune started as a simple sound synthesis engine. The constraint of the systems playing chiptunes is what made that sound so iconic. We can produce better sounds now, but the style has grown beyond the original constraint.
+      3. Embeded systems apply a constraint on software that we don't usually get to experience in the copreate business world. Every function has to be intentional, every variable a contionus choice, it allows us to build software art of the likes of pixel and chiptune art.
+
+
+</aside>
 </section>
