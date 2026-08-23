@@ -1,4 +1,3 @@
-<!-- English review: no spelling or grammar error found; the existing wording is preserved exactly. -->
 <section
     class="slide layout-content pcb-rework-slide"
     data-auto-animate
@@ -7,7 +6,7 @@
     data-emotion="careful"
 >
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">再作業</span> · ELECTRONICS FIELD GUIDE · 09</span>
+        <span class="eyebrow"><span lang="ja">リワーク</span> · ELECTRONICS FIELD GUIDE · 09</span>
         <h2>Remove the part—not the pads</h2>
     </header>
 
@@ -15,63 +14,50 @@
         <div class="rework-photo-story fragment step-panel" data-fragment-index="0">
             <figure>
                 <img src="assets/pcb-rework/ic-footprint-removed.webp" alt="Close-up of the U1 footprint after the original surface-mount IC was removed">
-                <figcaption><b>01 · REMOVE</b><span>Every joint molten. Lift—never pry.</span></figcaption>
+                <figcaption><b>01 · OLD U1 OUT</b><span>It should lift, not fight.</span></figcaption>
             </figure>
             <i aria-hidden="true">→</i>
             <figure>
                 <img src="assets/pcb-rework/ic-replacement-installed.webp" alt="Close-up of the replacement surface-mount IC soldered onto the U1 footprint">
-                <figcaption><b>02 · REPLACE</b><span>Align pin 1. Tack corners. Solder + inspect.</span></figcaption>
+                <figcaption><b>02 · NEW U1 IN</b><span>Line up pin 1, tack two corners, inspect.</span></figcaption>
             </figure>
 
             <div class="rework-method-list" data-stagger=".rework-method-note" data-stagger-effect="step-pop">
-                <article class="rework-method-note"><b>2 PINS</b><div><strong>Heat both ends</strong><span>Flux, then lift gently</span></div></article>
-                <article class="rework-method-note"><b>IC</b><div><strong>Heat every joint</strong><span>Low airflow; never pry</span></div></article>
-                <article class="rework-method-note"><b>THT</b><div><strong>Sacrifice the cheap part</strong><span>Clear one hole at a time</span></div></article>
+                <article class="rework-method-note"><b>2 PINS</b><div><strong>Heat both sides</strong><span>Then lift it gently</span></div></article>
+                <article class="rework-method-note"><b>IC</b><div><strong>Get every pin molten</strong><span>If it fights, stop</span></div></article>
+                <article class="rework-method-note"><b>THT</b><div><strong>Save the board, not the dead part</strong><span>Cut it up and clear one hole at a time</span></div></article>
             </div>
         </div>
 
         <div class="u1-desolder-gag fragment step-punch" data-fragment-index="0" aria-label="Kaori tells the faulty U1 that it is already desoldered, and U1 reacts in shock">
             <div class="u1-desolder-threat">
-                <span lang="ja">お前はもう…</span>
+                <span lang="ja">U1はもう…</span>
                 <strong>Omae wa mou… <em>desoldered.</em></strong>
             </div>
             <div class="u1-desolder-chip" aria-hidden="true"><b>U1</b><span>NANI?!</span></div>
         </div>
 
-        <div class="rework-sequence fragment step-panel" data-fragment-index="4">
-            <span><b>1</b> Shield neighbors</span><i>→</i>
-            <span><b>2</b> Add flux + fresh solder</span><i>→</i>
-            <span><b>3</b> Heat, then lift</span><i>→</i>
-            <span><b>4</b> Wick + inspect</span>
-        </div>
-
-        <div class="board-surgery-rule board-surgery-rule--warning fragment step-punch" data-fragment-index="5">
+        <div class="board-surgery-rule board-surgery-rule--warning fragment step-punch" data-fragment-index="4">
             <span lang="ja">引っ張らない</span>
-            <strong>If it needs force, the solder is not molten.</strong>
+            <strong>If you have to pull, something is still soldered.</strong>
         </div>
     </div>
 
-    <img class="slide-corner-reaction" src="assets/characters/faces/kaori/deadpan.png" alt="" aria-hidden="true">
+    <img class="slide-corner-reaction" src="assets/characters/faces/kaori/deadpan.png" alt="" aria-hidden="true" style="--reaction-width: 400px; --reaction-max-height: 520px">
     <aside class="notes">
-        These photos show the actual U1 removal and replacement. Let the visual gag
-        land first: Kaori tells the failed component, “Omae wa mou… desoldered,” and
-        U1 answers “Nani?!” Then choose the removal
-        method by package, thermal mass, and whether the part needs to survive. For
-        a two-terminal resistor, capacitor, or diode, add flux
-        and a little fresh solder; the new flux helps the old joint flow. Heat both
-        ends nearly together with two irons, hot tweezers, or a broad solder blob,
-        then lift with almost no force. For an IC, protect nearby plastics with
-        Kapton or a shield, use low airflow so tiny parts do not fly away, and move
-        heat evenly around the package. Lift only when every joint is visibly molten.
-        Through-hole connectors are heat sinks. If the inexpensive component is
-        already faulty, cut its body or leads and desolder one pin at a time rather
-        than trying to save it at the board's expense. A low-melting-point removal
-        alloy can help on stubborn multi-pin packages. After removal, add flux, wick
-        only until the pads are flat, clean the residue as appropriate for the flux,
-        and inspect for lifted pads or solder bridges under magnification. Work with
-        ventilation, observe ESD precautions, disconnect power, and discharge large
-        capacitors. The key rule is tactile: if the component resists, stop pulling.
-        Transition: with clean pads, installing a replacement is the easy case—but
-        the board can also accept a component the schematic never planned for.
+        These are photos of the U1 we removed and the replacement we soldered in.
+        Let the “Omae wa mou… desoldered” joke land first. The real rule is simple:
+        if the part does not lift easily, one of the joints is still holding it. For
+        a resistor, capacitor, or diode, add flux and a little fresh solder, heat
+        both ends, and lift gently. For an IC, shield nearby plastic, keep the hot-air
+        flow low, and heat the package evenly until every joint is molten. A dead
+        through-hole part is often not worth saving. Cut its body or leads and clear
+        one hole at a time instead of risking the board. Low-melting-point removal
+        alloy can help with stubborn packages. Once the part is off, use flux and
+        wick to flatten the pads, clean the residue, and inspect for lifted pads or
+        bridges under magnification. Disconnect power, discharge large capacitors,
+        use ventilation, and follow ESD precautions. If the component resists, stop
+        pulling. Transition: with clean pads, installing the replacement is the easy
+        part—but the board can also take a component the schematic never planned for.
     </aside>
 </section>

@@ -1,4 +1,3 @@
-<!-- English review: “Now bring the toolbelt” is grammatical, though “Now bring your toolbelt” is the more natural idiom. Original text intentionally unchanged. -->
 <section
     class="slide layout-content pcb-toolbelt-slide"
     data-auto-animate
@@ -8,7 +7,7 @@
 >
     <header class="slide-head">
         <span class="eyebrow"><span lang="ja">装備</span> · ELECTRONICS FIELD GUIDE · 07</span>
-        <h2>The PCB arrived. Now bring the toolbelt.</h2>
+        <h2>The boards are here. Let’s see what works.</h2>
     </header>
 
     <div class="content pcb-toolbelt-stage">
@@ -18,75 +17,72 @@
                 <figure class="pcb-tool-photo"><img src="assets/electronics-tips/toolbelt/multimeter.webp" alt="Blue digital multimeter with test probes"></figure>
                 <small>START HERE</small>
                 <h3>Multimeter</h3>
-                <p>Shorts + rail voltage</p>
+                <p>Any shorts? Are the rails right?</p>
             </article>
 
             <article class="pcb-tool pcb-tool--logic">
                 <span class="pcb-tool-number">02</span>
                 <figure class="pcb-tool-photo"><img src="assets/electronics-tips/toolbelt/logic-analyzer.webp" alt="Compact Saleae Logic8 USB logic analyzer"></figure>
-                <small>DIGITAL EVIDENCE</small>
+                <small>IS THE BUS TALKING?</small>
                 <h3>Logic analyzer</h3>
-                <p>Buses + timing</p>
+                <p>Watch bits and timing</p>
             </article>
 
             <article class="pcb-tool pcb-tool--scope">
                 <span class="pcb-tool-number">03</span>
                 <figure class="pcb-tool-photo"><img src="assets/electronics-tips/toolbelt/oscilloscope.webp" alt="Oscilloscope displaying an electrical waveform"></figure>
-                <small>ANALOG TRUTH</small>
+                <small>WHAT IS THAT WAVEFORM?</small>
                 <h3>Oscilloscope</h3>
-                <p>Noise + waveforms</p>
+                <p>See noise, clocks, and signals</p>
             </article>
 
             <article class="pcb-tool pcb-tool--iron">
                 <span class="pcb-tool-number">04</span>
                 <figure class="pcb-tool-photo"><img src="assets/electronics-tips/toolbelt/soldering-iron.webp" alt="Electric soldering iron"></figure>
-                <small>REWORK</small>
+                <small>CHANGE THE HARDWARE</small>
                 <h3>Soldering iron</h3>
-                <p>Repair + experiment</p>
+                <p>Fix it or try a bodge</p>
             </article>
 
             <article class="pcb-tool pcb-tool--debugger">
                 <span class="pcb-tool-number">05</span>
                 <figure class="pcb-tool-photo"><img src="assets/electronics-tips/toolbelt/debugger.webp" alt="SEGGER J-Link hardware debugger with JTAG and SWD connector"></figure>
-                <small>FIRMWARE ACCESS</small>
+                <small>WHY WON’T IT BOOT?</small>
                 <h3>MCU debugger</h3>
-                <p>Flash + inspect</p>
+                <p>Flash, pause, and inspect</p>
             </article>
 
             <article class="pcb-tool pcb-tool--extras">
                 <span class="pcb-tool-number">06</span>
                 <figure class="pcb-tool-photo"><img src="assets/electronics-tips/toolbelt/workbench.webp" alt="Electronics workbench with oscilloscope, multimeters, probes, tools, and parts storage"></figure>
-                <small>THE NEXT UPGRADES</small>
+                <small>NICE TO HAVE</small>
                 <h3>Bench helpers</h3>
-                <p>Power + precision</p>
+                <p>Safer power and easier rework</p>
             </article>
         </div>
 
         <div class="pcb-toolbelt-payoff fragment step-punch" data-fragment-index="6">
             <span lang="ja">測ってから直す</span>
-            <strong>Measure first. Form a hypothesis. Rework second.</strong>
+            <strong>Don’t guess. Change one thing, then measure again.</strong>
         </div>
     </div>
 
     <img class="slide-corner-reaction" src="assets/characters/faces/mio/confident-big.png" alt="" aria-hidden="true">
     <aside class="notes">
-        Once the boards arrive, debugging becomes physical. Start with a multimeter:
-        with power off, check continuity and look for shorts; with power on, measure
-        every rail under the real load. A logic analyzer answers digital questions
-        cheaply and quickly—did I²C acknowledge, did the multiplexer enable, did the
-        UART transmit, did chip select move? An oscilloscope answers the questions a
-        multimeter averages away: ripple, noise, rise time, unstable clocks, Hall
-        sensor waveforms, and a supply rail collapsing during activity. The soldering
-        iron closes the loop by letting you repair a joint, swap a component, cut a
-        trace, or add a bodge wire. For firmware, expose the programming and debug
-        header before fabrication. ST-Link is common for STM32, but the correct tool
-        depends on the MCU and protocol; J-Link and CMSIS-DAP probes are common
-        alternatives. The next upgrades are a current-limited bench supply, good
-        flux, solder wick, fine tweezers, magnification, and hot air. The method is
-        more important than the shopping list: observe, form one hypothesis, make
-        one change, and measure again. Never use resistance or continuity mode on a
-        powered board, and understand the grounding of your oscilloscope before
-        attaching its probe. Photo sources: “Blue digital multimeter” by Publunch,
+        When the boards arrive, resist the urge to plug one in and hope. Start with
+        the multimeter while the power is off: check continuity and look for shorts.
+        Then power it and check every rail under load. If a digital bus is acting
+        weird, the logic analyzer will show whether I²C acknowledged, chip select
+        moved, or the UART sent anything. Use the scope when you need to see what the
+        meter hides—noise, ripple, bad clocks, sensor waveforms, or a rail collapsing
+        during activity. The iron lets you repair a joint, swap a part, cut a trace,
+        or add a bodge wire. Make sure the board exposes its programming and debug
+        pins too. STM32 often means ST-Link; J-Link and CMSIS-DAP are other common
+        options. A current-limited bench supply, good flux, wick, tweezers,
+        magnification, and hot air can come later. Whatever tools you have, change
+        one thing at a time and measure again. Never use resistance or continuity
+        mode on a powered board, and understand your scope’s grounding before you
+        connect it. Photo sources: “Blue digital multimeter” by Publunch,
         public domain, https://commons.wikimedia.org/wiki/File:Blue_digital_multimeter.jpg ·
         “Saleae Logic8 IMG 2876” by Myself248, CC BY-SA 2.0,
         https://commons.wikimedia.org/wiki/File:Saleae_Logic8_IMG_2876.jpg ·

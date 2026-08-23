@@ -22,7 +22,6 @@ window.SLIDE_FILES = [
   "slides/21-30s-of-kicad-part-2.html",
   "slides/22-let-the-factory-place-it.html",
   "slides/23-find-your-people.html",
-  "slides/24-get-a-board-review.html",
   "slides/25-30s-of-kicad-part-3.html",
   "slides/26-interruption-so-it-works.html",
   "slides/27-post-pcb-toolbelt.html",
