@@ -46,4 +46,12 @@ window.SLIDE_FILES = [
   "keyboard-keyboard/42-one-wire-carries-a-performance.html",
   "keyboard-keyboard/43-usart1-becomes-a-midi-port.html",
   "keyboard-keyboard/44-from-switch-event-to-din.html",
+  "keyboard-keyboard/45-one-geometry-two-instruments.html",
+  "keyboard-keyboard/46-the-interval-is-a-vector.html",
+  "keyboard-keyboard/47-pianist-vs-isomorphic-layout.html",
+  "keyboard-keyboard/48-guitarists-get-it.html",
+  "keyboard-keyboard/48b-interruption-can-we-sell-it.html",
+  "keyboard-keyboard/53-can-we-sell-it.html",
+  "keyboard-keyboard/57-quest-objective.html",
+  "keyboard-keyboard/58-closing.html",
 ];

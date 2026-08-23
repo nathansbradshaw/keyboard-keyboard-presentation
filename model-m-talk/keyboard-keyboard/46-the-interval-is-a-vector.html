@@ -1,0 +1,51 @@
+<section class="slide layout-content wicki-vector-slide" data-auto-animate data-beat="wicki-geometry">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">同型</span> · WICKI–HAYDEN FIELD GUIDE · 02</span>
+        <h2>The interval is a vector</h2>
+    </header>
+
+    <div class="content wicki-vector-stage">
+        <figure class="wicki-layout-source fragment step-panel" data-fragment-index="0">
+            <div class="wicki-layout-image">
+                <img src="assets/wicki-hayden/wicki-hayden-note-layout.svg" alt="Wicki–Hayden note layout diagram showing repeating note names on a staggered button field">
+            </div>
+            <figcaption><small>REFERENCE GEOMETRY</small><strong>Every row is a whole-tone scale</strong><span>The repeating 3 + 4 grouping keeps a major scale compact.</span></figcaption>
+        </figure>
+
+        <div class="wicki-vector-rules" data-stagger=".wicki-vector-rule" data-stagger-start="1" data-stagger-effect="step-wipe">
+            <article class="wicki-vector-rule wicki-vector-rule--across">
+                <b>→</b><div><small>MOVE ACROSS</small><strong>+2 semitones</strong><span>A whole step for every neighboring note key.</span></div>
+            </article>
+            <article class="wicki-vector-rule wicki-vector-rule--rows">
+                <b>↕</b><div><small>CHANGE ROWS</small><strong>Offset the whole-tone set</strong><span>Our adjacent note rows are a perfect fourth apart.</span></div>
+            </article>
+            <article class="wicki-vector-rule wicki-vector-rule--shape">
+                <b>⤢</b><div><small>MOVE A SHAPE</small><strong>Keep every interval</strong><span>Transpose the origin; reuse the fingering.</span></div>
+            </article>
+        </div>
+
+        <div class="wicki-vector-payoff fragment step-punch" data-fragment-index="4">
+            <code>same motion → same musical distance</code>
+            <strong>That invariant is what “isomorphic” means.</strong>
+        </div>
+
+        <aside class="wicki-modelm-caveat fragment step-panel" data-fragment-index="5">
+            <b>MODEL M ADAPTATION</b><span>The computer-keyboard stagger stays physical. The Wicki–Hayden relationship lives in software.</span>
+        </aside>
+    </div>
+
+    <aside class="notes">
+        Isomorphic means that a musical interval keeps the same geometric relationship
+        wherever it starts. In the Wicki–Hayden layout, each row advances by whole
+        steps. Adjacent rows supply the other whole-tone set. In this project's exact
+        firmware table, adjacent playable rows are offset by a perfect fourth. A chord
+        or scale fingering can therefore move to a new root without changing its
+        internal shape. Do not overclaim that every immediate diagonal on our staggered
+        Model M is a semitone; that shortcut does not match the actual SWITCH_TO_NOTE
+        table. The diagram is a reference layout, not a literal drawing of our PCB.
+        Diagram: “Wicki-Hayden-note-layout.svg” by Jaxter184, CC BY-SA 4.0,
+        https://commons.wikimedia.org/wiki/File:Wicki-Hayden-note-layout.svg .
+        Reference: https://en.wikipedia.org/wiki/Wicki%E2%80%93Hayden_note_layout .
+        Transition: the geometry is consistent; the pianist's muscle memory is not.
+    </aside>
+</section>
