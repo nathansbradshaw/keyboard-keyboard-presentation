@@ -178,10 +178,9 @@ fn safe_path(raw_path: &str) -> Option<PathBuf> {
 
 /// Requests for `<subfolder>/slide-manifest.js` are generated from that
 /// folder's slide fragments instead of read from disk, so a numbered,
-/// non-interleaved slide group (like `keyboard-keyboard/`) never needs a
-/// hand-maintained manifest. Root-level manifests (`slide-manifest.js`,
-/// `slide-manifest-discovery.js`) are unaffected because they have no
-/// parent folder and interleave slides out of numeric order on purpose.
+/// non-interleaved slide group never needs a hand-maintained manifest.
+/// Root-level manifests are unaffected because they have no parent folder
+/// and may include archived slides or a custom order.
 fn subfolder_manifest_dir(path: &Path) -> Option<&Path> {
     if path.file_name()? != "slide-manifest.js" {
         return None;
@@ -206,9 +205,8 @@ fn generate_manifest(dir: &Path) -> std::io::Result<String> {
     Ok(manifest)
 }
 
-/// Page shells (top-level `*.html` files, or a subfolder's `index.html`)
-/// get the live-reload poller injected. Slide fragments fetched by
-/// `slide-loader.js` and set via `innerHTML` are excluded — a `<script>`
+/// Page shells get the live-reload poller injected. Slide fragments fetched
+/// by `slide-loader.js` and set via `innerHTML` are excluded — a `<script>`
 /// tag inserted that way never executes, and would just show up as inert
 /// markup in the slide.
 fn is_page_shell(path: &Path) -> bool {
@@ -216,9 +214,12 @@ fn is_page_shell(path: &Path) -> bool {
     if !is_html {
         return false;
     }
-    let top_level = path.components().count() == 1;
-    let is_index = path.file_name().is_some_and(|name| name == "index.html");
-    top_level || is_index
+    !path.components().any(|component| {
+        matches!(
+            component,
+            Component::Normal(name) if name == "slides" || name == "slides-discovery"
+        )
+    })
 }
 
 fn inject_live_reload(body: Vec<u8>) -> Vec<u8> {

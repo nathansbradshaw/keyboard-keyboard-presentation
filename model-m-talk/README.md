@@ -1,6 +1,6 @@
 # Model M MIDI Talk
 
-An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The primary 58-slide cut follows the lived discovery story before opening up the technical system. It uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide.
+An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The primary 56-slide keyboard-keyboard cut uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide. Earlier discovery-led and technical-first cuts are preserved under `archive/`.
 
 ## Run locally
 
@@ -15,15 +15,14 @@ rustc server.rs -o target/model-m-talk-server
 
 Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed, for example `./target/model-m-talk-server 8080`. Reveal.js is loaded from jsDelivr, so the first run needs internet access. A browser that has already cached those files can run the deck offline.
 
-Pages hot-reload: the server injects a small poller into every page shell (root pages and each slide group's `index.html`) that watches the deck folder for edits and reloads the tab automatically. No extra setup or build step required — just edit a slide and save.
+Pages hot-reload: the server injects a small poller into every page shell that watches the deck folder for edits and reloads the tab automatically. No extra setup or build step required — just edit a slide and save.
 
-Three entry points are available:
+The presentation entry points are:
 
-- `/` — the primary discovery-led cut: research → false hope → acceptance → build
-- `/technical.html` — the 60-slide technical-first cut
-- `/discovery.html` — a direct alias for the primary discovery-led sequence
-- `/keyboard-keyboard/` — a standalone cut with its own slide fragments and manifest
-- `/compare.html` — both cuts side by side, with links to open either one full-size
+- `/` — the primary keyboard-keyboard presentation
+- `/archive/` — the archived discovery-led cut
+- `/archive/technical.html` — the archived technical-first cut
+- `/archive/compare.html` — both archived cuts side by side
 
 ## Controls
 
@@ -36,11 +35,10 @@ Three entry points are available:
 
 ## Editing
 
-- Individual slide markup and notes: `slides/*.html`
-- Discovery-cut slide markup and notes: `slides-discovery/*.html`
-- keyboard-keyboard cut markup, notes, and page shell: `keyboard-keyboard/`. Its `slide-manifest.js` is generated, not hand-edited: add or remove a numbered `NN-slug.html` fragment and the order updates itself — the dev server (`server.rs`) generates it live for any `<folder>/slide-manifest.js` request, and `tools/generate-manifest.sh <folder>` regenerates the static copy used by the production build (wired into the deploy workflow).
-- Slide order: `slide-manifest.js`
-- Discovery-cut order: `slide-manifest-discovery.js`
+- Main slide markup and notes: `slides/*.html`
+- Main slide order: `slide-manifest.js`
+- Archived slide markup: `archive/slides/*.html` and `archive/slides-discovery/*.html`
+- Archived slide order: `archive/slide-manifest-technical.js` and `archive/slide-manifest-discovery.js`
 - Slide loading/bootstrap: `slide-loader.js`
 - Page shell and Reveal dependencies: `index.html`
 - Visual system and reusable layouts: `styles.css`
@@ -50,7 +48,7 @@ Three entry points are available:
 - Original title cast and transparent reaction libraries: `assets/characters/`
 - Standalone manga characters, quest prompts, and item cards: `assets/manga/*.png`
 
-Every file under `slides/` and `slides-discovery/` contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add or reorder original slides, update `slide-manifest.js`. To change the alternate story, update `slide-manifest-discovery.js`; it can reuse canonical slides alongside discovery-specific fragments. The loader fetches the selected ordered list before `presentation.js` initializes Reveal.
+Every slide fragment contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add, remove, or reorder main slides, edit `slide-manifest.js`. Archived slides remain reusable: add a path such as `archive/slides/23-the-board-is-an-analog-routing-problem.html` to the main manifest. The loader fetches the selected ordered list before `presentation.js` initializes Reveal.
 
 Because the browser loads slide fragments with `fetch`, opening `index.html` directly from the filesystem is not supported. Use the included Rust server.
 

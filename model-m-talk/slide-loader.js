@@ -5,7 +5,7 @@
   // identity in their query string so a stale preview that lands on another
   // page shell can route itself back to the presentation that opened it.
   const presentationRoutes = {
-    "keyboard-keyboard": "keyboard-keyboard/",
+    "keyboard-keyboard": "./",
   };
   const requestedPresentationId = new URLSearchParams(
     window.location.search,

@@ -14,10 +14,7 @@ fn manifest_files(manifest: &str) -> Vec<&str> {
             let line = line.trim();
             line.strip_prefix('"')
                 .and_then(|value| value.strip_suffix("\","))
-                .filter(|value| {
-                    (value.starts_with("slides/") || value.starts_with("slides-discovery/"))
-                        && value.ends_with(".html")
-                })
+                .filter(|value| value.ends_with(".html"))
         })
         .collect()
 }
@@ -49,7 +46,7 @@ fn fail(message: impl Into<String>) -> io::Error {
 }
 
 fn validate_manga_border_integrity(deck_dir: &Path) -> io::Result<()> {
-    let relative_path = Path::new("keyboard-keyboard/manga-21-30.css");
+    let relative_path = Path::new("slides/manga-21-30.css");
     let path = deck_dir.join(relative_path);
     if !path.is_file() {
         return Ok(());
@@ -156,7 +153,7 @@ fn main() -> io::Result<()> {
         .next()
         .and_then(|value| value.into_string().ok())
         .unwrap_or_else(|| "slide-manifest.js".into());
-    let canonical_deck = manifest_name == "slide-manifest.js";
+    let canonical_deck = index_name == "index.html" && manifest_name == "slide-manifest.js";
     validate_manga_border_integrity(&deck_dir)?;
     validate_opening_arc_border_integrity(&deck_dir)?;
     let index = fs::read_to_string(deck_dir.join(&index_name))?;
@@ -170,12 +167,6 @@ fn main() -> io::Result<()> {
         if !index.contains(required) {
             return Err(fail(format!("{index_name} does not load {required}")));
         }
-    }
-    if canonical_deck && files.len() != 60 {
-        return Err(fail(format!(
-            "manifest contains {} slides instead of 60",
-            files.len()
-        )));
     }
     if files.is_empty() {
         return Err(fail("manifest contains no slides"));
@@ -193,8 +184,8 @@ fn main() -> io::Result<()> {
             .map(|entry| format!("slides/{}", entry.file_name().to_string_lossy()))
             .collect();
         let manifest_set: HashSet<String> = files.iter().map(|file| (*file).to_string()).collect();
-        if disk_files != manifest_set {
-            return Err(fail("slide files on disk do not exactly match the canonical manifest"));
+        if !disk_files.is_subset(&manifest_set) {
+            return Err(fail("one or more main slide files are missing from the canonical manifest"));
         }
     }
 
@@ -204,7 +195,10 @@ fn main() -> io::Result<()> {
     for file in &files {
         let path = deck_dir.join(file);
         let markup = fs::read_to_string(&path)?;
-        if count(&markup, "<section class=\"slide") != 1 || count(&markup, "</section>") != 1 {
+        if count(&markup, "<section") != 1
+            || !markup.contains("class=\"slide")
+            || count(&markup, "</section>") != 1
+        {
             return Err(fail(format!("{file} must contain exactly one slide section")));
         }
         let file_notes = count(&markup, "<aside class=\"notes\">");

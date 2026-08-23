@@ -33,14 +33,12 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Generate keyboard-keyboard slide manifest
-        run: model-m-talk/tools/generate-manifest.sh keyboard-keyboard
-
       - name: Validate presentation
         run: |
           rustc model-m-talk/tools/validate_deck.rs -o /tmp/validate-model-m-talk
-          /tmp/validate-model-m-talk model-m-talk technical.html slide-manifest.js
-          /tmp/validate-model-m-talk model-m-talk index.html slide-manifest-discovery.js
+          /tmp/validate-model-m-talk model-m-talk index.html slide-manifest.js
+          /tmp/validate-model-m-talk model-m-talk archive/technical.html archive/slide-manifest-technical.js
+          /tmp/validate-model-m-talk model-m-talk archive/index.html archive/slide-manifest-discovery.js
 
       - name: Upload presentation
         uses: actions/upload-pages-artifact@v4
