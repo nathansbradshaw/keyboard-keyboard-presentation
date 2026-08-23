@@ -57,10 +57,7 @@ const sceneSpecificPoses = [
 ];
 
 const supportingAssets = [
-  { group: "Legacy reactions", kind: "reaction", files: ["brunette-skeptical.png", "brunette-uh-oh.png", "brunette-eureka.png", "blond-panic.png", "blond-exhausted.png", "blond-triumph.png"], root: "assets/characters/reactions/", rights: "project art" },
-  { group: "Manga props and cards", kind: "prop", files: ["electronuck-cook.png", "n8-it-works.png", "it-worked.png", "cat-midi-keyboard.png", "nani-reaction.png", "one-more-feature.png", "model-m-card.png", "hall-effect-card.png", "synth-phone-card.png"], root: "assets/manga/", rights: "mixed" },
-  { group: "Legacy — verify reuse", kind: "legacy", files: ["model-m-senpai.webp", "its-fine.webp", "project-despair.webp", "thats-illegal.webp", "lucky-star-keyboard.gif"], root: "assets/manga/", rights: "reuse check" },
-  { group: "Technical anchors", kind: "technical", files: ["keyboard/keyboard-keyboard.webp", "kicad/board-top-crop.png", "kicad/copper-routing.svg", "ui/anime-ui-sheet.webp"], root: "assets/", rights: "mixed" },
+  { group: "Technical anchors", kind: "technical", files: ["keyboard/keyboard-keyboard.webp", "kicad/board-top-crop.png", "kicad/copper-routing.svg"], root: "assets/", rights: "mixed" },
   { group: "Research and documentary", kind: "documentary", files: ["image_1.webp", "image_2.webp", "image_3.webp", "image_4.webp", "image_5.webp", "image_6.webp", "image_7.webp", "image_8.webp", "initial-hall-hypothesis.webp", "melodicade-mx.webp"], root: "assets/research/", rights: "mixed" },
 ];
 
