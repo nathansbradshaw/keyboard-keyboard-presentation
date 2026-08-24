@@ -1,0 +1,74 @@
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--state" data-auto-animate data-beat="release-hysteresis">
+    <header class="slide-head">
+        <div>
+            <span class="eyebrow"><span lang="ja">解放</span> · FIRMWARE · 10</span>
+            <h2>A lower threshold ends the note</h2>
+        </div>
+        <code class="editor-path">src/switch.rs:141</code>
+    </header>
+
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — switch.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file is-active">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">switch.rs</span><span class="firmware-tab">constants.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; switch.rs &gt; SwitchState &gt; update &gt; <b>FullyActuated</b></div>
+                <div class="firmware-editor__code firmware-editor__code--dense">
+                    <pre><code class="language-rust">SwitchPhase::FullyActuated { .. } =&gt; {
+    if delta &lt; RELEASE_DELTA {
+        self.debounce_count =
+            self.debounce_count.saturating_add(1);
+
+        if self.debounce_count &gt;= DEBOUNCE_TICKS {
+            self.phase = SwitchPhase::Idle;
+            self.debounce_count = 0;
+            Some(SwitchEvent::NoteOff)
+        } else {
+            None
+        }
+    } else {
+        self.debounce_count = 0;
+        None
+    }
+}</code></pre>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>RELEASE_DELTA = 100</span><span>DEBOUNCE_TICKS = 3</span></div>
+        </div>
+
+        <aside class="editor-guide">
+            <small>HYSTERESIS</small>
+            <strong>Press and release disagree.</strong>
+            <div class="editor-guide__metric"><b>250</b><span>full press threshold</span></div>
+            <div class="editor-guide__metric"><b>100</b><span>release threshold</span></div>
+            <div class="editor-guide__flow"><span class="is-accent">3 quiet scans → NoteOff</span></div>
+            <p class="editor-guide__takeaway">No chatter near one boundary.</p>
+        </aside>
+    </div>
+
+    <aside class="notes">
+        The previous slide showed NoteOn; this is its equally important other half.
+        A fully actuated key does not release near the 250-count press threshold. It
+        must fall below the separate 100-count release threshold for three scans.
+        Only then does the state return to Idle and emit exactly one NoteOff. The gap
+        between thresholds is hysteresis, which prevents a noisy signal from rapidly
+        retriggering at one boundary. Transition: both semantic events now cross the
+        queue because neither belongs on the MIDI wire inside the scan task.
+    </aside>
+</section>

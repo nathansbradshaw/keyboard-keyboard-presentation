@@ -1,60 +1,89 @@
-<section class="slide layout-content firmware-mapping-slide manga-firmware-arc manga-firmware-mapping" data-auto-animate data-beat="data-driven-routing">
-    <div class="firmware-manga-sfx firmware-manga-sfx--right" lang="ja" aria-hidden="true">パチッ</div>
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--mapping" data-auto-animate data-beat="data-driven-routing">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">対応表</span> · FIRMWARE FIELD GUIDE · 09 · <code>constants.rs</code></span>
-        <h2>Tables separate copper from music</h2>
+        <div>
+            <span class="eyebrow"><span lang="ja">対応表</span> · FIRMWARE · 12</span>
+            <h2>Two tables turn a sensor into a note</h2>
+        </div>
+        <code class="editor-path">src/constants.rs</code>
     </header>
 
-    <div class="content firmware-mapping-stage">
-        <div class="mapping-code-stack" data-stagger=".mapping-code-card" data-stagger-effect="step-wipe">
-            <article class="mapping-code-card mapping-code-card--physical">
-                <small>PHYSICAL ADDRESS</small>
-                <pre><code class="language-rust">SWITCH_MAP[0] = (0, 4); // AM1 · X4
-SWITCH_MAP[1] = (0, 6); // AM1 · X6
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor firmware-editor--split">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — constants.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file is-active">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">constants.rs</span><span class="firmware-tab">main.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; constants.rs &gt; <b>mapping tables</b></div>
+                <div class="firmware-editor__split-code">
+                    <div class="firmware-editor__code firmware-editor__code--dense" data-label="COPPER">
+                        <pre><code class="language-rust">// Physical address:
+// (mux, channel)
+pub const SWITCH_MAP: [(u8, u8); 100] = [
+    (0, 4), // HE1 · AM1 X4
+    (0, 6), // HE2 · AM1 X6
+    (0, 7), // HE3 · AM1 X7
+    (0, 5), // HE4 · AM1 X5
+    // ...
+];
 
-let raw = mux_raw[mux][channel];</code></pre>
-            </article>
-            <article class="mapping-code-card mapping-code-card--musical">
-                <small>MUSICAL POLICY</small>
-                <pre><code class="language-rust">SWITCH_TO_NOTE[0] = 78;
-SWITCH_TO_NOTE[1] = 80;
+let (mux, ch) = SWITCH_MAP[switch_idx];
+let raw = mux_raw
+    [mux as usize][ch as usize];</code></pre>
+                    </div>
+                    <div class="firmware-editor__code firmware-editor__code--dense" data-label="MUSIC">
+                        <pre><code class="language-rust">// Wicki–Hayden pitches
+pub const SWITCH_TO_NOTE: [u8; 100] = [
+    78, 80, 82, 84, 86, 88, 90,
+    92, 94, 96, 98, 100, 102, 104,
+    // ...
+];
 
-let note = map[switch_idx] + octave;</code></pre>
-            </article>
-            <article class="mapping-code-card mapping-code-card--routing">
-                <small>EVENT ROUTING</small>
-                <pre><code class="language-rust">HE1..HE70   =&gt; melody channel
-HE71..HE80  =&gt; controls + settings
-HE81..HE100 =&gt; GM drum notes</code></pre>
-            </article>
+let raw_note =
+    SWITCH_TO_NOTE[switch_idx];
+let offset = (settings.octave as i16 - 4) * 12;
+let note = (raw_note as i16 + offset)
+    .clamp(1, 127) as u8;</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>SWITCH_MAP → SWITCH_TO_NOTE</span><span>physical truth → musical policy</span></div>
         </div>
 
-        <div class="mapping-boundary">
-            <article class="mapping-boundary-card fragment step-panel" data-fragment-index="3"><b>PCB REVISION?</b><strong>Physical map</strong></article>
-            <article class="mapping-boundary-card fragment step-panel" data-fragment-index="4"><b>NEW LAYOUT?</b><strong>Note map</strong></article>
-            <article class="mapping-boundary-card fragment step-panel" data-fragment-index="5"><b>USB MIDI?</b><strong>Transport</strong></article>
-        </div>
-
-        <div class="mapping-payoff fragment step-punch" data-fragment-index="6">
-            <span lang="ja">配線は事実。音程は設計判断。</span>
+        <aside class="editor-guide">
+            <small>CHANGE ONE LAYER</small>
             <strong>Wiring is fact. Pitch is policy.</strong>
-        </div>
+            <div class="editor-guide__flow">
+                <span>PCB revision <i>map</i></span>
+                <span class="is-accent">new layout <i>notes</i></span>
+                <span>USB MIDI <i>transport</i></span>
+            </div>
+            <p class="editor-guide__takeaway">The state machine stays put.</p>
+        </aside>
     </div>
 
-    <img class="slide-corner-reaction" src="assets/characters/faces/ren/understands-big.png" alt="" aria-hidden="true">
     <aside class="notes">
-        constants.rs contains three useful boundaries. SWITCH_MAP describes physical
-        truth: which mux and channel feed each logical switch index. SWITCH_TO_NOTE
-        describes the Wicki-Hayden musical layout. process_events then applies policy:
-        the first seventy switches are melody, later keys select voices and settings,
-        and the final twenty route General MIDI drum notes to the drum channel. The
-        snippets are condensed examples rather than contiguous source. This data-driven
-        split is what makes the firmware reusable. A PCB revision changes physical
-        mapping. A new isomorphic layout changes note mapping. USB MIDI or BLE MIDI
-        changes transport. None of those should require rewriting the per-key state
-        machine. On your keyboard, generate these tables from one source of truth if
-        possible, and test that every physical switch maps to exactly one intended
-        function. Transition: assemble those boundaries into the smallest build plan
-        that produces sound early.
+        constants.rs keeps two different facts apart. SWITCH_MAP says where each
+        switch is physically wired: a mux and channel. SWITCH_TO_NOTE says which
+        pitch that switch should play in the Wicki-Hayden layout. process_events
+        then applies octave and channel settings. A PCB revision changes the first
+        table; a new musical layout changes the second; another MIDI transport
+        changes neither. These are abbreviated but ordered excerpts from the real
+        arrays. Transition: zoom back out and turn these files into an implementation
+        order that always leaves a runnable instrument.
     </aside>
 </section>

@@ -1,0 +1,77 @@
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--scan" data-auto-animate data-beat="mux-addressing">
+    <header class="slide-head">
+        <div>
+            <span class="eyebrow"><span lang="ja">選択</span> · FIRMWARE · 05</span>
+            <h2>Three GPIO bits select one of eight columns</h2>
+        </div>
+        <code class="editor-path">src/hardware.rs:27</code>
+    </header>
+
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — hardware.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file is-active">hardware.rs</span>
+                    <span class="tree-file">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">hardware.rs</span><span class="firmware-tab">main.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; hardware.rs &gt; set_mux_channel &gt; <b>function body</b></div>
+                <div class="firmware-editor__code firmware-editor__code--dense">
+                    <pre><code class="language-rust">if ch &amp; 0b001 != 0 {
+    s0.set_high()
+} else {
+    s0.set_low()
+}
+
+if ch &amp; 0b010 != 0 {
+    s1.set_high()
+} else {
+    s1.set_low()
+}
+
+if ch &amp; 0b100 != 0 {
+    s2.set_high()
+} else {
+    s2.set_low()
+}</code></pre>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>#[inline(always)]</span><span>ch: 0..7</span></div>
+        </div>
+
+        <aside class="editor-guide">
+            <small>BINARY ADDRESS</small>
+            <strong>The loop becomes voltage.</strong>
+            <div class="editor-guide__flow" data-stagger="span" data-stagger-effect="step-wipe">
+                <span>000 <i>channel 0</i></span>
+                <span>001 <i>channel 1</i></span>
+                <span>⋮ <i>same three wires</i></span>
+                <span class="is-accent">111 <i>channel 7</i></span>
+            </div>
+            <p class="editor-guide__takeaway">One address reaches all 13 muxes.</p>
+        </aside>
+    </div>
+
+    <aside class="notes">
+        Open the helper that the scan just called. The channel number is treated as
+        three binary bits. Bit zero drives s0, bit one drives s1, and bit two drives
+        s2. The same three physical wires reach all thirteen multiplexers, so one
+        address selects the same column everywhere. The ADC pins can then read many
+        sensor groups in parallel. This is the direct bridge from the Rust loop to
+        voltages on the PCB. Transition: because this work happens every millisecond,
+        its priority must be protected.
+    </aside>
+</section>

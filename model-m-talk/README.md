@@ -1,6 +1,6 @@
 # Model M MIDI Talk
 
-An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The primary 58-slide keyboard-keyboard cut uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide. Earlier discovery-led and technical-first cuts are preserved under `archive/`.
+An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The primary 60-slide keyboard-keyboard cut uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide. Earlier discovery-led and technical-first cuts are preserved under `archive/`.
 
 ## Run locally
 

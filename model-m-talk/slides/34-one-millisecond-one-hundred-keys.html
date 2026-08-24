@@ -1,44 +1,77 @@
-<section class="slide layout-code scan-code-slide manga-firmware-arc manga-firmware-scan" data-auto-animate data-beat="scan-hot-path">
-    <div class="firmware-manga-sfx firmware-manga-sfx--right" lang="ja" aria-hidden="true">カカカ</div>
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--scan" data-auto-animate data-beat="scan-hot-path">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">走査</span> · FIRMWARE FIELD GUIDE · 03 · <code>main.rs</code></span>
-        <!-- English review: “One millisecond. One hundred keys.” uses two intentional headline fragments; formal prose would read “One millisecond for one hundred keys.” Original text intentionally preserved. -->
-        <h2 data-id="firmware-title">One millisecond. One hundred keys.</h2>
+        <div>
+            <span class="eyebrow"><span lang="ja">走査</span> · FIRMWARE · 04</span>
+            <h2>This loop reads all 100 keys every millisecond</h2>
+        </div>
+        <code class="editor-path">src/main.rs:464</code>
     </header>
-    <div class="content">
-        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8-14">for ch in 0..MUX_CHANNELS {
+
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — main.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file is-active">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">main.rs</span><span class="firmware-tab">hardware.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; main.rs &gt; timer_handler &gt; <b>ADC scan · abridged</b></div>
+                <div class="firmware-editor__code firmware-editor__code--dense">
+                    <pre><code class="language-rust">for ch in 0..MUX_CHANNELS {
     set_mux_channel(ch, s0, s1, s2);
-    delay(480 * 10); // analog settling
+    cortex_m::asm::delay(480 * 10);
+
     let readings = read_all_adcs(adc, adc_pins);
     for (mux, &amp;val) in readings.iter().enumerate() {
         mux_raw[mux][ch] = val;
     }
+
     for decoder_idx in 0..4u8 {
         set_decoder(decoder_idx, enb_a, enb_b, enb_c);
-        delay(480 * 5);
-        mux_raw[9 + decoder_idx as usize][ch] =
-            read_shared_adc(decoder_idx);
+        cortex_m::asm::delay(480 * 5);
+        let mux_idx = 9 + decoder_idx as usize;
+        mux_raw[mux_idx][ch] = if decoder_idx &lt; 2 {
+            adc.read(adc_pin_a9).unwrap_or(0u32) as u16
+        } else {
+            adc.read(adc_pin_a10).unwrap_or(0u32) as u16
+        };
     }
 }</code></pre>
-        <div class="scan-budget">
-            <div><strong>8</strong><span>broadcast addresses</span></div>
-            <div><strong>9</strong><span>direct reads / address</span></div>
-            <div><strong>4</strong><span>decoded reads / address</span></div>
-            <div class="scan-total"><strong>104</strong><span>slots cover 100 keys</span></div>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>TIM2 interrupt · priority 15</span><span>period: 1 ms</span></div>
         </div>
+
+        <aside class="editor-guide">
+            <small>ONE PASS</small>
+            <strong>Set an address. Read a row.</strong>
+            <div class="editor-guide__metric"><b>8</b><span>mux addresses</span></div>
+            <div class="editor-guide__metric"><b>13</b><span>sensor groups</span></div>
+            <div class="editor-guide__metric"><b>104</b><span>slots; 100 populated</span></div>
+            <p class="editor-guide__takeaway">The wiring becomes a loop.</p>
+        </aside>
     </div>
-    <img class="slide-corner-reaction" src="assets/characters/faces/kaori/stunned.png" alt="" aria-hidden="true">
+
     <aside class="notes">
-        This is the actual structure of timer_handler with concrete pin types and
-        error plumbing compressed. TIM2 runs every millisecond. For each of eight
-        mux channel addresses, firmware broadcasts three address bits to every mux,
-        waits for the analog signal to settle, reads nine dedicated ADC inputs, then
-        selects and reads four additional muxes through the decoder. Thirteen times
-        eight gives 104 physical slots; SWITCH_MAP chooses the hundred populated
-        Hall sensors. This is the key scaling trick for a custom keyboard: GPIO sets
-        an address, ADC pins read groups in parallel, and a table describes which
-        slots actually exist. Measure settling time on your own mux, sensor, source
-        impedance, and PCB before copying these delays. Transition: a fast loop is
-        useful only if slower work cannot steal its deadline.
+        This is the actual shape of the ADC scan in timer_handler, with long pin
+        arguments shortened. Each of eight mux addresses is broadcast to every mux.
+        Nine ADC inputs are read directly; four more muxes are selected through the
+        decoder and read from shared ADC inputs. Thirteen by eight gives 104 slots,
+        and the mapping table identifies the 100 populated sensors. The settling
+        delays are hardware-specific and must be measured, not copied blindly.
+        Transition: this loop only stays regular if slower jobs run below it.
     </aside>
 </section>

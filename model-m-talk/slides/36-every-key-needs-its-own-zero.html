@@ -1,54 +1,75 @@
-<section class="slide layout-content baseline-deep-slide manga-firmware-arc manga-firmware-calibration" data-auto-animate data-beat="per-key-calibration">
-    <div class="firmware-manga-sfx firmware-manga-sfx--left" lang="ja" aria-hidden="true">ピタッ</div>
-    <img class="firmware-reaction firmware-reaction--calibration background-character" src="assets/characters/faces/mio/realization-big.png" alt="" aria-hidden="true">
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--calibration" data-auto-animate data-beat="per-key-calibration">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">基準</span> · FIRMWARE FIELD GUIDE · 05</span>
-        <h2>Every key needs its own zero</h2>
+        <div>
+            <span class="eyebrow"><span lang="ja">基準</span> · FIRMWARE · 07</span>
+            <h2>At boot, every key learns “not pressed”</h2>
+        </div>
+        <code class="editor-path">src/main.rs:181</code>
     </header>
 
-    <div class="content baseline-deep-stage">
-        <div class="baseline-sequence" data-stagger=".baseline-step" data-stagger-effect="step-wipe">
-            <article class="baseline-step"><b>01</b><div><small>BOOT</small><strong>64 samples / slot</strong></div></article>
-            <article class="baseline-step"><b>02</b><div><small>PRIME</small><strong>Fill 4 filter slots</strong></div></article>
-            <article class="baseline-step"><b>03</b><div><small>IDLE ONLY</small><strong>IIR · 1 / 1024</strong></div></article>
-            <article class="baseline-step"><b>04</b><div><small>GUARDRAIL</small><strong>Clamp to ±40</strong></div></article>
-            <article class="baseline-step"><b>05</b><div><small>ESCAPE HATCH</small><strong>HE75 recalibrates</strong></div></article>
-        </div>
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — main.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file is-active">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">main.rs</span><span class="firmware-tab">constants.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; main.rs &gt; init &gt; <b>Boot calibration · abridged</b></div>
+                <div class="firmware-editor__code firmware-editor__code--dense">
+                    <pre><code class="language-rust">for ch in 0..MUX_CHANNELS {
+    set_mux_channel(ch, &amp;mut s0, &amp;mut s1, &amp;mut s2);
+    for _ in 0..CALIBRATION_SAMPLES {
+        let readings = read_all_adcs(&amp;mut adc, &amp;mut adc_pins);
+        for mux in 0..NUM_ADC_PINS {
+            slot_sum[mux][ch] += readings[mux] as u32;
+            slot_count[mux][ch] += 1;
+        }
+    }
+}
 
-        <aside class="baseline-code-card fragment step-panel" data-fragment-index="5">
-            <pre><code class="language-rust">let delta = filtered.abs_diff(baseline);
-
-if state.is_idle()
-    &amp;&amp; delta &lt; RELEASE_DELTA
-{
-    let tracked = ((baseline as u32 * 1023
-        + filtered as u32) / 1024) as u16;
-    baseline = tracked.clamp(
-        anchor.saturating_sub(40),
-        anchor.saturating_add(40),
-    );
+for (switch_idx, &amp;(mux, ch)) in SWITCH_MAP.iter().enumerate() {
+    let avg = slot_sum[mux as usize][ch as usize]
+        .checked_div(slot_count[mux as usize][ch as usize])
+        .unwrap_or(0) as u16;
+    baselines[switch_idx] = avg;
+    filters[switch_idx].prime(avg);
 }</code></pre>
-        </aside>
-
-        <div class="baseline-warning fragment step-punch" data-fragment-index="6">
-            <b>CALIBRATION RULE</b>
-            <!-- English review: “Nothing pressed while learning ‘rest.’” is a sentence fragment; formal prose would read “Nothing should be pressed while learning ‘rest.’” Original text intentionally preserved. -->
-            <strong>Nothing pressed while learning “rest.”</strong>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>CALIBRATION_SAMPLES = 64</span><span>100 baselines</span></div>
         </div>
+
+        <aside class="editor-guide">
+            <small>WHY PER KEY?</small>
+            <strong>Real hardware is uneven.</strong>
+            <div class="editor-guide__metric"><b>64</b><span>samples at rest</span></div>
+            <div class="editor-guide__metric"><b>100</b><span>independent zeros</span></div>
+            <div class="editor-guide__flow"><span class="is-accent">baseline → filter prime</span></div>
+            <p class="editor-guide__takeaway">Boot with every key released.</p>
+        </aside>
     </div>
 
     <aside class="notes">
-        The firmware calibrates every physical switch separately because magnet
-        height, sensor offset, assembly tolerance, temperature, and analog routing
-        vary across the board. At boot, it averages 64 samples for each populated
-        slot and primes every four-sample filter with that value. During normal use,
-        a baseline can move only while the state machine is idle and the filtered
-        signal is inside the release band. The IIR moves by one part in 1024 per scan
-        and is clamped within 40 ADC counts of the last calibration anchor. The
-        manual recalibration key snapshots a new anchor. The code uses an absolute
-        delta, so either magnet polarity can work. The practical rule for your own
-        build is simple: calibration is a measurement procedure, not a magic fix;
-        the mechanism must be completely at rest. Transition: now reduce noise
-        without hiding a fast key press.
+        The keyboard does not assume all Hall sensors share one zero. At boot it
+        averages 64 readings for every populated mux slot, then stores one baseline
+        and primes one filter per switch. That absorbs magnet height, sensor offset,
+        and assembly tolerance. The firmware can track small drift later, but only
+        while a key is idle and inside the release band. The practical instruction
+        is simple: keep every key released during calibration. Transition: each new
+        reading now goes through a very small rolling filter.
     </aside>
 </section>

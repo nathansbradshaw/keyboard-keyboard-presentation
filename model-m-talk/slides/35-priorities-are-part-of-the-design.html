@@ -1,59 +1,79 @@
-<section class="slide layout-content firmware-priority-slide manga-firmware-arc manga-firmware-deadline" data-auto-animate data-beat="rtic-priorities">
-    <div class="firmware-manga-sfx firmware-manga-sfx--right" lang="ja" aria-hidden="true">ギリギリ</div>
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--priority" data-auto-animate data-beat="rtic-priorities">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">締切</span> · FIRMWARE FIELD GUIDE · 04 · RTIC</span>
-        <h2>Priorities are part of the instrument</h2>
+        <div>
+            <span class="eyebrow"><span lang="ja">締切</span> · FIRMWARE · 06</span>
+            <h2>The priority numbers describe what may wait</h2>
+        </div>
+        <code class="editor-path">src/main.rs · RTIC tasks</code>
     </header>
 
-    <div class="content firmware-priority-stage">
-        <div class="priority-ladder" data-stagger=".priority-lane" data-stagger-effect="step-wipe">
-            <article class="priority-lane priority-lane--scan">
-                <b>P15</b>
-                <div><small>HARD DEADLINE · TIM2</small><strong>Scan → filter → enqueue</strong></div>
-                <code>timer_handler</code>
-            </article>
-            <article class="priority-lane priority-lane--audio">
-                <b>P8</b>
-                <div><small>DMA INTERRUPT</small><strong>Audio pass-through</strong></div>
-                <code>audio_handler</code>
-            </article>
-            <article class="priority-lane priority-lane--midi">
-                <b>P2</b>
-                <div><small>SOFT DEADLINE</small><strong>Route event → write MIDI</strong></div>
-                <code>process_events</code>
-            </article>
-            <article class="priority-lane priority-lane--display">
-                <b>P1</b>
-                <div><small>BEST EFFORT</small><strong>Draw the OLED</strong></div>
-                <code>display_update</code>
-            </article>
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — main.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file is-active">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">main.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; main.rs &gt; app &gt; <b>task attributes · excerpts</b></div>
+                <div class="firmware-editor__code firmware-editor__code--dense">
+                    <pre><code class="language-rust">#[task(binds = TIM2, priority = 15)]
+fn timer_handler(...) {
+    // scan → filter → enqueue
+}
+
+#[task(binds = DMA1_STR1, priority = 8)]
+fn audio_handler(...) {
+    // audio pass-through
+}
+
+#[task(priority = 2, capacity = 32)]
+fn process_events(...) {
+    // route event → write MIDI
+}
+
+#[task(priority = 1)]
+fn display_update(...) {
+    // draw the OLED
+}</code></pre>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>RTIC · interrupt-safe resources</span><span>highest priority: 15</span></div>
         </div>
 
-        <aside class="priority-contract fragment step-panel" data-fragment-index="4">
-            <small>RTIC RESOURCE MODEL</small>
-            <div><b>LOCAL</b><span>One owner</span></div>
-            <div><b>SHARED</b><span>Locked access</span></div>
+        <aside class="editor-guide">
+            <small>SCHEDULING POLICY</small>
+            <strong>Input wins.</strong>
+            <div class="editor-guide__flow" data-stagger="span" data-stagger-effect="step-wipe">
+                <span class="is-hot">P15 scan <i>must run</i></span>
+                <span>P8 audio <i>must flow</i></span>
+                <span>P2 MIDI <i>may wait</i></span>
+                <span>P1 OLED <i>may be stale</i></span>
+            </div>
+            <p class="editor-guide__takeaway">Real-time means predictable.</p>
         </aside>
-
-        <div class="priority-payoff fragment step-punch" data-fragment-index="5">
-            <span lang="ja">速い処理より、予測できる処理</span>
-            <!-- English review: “Real-time means bounded—not merely fast.” is compressed technical copy; formal prose would read “Real-time operation means bounded execution—not merely fast execution.” Original text intentionally preserved. -->
-            <strong>Real-time means bounded—not merely fast.</strong>
-        </div>
     </div>
 
-    <img class="slide-corner-reaction slide-corner-reaction--left" src="assets/characters/faces/kaori/judging.png" alt="" aria-hidden="true">
     <aside class="notes">
-        The priority numbers come directly from the RTIC task attributes in main.rs.
-        TIM2 is priority 15 because missing that deadline makes the physical scan
-        irregular. The DMA audio interrupt is priority 8. Event routing and blocking
-        MIDI output run at priority 2. OLED drawing is priority 1 because stale UI is
-        preferable to stale input. RTIC also forces resources into local ownership
-        or explicit shared access, which makes interrupt safety visible in the type
-        structure. For your keyboard, list every recurring job, its maximum acceptable
-        delay, and its worst-case execution time before assigning priorities. Do not
-        put logging, display I/O, allocation, or serial backpressure in the scan path.
-        Transition: the first scan cannot mean anything until each physical sensor
-        has a reference point.
+        The scheduling policy is visible in the actual RTIC attributes. The
+        one-kilohertz scan has priority 15. Audio DMA is 8. MIDI routing and its
+        blocking UART writes are 2. OLED drawing is 1, because stale UI is safer
+        than stale input. RTIC also makes shared and local ownership explicit.
+        The takeaway is not that every task must be fast; it is that the work with
+        a deadline must be protected from work that can wait. Transition: before
+        a sensor value can mean movement, each key needs a rest value.
     </aside>
 </section>

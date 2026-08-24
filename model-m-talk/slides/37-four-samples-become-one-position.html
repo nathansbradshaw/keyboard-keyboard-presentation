@@ -1,39 +1,70 @@
-<section class="slide layout-code filter-code-slide manga-firmware-arc manga-firmware-filter" data-auto-animate data-beat="rolling-filter">
-    <div class="firmware-manga-sfx firmware-manga-sfx--right" lang="ja" aria-hidden="true">スーッ</div>
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--scan" data-auto-animate data-beat="rolling-filter">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">平滑化</span> · FIRMWARE FIELD GUIDE · 06 · <code>switch.rs</code></span>
-        <h2>Four samples become one stable position</h2>
+        <div>
+            <span class="eyebrow"><span lang="ja">平滑化</span> · FIRMWARE · 08</span>
+            <h2>Four readings become one stable position</h2>
+        </div>
+        <code class="editor-path">src/switch.rs:22</code>
     </header>
-    <div class="content">
-        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-6|8">pub fn feed(&amp;mut self, raw: u16) -> u16 {
+
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — switch.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file is-active">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">switch.rs</span><span class="firmware-tab">constants.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; switch.rs &gt; ChannelFilter &gt; <b>feed</b></div>
+                <div class="firmware-editor__code firmware-editor__code--large">
+                    <pre><code class="language-rust">pub fn feed(&amp;mut self, raw: u16) -&gt; u16 {
     self.sum -= self.ring[self.index] as u32;
     self.sum += raw as u32;
+
     self.ring[self.index] = raw;
     self.index = (self.index + 1) % FILTER_SIZE;
+
     (self.sum &gt;&gt; FILTER_SHIFT) as u16
 }
-let delta = adc_value.abs_diff(baseline);</code></pre>
-        <div class="filter-deep-dive">
-            <div class="sample-window"><i>401</i><i>406</i><i>409</i><i>412</i><span>average → 407</span></div>
-            <div class="filter-facts">
-                <p><strong>O(1)</strong> rolling-sum update</p>
-                <p><strong>4 samples</strong> · two-bit divide</p>
-                <p><strong>≈ 1.5 ms</strong> average age</p>
+
+// main.rs
+let filtered = filters[switch_idx].feed(raw);
+let delta = filtered.abs_diff(baseline);</code></pre>
+                </div>
             </div>
+            <div class="firmware-editor__status"><span>FILTER_SIZE = 4 · FILTER_SHIFT = 2</span><span>O(1)</span></div>
         </div>
+
+        <aside class="editor-guide">
+            <small>ONE WINDOW</small>
+            <strong>401 · 406 · 409 · 412</strong>
+            <div class="editor-guide__metric"><b>407</b><span>average sent onward</span></div>
+            <div class="editor-guide__metric"><b>≈1.5</b><span>ms average sample age</span></div>
+            <p>The oldest value leaves as the newest enters.</p>
+            <p class="editor-guide__takeaway">Smooth noise, keep the strike.</p>
+        </aside>
     </div>
-    <img class="slide-corner-reaction" src="assets/characters/faces/ren/understands-big.png" alt="" aria-hidden="true">
+
     <aside class="notes">
-        This is the actual ChannelFilter feed method and delta calculation. Each key
-        owns four samples and a running sum. Replacing one entry is constant time,
-        and dividing by four becomes a right shift. With samples at ages zero, one,
-        two, and three milliseconds, the moving average's mean age is approximately
-        1.5 milliseconds; that figure is derived from the window geometry, not a
-        measured end-to-end latency. A longer filter would suppress more noise but
-        add more delay and smear the threshold crossings used for velocity. Start
-        your keyboard with raw logging, choose the smallest filter that makes idle
-        noise comfortably smaller than the release threshold, and validate it with
-        real key strikes. Transition: position is still not a NoteOn; state gives
-        the thresholds meaning.
+        switch.rs contains the complete rolling-average update. Each key owns four
+        samples and a running sum, so replacing the oldest reading is constant time.
+        Dividing by four becomes a right shift. At a one-kilohertz scan rate the
+        average sample age is about 1.5 milliseconds. A longer window would remove
+        more noise but blur the two crossings used to calculate velocity. The output
+        is compared with that key's baseline to produce an absolute delta.
+        Transition: the state machine gives that delta musical meaning.
     </aside>
 </section>

@@ -1,50 +1,97 @@
-<section class="slide layout-code midi-wire-slide manga-cameo-slide manga-firmware-arc manga-firmware-backpressure" data-auto-animate data-beat="midi-backpressure">
-    <div class="firmware-manga-sfx firmware-manga-sfx--left" lang="ja" aria-hidden="true">ズズズ</div>
-    <img class="firmware-reaction firmware-reaction--backpressure background-character" src="assets/characters/faces/kaori/scandalized.png" alt="" aria-hidden="true">
-    <div class="manga-cameo callout-time fragment step-pop" data-sfx="ピンチ!!">
-        <div class="manga-bubble">
-            <span class="jp-text" lang="ja">三バイトでも時間はかかる。</span>
-            <span class="en-text">Even three bytes take time.</span>
-        </div>
-    </div>
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide firmware-editor-slide--queue" data-auto-animate data-beat="midi-backpressure">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">境界</span> · FIRMWARE FIELD GUIDE · 08 · <code>midi.rs</code></span>
-        <h2>MIDI is slower than the scan deadline</h2>
-    </header>
-    <div class="content">
-        <pre class="codeblock codeblock-deep"><code class="language-rust" data-line-numbers="1-5|7-10|12-14">// priority 15
-pending.push((switch_idx, event)).ok();
-event_queue.enqueue(item).ok();
-process_events::spawn().ok();
-
-// priority 2
-let status = 0x90 | channel;
-send_byte(status);
-send_byte(note &amp; 0x7F);
-send_byte(velocity &amp; 0x7F);
-
-fn send_byte(byte: u8) {
-    nb::block!(tx.write(byte)).ok();
-}</code></pre>
-        <div class="wire-math">
-            <div class="midi-packet"><span>status</span><span>note</span><span>velocity</span><code>9n kk vv</code></div>
-            <div class="wire-equation"><span>3 bytes × 10 UART bits</span><b>30 / 31,250</b><strong>≈ 0.96 ms</strong></div>
-            <!-- English review: “Queue 64” is compressed and potentially ambiguous; formal prose would read “64-entry queue.” Original text intentionally preserved. -->
-            <p><strong>Queue 64:</strong> scan now, send later.</p>
+        <div>
+            <span class="eyebrow"><span lang="ja">境界</span> · FIRMWARE · 11</span>
+            <h2>The queue keeps MIDI out of the scan</h2>
         </div>
+        <code class="editor-path">main.rs ↔ midi.rs</code>
+    </header>
+
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor firmware-editor--split">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — split editor</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file is-active">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">main.rs</span><span class="firmware-tab">midi.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; <b>scan / transport boundary · abridged</b></div>
+                <div class="firmware-editor__split-code">
+                    <div class="firmware-editor__code firmware-editor__code--dense" data-label="PRIORITY 15">
+                        <pre><code class="language-rust">// main.rs
+if !pending.is_empty() {
+    event_queue.lock(|queue| {
+        for item in pending {
+            queue.enqueue(item).ok();
+        }
+    });
+
+    process_events::spawn().ok();
+}
+
+#[task(priority = 2)]
+fn process_events(...) {
+    while let Some(event) =
+        queue.dequeue()
+    {
+        // route and send
+    }
+}</code></pre>
+                    </div>
+                    <div class="firmware-editor__code firmware-editor__code--dense" data-label="PRIORITY 2">
+                        <pre><code class="language-rust">// midi.rs
+pub fn note_on(
+    &amp;mut self,
+    note: u8,
+    velocity: u8,
+) {
+    let status = 0x90 | self.channel;
+
+    self.send_byte(status);
+    self.send_byte(note &amp; 0x7F);
+    self.send_byte(velocity &amp; 0x7F);
+}
+
+fn send_byte(&amp;mut self, byte: u8) {
+    nb::block!(self.tx.write(byte)).ok();
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>heapless SPSC queue · capacity 64</span><span>scan does not block</span></div>
+        </div>
+
+        <aside class="editor-guide">
+            <small>WIRE TIME</small>
+            <strong>Three bytes take almost 1 ms.</strong>
+            <div class="editor-guide__metric"><b>30</b><span>UART bits per NoteOn</span></div>
+            <div class="editor-guide__metric"><b>.96</b><span>ms at 31,250 baud</span></div>
+            <div class="editor-guide__flow"><span class="is-hot">scan now → send later</span></div>
+            <p class="editor-guide__takeaway">Never block the hot path.</p>
+        </aside>
     </div>
+
     <aside class="notes">
-        The snippets are condensed from timer_handler, process_events, and midi.rs.
-        DIN MIDI uses USART1 at 31,250 baud. In the configured UART framing, each
-        byte occupies a start bit, eight data bits, and a stop bit. A three-byte
-        NoteOn therefore occupies 30 wire bits, or about 0.96 milliseconds. That is
-        an inferred serialization time, not measured end-to-end latency, but it is
-        already almost the entire scan period. A chord makes the conflict obvious.
-        The priority-15 task queues intent into a heapless 64-entry SPSC queue; the
-        priority-2 task drains it and may block on UART. Fixed capacity avoids a heap,
-        but enqueue currently discards its error, so a production revision should
-        count and expose overflows. For your design, calculate transport time before
-        choosing queue depth, and instrument every drop path. Transition: after
-        timing is isolated, tables keep the PCB geometry out of the musical policy.
+        The split editor makes the boundary visible. timer_handler puts semantic
+        events into the fixed 64-entry queue and returns. process_events runs at
+        priority 2 and calls MidiSender, whose UART write may block. A three-byte
+        NoteOn occupies 30 framed UART bits; at 31,250 baud that is about 0.96
+        milliseconds—almost the entire scan period before a chord is considered.
+        The current enqueue path discards a full-queue error, so a production
+        revision should count and expose overflows. Transition: the event's switch
+        index still has to become a musical note.
     </aside>
 </section>

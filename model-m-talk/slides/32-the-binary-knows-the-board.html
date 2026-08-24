@@ -1,66 +1,83 @@
-<!-- English review: no spelling or grammar error found; the existing wording is preserved exactly. -->
-<section
-    class="slide layout-content firmware-entry-slide"
-    data-auto-animate
-    data-beat="firmware-entry"
-    data-shot="system-blueprint"
-    data-emotion="curiosity"
->
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide" data-auto-animate data-beat="firmware-entry">
     <header class="slide-head">
-        <span class="eyebrow"><span lang="ja">組み込み</span> · FIRMWARE FIELD GUIDE · 01</span>
-        <h2>The binary knows the board before <code>main</code></h2>
+        <div>
+            <span class="eyebrow"><span lang="ja">組み込み</span> · FIRMWARE · 01</span>
+            <h2>The repo knows which board is on the desk</h2>
+        </div>
+        <code class="editor-path">keyboard_keyboard/code</code>
     </header>
 
-    <div class="content firmware-entry-stage">
-        <div class="firmware-file-stack" data-stagger=".firmware-file" data-stagger-effect="step-wipe">
-            <article class="firmware-file firmware-file--target">
-                <small>.cargo/config.toml</small>
-                <strong>thumbv7em-none-eabihf</strong>
-                <span>CPU target</span>
-            </article>
-            <article class="firmware-file firmware-file--memory">
-                <small>memory.x</small>
-                <strong>FLASH · DTCMRAM · SRAM</strong>
-                <span>Memory map</span>
-            </article>
-            <article class="firmware-file firmware-file--probe">
-                <small>Embed.toml</small>
-                <strong>STM32H750V</strong>
-                <span>Probe + debug</span>
-            </article>
-            <article class="firmware-file firmware-file--runtime">
-                <small>src/main.rs</small>
-                <strong><code>#![no_std]</code> + RTIC</strong>
-                <span>Runtime + scheduler</span>
-            </article>
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar">
+                <div class="firmware-editor__traffic"><i></i><i></i><i></i></div>
+                <span>keyboard-keyboard — Cargo.toml</span><b>•••</b>
+            </div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config is-active">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs">
+                    <span class="firmware-tab firmware-tab--config is-active">Cargo.toml</span>
+                    <span class="firmware-tab firmware-tab--config">.cargo/config.toml</span>
+                </div>
+                <div class="firmware-editor__crumbs">code &gt; <b>Cargo.toml</b> &gt; selected dependencies</div>
+                <div class="firmware-editor__code firmware-editor__code--large">
+                    <pre><code class="language-toml">[dependencies]
+cortex-m-rtic = "1.1.4"
+stm32h7xx-hal = {
+    version = "0.16.0",
+    features = ["stm32h750v", "rt"]
+}
+libdaisy = {
+    git = "https://github.com/nathansbradshaw/libdaisy-rust.git",
+    features = ["log-rtt"]
+}
+heapless = "0.8.0"
+ssd1306 = "0.7.1"</code></pre>
+                </div>
+            </div>
+            <div class="firmware-editor__terminal fragment step-panel" data-fragment-index="1">
+                <small>TERMINAL</small>
+                <span>$ cargo embed --release</span><br>
+                <b>Flashing STM32H750VBTx · RTT connected</b>
+            </div>
+            <div class="firmware-editor__status"><span>main · Rust · thumbv7em-none-eabihf</span><span>Ln 23, Col 1</span></div>
         </div>
 
-        <aside class="firmware-boot-card fragment step-panel" data-fragment-index="4">
-            <div class="firmware-terminal-bar"><i></i><i></i><i></i><span>firmware</span></div>
-            <pre><code class="language-bash">rustup target add thumbv7em-none-eabihf
-cargo run --release</code></pre>
-            <b>YOUR FIRST CONTRACT</b>
-            <span>MCU + memory map + debug probe must agree.</span>
+        <aside class="editor-guide">
+            <small>WHAT THIS FILE DOES</small>
+            <strong>Targets the Daisy Seed.</strong>
+            <p>The build names the chip before our program runs.</p>
+            <div class="editor-guide__flow">
+                <span class="is-accent">chip <i>STM32H750V</i></span>
+                <span>CPU <i>Cortex-M7</i></span>
+                <span>debug <i>probe-rs + RTT</i></span>
+            </div>
+            <p class="editor-guide__takeaway">Code and board must agree.</p>
         </aside>
-
-        <div class="firmware-entry-payoff fragment step-punch" data-fragment-index="5">
-            <span lang="ja">コードも回路の一部</span>
-            <strong>The repository is part of the circuit.</strong>
-        </div>
     </div>
 
-    <img class="slide-corner-reaction" src="assets/characters/faces/ren/understands-big.png" alt="" aria-hidden="true">
     <aside class="notes">
-        Start by making embedded Rust concrete. This crate does not build a desktop
-        executable. The cargo target selects ARM Cortex-M with hardware floating
-        point. memory.x tells the linker where the STM32H750's flash and RAM regions
-        live. Embed.toml names the exact chip and enables RTT and GDB through the
-        debug probe. main.rs opts out of the standard library and lets RTIC turn
-        interrupts into scheduled tasks. The two commands are the shortest path on
-        a machine where probe-rs is already installed: add the target once, then
-        cargo run --release uses the runner declared in .cargo/config.toml. For your
-        own keyboard, choose the MCU first and copy its proven target, memory, and
-        probe configuration before writing scanning logic. Transition: once the
-        binary can boot, give every stage exactly one responsibility.
+        Start in a familiar place: the real repository. Cargo.toml selects RTIC,
+        the STM32H750V HAL target, our libdaisy fork, a fixed-capacity queue, and the
+        OLED driver. The neighboring .cargo/config.toml builds for the Cortex-M7
+        target and tells probe-rs the exact chip; Embed.toml enables RTT and GDB.
+        The terminal command builds, flashes, and attaches to that specific board.
+        The snippet removes unrelated dependencies, but every shown line is from the
+        repository. Transition: open main.rs and see how the files divide the work.
     </aside>
 </section>

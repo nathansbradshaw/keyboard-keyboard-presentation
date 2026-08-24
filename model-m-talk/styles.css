@@ -7504,6 +7504,316 @@ img.schematic-example.real-schematic-render {
   .manga-firmware-arc .card { transition: none !important; }
 }
 /* keyboard-keyboard MIDI field guide. */
+.firmware-editor-slide {
+  --editor-accent: #35d6d0;
+  --editor-accent-soft: rgba(53,214,208,.16);
+}
+.firmware-editor-slide .slide-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+}
+.firmware-editor-slide .slide-head h2 {
+  max-width: 980px;
+  margin-top: 13px;
+  font-size: 49px;
+}
+.firmware-editor-slide .editor-path {
+  padding-bottom: 5px;
+  color: #52665f;
+  font: 900 15px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
+}
+.firmware-editor-slide .content {
+  max-width: 1448px !important;
+  margin-top: 24px;
+}
+.firmware-editor-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 286px;
+  gap: 22px;
+  height: 574px;
+}
+.firmware-editor {
+  position: relative;
+  display: grid;
+  grid-template-columns: 206px minmax(0, 1fr);
+  grid-template-rows: 38px minmax(0, 1fr) 24px;
+  min-width: 0;
+  overflow: hidden;
+  border: 6px solid #101116;
+  border-radius: 3px 14px 4px 10px;
+  background: #0d1117;
+  box-shadow: 10px 10px 0 var(--editor-accent), 17px 17px 0 #101116;
+}
+.firmware-editor__titlebar {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 76px 1fr 76px;
+  align-items: center;
+  min-width: 0;
+  padding: 0 12px;
+  border-bottom: 1px solid #30363d;
+  background: #181c23;
+  color: #a7b0bd;
+  font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.firmware-editor__traffic { display: flex; gap: 7px; }
+.firmware-editor__traffic i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.firmware-editor__traffic i:nth-child(2) { background: #febc2e; }
+.firmware-editor__traffic i:nth-child(3) { background: #28c840; }
+.firmware-editor__titlebar span { overflow: hidden; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.firmware-editor__titlebar b { justify-self: end; color: #697382; font-size: 14px; letter-spacing: .13em; }
+.firmware-editor__sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  min-width: 0;
+  padding: 13px 0;
+  border-right: 1px solid #30363d;
+  background: #151922;
+  color: #a7b0bd;
+  font: 700 12px/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.firmware-editor__sidebar > small {
+  display: block;
+  padding: 0 15px 11px;
+  color: #788392;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+.firmware-tree { display: grid; }
+.firmware-tree span {
+  display: block;
+  min-width: 0;
+  padding: 4px 11px 4px 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.firmware-tree .tree-folder { color: #d3dae3; font-weight: 850; }
+.firmware-tree .tree-folder::before { content: "▾ "; color: #798493; }
+.firmware-tree .tree-folder--closed::before { content: "▸ "; }
+.firmware-tree .tree-child { padding-left: 29px; }
+.firmware-tree .tree-file { padding-left: 43px; }
+.firmware-tree .tree-root-file { padding-left: 29px; }
+.firmware-tree .tree-file::before { content: "rs "; color: #d67a42; font-size: 9px; font-weight: 1000; }
+.firmware-tree .tree-config::before { content: "◆ "; color: #d6b642; }
+.firmware-tree .is-active {
+  border-left: 3px solid var(--editor-accent);
+  background: #27303d;
+  color: #fff;
+}
+.firmware-editor__main {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: 37px 27px minmax(0, 1fr);
+  min-width: 0;
+  overflow: hidden;
+}
+.firmware-editor__tabs {
+  display: flex;
+  min-width: 0;
+  border-bottom: 1px solid #30363d;
+  background: #11151c;
+}
+.firmware-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 17px;
+  border-right: 1px solid #30363d;
+  color: #929dab;
+  font: 700 12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.firmware-tab::before { content: "rs"; color: #e7874c; font-size: 9px; font-weight: 1000; }
+.firmware-tab--config::before { content: "◆"; color: #d6b642; }
+.firmware-tab.is-active {
+  border-top: 2px solid var(--editor-accent);
+  background: #0d1117;
+  color: #fff;
+}
+.firmware-editor__crumbs {
+  display: flex;
+  align-items: center;
+  padding: 0 17px;
+  border-bottom: 1px solid #21262d;
+  color: #778290;
+  font: 700 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.firmware-editor__crumbs b { color: #bac3cf; }
+.firmware-editor__code {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, #0d1117 0 48px, #20262e 48px 49px, #0d1117 49px);
+}
+.firmware-editor__code pre {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 15px 20px 16px 59px;
+  overflow: hidden;
+  background: transparent !important;
+  white-space: pre;
+}
+.firmware-editor__code code,
+.firmware-editor__code code.hljs {
+  width: 100%;
+  padding: 0 !important;
+  background: transparent !important;
+  color: #d6deeb;
+  font-size: 17px;
+  line-height: 1.42;
+  tab-size: 4;
+}
+.firmware-editor__code--dense code,
+.firmware-editor__code--dense code.hljs { font-size: 15px; line-height: 1.38; }
+.firmware-editor__code--large code,
+.firmware-editor__code--large code.hljs { font-size: 19px; line-height: 1.48; }
+.firmware-editor__code .hljs-comment { color: #718096; font-style: italic; }
+.firmware-editor__code .hljs-keyword,
+.firmware-editor__code .hljs-meta { color: #c792ea; }
+.firmware-editor__code .hljs-title,
+.firmware-editor__code .hljs-function { color: #82aaff; }
+.firmware-editor__code .hljs-number,
+.firmware-editor__code .hljs-literal { color: #f78c6c; }
+.firmware-editor__code .hljs-string { color: #c3e88d; }
+.firmware-editor__status {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 12px;
+  background: var(--editor-accent);
+  color: #0b1c1d;
+  font: 950 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .02em;
+}
+.firmware-editor__status span:last-child { opacity: .75; }
+.firmware-editor__terminal {
+  position: absolute;
+  z-index: 4;
+  left: 206px;
+  right: 0;
+  bottom: 24px;
+  min-height: 93px;
+  padding: 10px 15px 12px;
+  border-top: 2px solid #30363d;
+  background: rgba(13,17,23,.97);
+  color: #b9c6d3;
+  font: 750 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.firmware-editor__terminal small { display: block; margin-bottom: 6px; color: #7d8998; font-weight: 950; letter-spacing: .12em; }
+.firmware-editor__terminal b { color: #c3e88d; }
+.editor-guide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px 19px 18px;
+  border: 5px solid #101116;
+  border-radius: 2px 12px 3px 9px;
+  background: rgba(255,253,244,.93);
+  box-shadow: 8px 8px 0 var(--editor-accent), 13px 13px 0 #101116;
+}
+.editor-guide > small {
+  color: #68756f;
+  font: 1000 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .12em;
+}
+.editor-guide > strong {
+  display: block;
+  margin-top: 13px;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.02;
+  letter-spacing: -.025em;
+}
+.editor-guide > p {
+  margin-top: 14px;
+  color: #52665f;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.editor-guide__metric {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 11px;
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 2px solid rgba(21,32,29,.14);
+}
+.editor-guide__metric b { color: var(--editor-accent, #087f83); font: 1000 28px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.editor-guide__metric span { color: #3f514b; font-size: 14px; line-height: 1.08; font-weight: 900; }
+.editor-guide__flow {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+.editor-guide__flow span {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 3px solid #101116;
+  background: var(--paper);
+  color: var(--ink);
+  font: 900 13px/1.05 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.editor-guide__flow span.is-hot { background: var(--yellow); }
+.editor-guide__flow span.is-accent { background: var(--editor-accent-soft); }
+.editor-guide__flow i { margin-left: auto; color: #68756f; font-style: normal; }
+.editor-guide__takeaway {
+  margin-top: auto !important;
+  padding-top: 15px;
+  border-top: 4px solid #101116;
+  color: var(--ink) !important;
+  font-size: 18px !important;
+  line-height: 1.1 !important;
+  font-weight: 950 !important;
+}
+.firmware-editor-slide--scan { --editor-accent: #35d6d0; --editor-accent-soft: rgba(53,214,208,.2); }
+.firmware-editor-slide--priority { --editor-accent: #ef4f4f; --editor-accent-soft: rgba(239,79,79,.15); }
+.firmware-editor-slide--calibration { --editor-accent: #48b875; --editor-accent-soft: rgba(72,184,117,.17); }
+.firmware-editor-slide--state { --editor-accent: #ffd34f; --editor-accent-soft: rgba(255,211,79,.22); }
+.firmware-editor-slide--queue { --editor-accent: #ef8b35; --editor-accent-soft: rgba(239,139,53,.18); }
+.firmware-editor-slide--mapping { --editor-accent: #f25aa2; --editor-accent-soft: rgba(242,90,162,.16); }
+.firmware-editor-slide--debug { --editor-accent: #9a7ae8; --editor-accent-soft: rgba(154,122,232,.17); }
+
+.firmware-editor--split .firmware-editor__main {
+  grid-template-rows: 37px 27px minmax(0, 1fr);
+}
+.firmware-editor__split-code {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+}
+.firmware-editor__split-code .firmware-editor__code + .firmware-editor__code { border-left: 1px solid #30363d; }
+.firmware-editor__split-code .firmware-editor__code::before {
+  content: attr(data-label);
+  position: absolute;
+  z-index: 2;
+  right: 13px;
+  top: 10px;
+  padding: 5px 7px;
+  background: #242b35;
+  color: #98a5b3;
+  font: 900 9px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .08em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .firmware-editor,
+  .editor-guide { transition: none !important; }
+}
+
 .midi-primer-slide .slide-head h2,
 .midi-vocabulary-slide .slide-head h2,
 .midi-setup-slide .slide-head h2,

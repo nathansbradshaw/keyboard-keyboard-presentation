@@ -1,0 +1,77 @@
+<section class="slide layout-content manga-firmware-arc firmware-editor-slide" data-auto-animate data-beat="firmware-pin-ownership">
+    <header class="slide-head">
+        <div>
+            <span class="eyebrow"><span lang="ja">所有</span> · FIRMWARE · 02</span>
+            <h2>main.rs claims the pins by name</h2>
+        </div>
+        <code class="editor-path">src/main.rs:117</code>
+    </header>
+
+    <div class="content firmware-editor-stage">
+        <div class="firmware-editor">
+            <div class="firmware-editor__titlebar"><div class="firmware-editor__traffic"><i></i><i></i><i></i></div><span>keyboard-keyboard — main.rs</span><b>•••</b></div>
+            <aside class="firmware-editor__sidebar" aria-label="Repository files">
+                <small>EXPLORER</small>
+                <div class="firmware-tree">
+                    <span class="tree-folder">code</span>
+                    <span class="tree-folder tree-folder--closed tree-child">.cargo</span>
+                    <span class="tree-folder tree-child">src</span>
+                    <span class="tree-file">constants.rs</span>
+                    <span class="tree-file">hardware.rs</span>
+                    <span class="tree-file is-active">main.rs</span>
+                    <span class="tree-file">midi.rs</span>
+                    <span class="tree-file">switch.rs</span>
+                    <span class="tree-file tree-root-file tree-config">Cargo.toml</span>
+                    <span class="tree-file tree-root-file tree-config">Embed.toml</span>
+                    <span class="tree-file tree-root-file tree-config">memory.x</span>
+                </div>
+            </aside>
+            <div class="firmware-editor__main">
+                <div class="firmware-editor__tabs"><span class="firmware-tab is-active">main.rs</span><span class="firmware-tab">hardware.rs</span></div>
+                <div class="firmware-editor__crumbs">src &gt; main.rs &gt; app &gt; init &gt; <b>mux select pins</b></div>
+                <div class="firmware-editor__code firmware-editor__code--dense">
+                    <pre><code class="language-rust">let mut s0 = system
+    .gpio
+    .daisy7
+    .take()
+    .expect("daisy7")
+    .into_push_pull_output();
+let mut s1 = system
+    .gpio
+    .daisy8
+    .take()
+    .expect("daisy8")
+    .into_push_pull_output();
+let mut s2 = system
+    .gpio
+    .daisy9
+    .take()
+    .expect("daisy9")
+    .into_push_pull_output();</code></pre>
+                </div>
+            </div>
+            <div class="firmware-editor__status"><span>D7 · D8 · D9</span><span>Output&lt;PushPull&gt;</span></div>
+        </div>
+
+        <aside class="editor-guide">
+            <small>THE SCHEMATIC IN CODE</small>
+            <strong>Three pins drive every mux.</strong>
+            <div class="editor-guide__flow" data-stagger="span" data-stagger-effect="step-wipe">
+                <span>D7 <i>MUX_SELECT_0</i></span>
+                <span>D8 <i>MUX_SELECT_1</i></span>
+                <span>D9 <i>MUX_SELECT_2</i></span>
+            </div>
+            <p class="editor-guide__takeaway">The type records what each pin became.</p>
+        </aside>
+    </div>
+
+    <aside class="notes">
+        Cargo selected the board; now main.rs claims its real pins. Daisy D7, D8,
+        and D9 become push-pull outputs named s0, s1, and s2. Those names correspond
+        directly to the three mux-select nets on the schematic. take() also gives
+        the program exclusive ownership: another part of the firmware cannot quietly
+        claim the same pin. The following ADC setup does the same thing for Daisy
+        D15 through D23, converting them into analog inputs. Transition: these files
+        now have clear jobs, and main.rs coordinates their one-way flow.
+    </aside>
+</section>
