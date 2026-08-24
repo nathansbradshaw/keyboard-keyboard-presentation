@@ -1,6 +1,6 @@
 # Model M MIDI Talk
 
-An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The primary 60-slide keyboard-keyboard cut uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide. Earlier discovery-led and technical-first cuts are preserved under `archive/`.
+An anime-inspired Reveal.js deck for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober.”** The 60-slide keyboard-keyboard presentation uses a fixed 1600 × 900 canvas, runs without a build step, and includes speaker notes on every slide.
 
 ## Run locally
 
@@ -17,12 +17,7 @@ Open <http://127.0.0.1:8000>. Pass another port as the first argument if needed,
 
 Pages hot-reload: the server injects a small poller into every page shell that watches the deck folder for edits and reloads the tab automatically. No extra setup or build step required — just edit a slide and save.
 
-The presentation entry points are:
-
-- `/` — the primary keyboard-keyboard presentation
-- `/archive/` — the archived discovery-led cut
-- `/archive/technical.html` — the archived technical-first cut
-- `/archive/compare.html` — both archived cuts side by side
+The presentation entry point is `/`.
 
 ## Controls
 
@@ -37,8 +32,6 @@ The presentation entry points are:
 
 - Main slide markup and notes: `slides/*.html`
 - Main slide order: `slide-manifest.js`
-- Archived slide markup: `archive/slides/*.html` and `archive/slides-discovery/*.html`
-- Archived slide order: `archive/slide-manifest-technical.js` and `archive/slide-manifest-discovery.js`
 - Slide loading/bootstrap: `slide-loader.js`
 - Page shell and Reveal dependencies: `index.html`
 - Visual system and reusable layouts: `styles.css`
@@ -47,7 +40,7 @@ The presentation entry points are:
 - Real keyboard photograph: `assets/keyboard/keyboard-keyboard.webp`
 - Recurring Mio, Ren, and Kaori character libraries: `assets/characters/`
 
-Every slide fragment contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add, remove, or reorder main slides, edit `slide-manifest.js`. Archived slides remain reusable: add a path such as `archive/slides/23-the-board-is-an-analog-routing-problem.html` to the main manifest. The loader fetches the selected ordered list before `presentation.js` initializes Reveal.
+Every slide fragment contains exactly one `<section class="slide">` and its `<aside class="notes">`. Keep caveats, transitions, and demo cues there rather than shrinking body text. To add, remove, or reorder slides, edit `slide-manifest.js`. The loader fetches the selected ordered list before `presentation.js` initializes Reveal.
 
 Because the browser loads slide fragments with `fetch`, opening `index.html` directly from the filesystem is not supported. Use the included Rust server.
 

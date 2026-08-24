@@ -2,7 +2,7 @@
 
 Source for **“That Time We Turned an IBM Model M into a MIDI Instrument to Meet Mark Rober,”** an anime-inspired technical talk by electroNuck and N8.
 
-The presentation tells the story of rebuilding an IBM Model M as a 100-key Hall effect MIDI controller: preserving the original enclosure, mapping its rectangular grid to a Wicki–Hayden layout, turning analog key travel into musical intent, and sending the result to an external Synth Phone. The main 56-slide Reveal.js deck lives directly in the app root; earlier cuts remain available in the archive.
+The presentation tells the story of rebuilding an IBM Model M as a 100-key Hall effect MIDI controller: preserving the original enclosure, mapping its rectangular grid to a Wicki–Hayden layout, turning analog key travel into musical intent, and sending the result to an external Synth Phone. The 60-slide Reveal.js deck lives directly in the app root.
 
 ## Run the presentation
 
@@ -21,7 +21,7 @@ Open <http://127.0.0.1:8000>. To use another port, pass it as the first argument
 ./target/model-m-talk-server 8080
 ```
 
-The main deck opens at <http://127.0.0.1:8000>. The earlier discovery-led and technical-first cuts remain available at `/archive/` and `/archive/technical.html`; `/archive/compare.html` shows them side by side.
+The deck opens at <http://127.0.0.1:8000>.
 
 Reveal.js is loaded from jsDelivr, so an uncached first run requires internet access. Opening `index.html` directly is not supported because the browser loads the individual slide files with `fetch`.
 
@@ -43,7 +43,6 @@ Every slide includes speaker notes. Staged reveals, auto-animation, and decorati
 ├── DESIGN.md                  # Original visual and content specification
 ├── model-m-talk/
 │   ├── assets/                # Character art, project photos, and manga cut-ins
-│   ├── archive/               # Earlier deck shells, manifests, and slide fragments
 │   ├── slides/                # Main keyboard-keyboard slide fragments
 │   ├── tools/validate_deck.rs # Dependency-free structural validator
 │   ├── index.html             # Reveal.js shell
@@ -66,7 +65,7 @@ rustc model-m-talk/tools/validate_deck.rs -o /tmp/validate-model-m-talk
 /tmp/validate-model-m-talk model-m-talk
 ```
 
-The validator checks the main and archived manifests, one slide and one notes block per fragment, duplicate or unlisted slides, and missing local assets.
+The validator checks the canonical manifest, one slide and one notes block per fragment, duplicate or unlisted slides, and missing local assets.
 
 ## Host with GitHub Pages
 

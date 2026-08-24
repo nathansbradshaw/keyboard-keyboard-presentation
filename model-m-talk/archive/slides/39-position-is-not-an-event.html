@@ -1,9 +1,0 @@
-<section class="slide layout-diagram" data-auto-animate>
-  <header class="slide-head"><span class="eyebrow">Key state machine</span><h2 data-id="firmware-title">Position is not an event</h2></header>
-  <div class="content">
-    <div class="state-machine" data-id="key-state" data-stagger=".state, .arrow" data-stagger-group="2" data-stagger-effect="step-pop">
-      <div class="state detail">IDLE<br><span class="small">track baseline</span></div><div class="arrow">→<br><span class="small">150 × 3</span></div><div class="state detail">FIRST ACTUATED<br><span class="small">save tick</span></div><div class="arrow">→<br><span class="small">250 × 3</span></div><div class="state active detail">FULLY ACTUATED<br><span class="small">NoteOn + velocity</span></div><div class="arrow">↩<br><span class="small">100 × 3 · NoteOff</span></div>
-    </div>
-  </div>
-  <aside class="notes">These are the three actual SwitchState phases in switch.rs. FirstActuated stores the threshold-crossing tick. FullyActuated holds the computed velocity. Three confirmations guard every transition, and release emits NoteOff. Transition: show the compact loop.</aside>
-</section>

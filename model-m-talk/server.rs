@@ -184,7 +184,7 @@ fn safe_path(raw_path: &str) -> Option<PathBuf> {
 /// folder's slide fragments instead of read from disk, so a numbered,
 /// non-interleaved slide group never needs a hand-maintained manifest.
 /// Root-level manifests are unaffected because they have no parent folder
-/// and may include archived slides or a custom order.
+/// and may include slide paths in a custom order.
 fn subfolder_manifest_dir(path: &Path) -> Option<&Path> {
     if path.file_name()? != "slide-manifest.js" {
         return None;
