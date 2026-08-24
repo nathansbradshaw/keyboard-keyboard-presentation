@@ -51,7 +51,7 @@
    Introduce electroNuck and N8, show the finished object, and state that this is the second attempt to build something interesting enough to meet Mark Rober. Do not explain the implementation yet.
 
 2. **Last Time On…**
-   Recap Open Sauce, the SynthPhone, meeting ThePrimeagen, and failing to meet Mark Rober. This creates continuity and gives the new build an emotional objective.
+   Recap Open Sauce, the Synthphone-e, meeting ThePrimeagen, and failing to meet Mark Rober. This creates continuity and gives the new build an emotional objective.
 
 3. **The Quest**
    State the objective—build something cool enough to meet Mark Rober—and let “unknown difficulty,” “non-existent budget,” and “expanding scope” establish the tone.
@@ -272,7 +272,7 @@
    Land the thesis in one sentence: “The best way to stretch your software brain is to build something where the bugs are physical.” Thank the audience and invite questions or direct them to the instrument.
 
 57. **See Our Last Demo**
-   Leave the SynthPhone demo and ElectroNuck channel QR codes on screen as post-close resources rather than interrupting the opening narrative.
+   Leave the Synthphone-e demo and ElectroNuck channel QR codes on screen as post-close resources rather than interrupting the opening narrative.
 
 58. **Photo Credits**
    Hold the attribution page after the spoken close. It is a credits screen, not another content beat.
