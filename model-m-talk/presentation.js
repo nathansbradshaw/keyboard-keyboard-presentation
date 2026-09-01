@@ -111,7 +111,29 @@ const updateJapaneseSlideNumber = () => {
 // than resolving to a top-level page shell.
 const configuredPresentationUrl = document.documentElement.dataset.presentationUrl;
 const presentationId = document.documentElement.dataset.presentationId;
+const presenterParams = new URLSearchParams(window.location.search);
+const isPresenterReceiver = presenterParams.has("receiver");
+const presenterSessionParameter = "presenterSession";
+const presenterSessionStorageKey = `reveal-presenter-session:${presentationId || window.location.pathname}`;
+let presenterSessionId = presenterParams.get(presenterSessionParameter);
 let presentationUrl;
+
+if (!presenterSessionId && !isPresenterReceiver) {
+  try {
+    presenterSessionId = window.sessionStorage.getItem(
+      presenterSessionStorageKey,
+    );
+    if (!presenterSessionId) {
+      presenterSessionId = window.crypto.randomUUID();
+      window.sessionStorage.setItem(
+        presenterSessionStorageKey,
+        presenterSessionId,
+      );
+    }
+  } catch (_error) {
+    presenterSessionId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+}
 
 if (configuredPresentationUrl) {
   const resolvedPresentationUrl = new URL(
@@ -121,8 +143,127 @@ if (configuredPresentationUrl) {
   if (presentationId) {
     resolvedPresentationUrl.searchParams.set("deck", presentationId);
   }
+  if (presenterSessionId) {
+    resolvedPresentationUrl.searchParams.set(
+      presenterSessionParameter,
+      presenterSessionId,
+    );
+  }
   presentationUrl = resolvedPresentationUrl.href;
 }
+
+// Reveal Notes normally synchronizes its popup through window.opener. A hot
+// reload, restored popup, or browser popup policy can interrupt that handshake
+// while leaving the presenter previews visible but frozen. This same-origin
+// channel is a small fallback: the main deck publishes state, and the two
+// receiver frames in speaker view apply it independently.
+const PresenterSync = {
+  id: "presenter-sync",
+  init(deck) {
+    if (!presenterSessionId || !("BroadcastChannel" in window)) return;
+
+    const channel = new BroadcastChannel(
+      `reveal-presenter:${presentationId || window.location.pathname}:${presenterSessionId}`,
+    );
+    const stateEvents = [
+      "slidechanged",
+      "fragmentshown",
+      "fragmenthidden",
+      "paused",
+      "resumed",
+      "overviewhidden",
+      "overviewshown",
+    ];
+
+    const getNotes = () => {
+      const slide = deck.getCurrentSlide();
+      if (!slide) return { html: "", whitespace: "normal" };
+
+      const currentFragment = slide.querySelector(".current-fragment");
+      const fragmentNotes = currentFragment?.querySelector("aside.notes");
+      if (fragmentNotes) {
+        return { html: fragmentNotes.innerHTML, whitespace: "normal" };
+      }
+      if (currentFragment?.hasAttribute("data-notes")) {
+        return {
+          html: currentFragment.getAttribute("data-notes") || "",
+          whitespace: "pre-wrap",
+        };
+      }
+      if (slide.hasAttribute("data-notes")) {
+        return {
+          html: slide.getAttribute("data-notes") || "",
+          whitespace: "pre-wrap",
+        };
+      }
+
+      const html = [...slide.querySelectorAll("aside.notes")]
+        .filter((notes) => !notes.closest(".fragment"))
+        .map((notes) => notes.innerHTML)
+        .join("\n");
+      return { html, whitespace: "normal" };
+    };
+
+    const publishState = () => {
+      channel.postMessage({
+        type: "state",
+        state: deck.getState(),
+        notes: getNotes(),
+      });
+    };
+
+    if (isPresenterReceiver) {
+      const isCurrentPreview =
+        presenterParams.get("postMessageEvents") === "true";
+      const isUpcomingPreview =
+        !isCurrentPreview && presenterParams.get("controls") === "false";
+      let pendingState;
+
+      const updateSpeakerNotes = (notes) => {
+        if (!isCurrentPreview || !notes) return;
+        try {
+          const notesPanel = window.parent.document.querySelector(
+            ".speaker-controls-notes",
+          );
+          const notesValue = notesPanel?.querySelector(".value");
+          if (!notesPanel || !notesValue) return;
+          notesPanel.classList.toggle("hidden", !notes.html);
+          notesValue.style.whiteSpace = notes.whitespace;
+          notesValue.innerHTML = notes.html;
+        } catch (_error) {
+          // The standard Reveal Notes sync remains available if frame access
+          // is restricted by the browser.
+        }
+      };
+
+      const applyState = (message) => {
+        deck.setState(message.state);
+        if (isUpcomingPreview) deck.next();
+        updateSpeakerNotes(message.notes);
+      };
+
+      channel.addEventListener("message", (event) => {
+        if (event.data?.type !== "state") return;
+        if (deck.isReady()) applyState(event.data);
+        else pendingState = event.data;
+      });
+      deck.on("ready", () => {
+        if (pendingState) applyState(pendingState);
+        channel.postMessage({ type: "request-state" });
+      });
+    } else {
+      channel.addEventListener("message", (event) => {
+        if (event.data?.type === "request-state" && deck.isReady()) {
+          publishState();
+        }
+      });
+      deck.on("ready", publishState);
+      stateEvents.forEach((eventName) => deck.on(eventName, publishState));
+    }
+
+    window.addEventListener("pagehide", () => channel.close(), { once: true });
+  },
+};
 
 Reveal.initialize({
   width: 1600,
@@ -145,7 +286,7 @@ Reveal.initialize({
   totalTime: 40 * 60,
   url: presentationUrl,
   slideNumber: false,
-  plugins: [RevealNotes, RevealHighlight],
+  plugins: [RevealNotes, RevealHighlight, PresenterSync],
   keyboard: {
     68: () => {
       const demo = document.querySelector("#demo-screen");
