@@ -57,6 +57,6 @@ window.SLIDE_FILES = [
   "slides/56-quest-objective.html",
   "slides/57-closing.html",
   "slides/58-last-demo.html",
-  "slides/58a-midi-resources.html",
   "slides/59-photo-credits.html",
+  "slides/58a-midi-resources.html",
 ];
