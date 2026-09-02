@@ -1,7 +1,7 @@
 <section class="slide layout-content midi-vocabulary-slide" data-auto-animate data-beat="midi-vocabulary">
     <header class="slide-head">
         <span class="eyebrow"><span lang="ja">語彙</span> · MIDI FIELD GUIDE · 17 · <code>midi.rs</code></span>
-        <h2>One cable carries a whole performance</h2>
+        <h2>beep boop</h2>
     </header>
 
     <div class="content midi-vocabulary-stage">
@@ -32,12 +32,19 @@
             </article>
         </div>
 
-        <aside class="midi-channel-card fragment step-panel" data-fragment-index="4">
-            <small>OUR DEFAULT ROUTING</small>
-            <div><b>CH 1</b><strong>Melody</strong><span>Wicki–Hayden note map</span></div>
-            <div><b>CH 10</b><strong>Drums</strong><span>20 General MIDI notes</span></div>
-            <p>Channels and programs can be changed on the OLED settings screen.</p>
-        </aside>
+        <div class="midi-vocabulary-rail">
+            <figure class="midi-vocabulary-keyboard">
+                <img src="assets/keyboard/keyboard-keyboard-cutout.png" alt="The finished Keyboard Keyboard, a Lexmark Model M converted into a MIDI instrument with colored keys, rotary controls, and an OLED display">
+                <figcaption>THE KEYBOARD KEYBOARD</figcaption>
+            </figure>
+
+            <aside class="midi-channel-card fragment step-panel" data-fragment-index="4">
+                <small>OUR DEFAULT ROUTING</small>
+                <div><b>CH 1</b><strong>Melody</strong><span>Wicki–Hayden note map</span></div>
+                <div><b>CH 10</b><strong>Drums</strong><span>20 General MIDI notes</span></div>
+                <p>Channels and programs can be changed on the OLED settings screen.</p>
+            </aside>
+        </div>
 
         <div class="midi-vocabulary-payoff fragment step-punch" data-fragment-index="5">
             <span lang="ja">同じ線。違う意味。</span>
@@ -47,18 +54,6 @@
 
     <img class="slide-corner-reaction slide-corner-reaction--left" src="assets/characters/faces/ren/happy-big.png" alt="" aria-hidden="true">
     <aside class="notes">
-        These are the message families implemented by MidiSender. Note On and Note
-        Off carry note and velocity. Control Change carries a controller number and
-        its value; the firmware uses CC for twelve pots, vibrato on CC 1, volume when
-        a mapped pot uses CC 7, and All Notes Off on CC 123. Program Change is the
-        exception here: it has only one data byte, so two bytes total. Three special
-        keys select programs zero, one, and two for triangle, square, and saw in the
-        paired synth. Pitch bend packs a fourteen-bit value into two seven-bit data
-        bytes, with 0x2000, decimal 8192, as center. By default melody uses channel 1
-        and drum pads use channel 10; code stores those as zero and nine. Both are
-        editable in the settings screen. The important protocol idea is that the
-        upper nibble of the status byte selects the message family, while the lower
-        nibble selects the channel. Transition: now configure an ordinary UART to
-        put those bytes onto a MIDI cable.
+So in the keyboard keyboard we're gonna have all these keys all of them are going to have note on and note off instructions but then you'll notice all of these knobs up here these are gonna be a different sort of instruction. This is a MIDI control change or a CC and these have standard these have standards as well. So for instance, the standard for volume is control change seven. So if you're on control change MIDI CC seven, then you have 127 data points to change the volume. so we have some of those locked in there and then over in the numpad area we've got some program change program change messages this is going to change the program program.the receiver's voice so we can change from a triangle wave a square wave a saw wave really quickly and then we have pitch bend and in in our case we mapped pitch bend to the arrow keys. Pitch bend is a a little bit of a different message. It's kind of the reason why the other ones are locked to 127 is they mapped two bits together so that they can have a more granular smoother ramp up and down instead of just being locked to 127. You can kind of hear that stair stepping. So they wanted a lot of fidelity with pitch bends, so they made sure to have more data than they needed for that. And then you've got other standards. We have our melody on channel one which is all of the the green and white you see here but then the standard for midi drums is channel ten and so the numpad drum pad is all I want to say broadcasting. No, that's not correct. It's all talking on channel 10. And channel ten, if I plug this into any general MIDI device, it's just going to work out of out of the box. These are always gonna play drums because they've agreed on that standard beforehand. Channel 10 means drums.
     </aside>
 </section>

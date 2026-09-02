@@ -127,6 +127,10 @@ Press `D` to jump to **LIVE DEMO**. Its speaker notes contain the six-step runbo
 
 `assets/midi/midi-ports-and-cable.webp` is an optimized derivative of Wikimedia Commons contributor Pretzelpaws' “MIDI ports and cable,” licensed CC BY-SA 3.0 / GFDL and available at `https://commons.wikimedia.org/wiki/File:Midi_ports_and_cable.jpg`. It is cropped in CSS to connect the USART configuration to the real five-pin DIN interface.
 
+`assets/midi/prophet-600.webp` is an optimized delivery copy of Wikimedia Commons' “SCI Prophet 600 (angled),” a crop by Clusternote of M Maeghan Donovan's photograph, licensed CC BY 2.0 and available at `https://commons.wikimedia.org/wiki/File:SCI_Prophet_600_(angled).jpg`. It represents the Sequential Circuits instrument used in the first public cross-manufacturer MIDI demonstration.
+
+`assets/midi/jupiter-6.webp` is an optimized delivery copy of Wikimedia Commons contributor Svuntutheysari's “Roland Jupiter-6,” cropped by ZoeB, licensed CC BY-SA 3.0 / GFDL and available at `https://commons.wikimedia.org/wiki/File:Roland_Jupiter-6.jpg`. It represents the Roland instrument used in that demonstration.
+
 `assets/pixel-art/terraria-forest.png` is an unmodified delivery copy of Re-Logic's classic *Terraria* forest screenshot, sourced from the Terraria Wiki's World page and original image host: `https://terraria.gamepedia.com/World` and `https://gamepedia.cursecdn.com/terraria_gamepedia/6/65/Terraria_Forest_1.2.png`. The constraint-finale slide crops it in CSS to show recognizable authored pixel art. Attribution does not itself grant reuse permission; confirm permission before redistributing the deck.
 
 `assets/pcb-rework/*.png` are project-owned photographs supplied by the presenter showing the keyboard PCB bodge wires and the actual U1 removal/replacement. The matching `.webp` files are optimized delivery copies used by the keyboard-keyboard field-guide slides.

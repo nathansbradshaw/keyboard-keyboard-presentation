@@ -1,0 +1,44 @@
+<section class="slide layout-content resources-slide" data-beat="resources" data-shot="reference">
+    <header class="slide-head">
+        <span class="eyebrow"><span lang="ja">資料</span> · RESOURCES · MIDI 1.0</span>
+        <h2>Keep the message map handy</h2>
+    </header>
+
+    <div class="content resources-stage">
+        <a class="resource-feature" href="https://midi.org/summary-of-midi-1-0-messages" target="_blank" rel="noreferrer">
+            <div class="resource-feature-copy">
+                <small>OFFICIAL MIDI ASSOCIATION REFERENCE</small>
+                <h3>Summary of MIDI 1.0 Messages</h3>
+                <p>One table for channel voice, channel mode, system common, and system real-time messages.</p>
+                <span>midi.org/summary-of-midi-1-0-messages</span>
+            </div>
+
+            <div class="resource-message-map" aria-label="Examples of MIDI message families included in the linked reference">
+                <article><code>8n</code><strong>Note Off</strong><span>key · velocity</span></article>
+                <article><code>9n</code><strong>Note On</strong><span>key · velocity</span></article>
+                <article><code>Bn</code><strong>Control Change</strong><span>controller · value</span></article>
+                <article><code>Cn</code><strong>Program Change</strong><span>program</span></article>
+                <article><code>En</code><strong>Pitch Bend</strong><span>LSB · MSB</span></article>
+                <article><code>F8</code><strong>Timing Clock</strong><span>system real-time</span></article>
+            </div>
+
+            <div class="resource-open-cue"><span lang="ja">公式リファレンス</span><strong>OPEN THE MESSAGE TABLE →</strong></div>
+        </a>
+
+        <div class="resources-payoff">
+            <span lang="ja">迷ったら、ステータスバイトから。</span>
+            <strong>When a byte looks mysterious, start with its status nibble.</strong>
+        </div>
+    </div>
+
+    <img class="slide-corner-reaction slide-corner-reaction--left" src="assets/characters/faces/ren/understands.png" alt="" aria-hidden="true">
+    <aside class="notes">
+        This is the MIDI reference to keep after the talk. The linked MIDI
+        Association page provides a compact table of MIDI 1.0 channel voice,
+        channel mode, system common, and system real-time messages, including each
+        status pattern and its data bytes. Open it when implementing or debugging a
+        message family that is not covered in the talk. Resource:
+        https://midi.org/summary-of-midi-1-0-messages . Transition: finish on the
+        photo and source credits.
+    </aside>
+</section>

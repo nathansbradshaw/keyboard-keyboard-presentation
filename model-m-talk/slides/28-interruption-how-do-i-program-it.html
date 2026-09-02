@@ -27,9 +27,7 @@
                 </div>
             </div>
 
-            <p class="interruption-subtext fragment step-pop" data-fragment-index="0">
-                Before <code>main</code>, the build describes the board.
-            </p>
+
         </div>
 
         <div class="interruption-developer" aria-label="A corporate software engineer asks how code becomes firmware for a specific board">
@@ -48,22 +46,6 @@
             </div>
         </div>
 
-        <div class="firmware-photo-path" aria-label="The physical path used to flash firmware onto a microcontroller">
-            <figure class="firmware-path-card firmware-path-card--usb fragment step-panel" data-fragment-index="1">
-                <img src="assets/ui/usb-connector.png" alt="Close-up photograph of a USB connector linking the host computer to programming hardware">
-                <figcaption><b>1 · HOST LINK</b><span>USB</span><small>Evan-Amos · CC0</small></figcaption>
-            </figure>
-            <span class="firmware-path-arrow fragment" data-fragment-index="2" aria-hidden="true">→</span>
-            <figure class="firmware-path-card firmware-path-card--probe fragment step-panel" data-fragment-index="2">
-                <img src="assets/electronics-tips/toolbelt/debugger.webp" alt="Photograph of a SEGGER J-Link hardware debug probe used to flash firmware">
-                <figcaption><b>2 · FLASH</b><span>SWD / JTAG</span><small>SEGGER · CC BY-SA 3.0</small></figcaption>
-            </figure>
-            <span class="firmware-path-arrow fragment" data-fragment-index="3" aria-hidden="true">→</span>
-            <figure class="firmware-path-card firmware-path-card--mcu fragment step-panel" data-fragment-index="3">
-                <img src="assets/firmware/stm32h7-microcontroller.webp" alt="Macro photograph of an STM32H7-family microcontroller mounted on a circuit board">
-                <figcaption><b>3 · RUN</b><span>CORTEX-M MCU</span><small>Giansi80 · CC BY-SA 4.0</small></figcaption>
-            </figure>
-        </div>
     </div>
 
     <div class="interruption-sfx" aria-hidden="true">
@@ -72,13 +54,6 @@
     </div>
 
     <aside class="notes">
-        Bring back the corporate software engineer, now relieved to see familiar
-        territory: “Finally. Software. How do I program this board—and how does the
-        code know what hardware exists?” Reveal the answer: “Before main, the build
-        describes the board.” The real-photo path makes the physical programming
-        chain explicit: USB from the host, a J-Link speaking SWD or JTAG, and the
-        STM32H7-family Cortex-M microcontroller that finally runs the binary. This begins the firmware half of both stories: how we
-        programmed the keyboard keyboard, and what they must configure for their own
-        board. Transition: the binary knows the board before main ever runs.
+Did someone say software?
     </aside>
 </section>

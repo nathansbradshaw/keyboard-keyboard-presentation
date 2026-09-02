@@ -45,16 +45,6 @@
 
     <img class="slide-corner-reaction" src="assets/characters/faces/kaori/deadpan.png" alt="" aria-hidden="true">
     <aside class="notes">
-        MIDI is a control protocol. It does not put audio on the cable. Our keyboard
-        is the controller: it decides that a key became note 60 with velocity 100.
-        The receiving synthesizer chooses the oscillator, sample, envelope, effects,
-        speakers, and therefore the actual sound. Read the example in hexadecimal.
-        0x90 is Note On on MIDI channel 1; the firmware stores that channel as zero
-        because the low nibble ranges from zero through fifteen. 0x3C is decimal 60,
-        middle C. 0x64 is decimal 100, the strike velocity. Channel voice data bytes
-        are seven-bit values, so notes, ordinary velocities, controller numbers, and
-        controller values recur in the range zero through 127. A separate Note Off
-        ends the note. Transition: Note On is only one word in the performance
-        vocabulary that this keyboard sends.
-    </aside>
+
+So with this new MIDI standard, I can press a note on my Model M controller, and that's going to send a message, a note on, on to the synthesizer, and the synthesizer is gonna know what to do with these instructions. See, the instructions are gonna have all sorts of information. So let's dive into this note on message. Our first byte, we're gonna have some information about what the status of this message is. That's it's gonna be a note on message. There's plenty of other messages like note off pitch bend, etc. The second nibble of this bite is gonna be the channel. Again we can play many channels all at once. So we're gonna need to keep track of that. Then if we move on to the second byte, that's going to be what note we're playing. In this case we're playing note sixty and we have zero to one twenty seven notes to choose from. This is middle C. And then last bit, this is going to be our velocity. Again, a zero to one twenty-seven range, and that's going to be how hard we hit that key. So that's that velocity that we measured from the Hall Effect keys.
 </section>

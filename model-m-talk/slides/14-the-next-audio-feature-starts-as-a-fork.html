@@ -29,32 +29,6 @@
     </div>
     <img class="slide-corner-reaction" src="assets/characters/faces/kaori/smug.png" alt="" aria-hidden="true" >
     <aside class="notes">
-        Here is how a published open-hardware schematic becomes part of your own
-        design. Start with OSHWA certification US001040 and follow it to the
-        exact SparkFun BOB-11044 v1.1 source. Open the schematic and trace the
-        functional block you need: the TPA2005D1, its supporting resistors and
-        capacitors, the input network, shutdown and bypass connections, and the
-        differential speaker output. Then recreate that block in your CAD tool
-        using real symbols, component values, and electrical nets—not a
-        screenshot pasted into the project. Connect the block to your system:
-        choose the correct supply, route your audio signal into it, connect any
-        control signal, and provide the proper speaker output. Rename nets and
-        change connectors to fit your board, but preserve the circuit
-        relationships that make the reference work. Check the amplifier
-        datasheet and prototype the original breakout before trusting the
-        adaptation; an open reference is a starting point, not a substitute for
-        electrical and layout review. Finally, retain the applicable notices and
-        attribution and publish modified source when the license requires it.
-        The slide uses OSHWLab's light-background rendering of the published
-        SparkFun circuit. The local source image preserves its embedded
-        attribution; the on-screen crop focuses on the circuit, while the
-        complete attribution and source links remain here in the notes. Sources:
-        https://www.sparkfun.com/sparkfun-mono-audio-amp-breakout-tpa2005d1.html
-        · https://certification.oshwa.org/us001040.html ·
-        https://github.com/sparkfun/Mono_Audio_Amp_Breakout-TPA2005D1/tree/V_1.1
-        ·
-        https://oshwlab.com/oshw/Mono_Audio_Amp_Breakout_TPA2005D1_Open_hardware-WKEWQ8qHZ
-        . Transition: now orient the audience in the KiCad journey that turns
-        references like this into a physical board.
+        So here's an example of one such design that that we're thinking of putting into a future board. This would be an audio amplifier that Sparkphone has. We actually bought the board and tested it out to see if it works and we'll probably put it in our keyboard, m since there's a spot specifically on the model M for a speaker mount.
     </aside>
 </section>
